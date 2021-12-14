@@ -1,0 +1,40 @@
+﻿@page "/spinners"
+<h3>Spinner Component</h3>
+
+<h4>Default Spinner</h4>
+<p>This is a spinner with the default properties and styles.</p>
+<Spinner />
+<hr />
+
+<h4>Spinner With Styles</h4>
+<p>This is a spinner where styles are defined: color: red; height:120 px; width: 120px.</p>
+<Spinner style="color: red; height: 120px; width: 120px" />
+<hr />
+
+<h4>Spinner With Additional Classes</h4>
+<p>This is a spinner with an additional class name. The CSS element changes several properties of the spinner component.</p>
+<Spinner id="my-spinner" class="my-custom-spinner" />
+<hr />
+
+<h4>Spinner Visibility</h4>
+<p>This is a spinner that allows changing of the IsVisible property to show and hide the spinner.</p>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleSpinnerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <Spinner IsVisible=@this._spinnerVisible />
+    </div>
+</div>
+<hr />
+
+@code {
+    bool _spinnerVisible = true;
+
+    private void ToggleSpinnerVisibility()
+    {
+        this._spinnerVisible = !this._spinnerVisible;
+    }
+}
