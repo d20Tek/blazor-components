@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{654B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.FullSample.Wasm", "samples\D20Tek.FullSample.Wasm\D20Tek.FullSample.Wasm.csproj", "{618A63B1-252E-4646-B74F-8F1FD89C9111}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95EB0544-6D3A-4A9B-84E3-0CFBBB70D7F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D20Tek.BlazorComponents.UnitTests", "tests\D20Tek.BlazorComponents.UnitTests\D20Tek.BlazorComponents.UnitTests.csproj", "{465218A1-2C09-466D-ACEA-BD9AF28F7AD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{618A63B1-252E-4646-B74F-8F1FD89C9111}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{618A63B1-252E-4646-B74F-8F1FD89C9111}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{618A63B1-252E-4646-B74F-8F1FD89C9111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{465218A1-2C09-466D-ACEA-BD9AF28F7AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{465218A1-2C09-466D-ACEA-BD9AF28F7AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{465218A1-2C09-466D-ACEA-BD9AF28F7AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{465218A1-2C09-466D-ACEA-BD9AF28F7AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C18DD19A-81B5-451F-B147-98F3AF376E89} = {E5F6C1BE-B27B-4A7B-98A8-B9D79E31F05D}
 		{618A63B1-252E-4646-B74F-8F1FD89C9111} = {654B164F-5EF0-4A99-84F7-E0C3908753FF}
+		{465218A1-2C09-466D-ACEA-BD9AF28F7AD5} = {95EB0544-6D3A-4A9B-84E3-0CFBBB70D7F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B11F51C-FA81-4056-B924-7EA243262E25}
