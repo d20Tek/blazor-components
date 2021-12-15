@@ -1,9 +1,7 @@
-name: Blazor-Components CI
+name: Blazor-Components Official
 
 on:
   push:
-    branches: [ feature/* ]
-  pull_request:
     branches: [ main ]
 
 jobs:
