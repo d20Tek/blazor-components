@@ -36,10 +36,29 @@
 <hr />
 
 <h4>Spinner Type</h4>
-<p>The Spinner component has different types of display: ring [default], pulse.</p>
-<Spinner class="m-2" Type=SpinType.Ring />
-<Spinner class="m-2" Type=SpinType.Pulse style="color: green" />
-<Spinner class="m-2" Type=SpinType.Square style="color: darkorange" />
+<p>The Spinner component has different types of displays:</p>
+<div class="row text-center">
+    <div class="col">
+        <Spinner class="m-2" Type=SpinType.Ring />
+        <div>Ring</div>
+    </div>
+    <div class="col">
+        <Spinner class="m-2" Type=SpinType.Pulse style="color: green" />
+        <div>Pulse</div>
+    </div>
+    <div class="col">
+        <Spinner class="m-2" Type=SpinType.Square style="color: darkorange" />
+        <div>Square</div>
+    </div>
+    <div class="col">
+        <Spinner class="m-2" Type=SpinType.Hourglass style="color: darkgray" />
+        <div>Hourglass</div>
+    </div>
+    <div class="col">
+        <Spinner class="m-2" Type=SpinType.DualRing style="color: lightblue" />
+        <div>DualRing</div>
+    </div>
+</div>
 <hr />
 
 @code {

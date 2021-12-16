@@ -69,6 +69,36 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
+        public void Render_DualRingType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.DualRing));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-dualring""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_HourglassType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Hourglass));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-hourglass""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void Render_WithAttributeSplat()
         {
             // arrange

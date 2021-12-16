@@ -10,6 +10,8 @@ namespace D20Tek.BlazorComponents
         private const string _fixedSpinCssClass = "spinner";
         private const string _fixedPulseCssClass = "spinner-pulse";
         private const string _fixedSquareCssClass = "spinner-square";
+        private const string _fixedHourGlassCssClass = "spinner-hourglass";
+        private const string _fixedDualRingCssClass = "spinner-dualring";
 
         [Parameter]
         public bool IsVisible { get; set; } = true;
@@ -38,6 +40,8 @@ namespace D20Tek.BlazorComponents
             {
                 SpinType.Pulse => _fixedPulseCssClass,
                 SpinType.Square => _fixedSquareCssClass,
+                SpinType.Hourglass => _fixedHourGlassCssClass,
+                SpinType.DualRing =>_fixedDualRingCssClass,
                 _ => _fixedSpinCssClass,
             };
         }
