@@ -1,0 +1,7 @@
+﻿.my-custom-spinner {
+    color: darkorange;
+    border-right-color: orangered;
+    width: 120px;
+    height: 120px;
+    border-width: 20px;
+}

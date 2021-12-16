@@ -11,9 +11,14 @@
 <Spinner style="color: red; height: 120px; width: 120px" />
 <hr />
 
+<h4>Spinner With Id CSS</h4>
+<p>This is a spinner with a class based on element id. The CSS element changes several properties of the spinner component.</p>
+<Spinner id="my-spinner" />
+<hr />
+
 <h4>Spinner With Additional Classes</h4>
 <p>This is a spinner with an additional class name. The CSS element changes several properties of the spinner component.</p>
-<Spinner id="my-spinner" class="my-custom-spinner" />
+<Spinner class="my-custom-spinner" b-1vvd1ern0j/>
 <hr />
 
 <h4>Spinner Visibility</h4>
@@ -28,6 +33,12 @@
         <Spinner IsVisible=@this._spinnerVisible />
     </div>
 </div>
+<hr />
+
+<h4>Spinner Type</h4>
+<p>The Spinner component has different types of display: ring [default], pulse.</p>
+<Spinner Type=SpinType.Ring />
+<Spinner Type=SpinType.Pulse style="color: green" />
 <hr />
 
 @code {
