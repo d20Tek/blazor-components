@@ -54,6 +54,21 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
+        public void Render_SquareType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Square));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-square""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void Render_WithAttributeSplat()
         {
             // arrange

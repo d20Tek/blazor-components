@@ -8,5 +8,6 @@ namespace D20Tek.BlazorComponents
     {
         Ring = 0,
         Pulse = 1,
+        Square = 2,        
     }
 }

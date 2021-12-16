@@ -8,9 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="D20Tek.BlazorComponents.Spinner" Version="1.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Spinner\D20Tek.BlazorComponents.Spinner.csproj" />
   </ItemGroup>
 
   <ItemGroup>

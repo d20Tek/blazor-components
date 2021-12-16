@@ -31,3 +31,13 @@
     0% { transform: scale(0); }
     50% { opacity: 1; transform: none; }
 }
+
+.spinner-square {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -.125em;
+    background-color: currentColor;
+    -webkit-animation: 1.5s linear infinite spin-animation;
+    animation: 1.5s linear infinite spin-animation;
+}

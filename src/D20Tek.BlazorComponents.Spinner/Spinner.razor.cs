@@ -2,7 +2,6 @@
 // Copyright (c) d20Tek. All rights reserved.
 //---------------------------------------------------------------------------------------------------------------------
 using Microsoft.AspNetCore.Components;
-using System.Runtime.CompilerServices;
 
 namespace D20Tek.BlazorComponents
 {
@@ -10,6 +9,7 @@ namespace D20Tek.BlazorComponents
     {
         private const string _fixedSpinCssClass = "spinner";
         private const string _fixedPulseCssClass = "spinner-pulse";
+        private const string _fixedSquareCssClass = "spinner-square";
 
         [Parameter]
         public bool IsVisible { get; set; } = true;
@@ -24,12 +24,22 @@ namespace D20Tek.BlazorComponents
 
         protected override void OnParametersSet()
         {
-            this.CssClass = this.Type == SpinType.Ring ? _fixedSpinCssClass : _fixedPulseCssClass;
+            this.CssClass = this.SpinTypeToCssClass(this.Type);
             this.RemainingAttributes.TryGetValue("class", out var value);
             if (value != null)
             {
                 this.CssClass += $" {value}";
             }
+        }
+
+        private string SpinTypeToCssClass(SpinType type)
+        {
+            return type switch
+            {
+                SpinType.Pulse => _fixedPulseCssClass,
+                SpinType.Square => _fixedSquareCssClass,
+                _ => _fixedSpinCssClass,
+            };
         }
     }
 }
