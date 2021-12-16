@@ -1,4 +1,4 @@
-﻿.my-custom-spinner {
+﻿::deep .my-custom-spinner {
     color: darkorange;
     border-right-color: orangered;
     width: 120px;
