@@ -29,6 +29,6 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
     - name: Push
-      run: dotnet nuget push D20Tek.BlazorComponents.Spinner.${VERSION}.nupkg --source https://github.com/orgs/d20Tek/packages --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push D20Tek.BlazorComponents.Spinner.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
