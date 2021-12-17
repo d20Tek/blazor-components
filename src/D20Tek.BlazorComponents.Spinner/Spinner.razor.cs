@@ -12,6 +12,7 @@ namespace D20Tek.BlazorComponents
         private const string _fixedSquareCssClass = "spinner-square";
         private const string _fixedHourGlassCssClass = "spinner-hourglass";
         private const string _fixedDualRingCssClass = "spinner-dualring";
+        private const string _fixedSpinIosCssClass = "spinner-ios";
 
         [Parameter]
         public bool IsVisible { get; set; } = true;
@@ -29,7 +30,17 @@ namespace D20Tek.BlazorComponents
 
         private bool HasLabel => !string.IsNullOrWhiteSpace(this.Label);
 
-        protected override void OnParametersSet()
+        private int InnerDivCount =>
+            this.Type switch
+            {
+                //SpinType.Pulse => _fixedPulseCssClass,
+                //SpinType.Square => _fixedSquareCssClass,
+                //SpinType.Hourglass => _fixedHourGlassCssClass,
+                SpinType.SpinIOS => 12,
+                _ => 0,
+            };
+
+    protected override void OnParametersSet()
         {
             this.CssClass = this.SpinTypeToCssClass(this.Type);
             this.RemainingAttributes.TryGetValue("class", out var value);
@@ -47,6 +58,7 @@ namespace D20Tek.BlazorComponents
                 SpinType.Square => _fixedSquareCssClass,
                 SpinType.Hourglass => _fixedHourGlassCssClass,
                 SpinType.DualRing =>_fixedDualRingCssClass,
+                SpinType.SpinIOS => _fixedSpinIosCssClass,
                 _ => _fixedSpinCssClass,
             };
         }

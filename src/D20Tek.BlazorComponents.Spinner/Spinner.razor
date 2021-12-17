@@ -3,12 +3,22 @@
     @if (this.HasLabel)
     {
         <div>
-            <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass"/>
+            <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass">
+                @for (int ctr = 0; ctr < this.InnerDivCount; ctr++)
+                {
+                    <div></div>
+                }
+            </div>
             <div class="spinner-label">@this.Label</div>
         </div>
     }
     else
     {
-        <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass"/>
+        <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass">
+            @for (int ctr = 0; ctr < this.InnerDivCount; ctr++)
+            {
+                <div></div>
+            }
+        </div>
     }
 }

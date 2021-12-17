@@ -11,5 +11,6 @@ namespace D20Tek.BlazorComponents
         Square = 2,
         Hourglass = 3,
         DualRing = 4,
+        SpinIOS = 5,
     }
 }
