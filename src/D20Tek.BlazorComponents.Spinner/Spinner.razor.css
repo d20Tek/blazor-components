@@ -1,4 +1,8 @@
-﻿.spinner {
+﻿.spinner-label {
+    margin: 8px;
+}
+
+.spinner {
     display: inline-block;
     width: 2rem;
     height: 2rem;
@@ -6,11 +10,98 @@
     border: .25em solid currentColor;
     border-right-color: transparent;
     border-radius: 50%;
-    -webkit-animation: 1s linear infinite spinner-animation;
-    animation: 1s linear infinite spinner-animation;
+    -webkit-animation: 1.5s linear infinite spin-animation;
+    animation: 1.5s linear infinite spin-animation;
 }
 
-@keyframes spinner-animation {
+@keyframes spin-animation {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.spinner-pulse {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -.125em;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-animation: 1.5s linear infinite pulse-animation;
+    animation: 1.5s linear infinite pulse-animation;
+}
+
+@keyframes pulse-animation {
+    0% { transform: scale(0); }
+    50% { opacity: 1; transform: none; }
+}
+
+.spinner-square {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -.125em;
+    background-color: currentColor;
+    -webkit-animation: 1.5s linear infinite spin-animation;
+    animation: 2s linear infinite spin-animation;
+}
+
+.spinner-dualring,
+.spinner-dualring:after {
+    box-sizing: border-box;
+}
+
+.spinner-dualring {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+}
+
+    .spinner-dualring:after {
+        content: " ";
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 6.4px solid currentColor;
+        border-color: currentColor transparent currentColor transparent;
+        animation: spin-animation 1.5s linear infinite;
+    }
+
+.spinner-hourglass,
+.spinner-hourglass:after {
+    box-sizing: border-box;
+}
+
+.spinner-hourglass {
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+}
+
+    .spinner-hourglass:after {
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 1rem solid currentColor;
+        border-color: currentColor transparent currentColor transparent;
+        animation: hourglass-animation 3s infinite;
+    }
+
+@keyframes hourglass-animation {
+    0% {
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    50% {
+        transform: rotate(900deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
 }

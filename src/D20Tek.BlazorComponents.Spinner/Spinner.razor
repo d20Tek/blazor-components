@@ -1,4 +1,14 @@
 ﻿@if (this.IsVisible)
 {
-    <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass"/>
+    @if (this.HasLabel)
+    {
+        <div>
+            <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass"/>
+            <div class="spinner-label">@this.Label</div>
+        </div>
+    }
+    else
+    {
+        <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass"/>
+    }
 }

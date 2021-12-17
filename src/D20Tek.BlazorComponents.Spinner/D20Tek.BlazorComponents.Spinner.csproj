@@ -5,6 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.5</Version>
+    <Authors>DarthPedro</Authors>
+    <Company>d20Tek</Company>
+    <Description>A Blazor component for displaying a spinner/loader component. This component allows you to easily place spinners throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
+    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly Spinner Loader</PackageTags>
+    <PackageReleaseNotes>Initial version of simple spinner component with customization and tests.</PackageReleaseNotes>
   </PropertyGroup>
 
 

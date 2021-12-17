@@ -39,6 +39,87 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
+        public void Render_WithLabel()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Label, "Test label"));
+
+            // assert
+            var expectedHtml =
+            @"
+              <div >
+                  <div role=""status"" class=""spinner""></div>
+                  <div class=""spinner-label"">Test label</div>
+              </div>
+            ";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_PulseType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Pulse));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-pulse""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_SquareType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Square));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-square""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_DualRingType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.DualRing));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-dualring""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_HourglassType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Hourglass));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner-hourglass""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void Render_WithAttributeSplat()
         {
             // arrange
