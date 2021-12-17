@@ -19,7 +19,24 @@ To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Package
 Read more about this release in our [Release Notes](ReleaseNotes.md).
 
 ## Usage
-Todo...
+Once you've installed the component NuGet package, you can start using it in your Blazor project. For this example we will use the Spinner component, but other components will follow the same usage pattern.
+
+1. You must add our namespace to your Blazor project's ```_Imports.razor``` file to make our types available to all of your pages/components.
+```
+@using D20Tek.BlazorComponents
+```
+2. Place the component in your razor file (for example in your Index.Razor file):
+```
+<Spinner />
+```
+3. Many components have additional parameters that you can call (see the component documentation for list of available parameters).
+```
+<Spinner Type=SpinType.Pulse Label="Loading..." />
+```
+4. Further customization is available by defining your own CSS or styles on the component.
+```
+<Spinner Type=SpinType.Hourglass class="my-custom-spinner" style="color: red; height: 120px; width: 120px" />
+```
 
 ### Samples:
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:
