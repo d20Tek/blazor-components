@@ -1,4 +1,8 @@
-﻿.spinner {
+﻿.spinner-label {
+    margin: 8px;
+}
+
+.spinner {
     display: inline-block;
     width: 2rem;
     height: 2rem;

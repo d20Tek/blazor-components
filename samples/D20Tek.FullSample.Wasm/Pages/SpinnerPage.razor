@@ -3,26 +3,37 @@
 
 <h4>Default Spinner</h4>
 <p>This is a spinner with the default properties and styles.</p>
+<pre><code>&lt;Spinner /&gt;</code></pre>
 <Spinner />
 <hr />
 
 <h4>Spinner With Styles</h4>
 <p>This is a spinner where styles are defined: color: red; height:120 px; width: 120px.</p>
+<pre><code>&lt;Spinner style="color: red; height: 120px; width: 120px" /&gt;</code></pre>
 <Spinner style="color: red; height: 120px; width: 120px" />
 <hr />
 
 <h4>Spinner With Id CSS</h4>
 <p>This is a spinner with a class based on element id. The CSS element changes several properties of the spinner component.</p>
+<pre><code>&lt;Spinner id="my-spinner" /&gt;</code></pre>
 <Spinner id="my-spinner" />
 <hr />
 
 <h4>Spinner With Additional Classes</h4>
 <p>This is a spinner with an additional class name. The CSS element changes several properties of the spinner component.</p>
+<pre><code>&lt;div class="my-custom-spinner"&gt;&lt;Spinner class="my-custom-spinner"/&gt;&lt;/div&gt;</code></pre>
 <div class="my-custom-spinner"><Spinner class="my-custom-spinner"/></div>
+<hr />
+
+<h4>Spinner With Label (optional)</h4>
+<p>The spinner component can also display an optional label if it is provided as a parameter.</p>
+<pre><code>&lt;Spinner Label="Loading..." /&gt;</code></pre>
+<Spinner Label="Loading..."/>
 <hr />
 
 <h4>Spinner Visibility</h4>
 <p>This is a spinner that allows changing of the IsVisible property to show and hide the spinner.</p>
+<pre><code>&lt;Spinner IsVisible=@this._spinnerVisible /&gt;</code></pre>
 <div class="row">
     <div class="col">
         <button class="btn btn-outline-secondary" @onclick="ToggleSpinnerVisibility">
@@ -37,26 +48,22 @@
 
 <h4>Spinner Type</h4>
 <p>The Spinner component has different types of displays:</p>
+<pre><code>&lt;Spinner Type=SpinType.Pulse Label="Pulse" style="color: green" /&gt;</code></pre>
 <div class="row text-center">
     <div class="col">
-        <Spinner class="m-2" Type=SpinType.Ring />
-        <div>Ring</div>
+        <Spinner Type=SpinType.Ring Label="Ring" />
     </div>
     <div class="col">
-        <Spinner class="m-2" Type=SpinType.Pulse style="color: green" />
-        <div>Pulse</div>
+        <Spinner Type=SpinType.Pulse Label="Pulse" style="color: green" />
     </div>
     <div class="col">
-        <Spinner class="m-2" Type=SpinType.Square style="color: darkorange" />
-        <div>Square</div>
+        <Spinner Type=SpinType.Square Label="Square" style="color: darkorange" />
     </div>
     <div class="col">
-        <Spinner class="m-2" Type=SpinType.Hourglass style="color: darkgray" />
-        <div>Hourglass</div>
+        <Spinner Type=SpinType.Hourglass Label="Hourglass" style="color: darkgray" />
     </div>
     <div class="col">
-        <Spinner class="m-2" Type=SpinType.DualRing style="color: lightblue" />
-        <div>DualRing</div>
+        <Spinner Type=SpinType.DualRing Label="DualRing" style="color: lightblue" />
     </div>
 </div>
 <hr />

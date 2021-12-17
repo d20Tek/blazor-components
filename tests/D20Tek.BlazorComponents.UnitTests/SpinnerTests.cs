@@ -39,6 +39,27 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
+        public void Render_WithLabel()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Label, "Test label"));
+
+            // assert
+            var expectedHtml =
+            @"
+              <div >
+                  <div role=""status"" class=""spinner""></div>
+                  <div class=""spinner-label"">Test label</div>
+              </div>
+            ";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void Render_PulseType()
         {
             // arrange

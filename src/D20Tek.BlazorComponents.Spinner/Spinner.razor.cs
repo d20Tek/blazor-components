@@ -19,10 +19,15 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public SpinType Type { get; set; }
 
+        [Parameter]
+        public string Label { get; set; } = string.Empty;
+
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> RemainingAttributes { get; set; } = new Dictionary<string, object>();
 
         private string CssClass { get; set; } = string.Empty;
+
+        private bool HasLabel => !string.IsNullOrWhiteSpace(this.Label);
 
         protected override void OnParametersSet()
         {
