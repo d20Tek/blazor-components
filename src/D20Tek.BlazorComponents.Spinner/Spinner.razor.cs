@@ -7,13 +7,6 @@ namespace D20Tek.BlazorComponents
 {
     public partial class Spinner : ComponentBase
     {
-        private const string _fixedSpinCssClass = "spinner";
-        private const string _fixedPulseCssClass = "spinner-pulse";
-        private const string _fixedSquareCssClass = "spinner-square";
-        private const string _fixedHourGlassCssClass = "spinner-hourglass";
-        private const string _fixedDualRingCssClass = "spinner-dualring";
-        private const string _fixedSpinIosCssClass = "spinner-ios";
-
         [Parameter]
         public bool IsVisible { get; set; } = true;
 
@@ -30,37 +23,18 @@ namespace D20Tek.BlazorComponents
 
         private bool HasLabel => !string.IsNullOrWhiteSpace(this.Label);
 
-        private int InnerDivCount =>
-            this.Type switch
-            {
-                //SpinType.Pulse => _fixedPulseCssClass,
-                //SpinType.Square => _fixedSquareCssClass,
-                //SpinType.Hourglass => _fixedHourGlassCssClass,
-                SpinType.SpinIOS => 12,
-                _ => 0,
-            };
+        private SpinTypeMetadata.Item TypeMetadata { get; set; } = SpinTypeMetadata.GetMetadataItem(SpinType.Ring);
 
-    protected override void OnParametersSet()
+        protected override void OnParametersSet()
         {
-            this.CssClass = this.SpinTypeToCssClass(this.Type);
+            this.TypeMetadata = SpinTypeMetadata.GetMetadataItem(this.Type);
+            this.CssClass = this.TypeMetadata.FixedCssClass;
+
             this.RemainingAttributes.TryGetValue("class", out var value);
             if (value != null)
             {
                 this.CssClass += $" {value}";
             }
-        }
-
-        private string SpinTypeToCssClass(SpinType type)
-        {
-            return type switch
-            {
-                SpinType.Pulse => _fixedPulseCssClass,
-                SpinType.Square => _fixedSquareCssClass,
-                SpinType.Hourglass => _fixedHourGlassCssClass,
-                SpinType.DualRing =>_fixedDualRingCssClass,
-                SpinType.SpinIOS => _fixedSpinIosCssClass,
-                _ => _fixedSpinCssClass,
-            };
         }
     }
 }

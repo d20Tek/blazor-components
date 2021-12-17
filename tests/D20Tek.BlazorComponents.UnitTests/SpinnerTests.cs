@@ -60,62 +60,25 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
-        public void Render_PulseType()
+        public void Render_WithInnerDivs()
         {
             // arrange
             var ctx = new TestContext();
 
             // act
             var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Pulse));
+                .Add(p => p.Label, "Test label")
+                .Add(p => p.Type, SpinType.SpinIOS));
 
             // assert
-            var expectedHtml = @"<div role=""status"" class=""spinner-pulse""></div>";
-            comp.MarkupMatches(expectedHtml);
-        }
-
-        [mst.TestMethod]
-        public void Render_SquareType()
-        {
-            // arrange
-            var ctx = new TestContext();
-
-            // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Square));
-
-            // assert
-            var expectedHtml = @"<div role=""status"" class=""spinner-square""></div>";
-            comp.MarkupMatches(expectedHtml);
-        }
-
-        [mst.TestMethod]
-        public void Render_DualRingType()
-        {
-            // arrange
-            var ctx = new TestContext();
-
-            // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.DualRing));
-
-            // assert
-            var expectedHtml = @"<div role=""status"" class=""spinner-dualring""></div>";
-            comp.MarkupMatches(expectedHtml);
-        }
-
-        [mst.TestMethod]
-        public void Render_HourglassType()
-        {
-            // arrange
-            var ctx = new TestContext();
-
-            // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Hourglass));
-
-            // assert
-            var expectedHtml = @"<div role=""status"" class=""spinner-hourglass""></div>";
+            var expectedHtml = @"
+              <div>
+                <div role=""status"" class=""spinner-ios"">
+                    <div></div><div></div><div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div><div></div><div></div>
+                </div>
+                <div class=""spinner-label"">Test label</div>
+              </div>";
             comp.MarkupMatches(expectedHtml);
         }
 
