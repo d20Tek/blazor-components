@@ -12,5 +12,10 @@ namespace D20Tek.BlazorComponents
         Hourglass = 3,
         DualRing = 4,
         SpinIOS = 5,
+        Ripple = 6,
+        Roller = 7,
+        Circle = 8,
+        Blocks = 9,
+        Ellipsis = 10,
     }
 }
