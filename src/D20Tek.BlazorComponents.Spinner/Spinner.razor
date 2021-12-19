@@ -3,7 +3,7 @@
     @if (this.HasLabel)
     {
         <div>
-            <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass">
+            <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass" style="@this.CssStyles">
                 @for (int ctr = 0; ctr < this.TypeMetadata.InnerDivCount; ctr++)
                 {
                     <div></div>
@@ -14,7 +14,7 @@
     }
     else
     {
-        <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass">
+        <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass" style="@this.CssStyles">
             @for (int ctr = 0; ctr < this.TypeMetadata.InnerDivCount; ctr++)
             {
                 <div></div>

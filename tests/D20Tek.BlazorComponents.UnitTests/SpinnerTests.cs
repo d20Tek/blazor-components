@@ -120,5 +120,21 @@ namespace D20Tek.BlazorComponents.UnitTests
             var expectedHtml = @"<div role=""status"" class=""spinner test-component text-white""></div>";
             comp.MarkupMatches(expectedHtml);
         }
+
+        [mst.TestMethod]
+        public void Render_Colors()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Color, "green")
+                .Add(p => p.SecondaryColor, "yellow"));
+
+            // assert
+            var expectedHtml = @"<div role=""status"" class=""spinner"" style=""color: green; --spinner-secondary-color: yellow""></div>";
+            comp.MarkupMatches(expectedHtml);
+        }
     }
 }

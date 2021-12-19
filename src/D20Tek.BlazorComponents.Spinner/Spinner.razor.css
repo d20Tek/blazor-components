@@ -1,4 +1,8 @@
-﻿.spinner-label {
+﻿div {
+    --spinner-secondary-color: transparent;
+}
+
+.spinner-label {
     margin: 8px;
 }
 
@@ -9,7 +13,7 @@
     height: 2rem;
     vertical-align: -.125em;
     border: .25em solid currentColor;
-    border-right-color: transparent;
+    border-right-color: var(--spinner-secondary-color);
     border-radius: 50%;
     -webkit-animation: 1.5s linear infinite spin-animation;
     animation: 1.5s linear infinite spin-animation;
@@ -68,7 +72,7 @@
         height: 2rem;
         border-radius: 50%;
         border: 6.4px solid currentColor;
-        border-color: currentColor transparent currentColor transparent;
+        border-color: currentColor var(--spinner-secondary-color) currentColor var(--spinner-secondary-color);
         animation: spin-animation 1.5s linear infinite;
     }
 
@@ -91,7 +95,7 @@
         border-radius: 50%;
         box-sizing: border-box;
         border: 1rem solid currentColor;
-        border-color: currentColor transparent currentColor transparent;
+        border-color: currentColor var(--spinner-secondary-color) currentColor var(--spinner-secondary-color);
         animation: hourglass-animation 3s infinite;
     }
 
