@@ -1,6 +1,7 @@
 ﻿//---------------------------------------------------------------------------------------------------------------------
 // Copyright (c) d20Tek. All rights reserved.
 //---------------------------------------------------------------------------------------------------------------------
+using D20Tek.BlazorComponents.Utilities;
 using Microsoft.AspNetCore.Components;
 
 namespace D20Tek.BlazorComponents
@@ -8,11 +9,8 @@ namespace D20Tek.BlazorComponents
     public partial class Spinner : ComponentBase
     {
         private const string _fixedCssSpinnerMain = "spinner-area-main";
-        private const string _attributNameClass = "class";
-        private const string _attributNameStyle = "style";
-        private const string _styleNameColor = "color:";
-        private const string _styleNameSecondaryColor = "--spinner-secondary-color:";
-        private static readonly char[] _charTrimList = { ',', ' ' };
+        private const string _styleNameColor = "color";
+        private const string _styleNameSecondaryColor = "--spinner-secondary-color";
 
         [Parameter]
         public bool IsVisible { get; set; } = true;
@@ -35,7 +33,7 @@ namespace D20Tek.BlazorComponents
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> RemainingAttributes { get; set; } = new Dictionary<string, object>();
 
-        private string CssClass { get; set; } = string.Empty;
+        private string? CssClass { get; set; } = null;
 
         private string? CssStyles { get; set; } = null;
 
@@ -52,20 +50,16 @@ namespace D20Tek.BlazorComponents
             this.CssStyles = this.CalculateCssStyles();
         }
 
-        private string CalculateCssClasses()
+        private string? CalculateCssClasses()
         {
-            var result = this.TypeMetadata.FixedCssClass;
+            var result = new CssBuilder(this.TypeMetadata.FixedCssClass)
+                             .AddClass(_fixedCssSpinnerMain, HasLabel)
+                             .AddClassFromAttributes(this.RemainingAttributes)
+                             .Build();
 
             if (this.HasLabel)
             {
-                result += $" {_fixedCssSpinnerMain}";
                 this.LabelCssClass = LabelPlacementMetadata.GetPlacementCss(this.LabelPlacement);
-            }
-
-            this.RemainingAttributes.TryGetValue(_attributNameClass, out var value);
-            if (value != null)
-            {
-                result += $" {value}";
             }
 
             return result;
@@ -73,25 +67,15 @@ namespace D20Tek.BlazorComponents
 
         private string? CalculateCssStyles()
         {
-            string tempStyles = string.Empty;
-            this.RemainingAttributes.TryGetValue(_attributNameStyle, out var style);
-            if (style != null)
-            {
-                tempStyles = $"{style}; ";
-            }
+            var result = new StyleBuilder()
+                             .AddStyleFromAttributes(this.RemainingAttributes)
+                             .AddStyle(_styleNameColor, this.Color, () => {
+                                     return string.IsNullOrWhiteSpace(this.Color) == false; })
+                             .AddStyle(_styleNameSecondaryColor, this.SecondaryColor, () => {
+                                     return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
+                             .Build();
 
-            if (string.IsNullOrWhiteSpace(this.Color) == false)
-            {
-                tempStyles += $"{_styleNameColor} {this.Color}; ";
-            }
-
-            if (string.IsNullOrWhiteSpace(this.SecondaryColor) == false)
-            {
-                tempStyles += $"{_styleNameSecondaryColor} {this.SecondaryColor}; ";
-            }
-
-            tempStyles = tempStyles.Trim(_charTrimList);
-            return (string.IsNullOrEmpty(tempStyles) ? null : tempStyles);
+            return result;
         }
     }
 }
