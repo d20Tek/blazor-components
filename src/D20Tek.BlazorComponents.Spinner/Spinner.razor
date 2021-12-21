@@ -2,14 +2,14 @@
 {
     @if (this.HasLabel)
     {
-        <div>
+        <div class="spinner-grid-container">
             <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass" style="@this.CssStyles">
                 @for (int ctr = 0; ctr < this.TypeMetadata.InnerDivCount; ctr++)
                 {
                     <div></div>
                 }
             </div>
-            <div class="spinner-label">@this.Label</div>
+            <div class="@this.LabelCssClass">@this.Label</div>
         </div>
     }
     else

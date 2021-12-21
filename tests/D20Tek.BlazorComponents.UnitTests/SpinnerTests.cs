@@ -39,27 +39,6 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
         [mst.TestMethod]
-        public void Render_WithLabel()
-        {
-            // arrange
-            var ctx = new TestContext();
-
-            // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Label, "Test label"));
-
-            // assert
-            var expectedHtml =
-            @"
-              <div >
-                  <div role=""status"" class=""spinner""></div>
-                  <div class=""spinner-label"">Test label</div>
-              </div>
-            ";
-            comp.MarkupMatches(expectedHtml);
-        }
-
-        [mst.TestMethod]
         public void Render_WithInnerDivs()
         {
             // arrange
@@ -72,12 +51,12 @@ namespace D20Tek.BlazorComponents.UnitTests
 
             // assert
             var expectedHtml = @"
-              <div>
-                <div role=""status"" class=""spinner-ios"">
+              <div class=""spinner-grid-container"">
+                <div role=""status"" class=""spinner-ios spinner-area-main"">
                     <div></div><div></div><div></div><div></div><div></div><div></div>
                     <div></div><div></div><div></div><div></div><div></div><div></div>
                 </div>
-                <div class=""spinner-label"">Test label</div>
+                <div class=""spinner-label spinner-label-bottom"">Test label</div>
               </div>";
             comp.MarkupMatches(expectedHtml);
         }

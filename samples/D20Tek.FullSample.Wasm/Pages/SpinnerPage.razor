@@ -7,28 +7,31 @@
 <Spinner />
 <hr />
 
-<h4>Spinner With Styles</h4>
-<p>This is a spinner where styles are defined: color: red; height:120 px; width: 120px.</p>
-<pre><code>&lt;Spinner style="color: red; height: 120px; width: 120px" /&gt;</code></pre>
-<Spinner style="color: red; height: 120px; width: 120px" />
-<hr />
-
-<h4>Spinner With Id CSS</h4>
-<p>This is a spinner with a class based on element id. The CSS element changes several properties of the spinner component.</p>
-<pre><code>&lt;Spinner id="my-spinner" /&gt;</code></pre>
-<Spinner id="my-spinner" />
-<hr />
-
-<h4>Spinner With Additional Classes</h4>
-<p>This is a spinner with an additional class name. The CSS element changes several properties of the spinner component.</p>
-<pre><code>&lt;div class="my-custom-spinner"&gt;&lt;Spinner class="my-custom-spinner"/&gt;&lt;/div&gt;</code></pre>
-<div class="my-custom-spinner"><Spinner class="my-custom-spinner"/></div>
-<hr />
-
 <h4>Spinner With Label (optional)</h4>
 <p>The spinner component can also display an optional label if it is provided as a parameter.</p>
 <pre><code>&lt;Spinner Label="Loading..." /&gt;</code></pre>
-<Spinner Label="Loading..."/>
+<div style="width: 56px">
+    <Spinner Label="Loading..." />
+</div>
+<hr />
+
+<h4>Spinner With LabelPlacement</h4>
+<p>The spinner component allows you to place the label in four different positions:</p>
+<pre><code>&lt;Spinner Label="Top..." LabelPlacement=Placement.Top /&gt;</code></pre>
+<div class="row text-center">
+    <div class="col">
+        <Spinner Label="Top..." LabelPlacement=Placement.Top />
+    </div>
+    <div class="col">
+        <Spinner Label="Bottom..." LabelPlacement=Placement.Bottom />
+    </div>
+    <div class="col">
+        <Spinner Label="Left..." LabelPlacement=Placement.Left />
+    </div>
+    <div class="col">
+        <Spinner Label="Right..." LabelPlacement=Placement.Right />
+    </div>
+</div>
 <hr />
 
 <h4>Spinner Visibility</h4>
@@ -92,6 +95,24 @@
         <Spinner Type=SpinType.Ellipsis Label="Ellipsis" style="color: orange" />
     </div>
 </div>
+<hr />
+
+<h4>Spinner With Styles</h4>
+<p>This is a spinner where styles are defined: color: red; height:120 px; width: 120px.</p>
+<pre><code>&lt;Spinner style="color: red; height: 120px; width: 120px" /&gt;</code></pre>
+<Spinner style="color: red; height: 120px; width: 120px" />
+<hr />
+
+<h4>Spinner With Id CSS</h4>
+<p>This is a spinner with a class based on element id. The CSS element changes several properties of the spinner component.</p>
+<pre><code>&lt;Spinner id="my-spinner" /&gt;</code></pre>
+<Spinner id="my-spinner" />
+<hr />
+
+<h4>Spinner With Additional Classes</h4>
+<p>This is a spinner with an additional class name. The CSS element changes several properties of the spinner component.</p>
+<pre><code>&lt;div class="my-custom-spinner"&gt;&lt;Spinner class="my-custom-spinner"/&gt;&lt;/div&gt;</code></pre>
+<div class="my-custom-spinner"><Spinner class="my-custom-spinner"/></div>
 <hr />
 
 @code {

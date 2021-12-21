@@ -7,6 +7,13 @@ namespace D20Tek.BlazorComponents
 {
     public partial class Spinner : ComponentBase
     {
+        private const string _fixedCssSpinnerMain = "spinner-area-main";
+        private const string _attributNameClass = "class";
+        private const string _attributNameStyle = "style";
+        private const string _styleNameColor = "color:";
+        private const string _styleNameSecondaryColor = "--spinner-secondary-color:";
+        private static readonly char[] _charTrimList = { ',', ' ' };
+
         [Parameter]
         public bool IsVisible { get; set; } = true;
 
@@ -22,12 +29,17 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public string SecondaryColor { get; set; } = string.Empty;
 
+        [Parameter]
+        public Placement LabelPlacement { get; set; } = Placement.Bottom;
+
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> RemainingAttributes { get; set; } = new Dictionary<string, object>();
 
         private string CssClass { get; set; } = string.Empty;
 
         private string? CssStyles { get; set; } = null;
+
+        private string? LabelCssClass { get; set; } = null;
 
         private bool HasLabel => !string.IsNullOrWhiteSpace(this.Label);
 
@@ -44,7 +56,13 @@ namespace D20Tek.BlazorComponents
         {
             var result = this.TypeMetadata.FixedCssClass;
 
-            this.RemainingAttributes.TryGetValue("class", out var value);
+            if (this.HasLabel)
+            {
+                result += $" {_fixedCssSpinnerMain}";
+                this.LabelCssClass = LabelPlacementMetadata.GetPlacementCss(this.LabelPlacement);
+            }
+
+            this.RemainingAttributes.TryGetValue(_attributNameClass, out var value);
             if (value != null)
             {
                 result += $" {value}";
@@ -56,7 +74,7 @@ namespace D20Tek.BlazorComponents
         private string? CalculateCssStyles()
         {
             string tempStyles = string.Empty;
-            this.RemainingAttributes.TryGetValue("style", out var style);
+            this.RemainingAttributes.TryGetValue(_attributNameStyle, out var style);
             if (style != null)
             {
                 tempStyles = $"{style}; ";
@@ -64,15 +82,15 @@ namespace D20Tek.BlazorComponents
 
             if (string.IsNullOrWhiteSpace(this.Color) == false)
             {
-                tempStyles += $"color: {this.Color}; ";
+                tempStyles += $"{_styleNameColor} {this.Color}; ";
             }
 
             if (string.IsNullOrWhiteSpace(this.SecondaryColor) == false)
             {
-                tempStyles += $"--spinner-secondary-color: {this.SecondaryColor}; ";
+                tempStyles += $"{_styleNameSecondaryColor} {this.SecondaryColor}; ";
             }
 
-            tempStyles = tempStyles.Trim(',', ' ');
+            tempStyles = tempStyles.Trim(_charTrimList);
             return (string.IsNullOrEmpty(tempStyles) ? null : tempStyles);
         }
     }

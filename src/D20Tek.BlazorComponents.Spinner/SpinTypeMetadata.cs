@@ -25,7 +25,7 @@ namespace D20Tek.BlazorComponents
         private const string _fixedBlocksCssClass = "spinner-blocks";
         private const string _fixedEllipsisCssClass = "spinner-ellipsis";
 
-        private static List<Item> _elements = new List<Item>
+        private static readonly List<Item> _elements = new List<Item>
         {
             new (){ Type = SpinType.Ring, FixedCssClass = _fixedSpinCssClass },
             new (){ Type = SpinType.Pulse, FixedCssClass = _fixedPulseCssClass },

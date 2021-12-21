@@ -4,6 +4,42 @@
 
 .spinner-label {
     margin: 8px;
+    text-align: center;
+}
+
+.spinner-grid-container {
+    display: grid;
+    justify-content: center;
+    vertical-align: middle;
+    grid-template-areas:
+        'top top top'
+        'left main right'
+        'bottom bottom bottom';
+}
+
+.spinner-label-top {
+    grid-area: top;
+}
+
+.spinner-label-bottom {
+    grid-area: bottom;
+}
+
+.spinner-label-left {
+    grid-area: left;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.spinner-label-right {
+    grid-area: right;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.spinner-area-main {
+    grid-area: main;
+    text-align: center;
 }
 
 /* default spinner */
