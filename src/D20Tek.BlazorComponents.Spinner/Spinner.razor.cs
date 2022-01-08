@@ -11,6 +11,8 @@ namespace D20Tek.BlazorComponents
         private const string _fixedCssSpinnerMain = "spinner-area-main";
         private const string _styleNameColor = "color";
         private const string _styleNameSecondaryColor = "--spinner-secondary-color";
+        private const string _styleNameWidth = "--spinner-width";
+        private const string _styleNameHeight = "--spinner-height";
 
         [Parameter]
         public bool IsVisible { get; set; } = true;
@@ -19,13 +21,16 @@ namespace D20Tek.BlazorComponents
         public SpinType Type { get; set; }
 
         [Parameter]
-        public string Label { get; set; } = string.Empty;
-
-        [Parameter]
         public string Color { get; set; } = string.Empty;
 
         [Parameter]
         public string SecondaryColor { get; set; } = string.Empty;
+
+        [Parameter]
+        public Size Size { get; set; } = Size.Small;
+
+        [Parameter]
+        public string Label { get; set; } = string.Empty;
 
         [Parameter]
         public Placement LabelPlacement { get; set; } = Placement.Bottom;
@@ -40,6 +45,8 @@ namespace D20Tek.BlazorComponents
         private string? LabelCssClass { get; set; } = null;
 
         private bool HasLabel => !string.IsNullOrWhiteSpace(this.Label);
+
+        private bool IsSizeRequired => (this.Size != Size.None && this.Size != Size.Small);
 
         private SpinTypeMetadata.Item TypeMetadata { get; set; } = SpinTypeMetadata.GetMetadataItem(SpinType.Ring);
 
@@ -70,9 +77,11 @@ namespace D20Tek.BlazorComponents
             var result = new StyleBuilder()
                              .AddStyleFromAttributes(this.RemainingAttributes)
                              .AddStyle(_styleNameColor, this.Color, () => {
-                                     return string.IsNullOrWhiteSpace(this.Color) == false; })
+                                    return string.IsNullOrWhiteSpace(this.Color) == false; })
                              .AddStyle(_styleNameSecondaryColor, this.SecondaryColor, () => {
-                                     return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
+                                    return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
+                             .AddStyle(_styleNameWidth, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
+                             .AddStyle(_styleNameHeight, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
                              .Build();
 
             return result;

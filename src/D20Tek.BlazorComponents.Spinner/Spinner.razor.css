@@ -1,5 +1,11 @@
 ﻿div {
     --spinner-secondary-color: transparent;
+    --spinner-width: 2rem;
+    --spinner-height: 2rem;
+
+    --ios-piece-width: calc(var(--spinner-width) * 0.08);
+    --ios-piece-height: calc(var(--spinner-height) * 0.22);
+    --ios-piece-radius: calc(var(--spinner-width) * 0.35);
 }
 
 .spinner-label {
@@ -45,10 +51,10 @@
 /* default spinner */
 .spinner {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
     vertical-align: -.125em;
-    border: .25em solid currentColor;
+    border: calc(var(--spinner-width) / 12) solid currentColor;
     border-right-color: var(--spinner-secondary-color);
     border-radius: 50%;
     -webkit-animation: 1.5s linear infinite spin-animation;
@@ -63,8 +69,8 @@
 /* pulse spinner */
 .spinner-pulse {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
     vertical-align: -.125em;
     background-color: currentColor;
     border-radius: 50%;
@@ -81,11 +87,12 @@
 /* square spinner */
 .spinner-square {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    width: calc(var(--spinner-width) * 0.85);
+    height: calc(var(--spinner-height) * 0.85);
+    margin: calc(var(--spinner-height) * 0.15) calc(var(--spinner-width) * 0.15) calc(var(--spinner-height) * 0.15) calc(var(--spinner-width) * 0.15);
     vertical-align: -.125em;
     background-color: currentColor;
-    -webkit-animation: 1.5s linear infinite spin-animation;
+    -webkit-animation: 2s linear infinite spin-animation;
     animation: 2s linear infinite spin-animation;
 }
 
@@ -97,17 +104,17 @@
 
 .spinner-dualring {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-dualring:after {
         content: " ";
         display: block;
-        width: 2rem;
-        height: 2rem;
+        width: var(--spinner-width);
+        height: var(--spinner-height);
         border-radius: 50%;
-        border: 6.4px solid currentColor;
+        border: calc(var(--spinner-width) / 12) solid currentColor;
         border-color: currentColor var(--spinner-secondary-color) currentColor var(--spinner-secondary-color);
         animation: spin-animation 1.5s linear infinite;
     }
@@ -121,8 +128,8 @@
 .spinner-hourglass {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-hourglass:after {
@@ -130,7 +137,7 @@
         display: block;
         border-radius: 50%;
         box-sizing: border-box;
-        border: 1rem solid currentColor;
+        border: calc(var(--spinner-width) / 2) solid currentColor;
         border-color: currentColor var(--spinner-secondary-color) currentColor var(--spinner-secondary-color);
         animation: hourglass-animation 3s infinite;
     }
@@ -162,12 +169,12 @@
     color: currentColor;
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-ios div {
-        transform-origin: 1rem 1rem;
+        transform-origin: calc(var(--spinner-width) / 2) calc(var(--spinner-height) / 2);
         animation: fade-animation 1.2s linear infinite;
     }
 
@@ -257,8 +264,8 @@
 .spinner-ripple {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-ripple div {
@@ -285,8 +292,8 @@
     100% {
         top: 0;
         left: 0;
-        width: 2rem;
-        height: 2rem;
+        width: var(--spinner-width);
+        height: var(--spinner-height);
         opacity: 0;
     }
 }
@@ -301,8 +308,8 @@
 .spinner-roller {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-roller div {
@@ -402,8 +409,8 @@
 .spinner-circle {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-circle div {
@@ -506,8 +513,8 @@
 .spinner-blocks {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-blocks div {
@@ -555,8 +562,8 @@
 .spinner-ellipsis {
     display: inline-block;
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
 }
 
     .spinner-ellipsis div {
