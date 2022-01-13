@@ -266,6 +266,11 @@
     position: relative;
     width: var(--spinner-width);
     height: var(--spinner-height);
+
+    --ripple-height: var(--spinner-height);
+    --ripple-width: var(--spinner-width);
+    --center-x: calc(var(--spinner-width) / 2);
+    --center-y: calc(var(--spinner-height) / 2);
 }
 
     .spinner-ripple div {
@@ -277,23 +282,23 @@
     }
 
         .spinner-ripple div:nth-child(2) {
-            animation-delay: -0.5s;
+            animation-delay: -0.75s;
         }
 
 @keyframes ripple-animation {
     0% {
-        top: 12px;
-        left: 12px;
-        width: 8px;
+        top: calc(var(--center-y) - 4px);
+        left: calc(var(--center-x) - 4px);
         height: 8px;
+        width: 8px;
         opacity: 1;
     }
 
     100% {
         top: 0;
         left: 0;
-        width: var(--spinner-width);
-        height: var(--spinner-height);
+        width: var(--ripple-width);
+        height: var(--ripple-height);
         opacity: 0;
     }
 }
@@ -515,41 +520,45 @@
     position: relative;
     width: var(--spinner-width);
     height: var(--spinner-height);
+
+    --block-width: calc(var(--spinner-width) / 5);
+    --block-gap: calc(var(--spinner-width) / 10);
+    --block-height: var(--spinner-height);
 }
 
     .spinner-blocks div {
         display: inline-block;
         position: absolute;
-        left: 3.2px;
-        width: 6.4px;
+        left: var(--block-gap);
+        width: var(--block-width);
         background: currentColor;
         animation: blocks-animation 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
     }
 
         .spinner-blocks div:nth-child(1) {
-            left: 3.2px;
+            left: var(--block-gap);
             animation-delay: -0.24s;
         }
 
         .spinner-blocks div:nth-child(2) {
-            left: 12.8px;
+            left: calc(var(--block-gap) * 4);
             animation-delay: -0.12s;
         }
 
         .spinner-blocks div:nth-child(3) {
-            left: 22.4px;
+            left: calc(var(--block-gap) * 7);
             animation-delay: 0s;
         }
 
 @keyframes blocks-animation {
     0% {
-        top: 3.2px;
-        height: 25.6px;
+        top: calc(var(--block-height) * 0.05);
+        height: calc(var(--block-height) * 0.9);
     }
 
     50%, 100% {
-        top: 9.6px;
-        height: 12.8px;
+        top: calc(var(--block-height) * 0.25);
+        height: calc(var(--block-height) * 0.5);
     }
 }
 
@@ -564,35 +573,39 @@
     position: relative;
     width: var(--spinner-width);
     height: var(--spinner-height);
+
+    --ball-size: calc(var(--spinner-width) / 6);
+    --ball-top: calc((var(--spinner-height) / 2) - (var(--ball-size) / 2));
+    --gap-size: calc(var(--spinner-width) / 10);
 }
 
     .spinner-ellipsis div {
         position: absolute;
-        top: 13.33333px;
-        width: 5.33333px;
-        height: 5.33333px;
+        top: var(--ball-top);
+        width: var(--ball-size);
+        height: var(--ball-size);
         border-radius: 50%;
         background: currentColor;
         animation-timing-function: cubic-bezier(0, 1, 1, 0);
     }
 
         .spinner-ellipsis div:nth-child(1) {
-            left: 3.2px;
+            left: var(--gap-size);
             animation: ellipsis1 0.6s infinite;
         }
 
         .spinner-ellipsis div:nth-child(2) {
-            left: 3.2px;
+            left: var(--gap-size);
             animation: ellipsis2 0.6s infinite;
         }
 
         .spinner-ellipsis div:nth-child(3) {
-            left: 12.8px;
+            left: calc(var(--gap-size) * 4);
             animation: ellipsis2 0.6s infinite;
         }
 
         .spinner-ellipsis div:nth-child(4) {
-            left: 22.4px;
+            left: calc(var(--gap-size) * 7);
             animation: ellipsis3 0.6s infinite;
         }
 
@@ -603,7 +616,7 @@
 
 @keyframes ellipsis2 {
     0% { transform: translate(0, 0); }
-    100% { transform: translate(9.6px, 0); }
+    100% { transform: translate(calc(var(--gap-size) * 3), 0); }
 }
 
 @keyframes ellipsis3 {
