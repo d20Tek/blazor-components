@@ -418,12 +418,18 @@
     position: relative;
     width: var(--spinner-width);
     height: var(--spinner-height);
+
+    --ball-size-width: calc(var(--spinner-width) * 0.08);
+    --ball-size-height: calc(var(--spinner-height) * 0.08);
+    --circle-radius: calc((var(--spinner-width) - var(--ball-size-width)) * 0.4);
+    --delta-width: calc(var(--spinner-width) - var(--ball-size-height));
+    --delta-height: calc(var(--spinner-height) - var(--ball-size-height));
 }
 
     .spinner-circle div {
         position: absolute;
-        width: 2.6px;
-        height: 2.6px;
+        width: var(--ball-size-width);
+        height: var(--ball-size-height);
         background: currentColor;
         border-radius: 50%;
         animation: circle-animation 1.5s linear infinite;
@@ -431,74 +437,74 @@
 
         .spinner-circle div:nth-child(1) {
             animation-delay: 0s;
-            top: 14.72px;
-            left: 26.5px;
+            top: calc(var(--delta-height) * 0.5 + 0 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 1 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(2) {
             animation-delay: -0.1s;
-            top: 8.83px;
-            left: 24.92px;
+            top: calc(var(--delta-height) * 0.5 + -0.5 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0.866 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(3) {
             animation-delay: -0.2s;
-            top: 4.52px;
-            left: 20.61px;
+            top: calc(var(--delta-height) * 0.5 + -0.866 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0.5 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(4) {
             animation-delay: -0.3s;
-            top: 2.94px;
-            left: 14.72px;
+            top: calc(var(--delta-height) * 0.5 + -1 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(5) {
             animation-delay: -0.4s;
-            top: 4.52px;
-            left: 8.83px;
+            top: calc(var(--delta-height) * 0.5 + -0.866 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + -0.5 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(6) {
             animation-delay: -0.5s;
-            top: 8.83px;
-            left: 4.52px;
+            top: calc(var(--delta-height) * 0.5 + -0.5 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + -0.866 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(7) {
             animation-delay: -0.6s;
-            top: 14.72px;
-            left: 2.94px;
+            top: calc(var(--delta-height) * 0.5 + 0 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + -1 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(8) {
             animation-delay: -0.7s;
-            top: 20.61px;
-            left: 4.52px;
+            top: calc(var(--delta-height) * 0.5 + 0.5 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + -0.866 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(9) {
             animation-delay: -0.8s;
-            top: 24.92px;
-            left: 8.83px;
+            top: calc(var(--delta-height) * 0.5 + 0.866 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + -0.5 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(10) {
             animation-delay: -0.9s;
-            top: 26.5px;
-            left: 14.72px;
+            top: calc(var(--delta-height) * 0.5 + 1 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(11) {
             animation-delay: -1s;
-            top: 24.92px;
-            left: 20.61px;
+            top: calc(var(--delta-height) * 0.5 + 0.866 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0.5 * var(--circle-radius));
         }
 
         .spinner-circle div:nth-child(12) {
             animation-delay: -1.1s;
-            top: 20.61px;
-            left: 24.92px;
+            top: calc(var(--delta-height) * 0.5 + 0.5 * var(--circle-radius));
+            left: calc(var(--delta-width) * 0.5 + 0.866 * var(--circle-radius));
         }
 
 @keyframes circle-animation {
