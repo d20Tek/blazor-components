@@ -317,94 +317,98 @@
     position: relative;
     width: var(--spinner-width);
     height: var(--spinner-height);
+
+    --ball-size: calc(var(--spinner-width) * 0.1);
+    --center-x: calc(var(--spinner-width) / 2);
+    --center-y: calc(var(--spinner-height) / 2);
 }
 
     .spinner-roller div {
-        animation: spin-animation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        transform-origin: 1rem 1rem;
+        animation: spin-animation 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        transform-origin: var(--center-x) var(--center-y);
     }
 
         .spinner-roller div:after {
             content: " ";
             display: block;
             position: absolute;
-            width: 2.6px;
-            height: 2.6px;
+            width: var(--ball-size);
+            height: var(--ball-size);
             border-radius: 50%;
             background: currentColor;
-            margin: -1.3px 0 0 -1.3px;
+            margin: calc(var(--ball-size) * -0.5) 0 0 calc(var(--ball-size) * -0.5);
         }
 
         .spinner-roller div:nth-child(1) {
-            animation-delay: -0.036s;
+            animation-delay: -0.1s;
         }
 
             .spinner-roller div:nth-child(1):after {
-                top: 25px;
-                left: 25px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(2) {
-            animation-delay: -0.072s;
+            animation-delay: -0.2s;
         }
 
             .spinner-roller div:nth-child(2):after {
-                top: 27px;
-                left: 22.4px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(3) {
-            animation-delay: -0.108s;
+            animation-delay: -0.3s;
         }
 
             .spinner-roller div:nth-child(3):after {
-                top: 28.4px;
-                left: 19.3px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(4) {
-            animation-delay: -0.144s;
+            animation-delay: -0.4s;
         }
 
             .spinner-roller div:nth-child(4):after {
-                top: 28.8px;
-                left: 16px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(5) {
-            animation-delay: -0.18s;
+            animation-delay: -0.5s;
         }
 
             .spinner-roller div:nth-child(5):after {
-                top: 28.4px;
-                left: 12.7px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(6) {
-            animation-delay: -0.216s;
+            animation-delay: -0.6s;
         }
 
             .spinner-roller div:nth-child(6):after {
-                top: 27.1px;
-                left: 9.6px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(7) {
-            animation-delay: -0.252s;
+            animation-delay: -0.7s;
         }
 
             .spinner-roller div:nth-child(7):after {
-                top: 25px;
-                left: 6.9px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
         .spinner-roller div:nth-child(8) {
-            animation-delay: -0.288s;
+            animation-delay: -0.8s;
         }
 
             .spinner-roller div:nth-child(8):after {
-                top: 22.4px;
-                left: 4.9px;
+                top: calc(var(--ball-size) / 2);
+                left: var(--center-x);
             }
 
 /* circle spinner */
