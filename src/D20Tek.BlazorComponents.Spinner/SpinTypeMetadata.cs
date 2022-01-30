@@ -19,8 +19,13 @@ namespace D20Tek.BlazorComponents
         private const string _fixedHourGlassCssClass = "spinner-hourglass";
         private const string _fixedDualRingCssClass = "spinner-dualring";
         private const string _fixedSpinIosCssClass = "spinner-ios";
+        private const string _fixedRippleCssClass = "spinner-ripple";
+        private const string _fixedRollerCssClass = "spinner-roller";
+        private const string _fixedCircleCssClass = "spinner-circle";
+        private const string _fixedBlocksCssClass = "spinner-blocks";
+        private const string _fixedEllipsisCssClass = "spinner-ellipsis";
 
-        private static List<Item> _elements = new List<Item>
+        private static readonly List<Item> _elements = new List<Item>
         {
             new (){ Type = SpinType.Ring, FixedCssClass = _fixedSpinCssClass },
             new (){ Type = SpinType.Pulse, FixedCssClass = _fixedPulseCssClass },
@@ -28,6 +33,11 @@ namespace D20Tek.BlazorComponents
             new (){ Type = SpinType.Hourglass, FixedCssClass = _fixedHourGlassCssClass },
             new (){ Type = SpinType.DualRing, FixedCssClass = _fixedDualRingCssClass },
             new (){ Type = SpinType.SpinIOS, FixedCssClass = _fixedSpinIosCssClass, InnerDivCount = 12 },
+            new (){ Type = SpinType.Ripple, FixedCssClass = _fixedRippleCssClass, InnerDivCount = 2 },
+            new (){ Type = SpinType.Roller, FixedCssClass = _fixedRollerCssClass, InnerDivCount = 8 },
+            new (){ Type = SpinType.Circle, FixedCssClass = _fixedCircleCssClass, InnerDivCount = 12 },
+            new (){ Type = SpinType.Blocks, FixedCssClass = _fixedBlocksCssClass, InnerDivCount = 3 },
+            new (){ Type = SpinType.Ellipsis, FixedCssClass = _fixedEllipsisCssClass, InnerDivCount = 4 },
         };
 
         public static Item GetMetadataItem(SpinType type) =>

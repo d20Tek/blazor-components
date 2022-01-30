@@ -88,5 +88,97 @@ namespace D20Tek.BlazorComponents.UnitTests
                 </div>";
             comp.MarkupMatches(expectedHtml);
         }
+
+        [mst.TestMethod]
+        public void Render_RippleType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Ripple));
+
+            // assert
+            var expectedHtml = @"
+                <div role=""status"" class=""spinner-ripple"">
+                    <div></div><div></div>
+                </div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_RollerType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Roller));
+
+            // assert
+            var expectedHtml = @"
+                <div role=""status"" class=""spinner-roller"">
+                    <div></div><div></div><div></div><div></div><div></div><div></div>
+                    <div></div><div></div>
+                </div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_CircleType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Circle));
+
+            // assert
+            var expectedHtml = @"
+                <div role=""status"" class=""spinner-circle"">
+                    <div></div><div></div><div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div><div></div><div></div>
+                </div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_BlocksType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Blocks));
+
+            // assert
+            var expectedHtml = @"
+                <div role=""status"" class=""spinner-blocks"">
+                    <div></div><div></div><div></div>
+                </div>";
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_EllipsisType()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+                .Add(p => p.Type, SpinType.Ellipsis));
+
+            // assert
+            var expectedHtml = @"
+                <div role=""status"" class=""spinner-ellipsis"">
+                    <div></div><div></div><div></div><div></div>
+                </div>";
+            comp.MarkupMatches(expectedHtml);
+        }
     }
 }

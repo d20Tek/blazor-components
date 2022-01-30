@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -30,5 +30,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
+
+  <Import Project="..\D20Tek.BlazorComponents.Shared\D20Tek.BlazorComponents.Shared.projitems" Label="Shared" />
 
 </Project>
