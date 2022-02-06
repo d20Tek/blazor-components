@@ -50,14 +50,14 @@ namespace D20Tek.BlazorComponents
         protected override string? CalculateCssStyles()
         {
             var result = new StyleBuilder()
-                             .AddStyleFromAttributes(this.RemainingAttributes)
-                             .AddStyle(SpinnerConstants.StyleNameColor, this.Color, () => {
-                                    return string.IsNullOrWhiteSpace(this.Color) == false; })
-                             .AddStyle(SpinnerConstants.StyleNameSecondaryColor, this.SecondaryColor, () => {
-                                    return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
-                             .AddStyle(SpinnerConstants.StyleNameWidth, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
-                             .AddStyle(SpinnerConstants.StyleNameHeight, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
-                             .Build();
+                .AddStyleFromAttributes(this.RemainingAttributes)
+                .AddStyle(SpinnerConstants.StyleNameColor, this.Color, () => {
+                    return string.IsNullOrWhiteSpace(this.Color) == false; })
+                .AddStyle(SpinnerConstants.StyleNameSecondaryColor, this.SecondaryColor, () => {
+                    return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
+                .AddStyle(SpinnerConstants.StyleNameWidth, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
+                .AddStyle(SpinnerConstants.StyleNameHeight, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
+                .Build();
 
             return result;
         }

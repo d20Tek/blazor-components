@@ -1,1 +1,7 @@
-﻿<h3>ContentSpinner</h3>
+﻿@inherits SpinnerBase
+@if (this.IsVisible)
+{
+    <div @attributes="@this.RemainingAttributes" role="status" class="@this.CssClass" style="@this.CssStyles">
+        @this.ChildContent
+    </div>
+}
