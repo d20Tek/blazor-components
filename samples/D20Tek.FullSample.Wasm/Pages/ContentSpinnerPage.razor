@@ -1,0 +1,95 @@
+﻿@page "/content-spinner"
+<h3>Spinner Component</h3>
+
+<h4>Default Content</h4>
+<p>This is a spinner with the default properties and styles, and some text to spin.</p>
+<pre><code>&lt;ContentSpinner&gt;Test!&lt;/ContentSpinner&gt;</code></pre>
+
+<ContentSpinner>
+    Test!
+</ContentSpinner>
+<hr />
+
+<h4>Image Spinner</h4>
+<p>This is a spinner with an image as content.</p>
+<pre><code>
+    &lt;ContentSpinner&gt;
+        &lt;img alt="fidget spinner" height=64 width=64 src="./images/fidget-spinner.png" /&gt;
+    &lt;/ContentSpinner&gt;
+</code></pre>
+
+<ContentSpinner>
+    <img alt="fidget spinner" height=64 width=64 src="./images/fidget-spinner-green.png" />
+</ContentSpinner>
+<hr />
+
+<h4>Div Spinner</h4>
+<p>This is a spinner with more complex div as content.</p>
+<pre><code>
+    &lt;ContentSpinner&gt;
+    &lt;div style="display: table-cell; border: 2px solid darkgreen; background-color: lightgreen;
+        color: purple; border-radius: 10px; font-size: 16px; height: 96px; width: 96px; 
+        text-align: center; vertical-align: middle"&gt;
+        Click Me!
+    &lt;/div&gt;
+    &lt;/ContentSpinner&gt;
+</code></pre>
+
+<ContentSpinner>
+    <div style="display: table-cell; border: 2px solid darkgreen; background-color: lightgreen; color: purple; border-radius: 10px; font-size: 16px; height: 96px; width: 96px; text-align: center; vertical-align: middle">
+        Click Me!
+    </div>
+</ContentSpinner>
+<hr />
+
+<h4>Spinner Visibility</h4>
+<p>This spinner allows changing of the IsVisible property to show and hide the spinner.</p>
+<pre><code>&lt;ContentSpinner IsVisible=@this._spinnerVisible /&gt;</code></pre>
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-outline-secondary" @onclick="ToggleSpinnerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col-4">
+        <ContentSpinner IsVisible=@this._spinnerVisible>
+            Test...
+        </ContentSpinner>
+    </div>
+</div>
+<hr />
+
+<h4>Spinner Sizes</h4>
+<p>This is a content spinner with different size settings.</p>
+<pre><code>
+    &lt;ContentSpinner Size=Size.Medium&gt;
+        &lt;img alt="fidget spinner" src="./images/fidget-spinner.png" style="width: 100%; height: 100%" /&gt;
+    &lt;/ContentSpinner&gt;
+</code></pre>
+
+<ContentSpinner Size=Size.ExtraSmall>
+    <img alt="fidget spinner" src="./images/fidget-spinner-green.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
+<ContentSpinner Size=Size.Small>
+    <img alt="fidget spinner" src="./images/fidget-spinner-green.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
+<ContentSpinner Size=Size.Medium>
+    <img alt="fidget spinner" src="./images/fidget-spinner-green.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
+<ContentSpinner Size=Size.Large>
+    <img alt="fidget spinner" src="./images/fidget-spinner-green.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
+<ContentSpinner Size=Size.ExtraLarge>
+    <img alt="fidget spinner" src="./images/fidget-spinner-green.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
+
+<hr />
+
+@code {
+    bool _spinnerVisible = true;
+
+    private void ToggleSpinnerVisibility()
+    {
+        this._spinnerVisible = !this._spinnerVisible;
+    }
+}

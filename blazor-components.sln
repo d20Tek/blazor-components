@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponents.Uni
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "D20Tek.BlazorComponents.Shared", "src\D20Tek.BlazorComponents.Shared\D20Tek.BlazorComponents.Shared.shproj", "{8A655636-0E34-4FF6-9F1A-5DE40F9DDF52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D20Tek.BlazorComponents.Shared.UnitTests", "tests\D20Tek.BlazorComponents.Shared.UnitTests\D20Tek.BlazorComponents.Shared.UnitTests.csproj", "{29073F20-F881-43E9-93F8-7BFD9F50A2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponents.Shared.UnitTests", "tests\D20Tek.BlazorComponents.Shared.UnitTests\D20Tek.BlazorComponents.Shared.UnitTests.csproj", "{29073F20-F881-43E9-93F8-7BFD9F50A2A4}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

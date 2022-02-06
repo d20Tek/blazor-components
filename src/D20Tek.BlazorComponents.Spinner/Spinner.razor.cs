@@ -6,17 +6,8 @@ using Microsoft.AspNetCore.Components;
 
 namespace D20Tek.BlazorComponents
 {
-    public partial class Spinner : ComponentBase
+    public partial class Spinner : SpinnerBase
     {
-        private const string _fixedCssSpinnerMain = "spinner-area-main";
-        private const string _styleNameColor = "color";
-        private const string _styleNameSecondaryColor = "--spinner-secondary-color";
-        private const string _styleNameWidth = "--spinner-width";
-        private const string _styleNameHeight = "--spinner-height";
-
-        [Parameter]
-        public bool IsVisible { get; set; } = true;
-
         [Parameter]
         public SpinType Type { get; set; }
 
@@ -27,20 +18,10 @@ namespace D20Tek.BlazorComponents
         public string SecondaryColor { get; set; } = string.Empty;
 
         [Parameter]
-        public Size Size { get; set; } = Size.Small;
-
-        [Parameter]
         public string Label { get; set; } = string.Empty;
 
         [Parameter]
         public Placement LabelPlacement { get; set; } = Placement.Bottom;
-
-        [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> RemainingAttributes { get; set; } = new Dictionary<string, object>();
-
-        private string? CssClass { get; set; } = null;
-
-        private string? CssStyles { get; set; } = null;
 
         private string? LabelCssClass { get; set; } = null;
 
@@ -50,17 +31,11 @@ namespace D20Tek.BlazorComponents
 
         private SpinTypeMetadata.Item TypeMetadata { get; set; } = SpinTypeMetadata.GetMetadataItem(SpinType.Ring);
 
-        protected override void OnParametersSet()
+        protected override string? CalculateCssClasses()
         {
             this.TypeMetadata = SpinTypeMetadata.GetMetadataItem(this.Type);
-            this.CssClass = this.CalculateCssClasses();
-            this.CssStyles = this.CalculateCssStyles();
-        }
-
-        private string? CalculateCssClasses()
-        {
             var result = new CssBuilder(this.TypeMetadata.FixedCssClass)
-                             .AddClass(_fixedCssSpinnerMain, HasLabel)
+                             .AddClass(SpinnerConstants.FixedCssSpinnerMain, HasLabel)
                              .AddClassFromAttributes(this.RemainingAttributes)
                              .Build();
 
@@ -72,17 +47,17 @@ namespace D20Tek.BlazorComponents
             return result;
         }
 
-        private string? CalculateCssStyles()
+        protected override string? CalculateCssStyles()
         {
             var result = new StyleBuilder()
-                             .AddStyleFromAttributes(this.RemainingAttributes)
-                             .AddStyle(_styleNameColor, this.Color, () => {
-                                    return string.IsNullOrWhiteSpace(this.Color) == false; })
-                             .AddStyle(_styleNameSecondaryColor, this.SecondaryColor, () => {
-                                    return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
-                             .AddStyle(_styleNameWidth, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
-                             .AddStyle(_styleNameHeight, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
-                             .Build();
+                .AddStyleFromAttributes(this.RemainingAttributes)
+                .AddStyle(SpinnerConstants.StyleNameColor, this.Color, () => {
+                    return string.IsNullOrWhiteSpace(this.Color) == false; })
+                .AddStyle(SpinnerConstants.StyleNameSecondaryColor, this.SecondaryColor, () => {
+                    return string.IsNullOrWhiteSpace(this.SecondaryColor) == false; })
+                .AddStyle(SpinnerConstants.StyleNameWidth, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
+                .AddStyle(SpinnerConstants.StyleNameHeight, SpinnerSizeMetadata.GetSizeCss(this.Size), this.IsSizeRequired)
+                .Build();
 
             return result;
         }
