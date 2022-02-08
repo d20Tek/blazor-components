@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>D20Tek.BlazorComponent</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>DarthPedro</Authors>
+    <Company>d20Tek</Company>
+    <Description>The core shared library for all d20Tek Blazor components. Contains shared component defintions, enumerations, and base types.</Description>
+    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly</PackageTags>
+    <PackageReleaseNotes>Initial release of base types and utilities.</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

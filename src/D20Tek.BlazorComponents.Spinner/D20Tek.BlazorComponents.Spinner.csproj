@@ -31,6 +31,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <Import Project="..\D20Tek.BlazorComponents.Shared\D20Tek.BlazorComponents.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+  </ItemGroup>
 
 </Project>
