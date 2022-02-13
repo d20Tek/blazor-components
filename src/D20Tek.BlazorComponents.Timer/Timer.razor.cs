@@ -7,7 +7,7 @@ using sys = System.Threading;
 
 namespace D20Tek.BlazorComponents
 {
-    public partial class Timer : BaseComponent
+    public partial class Timer : BaseComponent, IDisposable
     {
         private const int _secondsPerMin = 60;
         private const int _millisecondsPerSec = 1000;
@@ -15,12 +15,10 @@ namespace D20Tek.BlazorComponents
         private const string _cssTimerMain = "base-timer";
         private const string _cssTimerSizeMedium = "base-timer-md";
 
-        private int _timeRemaining = 0;
         private int _timeCounter = 0;
         private sys.Timer? _timer;
-        private bool disposedValue;
-
-        private string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this._timeRemaining)}";
+        
+        private string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
 
         private string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
 
@@ -45,12 +43,16 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public EventCallback TimerExpired { get; set; }
 
+        public int TimeRemaining { get; private set; } = 0;
+
+        public bool IsDisposed { get; private set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
             this.ResetTimer();
 
-            this._timeRemaining = TimerDuration;
+            this.TimeRemaining = TimerDuration;
             this._timer = new sys.Timer(this.OnTimerChanged, null, _millisecondsPerSec, _millisecondsPerSec);
         }
 
@@ -76,10 +78,13 @@ namespace D20Tek.BlazorComponents
         public void ResetTimer()
         {
             this._timeCounter = 0;
-            this._timeRemaining = TimerDuration;
-            this.StateHasChanged();
+            this.TimeRemaining = TimerDuration;
+            InvokeAsync(() => this.StateHasChanged());
 
-            this._timer?.Change(_millisecondsPerSec, _millisecondsPerSec);
+            if (this._timer != null)
+            {
+                this._timer.Change(_millisecondsPerSec, _millisecondsPerSec);
+            }
         }
 
         private string FormatTimeRemaining(int time)
@@ -96,28 +101,31 @@ namespace D20Tek.BlazorComponents
             return $"{minutes}:{seconds:D2}";
         }
 
-        private void OnTimerChanged(object? state)
+        internal void OnTimerChanged(object? state)
         {
             this._timeCounter++;
-            this._timeRemaining = this.TimerDuration - this._timeCounter;
+            this.TimeRemaining = this.TimerDuration - this._timeCounter;
 
-            if (this._timeRemaining <= 0)
+            if (this.TimeRemaining <= 0)
 
             {
-                this._timer?.Change(Timeout.Infinite, Timeout.Infinite);
+                if (this._timer != null)
+                {
+                    this._timer.Change(Timeout.Infinite, Timeout.Infinite);
+                }
 
                 this._timeCounter = this.TimerDuration;
-                this._timeRemaining = 0;
+                this.TimeRemaining = 0;
 
                 this.TimerExpired.InvokeAsync();
             }
 
-            this.StateHasChanged();
+            InvokeAsync(() => this.StateHasChanged());
         }
 
         private double CalculateTimeFraction()
         {
-            var rawFraction = this._timeRemaining / (double)this.TimerDuration;
+            var rawFraction = this.TimeRemaining / (double)this.TimerDuration;
             return rawFraction - (1 / (double)this.TimerDuration) * (1 - rawFraction);
         }
 
@@ -138,7 +146,7 @@ namespace D20Tek.BlazorComponents
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!this.IsDisposed)
             {
                 if (disposing)
                 {
@@ -146,7 +154,7 @@ namespace D20Tek.BlazorComponents
                     this._timer = null;
                 }
 
-                disposedValue = true;
+                this.IsDisposed = true;
             }
         }
 

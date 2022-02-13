@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Spinner\D20Tek.BlazorComponents.Spinner.csproj" />
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Timer\D20Tek.BlazorComponents.Timer.csproj" />
   </ItemGroup>
 
 </Project>
