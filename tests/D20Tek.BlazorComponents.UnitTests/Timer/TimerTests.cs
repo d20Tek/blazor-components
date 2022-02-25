@@ -130,6 +130,76 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
         }
 
         [mst.TestMethod]
+        public void Render_WithSizeLarge()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<c.Timer>(parameters =>
+                parameters.Add(p => p.Size, Size.Large));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer base-timer-lg"">
+  <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
+    <g class=""base-timer__circle"">
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
+            style=""stroke: green"" d=""
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            ""></path>
+    </g>
+  </svg>
+  <span id=""base-timer-label"" class=""base-timer__label"">0:30</span>
+</div>
+";
+
+            var results = comp.CompareTo(expectedHtml);
+            mst.Assert.AreEqual(1, results.Count);
+            var source = (AttrDiff)results[0];
+            mst.Assert.AreEqual("div(0) > svg(0) > g(0) > path(1)[d]", source.Test.Path);
+        }
+
+        [mst.TestMethod]
+        public void Render_WithSizeSmall()
+        {
+            // arrange
+            var ctx = new TestContext();
+
+            // act
+            var comp = ctx.RenderComponent<c.Timer>(parameters =>
+                parameters.Add(p => p.Size, Size.Small));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer base-timer-sm"">
+  <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
+    <g class=""base-timer__circle"">
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
+            style=""stroke: green"" d=""
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            ""></path>
+    </g>
+  </svg>
+  <span id=""base-timer-label"" class=""base-timer__label"">0:30</span>
+</div>
+";
+
+            var results = comp.CompareTo(expectedHtml);
+            mst.Assert.AreEqual(1, results.Count);
+            var source = (AttrDiff)results[0];
+            mst.Assert.AreEqual("div(0) > svg(0) > g(0) > path(1)[d]", source.Test.Path);
+        }
+
+        [mst.TestMethod]
         public void OnTimerChanged()
         {
             // arrange

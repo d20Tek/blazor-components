@@ -13,7 +13,6 @@ namespace D20Tek.BlazorComponents
         private const int _millisecondsPerSec = 1000;
         private const int _fullDashArray = 283;
         private const string _cssTimerMain = "base-timer";
-        private const string _cssTimerSizeMedium = "base-timer-md";
 
         private int _timeCounter = 0;
         private sys.Timer? _timer;
@@ -47,6 +46,11 @@ namespace D20Tek.BlazorComponents
 
         public bool IsDisposed { get; private set; }
 
+        public Timer()
+        {
+            this.Size = Size.Medium;
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -60,7 +64,7 @@ namespace D20Tek.BlazorComponents
         protected override string? CalculateCssClasses()
         {
             var result = new CssBuilder(_cssTimerMain)
-                             .AddClass(_cssTimerSizeMedium)
+                             .AddClass(TimerSizeMetadata.GetSizeCss(this.Size))
                              .AddClassFromAttributes(this.RemainingAttributes)
                              .Build();
             return result;
