@@ -8,11 +8,39 @@ Timer Styles
     position: relative;
 }
 
+.base-timer-xs {
+    height: 32px;
+    width: 32px;
+    --stroke-width: 2px;
+    --label-font-size: 4px;
+}
+
+.base-timer-sm {
+    height: 64px;
+    width: 64px;
+    --stroke-width: 4px;
+    --label-font-size: 8px;
+}
+
 .base-timer-md {
     height: 128px;
     width: 128px;
     --stroke-width: 8px;
     --label-font-size: 16px;
+}
+
+.base-timer-lg {
+    height: 256px;
+    width: 256px;
+    --stroke-width: 16px;
+    --label-font-size: 32px;
+}
+
+.base-timer-xl {
+    height: 512px;
+    width: 512px;
+    --stroke-width: 32px;
+    --label-font-size: 64px;
 }
 
 /* Removes SVG styling that would hide the time label */

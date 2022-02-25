@@ -11,7 +11,7 @@ Future components: ImageSpinner, Timer.
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.0.7
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.0.9
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.
@@ -36,6 +36,12 @@ Once you've installed the component NuGet package, you can start using it in you
 4. Further customization is available by defining your own CSS or styles on the component.
 ```
 <Spinner Type=SpinType.Hourglass class="my-custom-spinner" style="color: red; height: 120px; width: 120px" />
+```
+5. The ContentSpinner component allows you to spin any child content, like an image.
+```
+<ContentSpinner Size=Size.Medium>
+    <img src="./images/my-image.png" style="width: 100%; height: 100%" />
+</ContentSpinner>
 ```
 
 ### Samples:

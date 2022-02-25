@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace D20Tek.BlazorComponents
 {
-    public partial class ContentSpinner : SpinnerBase
+    public partial class ContentSpinner : BaseComponent
     {
         public ContentSpinner()
         {

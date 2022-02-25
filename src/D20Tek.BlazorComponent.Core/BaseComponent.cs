@@ -10,6 +10,9 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public bool IsVisible { get; set; } = true;
 
+        [Parameter]
+        public Size Size { get; set; } = Size.Small;
+
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> RemainingAttributes { get; set; } = new Dictionary<string, object>();
 
