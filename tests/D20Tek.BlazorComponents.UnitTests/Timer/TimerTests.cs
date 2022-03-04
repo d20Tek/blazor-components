@@ -1,12 +1,11 @@
 ﻿//---------------------------------------------------------------------------------------------------------------------
 // Copyright (c) d20Tek. All rights reserved.
 //---------------------------------------------------------------------------------------------------------------------
-using Bunit;
-using c = D20Tek.BlazorComponents;
-using System.Collections.Generic;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
 using AngleSharp.Diffing.Core;
+using Bunit;
 using System;
+using c = D20Tek.BlazorComponents;
+using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests.Timer
 {
@@ -27,7 +26,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
-      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45"" style=""stroke: gray""></circle>
       <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
             style=""stroke: green"" d=""
               M 50, 50
@@ -58,6 +57,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
                 parameters.Add(p => p.TimerDuration, 60)
                           .Add(p => p.WarningThreshold, 30)
                           .Add(p => p.AlertThreshold, 15)
+                          .Add(p => p.ElapsedTimeColor, "lightgreen")
                           .Add(p => p.RemainingTimeColor, "darkgray")
                           .Add(p => p.WarningTimeColor, "pink")
                           .Add(p => p.AlertTimeColor, "purple"));
@@ -67,7 +67,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
-      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45"" style=""stroke: lightgreen""></circle>
       <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
             style=""stroke: darkgray"" d=""
               M 50, 50
@@ -89,6 +89,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             mst.Assert.AreEqual(60, comp.Instance.TimerDuration);
             mst.Assert.AreEqual(30, comp.Instance.WarningThreshold);
             mst.Assert.AreEqual(15, comp.Instance.AlertThreshold);
+            mst.Assert.AreEqual("lightgreen", comp.Instance.ElapsedTimeColor);
             mst.Assert.AreEqual("darkgray", comp.Instance.RemainingTimeColor);
             mst.Assert.AreEqual("pink", comp.Instance.WarningTimeColor);
             mst.Assert.AreEqual("purple", comp.Instance.AlertTimeColor);
@@ -109,7 +110,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
-      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45"" style=""stroke: gray""></circle>
       <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
             style=""stroke: orange"" d=""
               M 50, 50
@@ -144,7 +145,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 <div role=""timer"" class=""base-timer base-timer-lg"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
-      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45"" style=""stroke: gray""></circle>
       <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
             style=""stroke: green"" d=""
               M 50, 50
@@ -179,7 +180,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 <div role=""timer"" class=""base-timer base-timer-sm"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
-      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45""></circle>
+      <circle class=""base-timer__path-elapsed"" cx=""50"" cy=""50"" r=""45"" style=""stroke: gray""></circle>
       <path id=""base-timer-path-remaining"" stroke-dasharray=""283 283"" class=""base-timer__path-remaining""
             style=""stroke: green"" d=""
               M 50, 50

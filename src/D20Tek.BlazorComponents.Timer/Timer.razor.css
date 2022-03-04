@@ -52,7 +52,6 @@ Timer Styles
 /* The SVG path that displays the timer's progress */
 .base-timer__path-elapsed {
     stroke-width: var(--stroke-width);
-    stroke: grey;
 }
 
 .base-timer__label {

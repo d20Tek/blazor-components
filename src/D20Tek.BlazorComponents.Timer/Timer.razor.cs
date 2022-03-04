@@ -16,7 +16,9 @@ namespace D20Tek.BlazorComponents
 
         private int _timeCounter = 0;
         private sys.Timer? _timer;
-        
+
+        private string TimerElapsedColorCss => $"stroke: {this.ElapsedTimeColor}";
+
         private string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
 
         private string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
@@ -38,6 +40,9 @@ namespace D20Tek.BlazorComponents
 
         [Parameter]
         public string AlertTimeColor { get; set; } = "red";
+
+        [Parameter]
+        public string ElapsedTimeColor { get; set; } = "gray";
 
         [Parameter]
         public EventCallback TimerExpired { get; set; }
