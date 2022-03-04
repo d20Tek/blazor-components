@@ -47,6 +47,9 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public EventCallback TimerExpired { get; set; }
 
+        [Parameter]
+        public string ExpirationMessage { get; set; } = "Time's up!";
+
         public int TimeRemaining { get; private set; } = 0;
 
         public bool IsDisposed { get; private set; }
@@ -100,7 +103,7 @@ namespace D20Tek.BlazorComponents
         {
             if (time <= 0)
             {
-                return "Time's up!";
+                return this.ExpirationMessage;
             }
 
             var minutes = Math.Floor((decimal)time / _secondsPerMin);

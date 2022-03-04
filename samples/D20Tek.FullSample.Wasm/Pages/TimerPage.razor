@@ -7,6 +7,21 @@
 <Timer />
 <hr />
 
+<h4>Timer Visibility</h4>
+<p>This timer shows how to change the IsVisible property to show and hide the spinner.</p>
+<pre><code>&lt;Timer IsVisible=@this._timerVisible /&gt;</code></pre>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleTimerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <Timer IsVisible=@this._timerVisible />
+    </div>
+</div>
+<hr />
+
 <h4>Timer Colors</h4>
 <p>Here's how you customize the timer's colors'.</p>
 <pre><code>&lt;Timer RemainingTimeColor="darkgray" WarningTimeColor="pink" AlertTimeColor="purple" ElapsedTimeColor="lightgreen" /&gt;</code></pre>
@@ -17,6 +32,12 @@
 <p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
 <pre><code>&lt;Timer TimerDuration=60 WarningThreshold=30 AlertThreshold=15 /&gt;</code></pre>
 <Timer TimerDuration=60 WarningThreshold=30 AlertThreshold=15 />
+<hr />
+
+<h4>Timer Intervals</h4>
+<p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
+<pre><code>&lt;Timer TimerDuration=10 WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" /&gt;</code></pre>
+<Timer TimerDuration=10 WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Super Long Message - Done!" />
 <hr />
 
 <h4>Size</h4>
@@ -30,5 +51,10 @@
 <hr />
 
 @code {
+    bool _timerVisible = true;
 
+    private void ToggleTimerVisibility()
+    {
+        this._timerVisible = !this._timerVisible;
+    }
 }
