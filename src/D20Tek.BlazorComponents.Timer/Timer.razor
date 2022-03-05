@@ -1,0 +1,25 @@
+﻿@inherits BaseComponent
+@if (this.IsVisible)
+{
+    <div @attributes="@this.RemainingAttributes" role="timer" class="@this.CssClass" style="@this.CssStyles">
+      <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g class="base-timer__circle">
+          <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45" style=@this.TimerElapsedColorCss />
+          <path
+            id="base-timer-path-remaining"
+            stroke-dasharray=@this.TimerPathDashArray
+            class="base-timer__path-remaining"
+            style=@this.TimerPathColorCss
+            d="
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            "></path>
+        </g>
+      </svg>
+      <div id="base-timer-label" class="base-timer__label">
+        <div class="base-timer__label-inner">@FormatTimeRemaining(TimeRemaining)</div>
+      </div>
+    </div>
+}

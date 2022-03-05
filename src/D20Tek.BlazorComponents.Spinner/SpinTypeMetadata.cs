@@ -6,7 +6,7 @@ namespace D20Tek.BlazorComponents
 {
     internal static class SpinTypeMetadata
     {
-        internal struct Item
+        internal class Item
         {
             public SpinType Type;
             public string FixedCssClass = String.Empty;

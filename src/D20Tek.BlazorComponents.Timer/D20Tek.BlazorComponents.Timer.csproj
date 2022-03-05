@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,16 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.5</Version>
     <Authors>DarthPedro</Authors>
     <Company>d20Tek</Company>
-    <Description>A Blazor component for displaying a spinner/loader component. This component allows you to easily place spinners throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
+    <Description>Blazor components for displaying countdown timers in visually appealing ways. These component allows you to easily place timers throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
     <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
     <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly Spinner Loader</PackageTags>
-    <PackageReleaseNotes>Initial version of simple spinner component with customization and tests.</PackageReleaseNotes>
+    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly Timer Countdown Stopwatch</PackageTags>
   </PropertyGroup>
 
 

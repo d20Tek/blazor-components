@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace D20Tek.BlazorComponents
 {
-    public abstract class SpinnerBase : ComponentBase
+    public abstract class BaseComponent : ComponentBase
     {
         [Parameter]
         public bool IsVisible { get; set; } = true;
