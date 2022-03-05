@@ -21,6 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponents.Tim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponent.Core", "src\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj", "{81EA6020-E6BC-40E0-9EE2-B82207CF4D43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Items", ".Items", "{F0C4F3EA-00F2-4774-82AF-6B9CA8FCC1FE}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\blazor-components-ci.yml = .github\workflows\blazor-components-ci.yml
+		.github\workflows\blazor-components-official.yml = .github\workflows\blazor-components-official.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
