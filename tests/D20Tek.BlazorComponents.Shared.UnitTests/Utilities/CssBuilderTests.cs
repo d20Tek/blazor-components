@@ -152,7 +152,9 @@ namespace D20Tek.BlazorComponents.Shared.UnitTests.Utilities
             var builder = new CssBuilder();
 
             // act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             builder.AddClassFromAttributes(null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             // assert
             Assert.IsNull(builder.Build());

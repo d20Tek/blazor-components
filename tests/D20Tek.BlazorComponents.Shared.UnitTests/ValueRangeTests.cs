@@ -164,6 +164,32 @@ namespace D20Tek.BlazorComponents.Core.UnitTests
         }
 
         [TestMethod]
+        public void AssertInRange_NonInclusive()
+        {
+            // arrange
+            var range = new ValueRange(5, 10);
+
+            // act
+            range.AssertInRange(7);
+
+            // assert
+        }
+
+        [TestMethod]
+        [ExcludeFromCodeCoverage]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void AssertInRange_NotInRange()
+        {
+            // arrange
+            var range = new ValueRange(5, 10);
+
+            // act
+            range.AssertInRange(0);
+
+            // assert
+        }
+
+        [TestMethod]
         public void EqualityOperator_Equals()
         {
             // arrange

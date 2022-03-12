@@ -33,6 +33,12 @@ namespace D20Tek.BlazorComponents
         public bool InRange(int value) =>
             (value >= this.Min && value <= (this.Max ?? int.MaxValue));
 
+        public void AssertInRange(int value, string parameterName = "ValueRange.Value")
+        {
+            if (!this.InRange(value))
+                throw new ArgumentOutOfRangeException(parameterName);
+        }
+
         public bool Equals(ValueRange other) =>
             (this.Min == other.Min && this.Max == other.Max);
 

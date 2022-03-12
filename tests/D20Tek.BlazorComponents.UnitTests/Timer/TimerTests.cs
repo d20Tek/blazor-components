@@ -5,6 +5,7 @@ using AngleSharp.Diffing.Core;
 using Bunit;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using c = D20Tek.BlazorComponents;
 using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -264,6 +265,38 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 
             // assert
             mst.Assert.AreEqual(30, comp.Instance.TimeRemaining);
+        }
+
+        [mst.TestMethod]
+        [ExcludeFromCodeCoverage]
+        [mst.ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
+        public void SetOutOfRangeDuration()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var comp = ctx.RenderComponent<c.Timer>();
+
+            // act
+            comp.Instance.TimerDuration = -3;
+
+            // assert
+        }
+
+        [mst.TestMethod]
+        [ExcludeFromCodeCoverage]
+        [mst.ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
+        public void SetOutOfRangeWarning()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var comp = ctx.RenderComponent<c.Timer>();
+
+            // act
+            comp.Instance.TimerDuration = 1111000;
+
+            // assert
         }
 
         [mst.TestMethod]

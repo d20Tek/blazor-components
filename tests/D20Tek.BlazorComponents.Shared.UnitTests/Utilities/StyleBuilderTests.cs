@@ -151,7 +151,9 @@ namespace D20Tek.BlazorComponents.Shared.UnitTests.Utilities
             var builder = new StyleBuilder();
 
             // act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             builder.AddStyleFromAttributes(null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             // assert
             Assert.IsNull(builder.Build());
@@ -166,7 +168,9 @@ namespace D20Tek.BlazorComponents.Shared.UnitTests.Utilities
             var builder = new StyleBuilder("foo", "bar");
 
             // act - assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             builder.AddStyle(null, "value");
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         [TestMethod]
@@ -178,7 +182,9 @@ namespace D20Tek.BlazorComponents.Shared.UnitTests.Utilities
             var builder = new StyleBuilder("foo", "bar");
 
             // act - assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             builder.AddStyle("property", null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
     }
 }

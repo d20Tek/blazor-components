@@ -13,9 +13,13 @@ namespace D20Tek.BlazorComponents
         private const int _millisecondsPerSec = 1000;
         private const int _fullDashArray = 283;
         private const string _cssTimerMain = "base-timer";
+        private static ValueRange _validTimeRange = new ValueRange(0, 1000000);
 
         private int _timeCounter = 0;
         private sys.Timer? _timer;
+        private int _timerDuration = 30;
+        private int _warningThreshold = 15;
+        private int _alertThreshold = 8;
 
         private string TimerElapsedColorCss => $"stroke: {this.ElapsedTimeColor}";
 
@@ -24,13 +28,37 @@ namespace D20Tek.BlazorComponents
         private string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
 
         [Parameter]
-        public int TimerDuration { get; set; } = 30;
+        public int TimerDuration
+        {
+            get => this._timerDuration;
+            set
+            {
+                _validTimeRange.AssertInRange(value, nameof(TimerDuration));
+                this._timerDuration = value;
+            }
+        }
 
         [Parameter]
-        public int WarningThreshold { get; set; } = 15;
+        public int WarningThreshold
+        { 
+            get => _warningThreshold;
+            set
+            {
+                _validTimeRange.AssertInRange(value, nameof(WarningThreshold));
+                this._warningThreshold = value;
+            }
+        }
 
         [Parameter]
-        public int AlertThreshold { get; set; } = 8;
+        public int AlertThreshold
+        {
+            get => this._alertThreshold;
+            set
+            {
+                _validTimeRange.AssertInRange(value, nameof(AlertThreshold));
+                this._alertThreshold = value;
+            }
+        }
 
         [Parameter]
         public string RemainingTimeColor { get; set; } = "green";
