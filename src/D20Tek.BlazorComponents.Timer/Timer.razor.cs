@@ -10,6 +10,7 @@ namespace D20Tek.BlazorComponents
     public partial class Timer : BaseComponent, IDisposable
     {
         private const int _secondsPerMin = 60;
+        private const int _secondsPerHour = _secondsPerMin * 60;
         private const int _millisecondsPerSec = 1000;
         private const int _fullDashArray = 283;
         private const string _cssTimerMain = "base-timer";
@@ -134,8 +135,21 @@ namespace D20Tek.BlazorComponents
                 return this.ExpirationMessage;
             }
 
-            var minutes = Math.Floor((decimal)time / _secondsPerMin);
-            var seconds = time % _secondsPerMin;
+            int hours = (int)Math.Floor((decimal)time / _secondsPerHour);
+            int remainingTime = time % _secondsPerHour;
+            int minutes = (int)Math.Floor((decimal)remainingTime / _secondsPerMin);
+            int seconds = remainingTime % _secondsPerMin;
+
+            return FormatTimeRemaining(hours, minutes, seconds);
+        }
+
+        internal static string FormatTimeRemaining(int hours, int minutes, int seconds)
+        {
+            if (hours > 0)
+            {
+                // The output in HH:MM:SS format
+                return $"{hours}:{minutes:D2}:{seconds:D2}";
+            }
 
             // The output in MM:SS format
             return $"{minutes}:{seconds:D2}";
