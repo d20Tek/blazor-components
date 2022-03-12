@@ -22,11 +22,11 @@ namespace D20Tek.BlazorComponents
         private int _warningThreshold = 15;
         private int _alertThreshold = 8;
 
-        private string TimerElapsedColorCss => $"stroke: {this.ElapsedTimeColor}";
+        protected string TimerElapsedColorCss => $"stroke: {this.ElapsedTimeColor}";
 
-        private string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
+        protected string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
 
-        private string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
+        protected string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
 
         [Parameter]
         public int TimerDuration
@@ -128,7 +128,7 @@ namespace D20Tek.BlazorComponents
             }
         }
 
-        private string FormatTimeRemaining(int time)
+        protected string FormatTimeRemaining(int time)
         {
             if (time <= 0)
             {

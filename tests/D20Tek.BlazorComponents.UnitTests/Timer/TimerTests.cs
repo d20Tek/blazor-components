@@ -1,12 +1,9 @@
 ﻿//---------------------------------------------------------------------------------------------------------------------
 // Copyright (c) d20Tek. All rights reserved.
 //---------------------------------------------------------------------------------------------------------------------
-using AngleSharp.Diffing.Core;
 using Bunit;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using c = D20Tek.BlazorComponents;
 using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -46,7 +43,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
         }
 
         [mst.TestMethod]
@@ -87,7 +84,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
 
             mst.Assert.AreEqual(60, comp.Instance.TimerDuration);
             mst.Assert.AreEqual(30, comp.Instance.WarningThreshold);
@@ -130,7 +127,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
         }
 
         [mst.TestMethod]
@@ -166,7 +163,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
         }
 
         [mst.TestMethod]
@@ -201,7 +198,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
         }
 
         [mst.TestMethod]
@@ -236,7 +233,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             var results = comp.CompareTo(expectedHtml);
-            VerifyMarkupDifferences(results);
+            TimerVerifier.VerifyMarkupDifferences(results);
         }
 
         [mst.TestMethod]
@@ -379,16 +376,6 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 
             // assert
             mst.Assert.IsTrue(comp.IsDisposed);
-        }
-
-        private static void VerifyMarkupDifferences(IReadOnlyList<IDiff> results)
-        {
-            mst.Assert.IsTrue(results.Count <= 1);
-            if (results.Any())
-            {
-                var source = (AttrDiff)results[0];
-                mst.Assert.AreEqual("div(0) > svg(0) > g(0) > path(1)[d]", source.Test.Path);
-            }
         }
     }
 }
