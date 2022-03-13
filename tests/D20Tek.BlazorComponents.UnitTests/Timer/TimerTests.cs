@@ -302,7 +302,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             // arrange
 
             // act
-            var result = c.Timer.FormatTimeRemaining(12, 5, 36);
+            var result = TimeDisplayFormatter.FormatTimeRemaining(12, 5, 36);
             
             // assert
             mst.Assert.AreEqual("12:05:36", result);
@@ -314,7 +314,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             // arrange
 
             // act
-            var result = c.Timer.FormatTimeRemaining(0, 15, 8);
+            var result = TimeDisplayFormatter.FormatTimeRemaining(0, 15, 8);
 
             // assert
             mst.Assert.AreEqual("15:08", result);
@@ -326,7 +326,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             // arrange
 
             // act
-            var result = c.Timer.FormatTimeRemaining(0, 0, 19);
+            var result = TimeDisplayFormatter.FormatTimeRemaining(0, 0, 19);
 
             // assert
             mst.Assert.AreEqual("0:19", result);
