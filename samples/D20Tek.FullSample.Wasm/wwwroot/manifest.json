@@ -1,6 +1,6 @@
 {
-  "name": "D20Tek.FullSample.Wasm",
-  "short_name": "D20Tek.FullSample.Wasm",
+  "name": "d20Tek Components Sample",
+  "short_name": "Comp Sample",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -23,6 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponent.Core
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Items", ".Items", "{F0C4F3EA-00F2-4774-82AF-6B9CA8FCC1FE}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\azure-static-web-apps-white-rock-0f5bec81e.yml = .github\workflows\azure-static-web-apps-white-rock-0f5bec81e.yml
 		.github\workflows\blazor-components-ci.yml = .github\workflows\blazor-components-ci.yml
 		.github\workflows\blazor-components-official.yml = .github\workflows\blazor-components-official.yml
 		README.md = README.md

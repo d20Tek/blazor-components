@@ -48,6 +48,7 @@ Once you've installed the component NuGet package, you can start using it in you
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:
 
 * [Sample - D20Tek.FullSample.Wasm](samples/D20Tek.FullSample.Wasm)
+See this sample app running live at https://components.d20tek.com.
 
 ## Feedback
 If you use these libraries and have any feedback, bugs, or suggestions, please file them in the Issues section of this repository.
