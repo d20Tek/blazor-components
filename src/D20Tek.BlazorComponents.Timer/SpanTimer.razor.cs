@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace D20Tek.BlazorComponents
 {
-    public partial class Timer : RadialTimer
+    public partial class SpanTimer : RadialTimer
     {
         private int _timerDuration = 30;
+        private TimeSpan _timerDurationSpan = new TimeSpan(0, 0, 30);
 
-        [Parameter]
         public override int TimerDuration
         {
             get => this._timerDuration;
@@ -20,8 +20,15 @@ namespace D20Tek.BlazorComponents
             }
         }
 
-        public Timer()
+        [Parameter]
+        public TimeSpan TimerDurationSpan
         {
+            get => _timerDurationSpan;
+            set
+            {
+                this.TimerDuration = (int)value.TotalSeconds;
+                this._timerDurationSpan = value;
+            }
         }
     }
 }
