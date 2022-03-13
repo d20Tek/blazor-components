@@ -25,7 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Items", ".Items", "{F0C4F3
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\blazor-components-ci.yml = .github\workflows\blazor-components-ci.yml
 		.github\workflows\blazor-components-official.yml = .github\workflows\blazor-components-official.yml
+		README.md = README.md
 		.github\workflows\release.yml = .github\workflows\release.yml
+		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
 Global
