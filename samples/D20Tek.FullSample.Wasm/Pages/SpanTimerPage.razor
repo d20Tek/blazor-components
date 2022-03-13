@@ -1,0 +1,56 @@
+﻿@page "/span-timer"
+<h3>SpanTimer Component</h3>
+
+<h4>Default SpanTimer</h4>
+<p>This is a timer with TimeSpan with the default properties and styles.</p>
+<pre><code>&lt;SpanTimer /&gt;</code></pre>
+<SpanTimer />
+<hr />
+
+<h4>SpanTimer Visibility</h4>
+<p>This timer shows how to change the IsVisible property to show and hide the spinner.</p>
+<pre><code>&lt;SpanTimer IsVisible=@this._timerVisible /&gt;</code></pre>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleTimerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <SpanTimer IsVisible=@this._timerVisible />
+    </div>
+</div>
+<hr />
+
+<h4>SpanTimer Colors</h4>
+<p>Here's how you customize the timer's colors'.</p>
+<pre><code>&lt;SpanTimer RemainingTimeColor="darkgray" WarningTimeColor="pink" AlertTimeColor="purple" ElapsedTimeColor="lightgreen" /&gt;</code></pre>
+<SpanTimer RemainingTimeColor="darkgray" WarningTimeColor="pink" AlertTimeColor="purple" ElapsedTimeColor="lightgreen" />
+<hr />
+
+<h4>SpanTimer Intervals</h4>
+<p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
+<pre><code>&lt;SpanTimer TimerDurationSpan=@(new TimeSpan(60)) WarningThreshold=30 AlertThreshold=15 /&gt;</code></pre>
+<SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 60)) WarningThreshold=30 AlertThreshold=15 />
+<hr />
+
+<h4>SpanTimer with Hours</h4>
+<p>Here's how you customize the timer to show hours value.</p>
+<pre><code>&lt;SpanTimer TimerDurationSpan=@(new TimeSpan(1, 10, 30)) WarningThreshold=1800 AlertThreshold=900 /&gt;</code></pre>
+<SpanTimer TimerDurationSpan=@(new TimeSpan(1, 10, 30)) WarningThreshold=1800 AlertThreshold=900 />
+<hr />
+
+<h4>SpanTimer Expiration Message</h4>
+<p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
+<pre><code>&lt;SpanTimer TimerDuration=10 WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" /&gt;</code></pre>
+<SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 10)) WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" />
+<hr />
+
+@code {
+    bool _timerVisible = true;
+
+    private void ToggleTimerVisibility()
+    {
+        this._timerVisible = !this._timerVisible;
+    }
+}
