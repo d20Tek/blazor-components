@@ -30,7 +30,7 @@
 
 <h4>SpanTimer Intervals</h4>
 <p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
-<pre><code>&lt;SpanTimer TimerDurationSpan=@(new TimeSpan(60)) WarningThreshold=30 AlertThreshold=15 /&gt;</code></pre>
+<pre><code>&lt;SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 60)) WarningThreshold=30 AlertThreshold=15 /&gt;</code></pre>
 <SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 60)) WarningThreshold=30 AlertThreshold=15 />
 <hr />
 
@@ -42,7 +42,7 @@
 
 <h4>SpanTimer Expiration Message</h4>
 <p>Here's how you customize the timer's different intervals for duration and color changes'.</p>
-<pre><code>&lt;SpanTimer TimerDuration=10 WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" /&gt;</code></pre>
+<pre><code>&lt;SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 10)) WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" /&gt;</code></pre>
 <SpanTimer TimerDurationSpan=@(new TimeSpan(0, 0, 10)) WarningThreshold=5 AlertThreshold=3 ExpirationMessage="Done!" />
 <hr />
 

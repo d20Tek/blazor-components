@@ -7,6 +7,7 @@
     <title>d20Tek Components Sample</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link href="css/app.css" rel="stylesheet" />
     <link href="D20Tek.FullSample.Wasm.styles.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
@@ -15,7 +16,19 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app" style="margin: 0 auto">
+        <div class="text-center pt-3" style="color: darkgreen; font-size: 16pt">
+            Loading...
+        </div>
+        <div class="text-center mt-3">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                  style="font-size: 16pt; width: 36px; height: 36px; color: darkgreen" />
+        </div>
+        <div class="text-center fa-10x" >
+            <i class="fa-solid fa-dice-d20 fa-flip mt-5"
+               style="--fa-animation-duration: 3s; color: darkgreen"></i>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -24,6 +37,7 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script src="https://kit.fontawesome.com/40b6d353df.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
