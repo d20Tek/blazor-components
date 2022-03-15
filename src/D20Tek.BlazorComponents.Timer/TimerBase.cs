@@ -10,18 +10,7 @@ namespace D20Tek.BlazorComponents
     {
         private const int _millisecondsPerSec = 1000;
 
-        private int _timeCounter = 0;
         private sys.Timer? _timer;
-
-        public abstract int TimerDuration { get; set; }
-
-        public string TimerDurationDisplay
-        {
-            get
-            {
-                return TimeDisplayFormatter.FormatTimeRemaining(this.TimeRemaining, this.ExpirationMessage);
-            }
-        }
 
         [Parameter]
         public EventCallback TimerExpired { get; set; }
@@ -43,14 +32,14 @@ namespace D20Tek.BlazorComponents
             base.OnInitialized();
             this.ResetTimer();
 
-            this.TimeRemaining = TimerDuration;
+            this.InitializeTime();
             this._timer = new sys.Timer(this.OnTimerChanged, null, _millisecondsPerSec, _millisecondsPerSec);
         }
 
         public void ResetTimer()
         {
-            this._timeCounter = 0;
-            this.TimeRemaining = TimerDuration;
+            this.InitializeTime();
+
             InvokeAsync(() => this.StateHasChanged());
 
             if (this._timer != null)
@@ -59,21 +48,20 @@ namespace D20Tek.BlazorComponents
             }
         }
 
+        protected virtual void InitializeTime() { }
+
+        protected abstract int ProcessTimerChange();
+
         internal void OnTimerChanged(object? state)
         {
-            this._timeCounter++;
-            this.TimeRemaining = this.TimerDuration - this._timeCounter;
+            var difference = this.ProcessTimerChange();
 
-            if (this.TimeRemaining <= 0)
-
+            if (difference <= 0)
             {
                 if (this._timer != null)
                 {
                     this._timer.Change(Timeout.Infinite, Timeout.Infinite);
                 }
-
-                this._timeCounter = this.TimerDuration;
-                this.TimeRemaining = 0;
 
                 this.TimerExpired.InvokeAsync();
             }

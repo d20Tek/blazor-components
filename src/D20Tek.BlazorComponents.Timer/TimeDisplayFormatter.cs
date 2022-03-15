@@ -38,5 +38,33 @@ namespace D20Tek.BlazorComponents
             // The output in MM:SS format
             return $"{minutes}:{seconds:D2}";
         }
+
+        public static string FormatTimeRemaining(int days, int hours, int minutes, int seconds)
+        {
+            if (days > 0)
+            {
+                // The output in HH:MM:SS format
+                return $"{days}D {hours}:{minutes:D2}:{seconds:D2}";
+            }
+
+            return FormatTimeRemaining(hours, minutes, seconds);
+        }
+
+        public static string FormatTicksRemaining(double ticks, string expirationMessage)
+        {
+            expirationMessage.ThrowWhenEmpty(nameof(expirationMessage));
+
+            if (ticks <= 0)
+            {
+                return expirationMessage;
+            }
+
+            var days = (int)Math.Floor(ticks / (1000 * 60 * 60 * 24));
+            var hours = (int)Math.Floor((ticks % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = (int)Math.Floor((ticks % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = (int)Math.Floor((ticks % (1000 * 60)) / 1000);
+
+            return FormatTimeRemaining(hours, minutes, seconds);
+        }
     }
 }
