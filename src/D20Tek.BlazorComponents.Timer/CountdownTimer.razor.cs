@@ -35,12 +35,11 @@ namespace D20Tek.BlazorComponents
         protected override int ProcessTimerChange()
         {
             var delta = this.CountdownTarget - DateTimeOffset.Now;
-            var difference = delta.Ticks;
 
-            this.TimerDisplay = TimeDisplayFormatter.FormatTicksRemaining(
-                difference, this.ExpirationMessage);
+            this.TimerDisplay = TimeDisplayFormatter.FormatTimeSpanRemaining(
+                delta, this.ExpirationMessage);
 
-            return delta.Seconds;
+            return (int)delta.TotalSeconds;
         }
     }
 }

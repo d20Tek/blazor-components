@@ -1,0 +1,38 @@
+﻿@page "/countdown-timer"
+<h3>CountdownTimer Component</h3>
+
+<h4>Default CountdownTimer</h4>
+<p>This is a countdown timer with default properties and styles.</p>
+<pre><code>&lt;CountdownTimer /&gt;</code></pre>
+<CountdownTimer />
+<hr />
+
+<h4>CountdownTimer Visibility</h4>
+<p>This timer shows how to change the IsVisible property to show and hide.</p>
+<pre><code>&lt;CountdownTimer IsVisible=@this._timerVisible /&gt;</code></pre>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleTimerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <CountdownTimer IsVisible=@this._timerVisible />
+    </div>
+</div>
+<hr />
+
+<h4>CountdownTimer Expiration Message</h4>
+<p>Here's how you customize the timer's expiration message'.</p>
+<pre><code>&lt;CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" /&gt;</code></pre>
+<CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" />
+<hr />
+
+@code {
+    bool _timerVisible = true;
+
+    private void ToggleTimerVisibility()
+    {
+        this._timerVisible = !this._timerVisible;
+    }
+}
