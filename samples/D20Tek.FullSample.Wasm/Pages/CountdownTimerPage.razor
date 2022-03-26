@@ -22,14 +22,36 @@
 </div>
 <hr />
 
+<h4>CountdownTimer With Countdown Target</h4>
+<p>You can set the countdown timer to a DateTimeOffset and allow the timer to count to it.</p>
+<pre><code>&lt;CountdownTimer CountdownTarget=@_birthdate ExpirationMessage="Happy Birthday!" /&gt;</code></pre>
+<div class="row">
+    <div class="col-6 col-md-3">
+        <label>Next birthday: </label>
+    </div>
+    <div class="col-6 col-md-9">
+        <CountdownTimer CountdownTarget=@_birthdate ExpirationMessage="Happy Birthday!" />
+    </div>
+</div>
+<hr />
+
 <h4>CountdownTimer Expiration Message</h4>
-<p>Here's how you customize the timer's expiration message'.</p>
+<p>Here's how you customize the timer's expiration message.</p>
 <pre><code>&lt;CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" /&gt;</code></pre>
 <CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" />
 <hr />
 
+<h4>CountdownTimer Styling</h4>
+<p>Here's how you customize the timer with custom styling.</p>
+<pre><code>&lt;CountdownTimer class="col-6 text-center" style="font-size: 24px; font-weight: bold; color: darkgray"  /&gt;</code></pre>
+<div class="row">
+    <CountdownTimer class="col-6 text-center" style="font-size: 24px; font-weight: bold; color: darkgray" />
+</div>
+<hr />
+
 @code {
     bool _timerVisible = true;
+    DateTimeOffset _birthdate = new DateTimeOffset(2022, 5, 3, 8, 0, 0, new TimeSpan(-8, 0, 0));
 
     private void ToggleTimerVisibility()
     {

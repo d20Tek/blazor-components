@@ -13,7 +13,7 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public DateTimeOffset CountdownTarget { get; set; } = DateTimeOffset.Now.AddDays(1);
 
-        public string TimerDisplay { get; private set; } = string.Empty;
+        public string TimerDisplay { get; private set; } = "...";
 
         protected override string? CalculateCssClasses()
         {
@@ -39,7 +39,7 @@ namespace D20Tek.BlazorComponents
             this.TimerDisplay = TimeDisplayFormatter.FormatTimeSpanRemaining(
                 delta, this.ExpirationMessage);
 
-            return (int)delta.TotalSeconds;
+            return (int)Math.Floor(delta.TotalSeconds);
         }
     }
 }
