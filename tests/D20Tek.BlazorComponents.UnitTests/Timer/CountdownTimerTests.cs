@@ -56,6 +56,28 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
         }
 
         [mst.TestMethod]
+        public void Render_WithLabelText()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var time = DateTimeOffset.Now.AddHours(1);
+
+            // act
+            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+                parameters.Add(p => p.LabelText, "My timer:"));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer"">
+  <label class=""base-timer-label"">My timer:&nbsp;</label>
+  ...
+</div>
+";
+
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void OnTimerChanged()
         {
             // arrange

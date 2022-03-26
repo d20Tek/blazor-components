@@ -2,6 +2,10 @@
 @if (this.IsVisible)
 {
     <div @attributes="@this.RemainingAttributes" role="timer" class="@this.CssClass" style="@this.CssStyles">
+        @if (this.HasLabelText)
+        {
+            <label class="base-timer-label">@this.LabelText&nbsp;</label>
+        }
         @this.TimerDisplay
     </div>
 }

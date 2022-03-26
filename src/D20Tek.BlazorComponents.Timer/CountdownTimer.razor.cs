@@ -13,7 +13,12 @@ namespace D20Tek.BlazorComponents
         [Parameter]
         public DateTimeOffset CountdownTarget { get; set; } = DateTimeOffset.Now.AddDays(1);
 
+        [Parameter]
+        public string? LabelText { get; set; } = null;
+
         public string TimerDisplay { get; private set; } = "...";
+
+        private bool HasLabelText => !string.IsNullOrWhiteSpace(this.LabelText);
 
         protected override string? CalculateCssClasses()
         {
