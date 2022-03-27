@@ -42,6 +42,16 @@
 </div>
 <hr />
 
+<h4>CountdownTimer With Size</h4>
+<p>You can set the countdown timer to a set of predetermined sizes.</p>
+<pre><code>&lt;CountdownTimer Size=Size.Small LabelText="Font-size (small):" /&gt;</code></pre>
+<CountdownTimer Size=Size.ExtraSmall LabelText="Font-size (extra-small):" />
+<CountdownTimer Size=Size.Small LabelText="Font-size (small):" />
+<CountdownTimer Size=Size.Medium LabelText="Font-size (medium):" />
+<CountdownTimer Size=Size.Large LabelText="Font-size (large):" />
+<CountdownTimer Size=Size.ExtraLarge LabelText="Font-size (extra-large):" />
+<hr />
+
 @code {
     bool _timerVisible = true;
     DateTimeOffset _birthdate = new DateTimeOffset(2022, 5, 3, 8, 0, 0, new TimeSpan(-8, 0, 0));

@@ -1,0 +1,33 @@
+﻿/*
+============
+Timer Styles
+============
+*/
+
+.base-timer {
+    position: relative;
+}
+
+.base-timer-label {
+    position: relative;
+}
+
+.base-timer-xs {
+    font-size: 9px;
+}
+
+.base-timer-sm {
+    font-size: 12px;
+}
+
+.base-timer-md {
+    font-size: 16px;
+}
+
+.base-timer-lg {
+    font-size: 32px;
+}
+
+.base-timer-xl {
+    font-size: 48px;
+}

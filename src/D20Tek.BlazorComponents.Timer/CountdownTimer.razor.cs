@@ -20,9 +20,15 @@ namespace D20Tek.BlazorComponents
 
         private bool HasLabelText => !string.IsNullOrWhiteSpace(this.LabelText);
 
+        public CountdownTimer()
+        {
+            this.Size = Size.None;
+        }
+
         protected override string? CalculateCssClasses()
         {
             var result = new CssBuilder(_cssTimerMain)
+                             .AddClass(TimerSizeMetadata.GetSizeCss(this.Size))
                              .AddClassFromAttributes(this.RemainingAttributes)
                              .Build();
             return result;

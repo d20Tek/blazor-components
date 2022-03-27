@@ -78,6 +78,69 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
         }
 
         [mst.TestMethod]
+        public void Render_WithSizeSmall()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var time = DateTimeOffset.Now.AddHours(1);
+
+            // act
+            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+                parameters.Add(p => p.Size, Size.Small));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer base-timer-sm"">
+  ...
+</div>
+";
+
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_WithSizeMedium()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var time = DateTimeOffset.Now.AddHours(1);
+
+            // act
+            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+                parameters.Add(p => p.Size, Size.Medium));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer base-timer-md"">
+  ...
+</div>
+";
+
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
+        public void Render_WithSizeLarge()
+        {
+            // arrange
+            var ctx = new TestContext();
+            var time = DateTimeOffset.Now.AddHours(1);
+
+            // act
+            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+                parameters.Add(p => p.Size, Size.Large));
+
+            // assert
+            var expectedHtml = @$"
+<div role=""timer"" class=""base-timer base-timer-lg"">
+  ...
+</div>
+";
+
+            comp.MarkupMatches(expectedHtml);
+        }
+
+        [mst.TestMethod]
         public void OnTimerChanged()
         {
             // arrange
