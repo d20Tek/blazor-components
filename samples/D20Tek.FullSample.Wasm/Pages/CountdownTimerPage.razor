@@ -1,0 +1,63 @@
+﻿@page "/countdown-timer"
+<h3>CountdownTimer Component</h3>
+
+<h4>Default CountdownTimer</h4>
+<p>This is a countdown timer with default properties and styles.</p>
+<pre><code>&lt;CountdownTimer /&gt;</code></pre>
+<CountdownTimer />
+<hr />
+
+<h4>CountdownTimer Visibility</h4>
+<p>This timer shows how to change the IsVisible property to show and hide.</p>
+<pre><code>&lt;CountdownTimer IsVisible=@this._timerVisible /&gt;</code></pre>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleTimerVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <CountdownTimer IsVisible=@this._timerVisible />
+    </div>
+</div>
+<hr />
+
+<h4>CountdownTimer With Countdown Target</h4>
+<p>You can set the countdown timer to a DateTimeOffset and allow the timer to count to it.</p>
+<pre><code>&lt;CountdownTimer CountdownTarget=@_birthdate LabelText="Next birthday:" ExpirationMessage="Happy Birthday!" /&gt;</code></pre>
+<CountdownTimer CountdownTarget=@_birthdate LabelText="Next birthday:" ExpirationMessage="Happy Birthday!" />
+<hr />
+
+<h4>CountdownTimer Expiration Message</h4>
+<p>Here's how you customize the timer's expiration message.</p>
+<pre><code>&lt;CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" /&gt;</code></pre>
+<CountdownTimer CountdownTarget=@(DateTimeOffset.Now.AddSeconds(10)) ExpirationMessage="Finished!" />
+<hr />
+
+<h4>CountdownTimer Styling</h4>
+<p>Here's how you customize the timer with custom styling.</p>
+<pre><code>&lt;CountdownTimer class="col-6 text-center" style="font-size: 24px; font-weight: bold; color: darkgray"  /&gt;</code></pre>
+<div class="row">
+    <CountdownTimer class="col-6 text-center" style="font-size: 24px; font-weight: bold; color: darkgray" />
+</div>
+<hr />
+
+<h4>CountdownTimer With Size</h4>
+<p>You can set the countdown timer to a set of predetermined sizes.</p>
+<pre><code>&lt;CountdownTimer Size=Size.Small LabelText="Font-size (small):" /&gt;</code></pre>
+<CountdownTimer Size=Size.ExtraSmall LabelText="Font-size (extra-small):" />
+<CountdownTimer Size=Size.Small LabelText="Font-size (small):" />
+<CountdownTimer Size=Size.Medium LabelText="Font-size (medium):" />
+<CountdownTimer Size=Size.Large LabelText="Font-size (large):" />
+<CountdownTimer Size=Size.ExtraLarge LabelText="Font-size (extra-large):" />
+<hr />
+
+@code {
+    bool _timerVisible = true;
+    DateTimeOffset _birthdate = new DateTimeOffset(2022, 5, 3, 8, 0, 0, new TimeSpan(-8, 0, 0));
+
+    private void ToggleTimerVisibility()
+    {
+        this._timerVisible = !this._timerVisible;
+    }
+}

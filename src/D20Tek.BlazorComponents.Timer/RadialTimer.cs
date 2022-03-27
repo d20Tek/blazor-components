@@ -12,6 +12,7 @@ namespace D20Tek.BlazorComponents
         private const string _cssTimerMain = "base-timer";
         protected static ValueRange _validTimeRange = new ValueRange(0, 1000000);
 
+        private int _timeCounter = 0;
         private int _warningThreshold = 15;
         private int _alertThreshold = 8;
 
@@ -20,6 +21,16 @@ namespace D20Tek.BlazorComponents
         protected string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
 
         protected string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
+
+        public abstract int TimerDuration { get; set; }
+
+        public string TimerDurationDisplay
+        {
+            get
+            {
+                return TimeDisplayFormatter.FormatTimeRemaining(this.TimeRemaining, this.ExpirationMessage);
+            }
+        }
 
         [Parameter]
         public int WarningThreshold
@@ -81,6 +92,27 @@ namespace D20Tek.BlazorComponents
                 .Build();
 
             return result;
+        }
+
+        protected override void InitializeTime()
+        {
+            this._timeCounter = 0;
+            this.TimeRemaining = TimerDuration;
+        }
+
+        protected override int ProcessTimerChange()
+        {
+            this._timeCounter++;
+            this.TimeRemaining = this.TimerDuration - this._timeCounter;
+
+            if (this.TimeRemaining <= 0)
+
+            {
+                this._timeCounter = this.TimerDuration;
+                this.TimeRemaining = 0;
+            }
+
+            return this.TimeRemaining;
         }
 
         private double CalculateTimeFraction()
