@@ -1,5 +1,15 @@
 # Release Notes
 
+## Release v1.0.12
+* Refactored code between TimerBase and RadialTimer to better support text-only CountdownTimer.
+* Created initial Countdown timer to display countdown to a specific DateTimeOffset.
+* Updated display formatting to include days, hours, min, sec.
+* Added unit tests for CountdownTimer.
+* Created CountdownTimer sample page to show off its functionality.
+* Added splash screen for Sample app.
+* Added simple LabelText for CountdownTimer.
+* Added timer Size property rendering and css.
+
 ## Release v1.0.11
 * Updated Timer component to show hours:min:sec.
 * Added invalid error handling for Timer properties that deal with time intervals.

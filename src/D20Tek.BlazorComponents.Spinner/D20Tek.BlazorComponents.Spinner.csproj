@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Blazor .NET5 .NET6 Components WebAssembly Spinner Loader</PackageTags>
-    <PackageReleaseNotes>Initial version of simple spinner component with customization and tests.</PackageReleaseNotes>
+    <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
   </PropertyGroup>
 
 
