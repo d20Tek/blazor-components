@@ -1,0 +1,19 @@
+﻿.toggle-xs {
+    font-size: x-small;
+}
+
+.toggle-sm {
+    font-size: small;
+}
+
+.toggle-md {
+    font-size: medium;
+}
+
+.toggle-lg {
+    font-size: x-large;
+}
+
+.toggle-xl {
+    font-size: xx-large;
+}

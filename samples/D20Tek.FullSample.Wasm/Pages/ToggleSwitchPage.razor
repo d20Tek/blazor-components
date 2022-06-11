@@ -1,0 +1,65 @@
+﻿@page "/toggle-switch"
+<h3>ToggleSwitch Component</h3>
+
+<h4>Default ToggleSwitch</h4>
+<p>This is a toggle switch with the default properties and styles.</p>
+<pre><code>&lt;ToggleSwitch Label="Test!" /&gt;</code></pre>
+
+<ToggleSwitch Label="Test!" />
+<hr />
+
+<h4>ToggleSwitch Visibility</h4>
+<p>This toggle switch shows how to change the IsVisible property to show and hide the component.</p>
+<pre><code>&lt;ToggleSwitch IsVisible=@_toggleVisible Label="Visibility Test" /&gt;</code></pre>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary" @onclick="ToggleSwitchVisibility">
+            Toggle Visibility
+        </button>
+    </div>
+    <div class="col">
+        <ToggleSwitch IsVisible=@_toggleVisible Label="Visibility Test" />
+    </div>
+</div>
+<hr />
+
+<h4>ToggleSwitch - with Custom Toggle Color</h4>
+<p>This is a toggle switch with a toggle background color.</p>
+<pre><code>&lt;ToggleSwitch ToggleColor="bg-success" Label="Test!" /&gt;</code></pre>
+
+<ToggleSwitch ToggleColor="green" Label="Green background" />
+<hr />
+
+<h4>ToggleSwitch - with Sizes</h4>
+<p>This is a toggle switch with different sizes.</p>
+<pre><code>&lt;ToggleSwitch Size=Size.Medium Label="medium switch" /&gt;</code></pre>
+
+<ToggleSwitch Size=Size.ExtraSmall Label="extra-small switch" />
+<ToggleSwitch Size=Size.Small Label="small switch" />
+<ToggleSwitch Size=Size.Medium Label="medium switch" />
+<ToggleSwitch Size=Size.Large Label="large switch" />
+<ToggleSwitch Size=Size.ExtraLarge Label="extra-large switch" />
+<hr />
+
+<h4>ToggleSwitch - with EventHandler</h4>
+<p>This is a toggle switch with event handler code.</p>
+<pre><code>&lt;ToggleSwitch CheckedChanged=ToggleCheckChanged Label="Trigger Event" /&gt;</code></pre>
+
+<ToggleSwitch CheckedChanged=@ToggleCheckChanged Label="Trigger Event" />
+<p>@_displayMessage</p>
+<hr />
+
+@code {
+    bool _toggleVisible = true;
+    string _displayMessage = string.Empty;
+
+    private void ToggleSwitchVisibility()
+    {
+        _toggleVisible = !_toggleVisible;
+    }
+
+    private void ToggleCheckChanged(bool newValue)
+    {
+        _displayMessage = $"ToggleSwitch check changed: {newValue}";
+    }
+}
