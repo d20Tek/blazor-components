@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
   </ItemGroup>
 
 </Project>
