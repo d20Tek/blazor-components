@@ -5,6 +5,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
+    <Authors>DarthPedro</Authors>
+    <Company>d20Tek</Company>
+    <Description>Blazor component for displaying toggle switch and checked interaction. This component allows you to easily place toggle switches throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
+    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly  Toggle ToggleSwitch</PackageTags>
+    <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
   </PropertyGroup>
 
 
