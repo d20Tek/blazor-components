@@ -22,8 +22,8 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             var expectedHtml =
 @"
 <div class=""form-check form-switch mt-2 toggle-md"">
-  <input class=""form-check-input"" type=""checkbox"" id=""toggle-switch"" checked="""">
-  <label class=""form-check-label"" for=""toggle-switch""></label>
+  <input class=""form-check-input"" type=""checkbox"" id:ignore checked="""">
+  <label class=""form-check-label"" for:ignore></label>
 </div>
 ";
             comp.MarkupMatches(expectedHtml);
@@ -58,8 +58,8 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             var expectedHtml =
 @"
 <div class=""form-check form-switch mt-2 toggle-md"">
-  <input class=""form-check-input"" type=""checkbox"" id=""toggle-switch"">
-  <label class=""form-check-label"" for=""toggle-switch"">Test</label>
+  <input class=""form-check-input"" type=""checkbox"" id:ignore>
+  <label class=""form-check-label"" for:ignore>Test</label>
 </div>
 ";
             comp.MarkupMatches(expectedHtml);
@@ -80,9 +80,9 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             var expectedHtml =
 @"
 <div class=""form-check form-switch mt-2 toggle-md"">
-  <input class=""form-check-input"" type=""checkbox"" id=""toggle-switch""
+  <input class=""form-check-input"" type=""checkbox"" id:ignore
          style=""background-color: darkgreen"" checked="""">
-  <label class=""form-check-label"" for=""toggle-switch"">Dark Green</label>
+  <label class=""form-check-label"" for:ignore>Dark Green</label>
 </div>
 ";
             comp.MarkupMatches(expectedHtml);
@@ -103,8 +103,8 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             var expectedHtml =
 @"
 <div class=""form-check form-switch mt-2 toggle-lg"">
-  <input class=""form-check-input"" type=""checkbox"" id=""toggle-switch"" checked="""">
-  <label class=""form-check-label"" for=""toggle-switch"">Large Test</label>
+  <input class=""form-check-input"" type=""checkbox"" id:ignore checked="""">
+  <label class=""form-check-label"" for:ignore>Large Test</label>
 </div>
 ";
             comp.MarkupMatches(expectedHtml);
@@ -122,14 +122,14 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
                                         .Add(p => p.Label, "Change Test"));
 
             // act
-            comp.Find("#toggle-switch").Change<bool>(false);
+            comp.Find("input").Change<bool>(false);
 
             // assert
             var expectedHtml =
 @"
 <div class=""form-check form-switch mt-2 toggle-md"">
-  <input class=""form-check-input"" type=""checkbox"" id=""toggle-switch"">
-  <label class=""form-check-label"" for=""toggle-switch"">Change Test</label>
+  <input class=""form-check-input"" type=""checkbox"" id:ignore>
+  <label class=""form-check-label"" for:ignore>Change Test</label>
 </div>
 ";
             comp.MarkupMatches(expectedHtml);
