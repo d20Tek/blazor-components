@@ -8,8 +8,8 @@ namespace D20Tek.BlazorComponents
 {
     public partial class ToggleSwitch : BaseComponent
     {
-        private const string _cssToggleSwitchContainer = "form-check form-switch mt-2";
-        private string _innerToggleId = Guid.NewGuid().ToString("N");
+        private const string _cssToggleSwitchContainer = "form-check form-switch";
+        private readonly string _innerToggleId = Guid.NewGuid().ToString("N");
 
         public ToggleSwitch()
         {

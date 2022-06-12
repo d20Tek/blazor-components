@@ -21,7 +21,7 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             // assert
             var expectedHtml =
 @"
-<div class=""form-check form-switch mt-2 toggle-md"">
+<div class=""form-check form-switch toggle-md"">
   <input class=""form-check-input"" type=""checkbox"" id:ignore checked="""">
   <label class=""form-check-label"" for:ignore></label>
 </div>
@@ -57,7 +57,7 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             // assert
             var expectedHtml =
 @"
-<div class=""form-check form-switch mt-2 toggle-md"">
+<div class=""form-check form-switch toggle-md"">
   <input class=""form-check-input"" type=""checkbox"" id:ignore>
   <label class=""form-check-label"" for:ignore>Test</label>
 </div>
@@ -79,7 +79,7 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             // assert
             var expectedHtml =
 @"
-<div class=""form-check form-switch mt-2 toggle-md"">
+<div class=""form-check form-switch toggle-md"">
   <input class=""form-check-input"" type=""checkbox"" id:ignore
          style=""background-color: darkgreen"" checked="""">
   <label class=""form-check-label"" for:ignore>Dark Green</label>
@@ -102,7 +102,7 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             // assert
             var expectedHtml =
 @"
-<div class=""form-check form-switch mt-2 toggle-lg"">
+<div class=""form-check form-switch toggle-lg"">
   <input class=""form-check-input"" type=""checkbox"" id:ignore checked="""">
   <label class=""form-check-label"" for:ignore>Large Test</label>
 </div>
@@ -127,7 +127,7 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
             // assert
             var expectedHtml =
 @"
-<div class=""form-check form-switch mt-2 toggle-md"">
+<div class=""form-check form-switch toggle-md"">
   <input class=""form-check-input"" type=""checkbox"" id:ignore>
   <label class=""form-check-label"" for:ignore>Change Test</label>
 </div>
