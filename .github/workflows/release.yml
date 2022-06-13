@@ -42,3 +42,7 @@ jobs:
       run: dotnet nuget push D20Tek.BlazorComponents.Timer.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish ToggleSwitch
+      run: dotnet nuget push D20Tek.BlazorComponents.ToggleSwitch.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

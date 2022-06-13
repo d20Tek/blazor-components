@@ -1,5 +1,11 @@
 # Release Notes
 
+## Release v1.0.13
+* Created initial ToggleSwitch project.
+* Implemented basic ToggleSwitch functionality.
+* Created ToggleSwitchPage sample code.
+* Added unit tests for ToggleSwitch.
+
 ## Release v1.0.12
 * Refactored code between TimerBase and RadialTimer to better support text-only CountdownTimer.
 * Created initial Countdown timer to display countdown to a specific DateTimeOffset.

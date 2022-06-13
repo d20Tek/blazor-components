@@ -1,0 +1,9 @@
+﻿@inherits BaseComponent
+@if (IsVisible)
+{
+<div @attributes="@this.RemainingAttributes" class=@CssClass style="@this.CssStyles">
+    <input class="form-check-input" type="checkbox" id=@_innerToggleId style=@ToggleBgColorStyle
+           checked=@Checked @onchange=@OnCheckedChanged>
+    <label class="form-check-label" for=@_innerToggleId>@Label</label>
+</div>
+}
