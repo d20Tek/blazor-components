@@ -75,5 +75,11 @@ pre {
     border-right-color: lightgreen;
     width: 5rem;
     height: 5rem;
-    border-width: .5em
+    border-width: .5em;
+}
+
+.interactivity-card {
+    max-width: 360px;
+    border: 1px solid lightgray;
+    border-top: 8px solid darkgreen;
 }

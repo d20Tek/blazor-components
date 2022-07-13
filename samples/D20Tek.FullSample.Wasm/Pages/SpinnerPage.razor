@@ -1,5 +1,82 @@
 ﻿@page "/spinners"
 <h3>Spinner Component</h3>
+<p>A spinner alerts a user that content is being loaded or processed, and they should wait for the activity to complete.</p>
+<div class="d-flex align-items-center">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_color" style="margin-right: 5px;">Color</label></td>
+                    <td><input type="text" id="option_color" style="width: 150px;" @bind-value=_interactiveColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_secondary_color" style="margin-right: 5px;">Secondary Color</label></td>
+                    <td><input type="text" id="option_secondary_color" style="width: 150px;" @bind-value=_interactivesSecondaryColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_label" style="margin-right: 5px;">Label</label></td>
+                    <td><input type="text" id="option_label" style="width: 150px;" @bind-value=_interactiveLabel></td>
+                </tr>
+                <tr>
+                    <td><label for="option_label_placement" style="margin-right: 5px;">Label Placement</label></td>
+                    <td>
+                        <select id="option_label_placement" @bind-value=_interactiveLabelPlacement @bind-value:event="onchange">
+                            <option value=@Placement.Top>Top</option>
+                            <option value=@Placement.Left>Left</option>
+                            <option value=@Placement.Bottom selected>Bottom</option>
+                            <option value=@Placement.Right>Right</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_type" style="margin-right: 5px;">Type</label></td>
+                    <td>
+                        <select id="option_type" @bind-value=_interactiveType @bind-value:event="onchange">
+                            <option value=@SpinType.Blocks>Blocks</option>
+                            <option value=@SpinType.Circle>Circle</option>
+                            <option value=@SpinType.DualRing>Dual Ring</option>
+                            <option value=@SpinType.Ellipsis>Ellipsis</option>
+                            <option value=@SpinType.Hourglass>Hourglass</option>
+                            <option value=@SpinType.Pulse>Pulse</option>
+                            <option value=@SpinType.Ring selected>Ring</option>
+                            <option value=@SpinType.Roller>Roller</option>
+                            <option value=@SpinType.SpinIOS>Spin iOS</option>
+                            <option value=@SpinType.Square>Square</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_interactiveSize @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small selected>Small</option>
+                            <option value=@Size.Medium>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center">
+        <Spinner @bind-Color=_interactiveColor
+                 @bind-SecondaryColor=_interactivesSecondaryColor
+                 @bind-Label=_interactiveLabel
+                 @bind-LabelPlacement=_interactiveLabelPlacement
+                 @bind-Type=_interactiveType
+                 @bind-Size=_interactiveSize
+                 @bind-IsVisible=_interactiveVisibility
+                 />
+    </div>
+</div>
+<hr />
 
 <h4>Default Spinner</h4>
 <p>This is a spinner with the default properties and styles.</p>
@@ -312,6 +389,14 @@
 
 @code {
     bool _spinnerVisible = true;
+    string _interactiveColor = "";
+    string _interactivesSecondaryColor = "";
+    string _interactiveLabel = "Label text";
+    Placement _interactiveLabelPlacement = Placement.Bottom;
+    SpinType _interactiveType = SpinType.Ring;
+    Size _interactiveSize = Size.Small;
+    bool _interactiveVisibility = true;
+    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
 
     private void ToggleSpinnerVisibility()
     {
