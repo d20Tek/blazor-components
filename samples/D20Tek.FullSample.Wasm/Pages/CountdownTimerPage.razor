@@ -1,5 +1,62 @@
 ﻿@page "/countdown-timer"
 <h3>CountdownTimer Component</h3>
+<p>A countdown timer shows the remaining time to a specific event. When the target is reached, it shows an expiration message instead.</p>
+<div class="d-flex align-items-center component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_target" style="margin-right: 5px;">CountdownTarget</label></td>
+                    <td>
+                        <select id="option_size" @onchange=OnTargetChanged>
+                            <option value="10s">10 sec</option>
+                            <option value="1m"l>1 min</option>
+                            <option value="5m">5 min</option>
+                            <option value="1hr" selected>1 hour</option>
+                            <option value="1d">1 day</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_expiration" style="margin-right: 5px;">ExpirationMessage</label></td>
+                    <td><input type="text" id="option_expiration" style="width: 150px;" @bind-value=_interactiveExpirationMessage></td>
+                </tr>
+                <tr>
+                    <td><label for="option_label" style="margin-right: 5px;">LabelText</label></td>
+                    <td><input type="text" id="option_label" style="width: 150px;" @bind-value=_interactiveLabelText></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_interactiveSize @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center" style="text-align: center">
+        <CountdownTimer @ref=_ref
+                        CountdownTarget=@_interactiveCountdownTarget
+                        ExpirationMessage=@_interactiveExpirationMessage
+                        LabelText=@_interactiveLabelText
+                        Size=@_interactiveSize
+                        IsVisible=@_interactiveVisibility
+                        TimerExpired=@OnTimerExpired
+                        />
+    </div>
+</div>
+<hr />
 
 <h4>Default CountdownTimer</h4>
 <p>This is a countdown timer with default properties and styles.</p>
@@ -53,11 +110,55 @@
 <hr />
 
 @code {
+    CountdownTimer? _ref;
+    DateTimeOffset _interactiveCountdownTarget = DateTimeOffset.Now.AddHours(1);
+    string _interactiveExpirationMessage = "Done!";
+    string _interactiveLabelText = "Label text:";
+    Size _interactiveSize = Size.Medium;
+    bool _interactiveVisibility = true;
+    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
+    bool _interativeTimerNeedsReset = false;
+
     bool _timerVisible = true;
     DateTimeOffset _birthdate = new DateTimeOffset(2022, 5, 3, 8, 0, 0, new TimeSpan(-8, 0, 0));
 
     private void ToggleTimerVisibility()
     {
         this._timerVisible = !this._timerVisible;
+    }
+
+    private void OnTimerExpired() => _interativeTimerNeedsReset = true;
+
+    private void OnTargetChanged(ChangeEventArgs args)
+    {
+        string change = args.Value?.ToString() ?? "none";
+        switch (change)
+        {
+            case "10s":
+                ResetTimerIfNeeded(DateTimeOffset.Now.AddSeconds(10));
+                break;
+            case "1m":
+                ResetTimerIfNeeded(DateTimeOffset.Now.AddMinutes(1));
+                break;
+            case "5m":
+                ResetTimerIfNeeded(DateTimeOffset.Now.AddMinutes(5));
+                break;
+            case "1hr":
+                ResetTimerIfNeeded(DateTimeOffset.Now.AddHours(1));
+                break;
+            case "1d":
+                ResetTimerIfNeeded(DateTimeOffset.Now.AddDays(1));
+                break;
+        }
+    }
+
+    private void ResetTimerIfNeeded(DateTimeOffset newTarget)
+    {
+        _interactiveCountdownTarget = newTarget;
+        if (_interativeTimerNeedsReset)
+        {
+            _ref?.ResetTimer();
+            _interativeTimerNeedsReset = false;
+        }
     }
 }
