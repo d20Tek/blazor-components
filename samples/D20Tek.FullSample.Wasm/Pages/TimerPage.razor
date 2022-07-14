@@ -1,5 +1,87 @@
 ﻿@page "/timer"
 <h3>Timer Component</h3>
+<p>A timer shows the remaining time as a visual stopwatch. It has a radial display time with warnings as time runs low. 
+   When the duration is reached, it shows an expiration message instead.</p>
+<div class="d-flex align-items-center component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_duration" style="margin-right: 5px;">TimerDuration</label></td>
+                    <td>
+                        <select id="option_duration" @onchange=OnDurationChanged>
+                            <option value="10s">10 sec</option>
+                            <option value="30s" selected>30 sec</option>
+                            <option value="1m">1 min</option>
+                            <option value="2m">2 min</option>
+                            <option value="5m">5 min</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_expiration" style="margin-right: 5px;">ExpirationMessage</label></td>
+                    <td><input type="text" id="option_expiration" style="width: 150px;" @bind-value=_interactiveExpirationMessage></td>
+                </tr>
+                <tr>
+                    <td><label for="option_warning_threshold" style="margin-right: 5px;">WarningThreshold</label></td>
+                    <td><input type="number" min="1" max="300" id="option_warning_threshold" style="width: 150px;" @bind-value=_interactiveWarningThreshold></td>
+                </tr>
+                <tr>
+                    <td><label for="option_alert_threshold" style="margin-right: 5px;">AlertThreshold</label></td>
+                    <td><input type="number" min="1" max="300" id="option_alert_threshold" style="width: 150px;" @bind-value=_interactiveAlertThreshold></td>
+                </tr>
+                <tr>
+                    <td><label for="option_remaining_color" style="margin-right: 5px;">RemainingTimeColor</label></td>
+                    <td><input type="text" id="option_remaining_color" style="width: 150px;" @bind-value=_interactiveRemainingColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_warning_color" style="margin-right: 5px;">WarningTimeColor</label></td>
+                    <td><input type="text" id="option_warning_color" style="width: 150px;" @bind-value=_interactiveWarningColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_alert_color" style="margin-right: 5px;">AlertTimeColor</label></td>
+                    <td><input type="text" id="option_alert_color" style="width: 150px;" @bind-value=_interactiveAlertColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_elapsed_color" style="margin-right: 5px;">ElapsedTimeColor</label></td>
+                    <td><input type="text" id="option_elapsed_color" style="width: 150px;" @bind-value=_interactiveElapsedColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_interactiveSize @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center" style="text-align: center">
+        <Timer @ref=_ref style="margin: auto"
+               TimerDuration=@_interactiveDuration
+               ExpirationMessage=@_interactiveExpirationMessage
+               WarningThreshold=@_interactiveWarningThreshold
+               AlertThreshold=@_interactiveAlertThreshold
+               RemainingTimeColor=@_interactiveRemainingColor
+               ElapsedTimeColor=@_interactiveElapsedColor
+               WarningTimeColor=@_interactiveWarningColor
+               AlertTimeColor=@_interactiveAlertColor
+               Size=@_interactiveSize
+               IsVisible=@_interactiveVisibility
+               />
+    </div>
+</div>
+<hr />
 
 <h4>Default Timer</h4>
 <p>This is a simple timer with the default properties and styles.</p>
@@ -57,10 +139,52 @@
 <hr />
 
 @code {
+    Timer? _ref;
+    int _interactiveDuration = 30;
+    string _interactiveExpirationMessage = "Done!";
+    int _interactiveWarningThreshold = 15;
+    int _interactiveAlertThreshold = 8;
+    string _interactiveRemainingColor = "green";
+    string _interactiveWarningColor = "orange";
+    string _interactiveAlertColor = "red";
+    string _interactiveElapsedColor = "gray";
+    Size _interactiveSize = Size.Medium;
+    bool _interactiveVisibility = true;
+    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
+
     bool _timerVisible = true;
 
     private void ToggleTimerVisibility()
     {
         this._timerVisible = !this._timerVisible;
+    }
+
+    private void OnDurationChanged(ChangeEventArgs args)
+    {
+        string change = args.Value?.ToString() ?? "none";
+        switch (change)
+        {
+            case "10s":
+                ResetTimerIfNeeded(10);
+                break;
+            case "30s":
+                ResetTimerIfNeeded(30);
+                break;
+            case "1m":
+                ResetTimerIfNeeded(60);
+                break;
+            case "2m":
+                ResetTimerIfNeeded(120);
+                break;
+            case "5m":
+                ResetTimerIfNeeded(300);
+                break;
+        }
+    }
+
+    private void ResetTimerIfNeeded(int newDuration)
+    {
+        _interactiveDuration = newDuration;
+        _ref?.ResetTimer();
     }
 }
