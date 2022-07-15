@@ -1,5 +1,45 @@
 ﻿@page "/content-spinner"
-<h3>Spinner Component</h3>
+<h3>ContentSpinner Component</h3>
+<p>A spinner alerts a user that content is being loaded or processed, and they should wait for the activity to complete.
+   This ContentSpinner shows and spins any render fragment passed as child content.</p>
+<div class="d-flex align-items-center component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_content" style="margin-right: 5px;">Content</label></td>
+                    <td><input type="text" id="option_content" style="width: 150px;" @bind-value=_interactiveContent></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_interactiveSize @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center" style="text-align: center">
+        <ContentSpinner @bind-Size=_interactiveSize
+                        @bind-IsVisible=_interactiveVisibility>
+            <div style="display: table-cell; text-align: center; vertical-align: middle; width: inherit; height: inherit">
+                @_interactiveContent
+            </div>
+        </ContentSpinner>
+    </div>
+</div>
+<hr />
 
 <h4>Default Content</h4>
 <p>This is a spinner with the default properties and styles, and some text to spin.</p>
@@ -87,6 +127,10 @@
 
 @code {
     bool _spinnerVisible = true;
+    string _interactiveContent = "text...";
+    Size _interactiveSize = Size.Medium;
+    bool _interactiveVisibility = true;
+    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
 
     private void ToggleSpinnerVisibility()
     {
