@@ -1,5 +1,51 @@
 ﻿@page "/toggle-switch"
 <h3>ToggleSwitch Component</h3>
+<p>A toggle switch control allows users to make a choice between two mutually exclusive options (usually in a boolean form).
+   Similar to a checkbox control, but more visually appealing.</p>
+<div class="d-flex align-items-center component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_label" style="margin-right: 5px;">Label</label></td>
+                    <td><input type="text" id="option_label" style="width: 150px;" @bind-value=_interactiveLabelText></td>
+                </tr>
+                <tr>
+                    <td><label for="option_color" style="margin-right: 5px;">ToggleColor</label></td>
+                    <td><input type="text" id="option_color" style="width: 150px;" @bind-value=_interactiveColor></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_interactiveSize @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center">
+        <div class="px-0 px-md-5">
+            <ToggleSwitch @ref=_ref style="margin: auto"
+                            Label=@_interactiveLabelText
+                            ToggleColor=@_interactiveColor 
+                            Size=@_interactiveSize
+                            IsVisible=@_interactiveVisibility
+                            />
+        </div>
+    </div>
+</div>
+<hr />
 
 <h4>Default ToggleSwitch</h4>
 <p>This is a toggle switch with the default properties and styles.</p>
@@ -50,6 +96,13 @@
 <hr />
 
 @code {
+    ToggleSwitch? _ref;
+    string _interactiveLabelText = "Label";
+    string _interactiveColor = string.Empty;
+    Size _interactiveSize = Size.Medium;
+    bool _interactiveVisibility = true;
+    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
+
     bool _toggleVisible = true;
     string _displayMessage = string.Empty;
 
