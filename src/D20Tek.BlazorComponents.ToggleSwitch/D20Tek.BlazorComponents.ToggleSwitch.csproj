@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Blazor .NET Components WebAssembly Toggle ToggleSwitch</PackageTags>
     <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
