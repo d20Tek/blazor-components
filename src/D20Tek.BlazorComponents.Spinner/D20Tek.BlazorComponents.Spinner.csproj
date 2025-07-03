@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.5</Version>
+    <Version>1.9.1</Version>
     <Authors>DarthPedro</Authors>
     <Company>d20Tek</Company>
     <Description>A Blazor component for displaying a spinner/loader component. This component allows you to easily place spinners throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
     <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Blazor .NET5 .NET6 Components WebAssembly Spinner Loader</PackageTags>
+    <PackageTags>Blazor .NET Components WebAssembly Spinner Loader</PackageTags>
     <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>
