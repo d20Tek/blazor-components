@@ -11,9 +11,9 @@ Future components: Modal.
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.9.1
-PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.9.1
-PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.9.1
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.9.2
+PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.9.2
+PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.9.2
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.

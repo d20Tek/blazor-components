@@ -1,6 +1,9 @@
 # Release Notes
 
 ## Release v1.9.1
+* Updated all dependent packages to latest versions.
+
+## Release v1.9.1
 * Upgrades component and sample projects to .NET 9.
 * Updated all dependent packages to latest versions.
 
