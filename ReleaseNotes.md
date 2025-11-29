@@ -1,6 +1,9 @@
 # Release Notes
 
-## Release v1.9.1
+## Release v1.9.4
+* Updated all dependent packages to latest versions.
+
+## Release v1.9.3
 * Updated all dependent packages to latest versions.
 
 ## Release v1.9.1
