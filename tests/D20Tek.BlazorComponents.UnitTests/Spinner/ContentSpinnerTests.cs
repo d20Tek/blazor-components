@@ -1,88 +1,84 @@
-﻿using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿namespace D20Tek.BlazorComponents.UnitTests.Spinner;
 
-namespace D20Tek.BlazorComponents.UnitTests
+[TestClass]
+public class ContentSpinnerTests
 {
-    [TestClass]
-    public class ContentSpinnerTests
+    [TestMethod]
+    public void DefaultRender()
     {
-        [TestMethod]
-        public void DefaultRender()
-        {
-            // arrange
-            var ctx = new BunitContext();
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<ContentSpinner>();
+        // act
+        var comp = ctx.Render<ContentSpinner>();
 
-            // assert
-            var expectedHtml = @"<div role=""status"" class=""content-spinner""></div>";
-            comp.MarkupMatches(expectedHtml);
-        }
+        // assert
+        var expectedHtml = @"<div role=""status"" class=""content-spinner""></div>";
+        comp.MarkupMatches(expectedHtml);
+    }
 
-        [TestMethod]
-        public void Render_IsVisibleFalse()
-        {
-            // arrange
-            var ctx = new BunitContext();
+    [TestMethod]
+    public void Render_IsVisibleFalse()
+    {
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<ContentSpinner>(parameters => parameters.Add(p => p.IsVisible, false));
+        // act
+        var comp = ctx.Render<ContentSpinner>(parameters => parameters.Add(p => p.IsVisible, false));
 
-            // assert
-            comp.MarkupMatches(string.Empty);
-        }
+        // assert
+        comp.MarkupMatches(string.Empty);
+    }
 
-        [TestMethod]
-        public void Render_WithChildContent()
-        {
-            // arrange
-            var ctx = new BunitContext();
+    [TestMethod]
+    public void Render_WithChildContent()
+    {
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<ContentSpinner>(parameters => parameters.AddChildContent("Test message..."));
+        // act
+        var comp = ctx.Render<ContentSpinner>(parameters => parameters.AddChildContent("Test message..."));
 
-            // assert
-            var expectedHtml = @"<div role=""status"" class=""content-spinner"">Test message...</div>";
-            comp.MarkupMatches(expectedHtml);
-        }
+        // assert
+        var expectedHtml = @"<div role=""status"" class=""content-spinner"">Test message...</div>";
+        comp.MarkupMatches(expectedHtml);
+    }
 
 
-        [TestMethod]
-        public void Render_WithImageChildContent()
-        {
-            // arrange
-            var ctx = new BunitContext();
+    [TestMethod]
+    public void Render_WithImageChildContent()
+    {
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<ContentSpinner>(parameters => parameters
-                .AddChildContent(@"<img alt=""test image"" src=""./test/image.png"" />"));
+        // act
+        var comp = ctx.Render<ContentSpinner>(parameters => parameters
+            .AddChildContent(@"<img alt=""test image"" src=""./test/image.png"" />"));
 
-            // assert
-            var expectedHtml = @"
+        // assert
+        var expectedHtml = @"
 <div role=""status"" class=""content-spinner"">
     <img alt=""test image"" src=""./test/image.png"" />
 </div>";
-            comp.MarkupMatches(expectedHtml);
-        }
+        comp.MarkupMatches(expectedHtml);
+    }
 
-        [TestMethod]
-        public void Render_WithSize()
-        {
-            // arrange
-            var ctx = new BunitContext();
+    [TestMethod]
+    public void Render_WithSize()
+    {
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<ContentSpinner>(parameters => parameters
-                .Add(p => p.Size, Size.Medium)
-                .AddChildContent("Test message..."));
+        // act
+        var comp = ctx.Render<ContentSpinner>(parameters => parameters
+            .Add(p => p.Size, Size.Medium)
+            .AddChildContent("Test message..."));
 
-            // assert
-            var expectedHtml = @"
+        // assert
+        var expectedHtml = @"
 <div role=""status"" class=""content-spinner"" style=""--spinner-width: 4rem; --spinner-height: 4rem;"">
     Test message...
 </div>";
-            comp.MarkupMatches(expectedHtml);
-        }
+        comp.MarkupMatches(expectedHtml);
     }
 }

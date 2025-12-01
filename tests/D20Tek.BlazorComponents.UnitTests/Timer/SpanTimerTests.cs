@@ -1,24 +1,19 @@
-﻿using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Diagnostics.CodeAnalysis;
+﻿namespace D20Tek.BlazorComponents.UnitTests.Timer;
 
-namespace D20Tek.BlazorComponents.UnitTests.Timer
+[TestClass]
+public class SpanTimerTests
 {
-    [TestClass]
-    public class SpanTimerTests
+    [TestMethod]
+    public void DefaultRender()
     {
-        [TestMethod]
-        public void DefaultRender()
-        {
-            // arrange
-            var ctx = new BunitContext();
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<SpanTimer>();
+        // act
+        var comp = ctx.Render<SpanTimer>();
 
-            // assert
-            var expectedHtml = @$"
+        // assert
+        var expectedHtml = @$"
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
@@ -38,22 +33,22 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 </div>
 ";
 
-            var results = comp.CompareTo(expectedHtml);
-            TimerVerifier.VerifyMarkupDifferences(results);
-        }
+        var results = comp.CompareTo(expectedHtml);
+        TimerVerifier.VerifyMarkupDifferences(results);
+    }
 
-        [TestMethod]
-        public void Render_WithMinuteSpan()
-        {
-            // arrange
-            var ctx = new BunitContext();
+    [TestMethod]
+    public void Render_WithMinuteSpan()
+    {
+        // arrange
+        var ctx = new BunitContext();
 
-            // act
-            var comp = ctx.Render<SpanTimer>(parameters => 
-                parameters.Add(p => p.TimerDurationSpan, new TimeSpan(0, 1, 0)));
+        // act
+        var comp = ctx.Render<SpanTimer>(parameters => 
+            parameters.Add(p => p.TimerDurationSpan, new TimeSpan(0, 1, 0)));
 
-            // assert
-            var expectedHtml = @$"
+        // assert
+        var expectedHtml = @$"
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
@@ -73,22 +68,22 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 </div>
 ";
 
-            var results = comp.CompareTo(expectedHtml);
-            TimerVerifier.VerifyMarkupDifferences(results);
-        }
+        var results = comp.CompareTo(expectedHtml);
+        TimerVerifier.VerifyMarkupDifferences(results);
+    }
 
-        [TestMethod]
-        public void Render_WithHourSpan()
-        {
-            // arrange
-            var ctx = new BunitContext();
-            var span = new TimeSpan(1, 10, 13);
+    [TestMethod]
+    public void Render_WithHourSpan()
+    {
+        // arrange
+        var ctx = new BunitContext();
+        var span = new TimeSpan(1, 10, 13);
 
-            // act
-            var comp = ctx.Render<SpanTimer>(parameters => parameters.Add(p => p.TimerDurationSpan, span));
+        // act
+        var comp = ctx.Render<SpanTimer>(parameters => parameters.Add(p => p.TimerDurationSpan, span));
 
-            // assert
-            var expectedHtml = @$"
+        // assert
+        var expectedHtml = @$"
 <div role=""timer"" class=""base-timer base-timer-md"">
   <svg class=""base-timer__svg"" viewBox=""0 0 100 100"" xmlns=""http://www.w3.org/2000/svg"">
     <g class=""base-timer__circle"">
@@ -108,23 +103,22 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 </div>
 ";
 
-            var results = comp.CompareTo(expectedHtml);
-            TimerVerifier.VerifyMarkupDifferences(results);
+        var results = comp.CompareTo(expectedHtml);
+        TimerVerifier.VerifyMarkupDifferences(results);
 
-            Assert.AreEqual(span, comp.Instance.TimerDurationSpan);
-        }
+        Assert.AreEqual(span, comp.Instance.TimerDurationSpan);
+    }
 
-        [TestMethod]
-        [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
-        public void SetOutOfRangeDurationSpan()
-        {
-            // arrange
-            var ctx = new BunitContext();
-            var comp = ctx.Render<SpanTimer>();
+    [TestMethod]
+    [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
+    public void SetOutOfRangeDurationSpan()
+    {
+        // arrange
+        var ctx = new BunitContext();
+        var comp = ctx.Render<SpanTimer>();
 
-            // act - assert
-            Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () =>
-                comp.Instance.TimerDurationSpan = new TimeSpan(500, 1, 15, 0));
-        }
+        // act - assert
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () =>
+            comp.Instance.TimerDurationSpan = new TimeSpan(500, 1, 15, 0));
     }
 }
