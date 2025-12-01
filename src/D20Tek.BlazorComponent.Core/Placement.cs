@@ -1,14 +1,9 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
+﻿namespace D20Tek.BlazorComponents;
 
-namespace D20Tek.BlazorComponents
+public enum Placement
 {
-    public enum Placement
-    {
-        Top = 0,
-        Left = 1,
-        Bottom = 2,
-        Right = 3
-    }
+    Top = 0,
+    Left = 1,
+    Bottom = 2,
+    Right = 3
 }
