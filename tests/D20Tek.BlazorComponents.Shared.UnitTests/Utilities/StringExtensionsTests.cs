@@ -1,60 +1,56 @@
 ﻿using D20Tek.BlazorComponents.Utilities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Diagnostics.CodeAnalysis;
 
-namespace D20Tek.BlazorComponents.Core.UnitTests.Utilities
+namespace D20Tek.BlazorComponents.Core.UnitTests.Utilities;
+
+[TestClass]
+public class StringExtensionsTests
 {
-    [TestClass]
-    public class StringExtensionsTests
+    [TestMethod]
+    public void NullIfEmpty_WithText()
     {
-        [TestMethod]
-        public void NullIfEmpty_WithText()
-        {
-            // arrange
-            string text = "test";
+        // arrange
+        string text = "test";
 
-            // act
-            var result = text.NullIfEmpty();
+        // act
+        var result = text.NullIfEmpty();
 
-            // assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(text, result);
-        }
+        // assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(text, result);
+    }
 
-        [TestMethod]
-        public void NullIfEmpty_WithEmptyText()
-        {
-            // arrange
-            string text = "";
+    [TestMethod]
+    public void NullIfEmpty_WithEmptyText()
+    {
+        // arrange
+        string text = "";
 
-            // act
-            var result = text.NullIfEmpty();
+        // act
+        var result = text.NullIfEmpty();
 
-            // assert
-            Assert.IsNull(result);
-        }
+        // assert
+        Assert.IsNull(result);
+    }
 
-        [TestMethod]
-        public void ThrowWhenEmpty_WithText()
-        {
-            // arrange
-            string text = "test";
+    [TestMethod]
+    public void ThrowWhenEmpty_WithText()
+    {
+        // arrange
+        string text = "test";
 
-            // act
-            text.ThrowWhenEmpty("param");
+        // act
+        text.ThrowWhenEmpty("param");
 
-            // assert
-        }
+        // assert
+    }
 
-        [TestMethod]
-        public void ThrowWhenEmpty_WithEmptyText()
-        {
-            // arrange
-            string text = "";
+    [TestMethod]
+    public void ThrowWhenEmpty_WithEmptyText()
+    {
+        // arrange
+        string text = "";
 
-            // act - assert
-            Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () => text.ThrowWhenEmpty("param"));
-        }
+        // act - assert
+        Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () => text.ThrowWhenEmpty("param"));
     }
 }
