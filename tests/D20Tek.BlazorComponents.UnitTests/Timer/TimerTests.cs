@@ -1,25 +1,22 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using c = D20Tek.BlazorComponents;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+using Comp = D20Tek.BlazorComponents;
 
 namespace D20Tek.BlazorComponents.UnitTests.Timer
 {
-    [mst.TestClass]
+    [TestClass]
     public class TimerTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void DefaultRender()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>();
+            var comp = ctx.Render<Comp.Timer>();
 
             // assert
             var expectedHtml = @$"
@@ -46,14 +43,14 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             TimerVerifier.VerifyMarkupDifferences(results);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithParameters()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
+            var comp = ctx.Render<Comp.Timer>(parameters =>
                 parameters.Add(p => p.TimerDuration, 60)
                           .Add(p => p.WarningThreshold, 30)
                           .Add(p => p.AlertThreshold, 15)
@@ -86,24 +83,23 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             var results = comp.CompareTo(expectedHtml);
             TimerVerifier.VerifyMarkupDifferences(results);
 
-            mst.Assert.AreEqual(60, comp.Instance.TimerDuration);
-            mst.Assert.AreEqual(30, comp.Instance.WarningThreshold);
-            mst.Assert.AreEqual(15, comp.Instance.AlertThreshold);
-            mst.Assert.AreEqual("lightgreen", comp.Instance.ElapsedTimeColor);
-            mst.Assert.AreEqual("darkgray", comp.Instance.RemainingTimeColor);
-            mst.Assert.AreEqual("pink", comp.Instance.WarningTimeColor);
-            mst.Assert.AreEqual("purple", comp.Instance.AlertTimeColor);
+            Assert.AreEqual(60, comp.Instance.TimerDuration);
+            Assert.AreEqual(30, comp.Instance.WarningThreshold);
+            Assert.AreEqual(15, comp.Instance.AlertThreshold);
+            Assert.AreEqual("lightgreen", comp.Instance.ElapsedTimeColor);
+            Assert.AreEqual("darkgray", comp.Instance.RemainingTimeColor);
+            Assert.AreEqual("pink", comp.Instance.WarningTimeColor);
+            Assert.AreEqual("purple", comp.Instance.AlertTimeColor);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithWarningColor()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
-                parameters.Add(p => p.WarningThreshold, 30));
+            var comp = ctx.Render<Comp.Timer>(parameters => parameters.Add(p => p.WarningThreshold, 30));
 
             // assert
             var expectedHtml = @$"
@@ -130,14 +126,14 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             TimerVerifier.VerifyMarkupDifferences(results);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithExpirationMessage()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
+            var comp = ctx.Render<Comp.Timer>(parameters =>
                 parameters.Add(p => p.TimerDuration, 0)
                           .Add(p => p.ExpirationMessage, "Test!"));
 
@@ -166,15 +162,14 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             TimerVerifier.VerifyMarkupDifferences(results);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSizeLarge()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
-                parameters.Add(p => p.Size, Size.Large));
+            var comp = ctx.Render<Comp.Timer>(parameters => parameters.Add(p => p.Size, Size.Large));
 
             // assert
             var expectedHtml = @$"
@@ -201,15 +196,14 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             TimerVerifier.VerifyMarkupDifferences(results);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSizeSmall()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
-                parameters.Add(p => p.Size, Size.Small));
+            var comp = ctx.Render<Comp.Timer>(parameters => parameters.Add(p => p.Size, Size.Small));
 
             // assert
             var expectedHtml = @$"
@@ -236,73 +230,69 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             TimerVerifier.VerifyMarkupDifferences(results);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void OnTimerChanged()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>();
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>();
 
             // act
             comp.Instance.OnTimerChanged(true);
 
             // assert
-            mst.Assert.AreEqual(29, comp.Instance.TimeRemaining);
+            Assert.AreEqual(29, comp.Instance.TimeRemaining);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void ResetTimer()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>();
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>();
 
             // act
             comp.Instance.ResetTimer();
 
             // assert
-            mst.Assert.AreEqual(30, comp.Instance.TimeRemaining);
+            Assert.AreEqual(30, comp.Instance.TimeRemaining);
         }
 
-        [mst.TestMethod]
-        [ExcludeFromCodeCoverage]
-        [mst.ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
         [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
         public void SetOutOfRangeDuration()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>();
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>();
 
-            // act
-            comp.Instance.TimerDuration = -3;
-
-            // assert
+            // act - assert
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () =>
+                comp.Instance.TimerDuration = -3);
         }
 
-        [mst.TestMethod]
-        [ExcludeFromCodeCoverage]
-        [mst.ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
         [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "testing parameter exception.")]
         public void SetOutOfRangeWarning()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>();
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>();
 
-            // act
-            comp.Instance.TimerDuration = 1111000;
+            // act -assert
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () =>
+                comp.Instance.TimerDuration = 1111000);
 
             // assert
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void OnTimerChanged_ToZero()
         {
             // arrange
             var eventCalled = false;
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>(parameters =>
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>(parameters =>
                 parameters.Add(p => p.TimerDuration, 1)
                           .Add(p => p.TimerExpired, () => { eventCalled = true; }));
 
@@ -310,36 +300,36 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.Instance.OnTimerChanged(true);
 
             // assert
-            mst.Assert.AreEqual(0, comp.Instance.TimeRemaining);
-            mst.Assert.IsTrue(eventCalled);
+            Assert.AreEqual(0, comp.Instance.TimeRemaining);
+            Assert.IsTrue(eventCalled);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Dispose()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<c.Timer>();
+            var ctx = new BunitContext();
+            var comp = ctx.Render<Comp.Timer>();
 
             // act
             comp.Instance.Dispose();
 
             // assert
-            mst.Assert.IsTrue(comp.Instance.IsDisposed);
+            Assert.IsTrue(comp.Instance.IsDisposed);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Dispose_WithNullTimer()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = new c.Timer();
+            var ctx = new BunitContext();
+            var comp = new Comp.Timer();
 
             // act
             comp.Dispose();
 
             // assert
-            mst.Assert.IsTrue(comp.IsDisposed);
+            Assert.IsTrue(comp.IsDisposed);
         }
     }
 }

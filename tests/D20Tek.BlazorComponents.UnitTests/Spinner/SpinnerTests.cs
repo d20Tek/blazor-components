@@ -1,51 +1,47 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
+﻿using Bunit;
 using System.Collections.Generic;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests
 {
-    [mst.TestClass]
+    [TestClass]
     public class SpinnerTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void DefaultRender()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>();
+            var comp = ctx.Render<Spinner>();
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_IsVisibleFalse()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.IsVisible, false));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.IsVisible, false));
 
             // assert
             comp.MarkupMatches(string.Empty);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithInnerDivs()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Label, "Test label")
                 .Add(p => p.Type, SpinType.SpinIOS));
 
@@ -61,11 +57,11 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithAttributeSplat()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var attr = new Dictionary<string, object>
             {
                 { "style", "color: red; height: 120px; width 120 px" },
@@ -73,41 +69,39 @@ namespace D20Tek.BlazorComponents.UnitTests
             };
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.RemainingAttributes, attr));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.RemainingAttributes, attr));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner"" style=""color: red; height: 120px; width 120 px"" disabled=""""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithAdditionalCssClasses()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var attr = new Dictionary<string, object>
             {
                 { "class", "test-component text-white" }
             };
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.RemainingAttributes, attr));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.RemainingAttributes, attr));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner test-component text-white""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_Colors()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Color, "green")
                 .Add(p => p.SecondaryColor, "yellow"));
 
@@ -116,30 +110,28 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_NonDefaultSize()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Size, Size.Large));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Size, Size.Large));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner"" style=""--spinner-width: 8rem; --spinner-height: 8rem;""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_NoneSize()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Size, Size.None));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Size, Size.None));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner""></div>";

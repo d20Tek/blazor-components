@@ -1,7 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using D20Tek.BlazorComponents.Utilities;
+﻿using D20Tek.BlazorComponents.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -51,17 +48,13 @@ namespace D20Tek.BlazorComponents.Core.UnitTests.Utilities
         }
 
         [TestMethod]
-        [ExcludeFromCodeCoverage]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ThrowWhenEmpty_WithEmptyText()
         {
             // arrange
             string text = "";
 
-            // act
-            text.ThrowWhenEmpty("param");
-
-            // assert
+            // act - assert
+            Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () => text.ThrowWhenEmpty("param"));
         }
     }
 }

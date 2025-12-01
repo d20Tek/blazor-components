@@ -1,7 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
@@ -13,10 +10,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void DefaultRender()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>();
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>();
 
             // assert
             var expectedHtml =
@@ -33,10 +30,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void Render_IsVisibleFalse()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>(
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>(
                 parameters => parameters.Add(p => p.IsVisible, false));
 
             // assert
@@ -47,10 +44,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void Render_CheckedFalse()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>(
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>(
                 parameters => parameters.Add(p => p.Checked, false)
                                         .Add(p => p.Label, "Test"));
 
@@ -69,10 +66,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void Render_BackgroundColor()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>(
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>(
                 parameters => parameters.Add(p => p.ToggleColor, "darkgreen")
                                         .Add(p => p.Label, "Dark Green"));
 
@@ -92,10 +89,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void Render_NonDefaultSize()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>(
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>(
                 parameters => parameters.Add(p => p.Size, Size.Large)
                                         .Add(p => p.Label, "Large Test"));
 
@@ -114,10 +111,10 @@ namespace D20Tek.BlazorComponents.UnitTests.ToggleSwitch
         public void CheckChanged()
         {
             // arrange
-            var ctx = new Bunit.TestContext();
+            var ctx = new BunitContext();
             bool isChecked = true;
 
-            var comp = ctx.RenderComponent<D20Tek.BlazorComponents.ToggleSwitch>(
+            var comp = ctx.Render<D20Tek.BlazorComponents.ToggleSwitch>(
                 parameters => parameters.Add(p => p.CheckedChanged, (arg) => { isChecked = arg; })
                                         .Add(p => p.Label, "Change Test"));
 

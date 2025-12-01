@@ -1,7 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -90,16 +87,13 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        [ExcludeFromCodeCoverage]
         public void FormatTimeSpanRemaining_WithEmptyExpirationMessage()
         {
             // arrange
 
-            // act
-            _ = TimeDisplayFormatter.FormatTimeSpanRemaining(TimeSpan.Zero, "");
-
-            // assert
+            // act - assert
+            Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () =>
+                _ = TimeDisplayFormatter.FormatTimeSpanRemaining(TimeSpan.Zero, ""));
         }
 
         [TestMethod]
@@ -127,16 +121,13 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        [ExcludeFromCodeCoverage]
         public void FormatTimeRemaining_WithEmptyExpirationMessage()
         {
             // arrange
 
-            // act
-            _ = TimeDisplayFormatter.FormatTimeRemaining(42, "");
-
-            // assert
+            // act - assert
+            Assert.ThrowsExactly<ArgumentNullException> ([ExcludeFromCodeCoverage] () =>
+                _ = TimeDisplayFormatter.FormatTimeRemaining(42, ""));
         }
 
         [TestMethod]

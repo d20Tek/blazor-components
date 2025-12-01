@@ -1,52 +1,46 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
-using System.Collections.Generic;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests
 {
-    [mst.TestClass]
+    [TestClass]
     public class ContentSpinnerTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void DefaultRender()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<ContentSpinner>();
+            var comp = ctx.Render<ContentSpinner>();
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""content-spinner""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_IsVisibleFalse()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<ContentSpinner>(parameters => parameters
-                .Add(p => p.IsVisible, false));
+            var comp = ctx.Render<ContentSpinner>(parameters => parameters.Add(p => p.IsVisible, false));
 
             // assert
             comp.MarkupMatches(string.Empty);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithChildContent()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<ContentSpinner>(parameters => parameters
-                .AddChildContent("Test message..."));
+            var comp = ctx.Render<ContentSpinner>(parameters => parameters.AddChildContent("Test message..."));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""content-spinner"">Test message...</div>";
@@ -54,14 +48,14 @@ namespace D20Tek.BlazorComponents.UnitTests
         }
 
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithImageChildContent()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<ContentSpinner>(parameters => parameters
+            var comp = ctx.Render<ContentSpinner>(parameters => parameters
                 .AddChildContent(@"<img alt=""test image"" src=""./test/image.png"" />"));
 
             // assert
@@ -72,14 +66,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSize()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<ContentSpinner>(parameters => parameters
+            var comp = ctx.Render<ContentSpinner>(parameters => parameters
                 .Add(p => p.Size, Size.Medium)
                 .AddChildContent("Test message..."));
 

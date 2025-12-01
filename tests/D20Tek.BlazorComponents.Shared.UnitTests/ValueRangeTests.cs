@@ -176,17 +176,13 @@ namespace D20Tek.BlazorComponents.Core.UnitTests
         }
 
         [TestMethod]
-        [ExcludeFromCodeCoverage]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void AssertInRange_NotInRange()
         {
             // arrange
             var range = new ValueRange(5, 10);
 
-            // act
-            range.AssertInRange(0);
-
-            // assert
+            // act - assert
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () => range.AssertInRange(0));
         }
 
         [TestMethod]
@@ -291,14 +287,12 @@ namespace D20Tek.BlazorComponents.Core.UnitTests
         }
 
         [TestMethod]
-        [ExcludeFromCodeCoverage]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Create_LargerMinimum()
         {
             // arrange
 
-            // act
-            _ = new ValueRange(10, 9);
+            // act - assert
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>([ExcludeFromCodeCoverage] () =>  _ = new ValueRange(10, 9));
         }
 
         [TestMethod]

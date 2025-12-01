@@ -1,8 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-
-using D20Tek.BlazorComponents.Utilities;
+﻿using D20Tek.BlazorComponents.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -151,40 +147,32 @@ namespace D20Tek.BlazorComponents.Shared.UnitTests.Utilities
             var builder = new StyleBuilder();
 
             // act
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            builder.AddStyleFromAttributes(null);
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+            builder.AddStyleFromAttributes(null!);
 
             // assert
             Assert.IsNull(builder.Build());
         }
 
         [TestMethod]
-        [ExcludeFromCodeCoverage]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddClass_WithNullProperty()
         {
             // arrange
             var builder = new StyleBuilder("foo", "bar");
 
             // act - assert
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            builder.AddStyle(null, "value");
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+            Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () =>
+                builder.AddStyle(null!, "value"));
         }
 
         [TestMethod]
-        [ExcludeFromCodeCoverage]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddClass_WithNullValue()
         {
             // arrange
             var builder = new StyleBuilder("foo", "bar");
 
             // act - assert
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            builder.AddStyle("property", null);
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+            Assert.ThrowsExactly<ArgumentNullException>([ExcludeFromCodeCoverage] () =>
+                builder.AddStyle("property", null!));
         }
     }
 }

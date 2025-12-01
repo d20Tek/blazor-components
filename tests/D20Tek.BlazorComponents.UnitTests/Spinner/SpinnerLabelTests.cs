@@ -1,24 +1,19 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
-using System.Collections.Generic;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests
 {
-    [mst.TestClass]
+    [TestClass]
     public class SpinnerLabelTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabel()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Label, "Test label"));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Label, "Test label"));
 
             // assert
             var expectedHtml =
@@ -31,14 +26,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabelPlacement_Top()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Label, "Test label")
                 .Add(p => p.LabelPlacement, Placement.Top));
 
@@ -53,14 +48,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabelPlacement_Bottom()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Label, "Test label")
                 .Add(p => p.LabelPlacement, Placement.Bottom));
 
@@ -75,14 +70,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabelPlacement_Left()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Label, "Test label")
                 .Add(p => p.LabelPlacement, Placement.Left));
 
@@ -97,14 +92,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabelPlacement_Right()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
+            var comp = ctx.Render<Spinner>(parameters => parameters
                 .Add(p => p.Label, "Test label")
                 .Add(p => p.LabelPlacement, Placement.Right));
 

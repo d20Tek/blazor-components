@@ -1,7 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using AngleSharp.Diffing.Core;
+﻿using AngleSharp.Diffing.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,7 +11,7 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
         [ExcludeFromCodeCoverage]
         internal static void VerifyMarkupDifferences(IReadOnlyList<IDiff> results)
         {
-            Assert.IsTrue(results.Count <= 1);
+            Assert.IsLessThanOrEqualTo(1, results.Count);
             if (results.Any())
             {
                 var source = (AttrDiff)results[0];

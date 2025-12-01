@@ -1,84 +1,75 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
-using System.Collections.Generic;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests
 {
-    [mst.TestClass]
+    [TestClass]
     public class SpinnerTypeTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_PulseType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Pulse));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Pulse));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner-pulse""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_SquareType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Square));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Square));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner-square""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_DualRingType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.DualRing));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.DualRing));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner-dualring""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_HourglassType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Hourglass));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Hourglass));
 
             // assert
             var expectedHtml = @"<div role=""status"" class=""spinner-hourglass""></div>";
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_IosSpinnerType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.SpinIOS));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.SpinIOS));
 
             // assert
             var expectedHtml = @"
@@ -89,15 +80,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_RippleType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Ripple));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Ripple));
 
             // assert
             var expectedHtml = @"
@@ -107,15 +97,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_RollerType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Roller));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Roller));
 
             // assert
             var expectedHtml = @"
@@ -126,15 +115,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_CircleType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Circle));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Circle));
 
             // assert
             var expectedHtml = @"
@@ -145,15 +133,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_BlocksType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Blocks));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Blocks));
 
             // assert
             var expectedHtml = @"
@@ -163,15 +150,14 @@ namespace D20Tek.BlazorComponents.UnitTests
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_EllipsisType()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<Spinner>(parameters => parameters
-                .Add(p => p.Type, SpinType.Ellipsis));
+            var comp = ctx.Render<Spinner>(parameters => parameters.Add(p => p.Type, SpinType.Ellipsis));
 
             // assert
             var expectedHtml = @"

@@ -1,25 +1,21 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Bunit;
+﻿using Bunit;
 using System;
-using System.Diagnostics.CodeAnalysis;
-using mst = Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace D20Tek.BlazorComponents.UnitTests.Timer
 {
-    [mst.TestClass]
+    [TestClass]
 
     public class CountdownTimerTests
     {
-        [mst.TestMethod]
+        [TestMethod]
         public void DefaultRender()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>();
+            var comp = ctx.Render<CountdownTimer>();
 
             // assert
             var expectedHtml = @$"
@@ -31,15 +27,15 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithCountdownTarget()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var time = DateTimeOffset.Now.AddHours(1);
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+            var comp = ctx.Render<CountdownTimer>(parameters =>
                 parameters.Add(p => p.CountdownTarget, time)
                           .Add(p => p.ExpirationMessage, "Test Expired"));
 
@@ -51,20 +47,19 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
 ";
 
             comp.MarkupMatches(expectedHtml);
-            mst.Assert.AreEqual(time, comp.Instance.CountdownTarget);
-            mst.Assert.AreEqual("Test Expired", comp.Instance.ExpirationMessage);
+            Assert.AreEqual(time, comp.Instance.CountdownTarget);
+            Assert.AreEqual("Test Expired", comp.Instance.ExpirationMessage);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithLabelText()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var time = DateTimeOffset.Now.AddHours(1);
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
-                parameters.Add(p => p.LabelText, "My timer:"));
+            var comp = ctx.Render<CountdownTimer>(parameters => parameters.Add(p => p.LabelText, "My timer:"));
 
             // assert
             var expectedHtml = @$"
@@ -77,16 +72,15 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSizeSmall()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var time = DateTimeOffset.Now.AddHours(1);
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
-                parameters.Add(p => p.Size, Size.Small));
+            var comp = ctx.Render<CountdownTimer>(parameters => parameters.Add(p => p.Size, Size.Small));
 
             // assert
             var expectedHtml = @$"
@@ -98,16 +92,15 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSizeMedium()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var time = DateTimeOffset.Now.AddHours(1);
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
-                parameters.Add(p => p.Size, Size.Medium));
+            var comp = ctx.Render<CountdownTimer>(parameters => parameters.Add(p => p.Size, Size.Medium));
 
             // assert
             var expectedHtml = @$"
@@ -119,16 +112,15 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void Render_WithSizeLarge()
         {
             // arrange
-            var ctx = new TestContext();
+            var ctx = new BunitContext();
             var time = DateTimeOffset.Now.AddHours(1);
 
             // act
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
-                parameters.Add(p => p.Size, Size.Large));
+            var comp = ctx.Render<CountdownTimer>(parameters => parameters.Add(p => p.Size, Size.Large));
 
             // assert
             var expectedHtml = @$"
@@ -140,19 +132,19 @@ namespace D20Tek.BlazorComponents.UnitTests.Timer
             comp.MarkupMatches(expectedHtml);
         }
 
-        [mst.TestMethod]
+        [TestMethod]
         public void OnTimerChanged()
         {
             // arrange
-            var ctx = new TestContext();
-            var comp = ctx.RenderComponent<CountdownTimer>(parameters =>
+            var ctx = new BunitContext();
+            var comp = ctx.Render<CountdownTimer>(parameters =>
                 parameters.Add(p => p.CountdownTarget, DateTimeOffset.Now.AddSeconds(10)));
 
             // act
             comp.Instance.OnTimerChanged(true);
 
             // assert
-            mst.Assert.AreEqual("0:00:09", comp.Instance.TimerDisplay);
+            Assert.AreEqual("0:00:09", comp.Instance.TimerDisplay);
         }
     }
 }
