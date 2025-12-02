@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                     <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
-                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@ToggleLabel" /></td>
                 </tr>
             </tbody>
         </table>
@@ -137,54 +137,3 @@
 <Timer Size=Size.Large />
 <Timer Size=Size.ExtraLarge />
 <hr />
-
-@code {
-    Timer? _ref;
-    int _interactiveDuration = 30;
-    string _interactiveExpirationMessage = "Done!";
-    int _interactiveWarningThreshold = 15;
-    int _interactiveAlertThreshold = 8;
-    string _interactiveRemainingColor = "green";
-    string _interactiveWarningColor = "orange";
-    string _interactiveAlertColor = "red";
-    string _interactiveElapsedColor = "gray";
-    Size _interactiveSize = Size.Medium;
-    bool _interactiveVisibility = true;
-    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
-
-    bool _timerVisible = true;
-
-    private void ToggleTimerVisibility()
-    {
-        this._timerVisible = !this._timerVisible;
-    }
-
-    private void OnDurationChanged(ChangeEventArgs args)
-    {
-        string change = args.Value?.ToString() ?? "none";
-        switch (change)
-        {
-            case "10s":
-                ResetTimerIfNeeded(10);
-                break;
-            case "30s":
-                ResetTimerIfNeeded(30);
-                break;
-            case "1m":
-                ResetTimerIfNeeded(60);
-                break;
-            case "2m":
-                ResetTimerIfNeeded(120);
-                break;
-            case "5m":
-                ResetTimerIfNeeded(300);
-                break;
-        }
-    }
-
-    private void ResetTimerIfNeeded(int newDuration)
-    {
-        _interactiveDuration = newDuration;
-        _ref?.ResetTimer();
-    }
-}

@@ -45,7 +45,7 @@ public abstract class TimerBase : BaseComponent, IDisposable
     {
         if (ProcessTimerChange() <= 0)
         {
-            _timer?.Change(Timeout.Infinite, Timeout.Infinite);
+            if (_timer is not null) _timer.Change(Timeout.Infinite, Timeout.Infinite);
             TimerExpired.InvokeAsync();
         }
 

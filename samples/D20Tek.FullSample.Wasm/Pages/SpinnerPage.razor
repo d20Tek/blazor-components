@@ -398,8 +398,5 @@
     bool _interactiveVisibility = true;
     string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
 
-    private void ToggleSpinnerVisibility()
-    {
-        this._spinnerVisible = !this._spinnerVisible;
-    }
+    private void ToggleSpinnerVisibility() => _spinnerVisible = !_spinnerVisible;
 }

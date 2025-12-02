@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
-                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@ToggleLabel" /></td>
                 </tr>
             </tbody>
         </table>
@@ -108,57 +108,3 @@
 <CountdownTimer Size=Size.Large LabelText="Font-size (large):" />
 <CountdownTimer Size=Size.ExtraLarge LabelText="Font-size (extra-large):" />
 <hr />
-
-@code {
-    CountdownTimer? _ref;
-    DateTimeOffset _interactiveCountdownTarget = DateTimeOffset.Now.AddHours(1);
-    string _interactiveExpirationMessage = "Done!";
-    string _interactiveLabelText = "Label text:";
-    Size _interactiveSize = Size.Medium;
-    bool _interactiveVisibility = true;
-    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
-    bool _interativeTimerNeedsReset = false;
-
-    bool _timerVisible = true;
-    DateTimeOffset _birthdate = new DateTimeOffset(2022, 5, 3, 8, 0, 0, new TimeSpan(-8, 0, 0));
-
-    private void ToggleTimerVisibility()
-    {
-        this._timerVisible = !this._timerVisible;
-    }
-
-    private void OnTimerExpired() => _interativeTimerNeedsReset = true;
-
-    private void OnTargetChanged(ChangeEventArgs args)
-    {
-        string change = args.Value?.ToString() ?? "none";
-        switch (change)
-        {
-            case "10s":
-                ResetTimerIfNeeded(DateTimeOffset.Now.AddSeconds(10));
-                break;
-            case "1m":
-                ResetTimerIfNeeded(DateTimeOffset.Now.AddMinutes(1));
-                break;
-            case "5m":
-                ResetTimerIfNeeded(DateTimeOffset.Now.AddMinutes(5));
-                break;
-            case "1hr":
-                ResetTimerIfNeeded(DateTimeOffset.Now.AddHours(1));
-                break;
-            case "1d":
-                ResetTimerIfNeeded(DateTimeOffset.Now.AddDays(1));
-                break;
-        }
-    }
-
-    private void ResetTimerIfNeeded(DateTimeOffset newTarget)
-    {
-        _interactiveCountdownTarget = newTarget;
-        if (_interativeTimerNeedsReset)
-        {
-            _ref?.ResetTimer();
-            _interativeTimerNeedsReset = false;
-        }
-    }
-}

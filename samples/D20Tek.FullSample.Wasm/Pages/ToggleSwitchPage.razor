@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
-                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@ToggleLabel" /></td>
                 </tr>
             </tbody>
         </table>
@@ -94,25 +94,3 @@
 <ToggleSwitch CheckedChanged=@ToggleCheckChanged Label="Trigger Event" />
 <p>@_displayMessage</p>
 <hr />
-
-@code {
-    ToggleSwitch? _ref;
-    string _interactiveLabelText = "Label";
-    string _interactiveColor = string.Empty;
-    Size _interactiveSize = Size.Medium;
-    bool _interactiveVisibility = true;
-    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
-
-    bool _toggleVisible = true;
-    string _displayMessage = string.Empty;
-
-    private void ToggleSwitchVisibility()
-    {
-        _toggleVisible = !_toggleVisible;
-    }
-
-    private void ToggleCheckChanged(bool newValue)
-    {
-        _displayMessage = $"ToggleSwitch check changed: {newValue}";
-    }
-}

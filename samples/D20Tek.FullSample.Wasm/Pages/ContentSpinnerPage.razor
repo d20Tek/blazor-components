@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
-                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@_toggleLabel" /></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_interactiveVisibility Label="@ToggleLabel" /></td>
                 </tr>
             </tbody>
         </table>
@@ -126,14 +126,12 @@
 <hr />
 
 @code {
-    bool _spinnerVisible = true;
-    string _interactiveContent = "text...";
-    Size _interactiveSize = Size.Medium;
-    bool _interactiveVisibility = true;
-    string _toggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
+    private bool _spinnerVisible = true;
+    private string _interactiveContent = "text...";
+    private Size _interactiveSize = Size.Medium;
+    private bool _interactiveVisibility = true;
+    
+    private string ToggleLabel => _interactiveVisibility ? "(visible)" : "(hidden)";
 
-    private void ToggleSpinnerVisibility()
-    {
-        this._spinnerVisible = !this._spinnerVisible;
-    }
+    private void ToggleSpinnerVisibility() => _spinnerVisible = !_spinnerVisible;
 }
