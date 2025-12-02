@@ -1,8 +1,4 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-
-namespace D20Tek.BlazorComponents
+﻿namespace D20Tek.BlazorComponents
 {
     internal static class SpinnerConstants
     {

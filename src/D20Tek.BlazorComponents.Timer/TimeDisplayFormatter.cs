@@ -1,66 +1,39 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using D20Tek.BlazorComponents.Utilities;
+﻿namespace D20Tek.BlazorComponents;
 
-namespace D20Tek.BlazorComponents
+internal static class TimeDisplayFormatter
 {
-    internal static class TimeDisplayFormatter
+    private const int _secondsPerMin = 60;
+    private const int _secondsPerHour = _secondsPerMin * 60;
+
+    public static string FormatTimeRemaining(int time, string expirationMessage)
     {
-        private const int _secondsPerMin = 60;
-        private const int _secondsPerHour = _secondsPerMin * 60;
+        expirationMessage.ThrowWhenEmpty(nameof(expirationMessage));
 
-        public static string FormatTimeRemaining(int time, string expirationMessage)
-        {
-            expirationMessage.ThrowWhenEmpty(nameof(expirationMessage));
+        if (time <= 0) return expirationMessage;
 
-            if (time <= 0)
-            {
-                return expirationMessage;
-            }
+        int hours = (int)Math.Floor((decimal)time / _secondsPerHour);
+        int remainingTime = time % _secondsPerHour;
+        int minutes = (int)Math.Floor((decimal)remainingTime / _secondsPerMin);
+        int seconds = remainingTime % _secondsPerMin;
 
-            int hours = (int)Math.Floor((decimal)time / _secondsPerHour);
-            int remainingTime = time % _secondsPerHour;
-            int minutes = (int)Math.Floor((decimal)remainingTime / _secondsPerMin);
-            int seconds = remainingTime % _secondsPerMin;
+        return FormatTimeRemaining(hours, minutes, seconds);
+    }
 
-            return FormatTimeRemaining(hours, minutes, seconds);
-        }
+    public static string FormatTimeRemaining(int hours, int minutes, int seconds) =>
+        (hours > 0)
+            ? $"{hours}:{minutes:D2}:{seconds:D2}"     // The output in HH:MM:SS format
+            : $"{minutes}:{seconds:D2}";               // The output in MM:SS format
 
-        public static string FormatTimeRemaining(int hours, int minutes, int seconds)
-        {
-            if (hours > 0)
-            {
-                // The output in HH:MM:SS format
-                return $"{hours}:{minutes:D2}:{seconds:D2}";
-            }
+    public static string FormatTimeRemaining(int days, int hours, int minutes, int seconds) =>
+        (days > 0)
+            ? $"{days}D {hours}:{minutes:D2}:{seconds:D2}"      // The output in HH:MM:SS format
+            : $"{hours}:{minutes:D2}:{seconds:D2}";            // The output in HH:MM:SS format
 
-            // The output in MM:SS format
-            return $"{minutes}:{seconds:D2}";
-        }
-
-        public static string FormatTimeRemaining(int days, int hours, int minutes, int seconds)
-        {
-            if (days > 0)
-            {
-                // The output in HH:MM:SS format
-                return $"{days}D {hours}:{minutes:D2}:{seconds:D2}";
-            }
-
-            // The output in HH:MM:SS format
-            return $"{hours}:{minutes:D2}:{seconds:D2}";
-        }
-
-        public static string FormatTimeSpanRemaining(TimeSpan time, string expirationMessage)
-        {
-            expirationMessage.ThrowWhenEmpty(nameof(expirationMessage));
-
-            if (Math.Floor(time.TotalSeconds) <= 0)
-            {
-                return expirationMessage;
-            }
-
-            return FormatTimeRemaining(time.Days, time.Hours, time.Minutes, time.Seconds);
-        }
+    public static string FormatTimeSpanRemaining(TimeSpan time, string expirationMessage)
+    {
+        expirationMessage.ThrowWhenEmpty(nameof(expirationMessage));
+        return (Math.Floor(time.TotalSeconds) <= 0)
+            ? expirationMessage
+            : FormatTimeRemaining(time.Days, time.Hours, time.Minutes, time.Seconds);
     }
 }

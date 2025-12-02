@@ -1,93 +1,75 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Microsoft.AspNetCore.Components;
-using sys = System.Threading;
+﻿using Sys = System.Threading;
 
-namespace D20Tek.BlazorComponents
+namespace D20Tek.BlazorComponents;
+
+public abstract class TimerBase : BaseComponent, IDisposable
 {
-    public abstract class TimerBase : BaseComponent, IDisposable
+    private const int _millisecondsPerSec = 1000;
+
+    private Sys.Timer? _timer;
+
+    [Parameter]
+    public EventCallback TimerExpired { get; set; }
+
+    [Parameter]
+    public string ExpirationMessage { get; set; } = "Time's up!";
+
+    public int TimeRemaining { get; protected set; } = 0;
+
+    public bool IsDisposed { get; private set; }
+
+    public TimerBase() => Size = Size.Medium;
+
+    protected override void OnInitialized()
     {
-        private const int _millisecondsPerSec = 1000;
+        base.OnInitialized();
 
-        private sys.Timer? _timer;
+        ResetTimer();
+        InitializeTime();
+        _timer = new Sys.Timer(OnTimerChanged, null, _millisecondsPerSec, _millisecondsPerSec);
+    }
 
-        [Parameter]
-        public EventCallback TimerExpired { get; set; }
+    public void ResetTimer()
+    {
+        InitializeTime();
+        InvokeAsync(StateHasChanged);
 
-        [Parameter]
-        public string ExpirationMessage { get; set; } = "Time's up!";
+        _timer?.Change(_millisecondsPerSec, _millisecondsPerSec);
+    }
 
-        public int TimeRemaining { get; protected set; } = 0;
+    protected virtual void InitializeTime() { }
 
-        public bool IsDisposed { get; private set; }
+    protected abstract int ProcessTimerChange();
 
-        public TimerBase()
+    internal void OnTimerChanged(object? state)
+    {
+        if (ProcessTimerChange() <= 0)
         {
-            this.Size = Size.Medium;
+            _timer?.Change(Timeout.Infinite, Timeout.Infinite);
+            TimerExpired.InvokeAsync();
         }
 
-        protected override void OnInitialized()
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!IsDisposed)
         {
-            base.OnInitialized();
-            this.ResetTimer();
-
-            this.InitializeTime();
-            this._timer = new sys.Timer(this.OnTimerChanged, null, _millisecondsPerSec, _millisecondsPerSec);
-        }
-
-        public void ResetTimer()
-        {
-            this.InitializeTime();
-
-            InvokeAsync(() => this.StateHasChanged());
-
-            if (this._timer != null)
+            if (disposing)
             {
-                this._timer.Change(_millisecondsPerSec, _millisecondsPerSec);
-            }
-        }
-
-        protected virtual void InitializeTime() { }
-
-        protected abstract int ProcessTimerChange();
-
-        internal void OnTimerChanged(object? state)
-        {
-            var difference = this.ProcessTimerChange();
-
-            if (difference <= 0)
-            {
-                if (this._timer != null)
-                {
-                    this._timer.Change(Timeout.Infinite, Timeout.Infinite);
-                }
-
-                this.TimerExpired.InvokeAsync();
+                _timer?.Dispose();
+                _timer = null;
             }
 
-            InvokeAsync(() => this.StateHasChanged());
+            IsDisposed = true;
         }
+    }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.IsDisposed)
-            {
-                if (disposing)
-                {
-                    this._timer?.Dispose();
-                    this._timer = null;
-                }
-
-                this.IsDisposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }

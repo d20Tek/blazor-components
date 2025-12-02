@@ -1,139 +1,86 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using D20Tek.BlazorComponents.Utilities;
-using Microsoft.AspNetCore.Components;
+﻿namespace D20Tek.BlazorComponents;
 
-namespace D20Tek.BlazorComponents
+public abstract class RadialTimer : TimerBase
 {
-    public abstract class RadialTimer : TimerBase
+    private const int _fullDashArray = 283;
+    private const string _cssTimerMain = "base-timer";
+    protected static readonly ValueRange _validTimeRange = new(0, 1000000);
+
+    private int _timeCounter = 0;
+    private int _warningThreshold = 15;
+    private int _alertThreshold = 8;
+
+    protected string TimerElapsedColorCss => $"stroke: {ElapsedTimeColor}";
+
+    protected string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(TimeRemaining)}";
+
+    protected string TimerPathDashArray => 
+        $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
+
+    public abstract int TimerDuration { get; set; }
+
+    public string TimerDurationDisplay => TimeDisplayFormatter.FormatTimeRemaining(TimeRemaining, ExpirationMessage);
+
+    [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "Needed")]
+    public int WarningThreshold
     {
-        private const int _fullDashArray = 283;
-        private const string _cssTimerMain = "base-timer";
-        protected static ValueRange _validTimeRange = new ValueRange(0, 1000000);
-
-        private int _timeCounter = 0;
-        private int _warningThreshold = 15;
-        private int _alertThreshold = 8;
-
-        protected string TimerElapsedColorCss => $"stroke: {this.ElapsedTimeColor}";
-
-        protected string TimerPathColorCss => $"stroke: {this.GetRemainingPathColor(this.TimeRemaining)}";
-
-        protected string TimerPathDashArray => $"{Math.Ceiling(this.CalculateTimeFraction() * _fullDashArray)} {_fullDashArray}";
-
-        public abstract int TimerDuration { get; set; }
-
-        public string TimerDurationDisplay
+        get => _warningThreshold;
+        set
         {
-            get
-            {
-                return TimeDisplayFormatter.FormatTimeRemaining(this.TimeRemaining, this.ExpirationMessage);
-            }
+            _validTimeRange.AssertInRange(value, nameof(WarningThreshold));
+            _warningThreshold = value;
         }
+    }
 
-        [Parameter]
-        public int WarningThreshold
+    [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "Needed")]
+    public int AlertThreshold
+    {
+        get => _alertThreshold;
+        set
         {
-            get => _warningThreshold;
-            set
-            {
-                _validTimeRange.AssertInRange(value, nameof(WarningThreshold));
-                this._warningThreshold = value;
-            }
+            _validTimeRange.AssertInRange(value, nameof(AlertThreshold));
+            _alertThreshold = value;
         }
+    }
 
-        [Parameter]
-        public int AlertThreshold
-        {
-            get => this._alertThreshold;
-            set
-            {
-                _validTimeRange.AssertInRange(value, nameof(AlertThreshold));
-                this._alertThreshold = value;
-            }
-        }
+    [Parameter]
+    public string RemainingTimeColor { get; set; } = "green";
 
-        [Parameter]
-        public string RemainingTimeColor { get; set; } = "green";
+    [Parameter]
+    public string WarningTimeColor { get; set; } = "orange";
 
-        [Parameter]
-        public string WarningTimeColor { get; set; } = "orange";
+    [Parameter]
+    public string AlertTimeColor { get; set; } = "red";
 
-        [Parameter]
-        public string AlertTimeColor { get; set; } = "red";
+    [Parameter]
+    public string ElapsedTimeColor { get; set; } = "gray";
 
-        [Parameter]
-        public string ElapsedTimeColor { get; set; } = "gray";
+    protected override void OnInitialized()
+    {
+        TimeRemaining = TimerDuration;
+        base.OnInitialized();
+    }
 
-        public RadialTimer()
-        {
-        }
+    protected override string? CalculateCssClasses() =>
+        new CssBuilder(_cssTimerMain).AddClass(TimerSizeMetadata.GetSizeCss(Size))
+                                     .AddClassFromAttributes(RemainingAttributes)
+                                     .Build();
 
-        protected override void OnInitialized()
-        {
-            this.TimeRemaining = TimerDuration;
-            base.OnInitialized();
-        }
+    protected override string? CalculateCssStyles() =>
+        new StyleBuilder().AddStyleFromAttributes(RemainingAttributes)
+                          .Build();
 
-        protected override string? CalculateCssClasses()
-        {
-            var result = new CssBuilder(_cssTimerMain)
-                             .AddClass(TimerSizeMetadata.GetSizeCss(this.Size))
-                             .AddClassFromAttributes(this.RemainingAttributes)
-                             .Build();
-            return result;
-        }
+    protected override void InitializeTime()
+    {
+        _timeCounter = 0;
+        TimeRemaining = TimerDuration;
+    }
 
-        protected override string? CalculateCssStyles()
-        {
-            var result = new StyleBuilder()
-                .AddStyleFromAttributes(this.RemainingAttributes)
-                .Build();
-
-            return result;
-        }
-
-        protected override void InitializeTime()
-        {
-            this._timeCounter = 0;
-            this.TimeRemaining = TimerDuration;
-        }
-
-        protected override int ProcessTimerChange()
-        {
-            this._timeCounter++;
-            this.TimeRemaining = this.TimerDuration - this._timeCounter;
-
-            if (this.TimeRemaining <= 0)
-
-            {
-                this._timeCounter = this.TimerDuration;
-                this.TimeRemaining = 0;
-            }
-
-            return this.TimeRemaining;
-        }
-
-        private double CalculateTimeFraction()
-        {
-            var rawFraction = this.TimeRemaining / (double)this.TimerDuration;
-            return rawFraction - (1 / (double)this.TimerDuration) * (1 - rawFraction);
-        }
-
-        private string GetRemainingPathColor(int timeLeft)
-        {
-            var result = this.RemainingTimeColor;
-            if (timeLeft <= this.AlertThreshold)
-            {
-                result = this.AlertTimeColor;
-            }
-            else if (timeLeft <= this.WarningThreshold)
-            {
-                result = this.WarningTimeColor;
-            }
-
-            return result;
-        }
+    protected override int ProcessTimerChange()
+    {
+        (_timeCounter, TimeRemaining) = this.UpdateTimerRemaining(_timeCounter);
+        return TimeRemaining;
     }
 }

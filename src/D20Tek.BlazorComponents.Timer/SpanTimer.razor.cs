@@ -1,34 +1,29 @@
-﻿//---------------------------------------------------------------------------------------------------------------------
-// Copyright (c) d20Tek. All rights reserved.
-//---------------------------------------------------------------------------------------------------------------------
-using Microsoft.AspNetCore.Components;
+﻿namespace D20Tek.BlazorComponents;
 
-namespace D20Tek.BlazorComponents
+public partial class SpanTimer : RadialTimer
 {
-    public partial class SpanTimer : RadialTimer
+    private int _timerDuration = 30;
+    private TimeSpan _timerDurationSpan = new(0, 0, 30);
+
+    public override int TimerDuration
     {
-        private int _timerDuration = 30;
-        private TimeSpan _timerDurationSpan = new TimeSpan(0, 0, 30);
-
-        public override int TimerDuration
+        get => _timerDuration;
+        set
         {
-            get => this._timerDuration;
-            set
-            {
-                _validTimeRange.AssertInRange(value, nameof(TimerDuration));
-                this._timerDuration = value;
-            }
+            _validTimeRange.AssertInRange(value, nameof(TimerDuration));
+            _timerDuration = value;
         }
+    }
 
-        [Parameter]
-        public TimeSpan TimerDurationSpan
+    [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "Needed")]
+    public TimeSpan TimerDurationSpan
+    {
+        get => _timerDurationSpan;
+        set
         {
-            get => _timerDurationSpan;
-            set
-            {
-                this.TimerDuration = (int)value.TotalSeconds;
-                this._timerDurationSpan = value;
-            }
+            TimerDuration = (int)value.TotalSeconds;
+            _timerDurationSpan = value;
         }
     }
 }
