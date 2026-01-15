@@ -1,5 +1,10 @@
 # Release Notes
 
+## Release v1.10.1
+* Updated library projects to support .net 9 & 10.
+* Upgraded all dependent packages to latest versions.
+* Updated build scripts to require .net 10.
+
 ## Release v1.9.4
 * Updated all dependent packages to latest versions.
 
