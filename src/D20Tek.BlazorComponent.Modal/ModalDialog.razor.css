@@ -5,13 +5,20 @@
     padding: 0;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     max-height: 90vh;
+    pointer-events: auto !important;
+}
+
+.modal-dialog[open] {
     display: flex;
     flex-direction: column;
 }
 
-.modal-dialog::backdrop {
+.modal-dialog * {
+    pointer-events: auto;
+}
+
+::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
 }
 
 /* Size Variations */

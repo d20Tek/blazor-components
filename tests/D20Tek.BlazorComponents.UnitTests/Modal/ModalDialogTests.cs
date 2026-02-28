@@ -14,7 +14,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -44,7 +44,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title"">Test Title</h2>
@@ -77,7 +77,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title"">Confirm</h2>
@@ -109,7 +109,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -153,7 +153,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -180,7 +180,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -207,7 +207,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -236,7 +236,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog id:regex=""modal-[a-f0-9]+"" class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>

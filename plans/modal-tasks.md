@@ -77,6 +77,11 @@ Create a Blazor component called `ModalDialog` using the native HTML `<dialog>` 
 11. Build and verify compilation
     - Run build to ensure no errors
 
+12. Add ModalDialogPage.razor to the D20Tek.FullSample.Wasm project to demonstrate usage
+    - Create a sample page that uses ModalDialog with various configurations
+    - Follow the examples of the other sample pages for consistency
+    - Add ModalDialogPage to the navigation menu and Index page in the sample app (in alpahbetical order)
+
 ## Files
 
 ### New Files to Create

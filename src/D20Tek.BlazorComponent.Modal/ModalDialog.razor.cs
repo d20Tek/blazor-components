@@ -3,7 +3,7 @@ namespace D20Tek.BlazorComponents;
 public partial class ModalDialog : BaseComponent, IAsyncDisposable
 {
     private const string _cssModalDialog = "modal-dialog";
-    private readonly string _dialogId = $"modal-{Guid.NewGuid():N}";
+    private ElementReference _dialogRef;
     private IJSObjectReference? _jsModule;
 
     public ModalDialog() => Size = Size.Medium;
@@ -54,41 +54,64 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
 
     public async Task ShowAsync()
     {
-        await EnsureJsModule();
+        await EnsureJsModuleAsync();
         if (_jsModule is not null)
         {
-            await _jsModule.InvokeVoidAsync("showModal", _dialogId);
+            await _jsModule.InvokeVoidAsync("showModal", _dialogRef);
             IsOpen = true;
+            await InvokeAsync(StateHasChanged);
         }
     }
 
     public async Task CloseAsync()
     {
-        await EnsureJsModule();
+        IsOpen = false;
+        await EnsureJsModuleAsync();
         if (_jsModule is not null)
         {
-            await _jsModule.InvokeVoidAsync("closeModal", _dialogId);
-            IsOpen = false;
+            await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
+            await InvokeAsync(StateHasChanged);
         }
     }
 
     private async Task HandleClose()
     {
-        await CloseAsync();
+        IsOpen = false;
+        try
+        {
+            await EnsureJsModuleAsync();
+            if (_jsModule is not null)
+            {
+                await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
+            }
+        }
+        catch { /* Dialog might already be closed */ }
         await OnClose.InvokeAsync();
     }
 
     private async Task HandleSubmit()
     {
-        await CloseAsync();
+        IsOpen = false;
+        try
+        {
+            await EnsureJsModuleAsync();
+            if (_jsModule is not null)
+            {
+                await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
+            }
+        }
+        catch { /* Dialog might already be closed */ }
         await OnSubmit.InvokeAsync();
     }
 
-    private async Task EnsureJsModule()
+    private async Task EnsureJsModuleAsync()
     {
-        _jsModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>(
-            "import",
-            "./_content/D20Tek.BlazorComponent.Modal/modalDialog.js");
+        if (_jsModule is null)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>(
+                "import",
+                "./_content/D20Tek.BlazorComponent.Modal/modalDialog.js");
+        }
     }
 
     public async ValueTask DisposeAsync()
@@ -98,7 +121,6 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
             await _jsModule.DisposeAsync();
             _jsModule = null;
         }
-
         GC.SuppressFinalize(this);
     }
 }

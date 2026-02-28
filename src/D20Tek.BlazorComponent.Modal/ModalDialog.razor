@@ -2,7 +2,7 @@
 
 @if (IsVisible)
 {
-<dialog @attributes="@RemainingAttributes" id="@_dialogId" class="@CssClass" style="@CssStyles" @oncancel="HandleClose">
+<dialog @ref="_dialogRef" @attributes="@RemainingAttributes" class="@CssClass" style="@CssStyles" @oncancel="HandleClose">
     <header class="modal-dialog__header">
         <div class="modal-dialog__header-content">
             <h2 class="modal-dialog__title">@Title</h2>
@@ -26,7 +26,7 @@
         <footer class="modal-dialog__footer">
             @if (ShowCancelButton)
             {
-            <button type="button" class="modal-dialog__btn modal-dialog__btn-cancel" @onclick="HandleClose">
+                <button type="button" class="modal-dialog__btn modal-dialog__btn-cancel" @onclick="HandleClose">
                     @CancelButtonText
                 </button>
             }
