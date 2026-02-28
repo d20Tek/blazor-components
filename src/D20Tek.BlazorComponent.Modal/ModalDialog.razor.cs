@@ -1,6 +1,4 @@
-using D20Tek.BlazorComponents;
-
-namespace D20Tek.BlazorComponent.Modal;
+namespace D20Tek.BlazorComponents;
 
 public partial class ModalDialog : BaseComponent, IAsyncDisposable
 {
