@@ -2,41 +2,41 @@
 
 @if (IsVisible)
 {
-    <dialog @attributes="@RemainingAttributes" id="@_dialogId" class="@CssClass" style="@CssStyles" @oncancel="HandleCancel">
-        <header class="modal-dialog__header">
-            <div class="modal-dialog__header-content">
-                <h2 class="modal-dialog__title">@Title</h2>
-                @if (!string.IsNullOrWhiteSpace(Summary))
-                {
-                    <p class="modal-dialog__summary">@Summary</p>
-                }
-            </div>
-            @if (ShowCloseButton)
+<dialog @attributes="@RemainingAttributes" id="@_dialogId" class="@CssClass" style="@CssStyles" @oncancel="HandleClose">
+    <header class="modal-dialog__header">
+        <div class="modal-dialog__header-content">
+            <h2 class="modal-dialog__title">@Title</h2>
+            @if (!string.IsNullOrWhiteSpace(Summary))
             {
-                <button type="button" class="modal-dialog__close-btn" @onclick="HandleClose" aria-label="Close">
-                    &times;
+                <p class="modal-dialog__summary">@Summary</p>
+            }
+        </div>
+        @if (ShowCloseButton)
+        {
+            <button type="button" class="modal-dialog__close-btn" @onclick="HandleClose" aria-label="Close">
+                &times;
+            </button>
+        }
+    </header>
+    <div class="modal-dialog__body">
+        @ChildContent
+    </div>
+    @if (ShowCancelButton || ShowSubmitButton)
+    {
+        <footer class="modal-dialog__footer">
+            @if (ShowCancelButton)
+            {
+            <button type="button" class="modal-dialog__btn modal-dialog__btn-cancel" @onclick="HandleClose">
+                    @CancelButtonText
                 </button>
             }
-        </header>
-        <div class="modal-dialog__body">
-            @ChildContent
-        </div>
-        @if (ShowCancelButton || ShowSubmitButton)
-        {
-            <footer class="modal-dialog__footer">
-                @if (ShowCancelButton)
-                {
-                    <button type="button" class="modal-dialog__btn modal-dialog__btn-cancel" @onclick="HandleCancel">
-                        @CancelButtonText
-                    </button>
-                }
-                @if (ShowSubmitButton)
-                {
-                    <button type="button" class="modal-dialog__btn modal-dialog__btn-submit" @onclick="HandleSubmit">
-                        @SubmitButtonText
-                    </button>
-                }
-            </footer>
-        }
-    </dialog>
+            @if (ShowSubmitButton)
+            {
+                <button type="button" class="modal-dialog__btn modal-dialog__btn-submit" @onclick="HandleSubmit">
+                    @SubmitButtonText
+                </button>
+            }
+        </footer>
+    }
+</dialog>
 }

@@ -6,39 +6,21 @@ namespace D20Tek.BlazorComponents.UnitTests.Modal;
 public class ModalDialogEventsTests
 {
     [TestMethod]
-    public async Task OnCancelCallback_FiresOnCancelButtonClick()
+    public async Task OnCloseCallback_FiresOnCancelButtonClick()
     {
         // arrange
         var ctx = new BunitContext();
         ctx.JSInterop.Mode = JSRuntimeMode.Loose;
-        var cancelFired = false;
+        var closeFired = false;
 
-        var comp = ctx.Render<ModalDialog>(parameters => parameters.Add(p => p.OnCancel, () => { cancelFired = true; }));
+        var comp = ctx.Render<ModalDialog>(parameters => parameters.Add(p => p.OnClose, () => { closeFired = true; }));
 
         // act
         var cancelButton = comp.Find(".modal-dialog__btn-cancel");
         await cancelButton.ClickAsync(new Microsoft.AspNetCore.Components.Web.MouseEventArgs());
 
         // assert
-        Assert.IsTrue(cancelFired);
-    }
-
-    [TestMethod]
-    public async Task OnSubmitCallback_FiresOnSubmitButtonClick()
-    {
-        // arrange
-        var ctx = new BunitContext();
-        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
-        var submitFired = false;
-
-        var comp = ctx.Render<ModalDialog>(parameters => parameters.Add(p => p.OnSubmit, () => { submitFired = true; }));
-
-        // act
-        var submitButton = comp.Find(".modal-dialog__btn-submit");
-        await submitButton.ClickAsync(new Microsoft.AspNetCore.Components.Web.MouseEventArgs());
-
-        // assert
-        Assert.IsTrue(submitFired);
+        Assert.IsTrue(closeFired);
     }
 
     [TestMethod]
@@ -57,6 +39,24 @@ public class ModalDialogEventsTests
 
         // assert
         Assert.IsTrue(closeFired);
+    }
+
+    [TestMethod]
+    public async Task OnSubmitCallback_FiresOnSubmitButtonClick()
+    {
+        // arrange
+        var ctx = new BunitContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
+        var submitFired = false;
+
+        var comp = ctx.Render<ModalDialog>(parameters => parameters.Add(p => p.OnSubmit, () => { submitFired = true; }));
+
+        // act
+        var submitButton = comp.Find(".modal-dialog__btn-submit");
+        await submitButton.ClickAsync(new Microsoft.AspNetCore.Components.Web.MouseEventArgs());
+
+        // assert
+        Assert.IsTrue(submitFired);
     }
 
     [TestMethod]

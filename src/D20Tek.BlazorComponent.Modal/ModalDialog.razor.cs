@@ -36,9 +36,6 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
     public bool ShowCancelButton { get; set; } = true;
 
     [Parameter]
-    public EventCallback OnCancel { get; set; }
-
-    [Parameter]
     public EventCallback OnClose { get; set; }
 
     [Parameter]
@@ -47,15 +44,13 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
     public bool IsOpen { get; private set; }
 
     protected override string? CalculateCssClasses() =>
-        new CssBuilder(_cssModalDialog)
-            .AddClass(ModalDialogSizeMetadata.GetSizeCss(Size), Size != Size.None)
-            .AddClassFromAttributes(RemainingAttributes)
-            .Build();
+        new CssBuilder(_cssModalDialog).AddClass(ModalDialogSizeMetadata.GetSizeCss(Size), Size != Size.None)
+                                       .AddClassFromAttributes(RemainingAttributes)
+                                       .Build();
 
     protected override string? CalculateCssStyles() =>
-        new StyleBuilder()
-            .AddStyleFromAttributes(RemainingAttributes)
-            .Build();
+        new StyleBuilder().AddStyleFromAttributes(RemainingAttributes)
+                          .Build();
 
     public async Task ShowAsync()
     {
@@ -75,12 +70,6 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
             await _jsModule.InvokeVoidAsync("closeModal", _dialogId);
             IsOpen = false;
         }
-    }
-
-    private async Task HandleCancel()
-    {
-        await CloseAsync();
-        await OnCancel.InvokeAsync();
     }
 
     private async Task HandleClose()
