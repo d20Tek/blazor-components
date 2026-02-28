@@ -1,0 +1,157 @@
+/* Modal Dialog Base Styles */
+.modal-dialog {
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Size Variations */
+.modal-dialog-xs {
+    width: 280px;
+    max-width: 90vw;
+}
+
+.modal-dialog-sm {
+    width: 400px;
+    max-width: 90vw;
+}
+
+.modal-dialog-md {
+    width: 560px;
+    max-width: 90vw;
+}
+
+.modal-dialog-lg {
+    width: 720px;
+    max-width: 90vw;
+}
+
+.modal-dialog-xl {
+    width: 900px;
+    max-width: 90vw;
+}
+
+/* Header Styles */
+.modal-dialog__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 1rem;
+}
+
+.modal-dialog__header-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-dialog__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.4;
+}
+
+.modal-dialog__summary {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.modal-dialog__close-btn {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.modal-dialog__close-btn:hover {
+    color: #374151;
+    background-color: #f3f4f6;
+}
+
+.modal-dialog__close-btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Body Styles */
+.modal-dialog__body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+    color: #374151;
+    line-height: 1.6;
+}
+
+/* Footer Styles */
+.modal-dialog__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    border-radius: 0 0 8px 8px;
+}
+
+.modal-dialog__btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.modal-dialog__btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.modal-dialog__btn-cancel {
+    background-color: #ffffff;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.modal-dialog__btn-cancel:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.modal-dialog__btn-submit {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.modal-dialog__btn-submit:hover {
+    background-color: #2563eb;
+}
+
+.modal-dialog__btn-submit:active {
+    background-color: #1d4ed8;
+}
