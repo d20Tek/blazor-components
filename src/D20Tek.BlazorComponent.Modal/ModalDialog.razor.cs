@@ -54,64 +54,35 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
 
     public async Task ShowAsync()
     {
-        await EnsureJsModuleAsync();
-        if (_jsModule is not null)
-        {
-            await _jsModule.InvokeVoidAsync("showModal", _dialogRef);
-            IsOpen = true;
-            await InvokeAsync(StateHasChanged);
-        }
+        await (await EnsureJsModuleAsync()).InvokeVoidAsync("showModal", _dialogRef);
+        IsOpen = true;
+        await InvokeAsync(StateHasChanged);
     }
 
     public async Task CloseAsync()
     {
         IsOpen = false;
-        await EnsureJsModuleAsync();
-        if (_jsModule is not null)
-        {
-            await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
-            await InvokeAsync(StateHasChanged);
-        }
+        await (await EnsureJsModuleAsync()).InvokeVoidAsync("closeModal", _dialogRef);
+        await InvokeAsync(StateHasChanged);
     }
 
     private async Task HandleClose()
     {
-        IsOpen = false;
-        try
-        {
-            await EnsureJsModuleAsync();
-            if (_jsModule is not null)
-            {
-                await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
-            }
-        }
-        catch { /* Dialog might already be closed */ }
+        await CloseAsync();
         await OnClose.InvokeAsync();
     }
 
     private async Task HandleSubmit()
     {
-        IsOpen = false;
-        try
-        {
-            await EnsureJsModuleAsync();
-            if (_jsModule is not null)
-            {
-                await _jsModule.InvokeVoidAsync("closeModal", _dialogRef);
-            }
-        }
-        catch { /* Dialog might already be closed */ }
+        await CloseAsync();
         await OnSubmit.InvokeAsync();
     }
 
-    private async Task EnsureJsModuleAsync()
+    private async Task<IJSObjectReference> EnsureJsModuleAsync()
     {
-        if (_jsModule is null)
-        {
-            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import",
-                "./_content/D20Tek.BlazorComponent.Modal/modalDialog.js");
-        }
+        return _jsModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>(
+            "import",
+            "./_content/D20Tek.BlazorComponent.Modal/ModalDialog.razor.js");
     }
 
     public async ValueTask DisposeAsync()

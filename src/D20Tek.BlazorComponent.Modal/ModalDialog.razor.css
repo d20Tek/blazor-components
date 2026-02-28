@@ -6,6 +6,12 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     max-height: 90vh;
     pointer-events: auto !important;
+    
+    /* Prevent scroll jump when dialog opens */
+    position: fixed;
+    margin: auto;
+    inset: 0;
+    height: fit-content;
 }
 
 .modal-dialog[open] {
