@@ -1,5 +1,8 @@
 # Release Notes
 
+## Release v1.10.2
+* Implemented Modal component with basic modal dialog functionality.
+
 ## Release v1.10.1
 * Updated library projects to support .net 9 & 10.
 * Upgraded all dependent packages to latest versions.
