@@ -87,7 +87,7 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
     {
         return _jsModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>(
             "import",
-            "./_content/D20Tek.BlazorComponent.Modal/ModalDialog.razor.js");
+            "./_content/D20Tek.BlazorComponents.Modal/Modal.js");
     }
 
     public async ValueTask DisposeAsync()
