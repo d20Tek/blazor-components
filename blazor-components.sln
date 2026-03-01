@@ -37,6 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D20Tek.BlazorComponent.Moda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".plans", ".plans", "{DB70631B-C32E-478D-A578-43C2872D936D}"
 	ProjectSection(SolutionItems) = preProject
+		plans\message-box-tasks.md = plans\message-box-tasks.md
 		plans\modal-form-tasks.md = plans\modal-form-tasks.md
 		plans\modal-tasks.md = plans\modal-tasks.md
 	EndProjectSection
