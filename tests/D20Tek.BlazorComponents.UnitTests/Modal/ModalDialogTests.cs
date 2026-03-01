@@ -14,7 +14,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -44,7 +44,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title"">Test Title</h2>
@@ -77,7 +77,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title"">Confirm</h2>
@@ -109,7 +109,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -153,7 +153,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -180,7 +180,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -207,7 +207,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -236,7 +236,7 @@ public class ModalDialogTests
 
         // assert
         var expectedHtml = @"
-<dialog class=""modal-dialog modal-dialog-md"">
+<dialog class=""modal-dialog modal-dialog-md modal-dialog--center"">
     <header class=""modal-dialog__header"">
         <div class=""modal-dialog__header-content"">
             <h2 class=""modal-dialog__title""></h2>
@@ -245,7 +245,6 @@ public class ModalDialogTests
     </header>
     <div class=""modal-dialog__body""></div>
 </dialog>";
-
 
         comp.MarkupMatches(expectedHtml);
     }
@@ -267,7 +266,7 @@ public class ModalDialogTests
         // assert
         var dialog = comp.Find("dialog");
         Assert.AreEqual("my-modal", dialog.GetAttribute("data-testid"));
-        Assert.Contains("border: 2px solid blue", dialog.GetAttribute("style")!);
+        Assert.IsTrue(dialog.GetAttribute("style")!.Contains("border: 2px solid blue"));
     }
 
     [TestMethod]

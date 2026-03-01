@@ -41,12 +41,17 @@ public partial class ModalDialog : BaseComponent, IAsyncDisposable
     [Parameter]
     public EventCallback OnSubmit { get; set; }
 
+    [Parameter]
+    public VerticalPosition Position { get; set; } = VerticalPosition.Center;
+
     public bool IsOpen { get; private set; }
 
     protected override string? CalculateCssClasses() =>
-        new CssBuilder(_cssModalDialog).AddClass(ModalDialogSizeMetadata.GetSizeCss(Size), Size != Size.None)
-                                       .AddClassFromAttributes(RemainingAttributes)
-                                       .Build();
+        new CssBuilder(_cssModalDialog)
+            .AddClass(ModalDialogSizeMetadata.GetSizeCss(Size), Size != Size.None)
+            .AddClass(ModalDialogPositionMetadata.GetPositionCss(Position))
+            .AddClassFromAttributes(RemainingAttributes)
+            .Build();
 
     protected override string? CalculateCssStyles() =>
         new StyleBuilder().AddStyleFromAttributes(RemainingAttributes)

@@ -9,6 +9,7 @@ public partial class ModalDialogPage
     private string _title = "Sample Dialog";
     private string _summary = "This is a sample modal dialog.";
     private Size _size = Size.Medium;
+    private VerticalPosition _position = VerticalPosition.Center;
     private string _submitText = "Submit";
     private string _cancelText = "Cancel";
     private bool _showCloseButton = true;
@@ -21,6 +22,9 @@ public partial class ModalDialogPage
     private ModalDialog _confirmDialog = default!;
     private ModalDialog _infoDialog = default!;
     private ModalDialog _largeDialog = default!;
+    private ModalDialog _topDialog = default!;
+    private ModalDialog _centerDialog = default!;
+    private ModalDialog _bottomDialog = default!;
 
     private async Task ShowInteractiveDialog() => await _interactiveDialog.ShowAsync();
 
@@ -40,4 +44,8 @@ public partial class ModalDialogPage
     private void HandleLargeClose() => _lastAction = "Terms declined";
 
     private void HandleLargeSubmit() => _lastAction = "Terms accepted!";
+
+    private void HandlePositionClose() => _lastAction = "Position dialog closed";
+
+    private void HandlePositionSubmit() => _lastAction = "Position dialog submitted";
 }

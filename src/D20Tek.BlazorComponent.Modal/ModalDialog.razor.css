@@ -9,7 +9,6 @@
     
     /* Prevent scroll jump when dialog opens */
     position: fixed;
-    margin: auto;
     inset: 0;
     height: fit-content;
 }
@@ -25,6 +24,19 @@
 
 ::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Position Variations */
+.modal-dialog--center {
+    margin: auto;
+}
+
+.modal-dialog--top {
+    margin: 2rem auto auto auto;
+}
+
+.modal-dialog--bottom {
+    margin: auto auto 2rem auto;
 }
 
 /* Size Variations */

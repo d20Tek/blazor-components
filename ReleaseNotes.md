@@ -1,7 +1,15 @@
 # Release Notes
 
 ## Release v1.10.2
-* Implemented Modal component with basic modal dialog functionality.
+* Implemented Modal component with basic modal dialog functionality:
+  * Native HTML5 Dialog - Built on <dialog> element for built-in accessibility, focus trapping, and backdrop support
+  * Customizable Header - Title and optional summary text
+  * Flexible Content - Render any Blazor content in the modal body
+  * Configurable Buttons - Show/hide Cancel and Submit buttons with custom text
+  * Size Variants - Small, Medium (default), Large, ExtraLarge
+  * Position Variants - Top, Center (default), Bottom of viewport
+  * Event Callbacks - OnClose and OnSubmit for handling user actions
+  * Keyboard Support - Native Escape key to close
 
 ## Release v1.10.1
 * Updated library projects to support .net 9 & 10.

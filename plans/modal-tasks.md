@@ -155,3 +155,77 @@ export function closeModal(dialogId) {
 - `D20Tek.BlazorComponent.Core` - For BaseComponent, Size enum, CssBuilder, StyleBuilder
 - `Microsoft.AspNetCore.Components.Web` - For Blazor Web support
 - `Microsoft.JSInterop` - For JavaScript interop
+
+---
+
+## Feature: Vertical Position
+
+### Overview
+Add a `Position` parameter to allow the modal dialog to be positioned at the top, center (default), or bottom of the viewport. This is useful for different UI patterns:
+- **Top**: Alerts, notifications, forms where user wants to see content below
+- **Center**: Default - confirmation dialogs, focused interactions
+- **Bottom**: Mobile-friendly "action sheets", slide-up menus
+
+### New Enum: `VerticalPosition`
+Create a new enum in the Core project:
+```csharp
+public enum VerticalPosition
+{
+    Center = 0,  // Default
+    Top = 1,
+    Bottom = 2
+}
+```
+
+### New Parameter
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `Position` | `VerticalPosition` | `VerticalPosition.Center` | Vertical position of the modal in the viewport |
+
+### CSS Position Classes
+| Position | CSS Class | CSS Styles |
+|----------|-----------|------------|
+| Center | `modal-dialog--center` | `margin: auto; inset: 0;` (default) |
+| Top | `modal-dialog--top` | `margin: 2rem auto auto auto; top: 0;` |
+| Bottom | `modal-dialog--bottom` | `margin: auto auto 2rem auto; bottom: 0;` |
+
+### Implementation Steps
+
+1. Create `VerticalPosition` enum in Core project
+   - Add `VerticalPosition.cs` to `D20Tek.BlazorComponent.Core`
+   - Values: `Center = 0`, `Top = 1`, `Bottom = 2`
+
+2. Create `ModalDialogPositionMetadata.cs`
+   - Define position-to-CSS class mappings
+   - Follow pattern of `ModalDialogSizeMetadata`
+
+3. Add `Position` parameter to `ModalDialog.razor.cs`
+   - Type: `VerticalPosition`
+   - Default: `VerticalPosition.Center`
+
+4. Update `CalculateCssClasses()` to include position class
+   - Add position CSS class based on `Position` parameter
+
+5. Add CSS classes in `ModalDialog.razor.css`
+   - `.modal-dialog--center` (default positioning)
+   - `.modal-dialog--top` (top of viewport)
+   - `.modal-dialog--bottom` (bottom of viewport)
+
+6. Add unit tests for position variations
+   - Test each position value renders correct CSS class
+   - Add tests to `ModalDialogTests.cs` or new `ModalDialogPositionTests.cs`
+
+7. Update sample page with position examples
+   - Add position selector to interactive panel
+   - Add example showing each position
+
+### Files to Create
+- `src/D20Tek.BlazorComponent.Core/VerticalPosition.cs` (new) - Enum definition
+- `src/D20Tek.BlazorComponent.Modal/ModalDialogPositionMetadata.cs` (new) - Position CSS mappings
+
+### Files to Modify
+- `src/D20Tek.BlazorComponent.Modal/ModalDialog.razor.cs` - Add Position parameter
+- `src/D20Tek.BlazorComponent.Modal/ModalDialog.razor.css` - Add position CSS classes
+- `samples/D20Tek.FullSample.Wasm/Pages/ModalDialogPage.razor` - Add position examples
+- `tests/D20Tek.BlazorComponents.UnitTests/Modal/ModalDialogTests.cs` - Add position tests
+

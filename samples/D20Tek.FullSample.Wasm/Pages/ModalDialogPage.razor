@@ -28,6 +28,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><label for="option_position" style="margin-right: 5px;">Position</label></td>
+                    <td>
+                        <select id="option_position" @bind-value=_position @bind-value:event="onchange">
+                            <option value=@VerticalPosition.Top>Top</option>
+                            <option value=@VerticalPosition.Center selected>Center</option>
+                            <option value=@VerticalPosition.Bottom>Bottom</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td><label for="option_submit_text" style="margin-right: 5px;">Submit Text</label></td>
                     <td><input type="text" id="option_submit_text" style="width: 150px;" @bind-value=_submitText></td>
                 </tr>
@@ -64,6 +74,7 @@
              Title=@_title
              Summary=@_summary
              Size=@_size
+             Position=@_position
              SubmitButtonText=@_submitText
              CancelButtonText=@_cancelText
              ShowCloseButton=@_showCloseButton
@@ -162,4 +173,39 @@
         <h5>4. Disclaimers</h5>
         <p>Sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
+</ModalDialog>
+
+<hr />
+
+<h4>Position Variants</h4>
+<p>Modals can be positioned at the top, center (default), or bottom of the viewport.</p>
+
+<div class="d-flex gap-2 mb-3">
+    <button class="btn btn-outline-primary" @onclick="() => _topDialog.ShowAsync()">Top Position</button>
+    <button class="btn btn-outline-primary" @onclick="() => _centerDialog.ShowAsync()">Center Position</button>
+    <button class="btn btn-outline-primary" @onclick="() => _bottomDialog.ShowAsync()">Bottom Position</button>
+</div>
+
+<ModalDialog @ref=_topDialog 
+             Title="Top Positioned Dialog" 
+             Position="VerticalPosition.Top"
+             OnClose="HandlePositionClose"
+             OnSubmit="HandlePositionSubmit">
+    <p>This dialog appears at the top of the viewport. Useful for alerts and notifications.</p>
+</ModalDialog>
+
+<ModalDialog @ref=_centerDialog 
+             Title="Center Positioned Dialog" 
+             Position="VerticalPosition.Center"
+             OnClose="HandlePositionClose"
+             OnSubmit="HandlePositionSubmit">
+    <p>This dialog appears centered in the viewport. This is the default position.</p>
+</ModalDialog>
+
+<ModalDialog @ref=_bottomDialog 
+             Title="Bottom Positioned Dialog" 
+             Position="VerticalPosition.Bottom"
+             OnClose="HandlePositionClose"
+             OnSubmit="HandlePositionSubmit">
+    <p>This dialog appears at the bottom of the viewport. Useful for mobile action sheets.</p>
 </ModalDialog>
