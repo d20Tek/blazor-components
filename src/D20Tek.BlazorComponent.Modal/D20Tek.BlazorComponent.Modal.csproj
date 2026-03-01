@@ -5,6 +5,16 @@
   <Nullable>enable</Nullable>
   <ImplicitUsings>enable</ImplicitUsings>
   <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
+  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  <Authors>DarthPedro</Authors>
+  <Company>d20Tek</Company>
+  <Description>A Blazor component for providing a ModalDialog that shows custom content in a popup modal window with a semi-transparent background.</Description>
+  <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+  <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+  <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+  <PackageReadmeFile>README.md</PackageReadmeFile>
+  <RepositoryType>git</RepositoryType>
+  <PackageTags>Blazor .NET Components; WebAssembly; modal; modal dialog</PackageTags>
 </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +35,13 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
