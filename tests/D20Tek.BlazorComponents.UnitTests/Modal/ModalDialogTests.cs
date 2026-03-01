@@ -1,3 +1,5 @@
+using D20Tek.BlazorComponents;
+
 namespace D20Tek.BlazorComponents.UnitTests.Modal;
 
 [TestClass]
