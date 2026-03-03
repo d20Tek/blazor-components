@@ -5,8 +5,7 @@
 ## Introduction
 This package suite provides custom, resuable Blazor components. These components are easy to use right out of the box, so developers can focus on building their applications. To keep the libraries small and independent, we have a project and NuGet package for each component, so that developers can just include what they need (and a huge component library).
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch.
-Future components: Modal.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, and MessageBox.
 
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
@@ -44,6 +43,15 @@ Once you've installed the component NuGet package, you can start using it in you
 <ContentSpinner Size=Size.Medium>
     <img src="./images/my-image.png" style="width: 100%; height: 100%" />
 </ContentSpinner>
+```
+
+### Component-Specific Setup
+
+Some components require a one-time setup step in addition to the standard usage above.
+
+**ModalDialog / ModalFormDialog / MessageBox** — These components use a static CSS file that must be linked in your app's `wwwroot/index.html` (Blazor WASM) or `App.razor` / `_Host.cshtml` (Blazor Server) inside the `<head>` tag:
+```html
+<link href="_content/D20Tek.BlazorComponents.Modal/Modal.css" rel="stylesheet" />
 ```
 
 ### Samples:
