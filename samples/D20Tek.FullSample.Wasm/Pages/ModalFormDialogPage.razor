@@ -1,0 +1,241 @@
+@page "/modal-form-dialog"
+<h3>ModalFormDialog Component</h3>
+<p>A modal dialog with built-in <code>EditForm</code> support. Content and the submit button are wrapped in an <code>EditForm</code>, enabling native Blazor form validation and submission.</p>
+
+<div class="d-flex align-items-center component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_title" style="margin-right: 5px;">Title</label></td>
+                    <td><input type="text" id="option_title" style="width: 150px;" @bind-value=_title></td>
+                </tr>
+                <tr>
+                    <td><label for="option_summary" style="margin-right: 5px;">Summary</label></td>
+                    <td><input type="text" id="option_summary" style="width: 150px;" @bind-value=_summary></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_size @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_position" style="margin-right: 5px;">Position</label></td>
+                    <td>
+                        <select id="option_position" @bind-value=_position @bind-value:event="onchange">
+                            <option value=@VerticalPosition.Top>Top</option>
+                            <option value=@VerticalPosition.Center selected>Center</option>
+                            <option value=@VerticalPosition.Bottom>Bottom</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_submit_text" style="margin-right: 5px;">Submit Text</label></td>
+                    <td><input type="text" id="option_submit_text" style="width: 150px;" @bind-value=_submitText></td>
+                </tr>
+                <tr>
+                    <td><label for="option_cancel_text" style="margin-right: 5px;">Cancel Text</label></td>
+                    <td><input type="text" id="option_cancel_text" style="width: 150px;" @bind-value=_cancelText></td>
+                </tr>
+                <tr>
+                    <td><label for="option_show_close" style="margin-right: 5px;">Show Close Button</label></td>
+                    <td><ToggleSwitch id="option_show_close" @bind-Checked=_showCloseButton /></td>
+                </tr>
+                <tr>
+                    <td><label for="option_show_cancel" style="margin-right: 5px;">Show Cancel Button</label></td>
+                    <td><ToggleSwitch id="option_show_cancel" @bind-Checked=_showCancelButton /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-3">
+            <button class="btn btn-primary" @onclick="ShowInteractiveDialog">Open Form Dialog</button>
+        </div>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center">
+        <div class="px-0 px-md-5 text-center">
+            <p><strong>Last Action:</strong> @_lastAction</p>
+        </div>
+    </div>
+</div>
+
+<ModalFormDialog @ref=_interactiveDialog
+                 Title=@_title
+                 Summary=@_summary
+                 Size=@_size
+                 Position=@_position
+                 SubmitButtonText=@_submitText
+                 CancelButtonText=@_cancelText
+                 ShowCloseButton=@_showCloseButton
+                 ShowCancelButton=@_showCancelButton
+                 Model="@_interactiveModel"
+                 OnValidSubmit="HandleInteractiveValidSubmit"
+                 OnCancel="HandleInteractiveCancel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="int_name">Name</label>
+        <InputText id="int_name" @bind-Value="_interactiveModel.Name" class="form-control" />
+        <ValidationMessage For="() => _interactiveModel.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="int_email">Email</label>
+        <InputText id="int_email" @bind-Value="_interactiveModel.Email" class="form-control" />
+        <ValidationMessage For="() => _interactiveModel.Email" />
+    </div>
+</ModalFormDialog>
+
+<hr />
+
+<h4>Basic Form Dialog</h4>
+<p>A simple form dialog without validation. Without <code>DataAnnotationsValidator</code>, the form always submits as valid.</p>
+<pre><code>&lt;ModalFormDialog @@ref="_basicDialog"
+                 Title="Add User"
+                 Model="@@_basicModel"
+                 OnValidSubmit="HandleBasicValidSubmit"
+                 OnCancel="HandleBasicCancel"&gt;
+    &lt;div class="mb-3"&gt;
+        &lt;label&gt;Name&lt;/label&gt;
+        &lt;InputText @@bind-Value="_basicModel.Name" class="form-control" /&gt;
+    &lt;/div&gt;
+&lt;/ModalFormDialog&gt;</code></pre>
+
+<button class="btn btn-secondary mb-3" @onclick="() => _basicDialog.ShowAsync()">Open Basic Form</button>
+
+<ModalFormDialog @ref=_basicDialog
+                 Title="Add User"
+                 Model="@_basicModel"
+                 OnValidSubmit="HandleBasicValidSubmit"
+                 OnCancel="HandleBasicCancel">
+    <div class="mb-3">
+        <label for="basic_name">Name</label>
+        <InputText id="basic_name" @bind-Value="_basicModel.Name" class="form-control" />
+    </div>
+</ModalFormDialog>
+
+<hr />
+
+<h4>Validation Form Dialog</h4>
+<p>A form dialog using <code>DataAnnotationsValidator</code>. Required fields must pass validation before <code>OnValidSubmit</code> fires. Invalid submissions trigger <code>OnInvalidSubmit</code>.</p>
+<pre><code>&lt;ModalFormDialog @@ref="_validationDialog"
+                 Title="Register User"
+                 Summary="All fields are required."
+                 Model="@@_validationModel"
+                 OnValidSubmit="HandleValidationValidSubmit"
+                 OnInvalidSubmit="HandleValidationInvalidSubmit"
+                 OnCancel="HandleValidationCancel"&gt;
+    &lt;DataAnnotationsValidator /&gt;
+    &lt;ValidationSummary /&gt;
+    &lt;InputText @@bind-Value="_validationModel.Name" class="form-control" /&gt;
+    &lt;ValidationMessage For="() =&gt; _validationModel.Name" /&gt;
+&lt;/ModalFormDialog&gt;</code></pre>
+
+<button class="btn btn-primary mb-3" @onclick="() => _validationDialog.ShowAsync()">Open Validation Form</button>
+
+<ModalFormDialog @ref=_validationDialog
+                 Title="Register User"
+                 Summary="All fields are required."
+                 Model="@_validationModel"
+                 SubmitButtonText="Register"
+                 OnValidSubmit="HandleValidationValidSubmit"
+                 OnInvalidSubmit="HandleValidationInvalidSubmit"
+                 OnCancel="HandleValidationCancel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="val_name">Name</label>
+        <InputText id="val_name" @bind-Value="_validationModel.Name" class="form-control" />
+        <ValidationMessage For="() => _validationModel.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="val_email">Email</label>
+        <InputText id="val_email" @bind-Value="_validationModel.Email" class="form-control" />
+        <ValidationMessage For="() => _validationModel.Email" />
+    </div>
+</ModalFormDialog>
+
+<hr />
+
+<h4>Large Form Dialog</h4>
+<p>A larger form dialog demonstrating the <code>Size.Large</code> option and a custom submit button label.</p>
+
+<button class="btn btn-success mb-3" @onclick="() => _largeDialog.ShowAsync()">Open Large Form</button>
+
+<ModalFormDialog @ref=_largeDialog
+                 Title="Edit Profile"
+                 Summary="Update your account information."
+                 Size="Size.Large"
+                 SubmitButtonText="Save Changes"
+                 Model="@_largeModel"
+                 OnValidSubmit="HandleLargeValidSubmit"
+                 OnCancel="HandleLargeCancel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="lg_name">Full Name</label>
+        <InputText id="lg_name" @bind-Value="_largeModel.Name" class="form-control" />
+        <ValidationMessage For="() => _largeModel.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="lg_email">Email Address</label>
+        <InputText id="lg_email" @bind-Value="_largeModel.Email" class="form-control" />
+        <ValidationMessage For="() => _largeModel.Email" />
+    </div>
+</ModalFormDialog>
+
+<hr />
+
+<h4>Position Variants</h4>
+<p>Form dialogs can be positioned at the top, center (default), or bottom of the viewport.</p>
+
+<div class="d-flex gap-2 mb-3">
+    <button class="btn btn-outline-primary" @onclick="() => _topDialog.ShowAsync()">Top Position</button>
+    <button class="btn btn-outline-primary" @onclick="() => _centerDialog.ShowAsync()">Center Position</button>
+    <button class="btn btn-outline-primary" @onclick="() => _bottomDialog.ShowAsync()">Bottom Position</button>
+</div>
+
+<ModalFormDialog @ref=_topDialog
+                 Title="Top Form Dialog"
+                 Position="VerticalPosition.Top"
+                 Model="@_positionModel"
+                 OnValidSubmit="HandleTopPositionSubmit"
+                 OnCancel="HandlePositionCancel">
+    <p>This form dialog appears at the top of the viewport.</p>
+    <div class="mb-3">
+        <label for="top_name">Name</label>
+        <InputText id="top_name" @bind-Value="_positionModel.Name" class="form-control" />
+    </div>
+</ModalFormDialog>
+
+<ModalFormDialog @ref=_centerDialog
+                 Title="Center Form Dialog"
+                 Position="VerticalPosition.Center"
+                 Model="@_positionModel"
+                 OnValidSubmit="HandleCenterPositionSubmit"
+                 OnCancel="HandlePositionCancel">
+    <p>This form dialog appears centered in the viewport. This is the default position.</p>
+    <div class="mb-3">
+        <label for="ctr_name">Name</label>
+        <InputText id="ctr_name" @bind-Value="_positionModel.Name" class="form-control" />
+    </div>
+</ModalFormDialog>
+
+<ModalFormDialog @ref=_bottomDialog
+                 Title="Bottom Form Dialog"
+                 Position="VerticalPosition.Bottom"
+                 Model="@_positionModel"
+                 OnValidSubmit="HandleBottomPositionSubmit"
+                 OnCancel="HandlePositionCancel">
+    <p>This form dialog appears at the bottom of the viewport.</p>
+    <div class="mb-3">
+        <label for="bot_name">Name</label>
+        <InputText id="bot_name" @bind-Value="_positionModel.Name" class="form-control" />
+    </div>
+</ModalFormDialog>
