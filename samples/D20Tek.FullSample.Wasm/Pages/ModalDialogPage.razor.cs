@@ -1,4 +1,6 @@
 ﻿using D20Tek.BlazorComponents;
+using Microsoft.AspNetCore.Components.Forms;
+using System.ComponentModel.DataAnnotations;
 
 namespace D20Tek.FullSample.Wasm.Pages;
 
@@ -48,4 +50,31 @@ public partial class ModalDialogPage
     private void HandlePositionClose() => _lastAction = "Position dialog closed";
 
     private void HandlePositionSubmit() => _lastAction = "Position dialog submitted";
+
+    // Form dialog state
+    private class UserFormModel
+    {
+        [Required(ErrorMessage = "Name is required.")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Enter a valid email address.")]
+        public string Email { get; set; } = string.Empty;
+    }
+
+    private ModalFormDialog _formDialog = default!;
+    private UserFormModel _formModel = new();
+
+    private async Task HandleFormSubmit(EditContext context)
+    {
+        _lastAction = $"Form submitted: {_formModel.Name} ({_formModel.Email})";
+        await _formDialog.CloseAsync();
+        _formModel = new();
+    }
+
+    private void HandleFormCancel()
+    {
+        _lastAction = "Form cancelled";
+        _formModel = new();
+    }
 }

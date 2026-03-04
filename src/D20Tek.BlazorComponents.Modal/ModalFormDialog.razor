@@ -1,0 +1,35 @@
+@inherits ModalDialogBase
+
+@if (IsVisible)
+{
+<dialog @ref="_dialogRef" @attributes="@RemainingAttributes" class="@CssClass" style="@CssStyles" @oncancel="HandleCancel">
+    <header class="modal-dialog__header">
+        <div class="modal-dialog__header-content">
+            <h2 class="modal-dialog__title">@Title</h2>
+            @if (!string.IsNullOrWhiteSpace(Summary))
+            {
+                <p class="modal-dialog__summary">@Summary</p>
+            }
+        </div>
+        @if (ShowCloseButton)
+        {
+            <button type="button" class="modal-dialog__close-btn" @onclick="HandleCancel" aria-label="Close">&times;</button>
+        }
+    </header>
+
+    <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <div class="modal-dialog__body">
+            @ChildContent
+        </div>
+        <footer class="modal-dialog__footer">
+            @if (ShowCancelButton)
+            {
+                <button type="button" class="modal-dialog__btn modal-dialog__btn-cancel" @onclick="HandleCancel">
+                    @CancelButtonText
+                </button>
+            }
+            <button type="submit" class="modal-dialog__btn modal-dialog__btn-submit">@SubmitButtonText</button>
+        </footer>
+    </EditForm>
+</dialog>
+}

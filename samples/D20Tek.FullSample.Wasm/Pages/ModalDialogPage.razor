@@ -209,3 +209,44 @@
              OnSubmit="HandlePositionSubmit">
     <p>This dialog appears at the bottom of the viewport. Useful for mobile action sheets.</p>
 </ModalDialog>
+
+<hr />
+
+<h4>Form Dialog</h4>
+<p>A modal dialog with built-in <code>EditForm</code> support for form submission and validation.</p>
+<pre><code>&lt;ModalFormDialog @@ref="_formDialog"
+                 Title="Add New User"
+                 Summary="Enter user details below."
+                 Model="@@_formModel"
+                 OnValidSubmit="HandleFormSubmit"
+                 OnCancel="HandleFormCancel"
+                 SubmitButtonText="Save User"&gt;
+    &lt;DataAnnotationsValidator /&gt;
+    &lt;div class="mb-3"&gt;
+        &lt;label&gt;Name&lt;/label&gt;
+        &lt;InputText @@bind-Value="_formModel.Name" class="form-control" /&gt;
+    &lt;/div&gt;
+&lt;/ModalFormDialog&gt;</code></pre>
+
+<button class="btn btn-primary mb-3" @onclick="() => _formDialog.ShowAsync()">Open Form Dialog</button>
+
+<ModalFormDialog @ref=_formDialog
+                 Title="Add New User"
+                 Summary="Enter user details below."
+                 Model="@_formModel"
+                 OnValidSubmit="HandleFormSubmit"
+                 OnCancel="HandleFormCancel"
+                 SubmitButtonText="Save User">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="form_name">Name</label>
+        <InputText id="form_name" @bind-Value="_formModel.Name" class="form-control" />
+        <ValidationMessage For="() => _formModel.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="form_email">Email</label>
+        <InputText id="form_email" @bind-Value="_formModel.Email" class="form-control" />
+        <ValidationMessage For="() => _formModel.Email" />
+    </div>
+</ModalFormDialog>
