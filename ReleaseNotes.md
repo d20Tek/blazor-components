@@ -1,5 +1,14 @@
 # Release Notes
 
+## Release v1.10.3
+* Implemented ModalFormDialog component with built-in EditForm support:
+  * EditForm Integration - Wraps body and footer in EditForm for native form submission
+  * Validation Support - Compatible with DataAnnotationsValidator and any Blazor validator
+  * OnValidSubmit / OnInvalidSubmit - Separate callbacks for valid and invalid form submissions
+  * OnCancel callback - Fires when Cancel or Close button is clicked
+  * Required Model parameter - Passed directly to EditForm
+  * Consistent styling - Reuses all ModalDialog CSS classes
+
 ## Release v1.10.2
 * Implemented Modal component with basic modal dialog functionality:
   * Native HTML5 Dialog - Built on <dialog> element for built-in accessibility, focus trapping, and backdrop support
