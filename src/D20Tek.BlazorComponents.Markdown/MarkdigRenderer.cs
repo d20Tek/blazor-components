@@ -2,11 +2,11 @@ using Markdig;
 
 namespace D20Tek.BlazorComponents;
 
-public class MarkdigMarkdownRenderer : IMarkdownRenderer
+public class MarkdigRenderer : IMarkdownRenderer
 {
     private readonly MarkdownPipeline _pipeline;
 
-    public MarkdigMarkdownRenderer()
+    public MarkdigRenderer()
     {
         _pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()

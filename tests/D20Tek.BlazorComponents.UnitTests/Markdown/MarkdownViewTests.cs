@@ -135,7 +135,7 @@ public partial class MarkdownViewTests
     {
         // arrange
         var ctx = new BunitContext();
-        ctx.Services.AddSingleton<IMarkdownRenderer>(new MarkdigMarkdownRenderer());
+        ctx.Services.AddSingleton<IMarkdownRenderer>(new MarkdigRenderer());
 
         // act
         var comp = ctx.Render<BlazorComponents.MarkdownView>(parameters =>
