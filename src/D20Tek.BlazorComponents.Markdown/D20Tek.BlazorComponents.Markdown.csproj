@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <Authors>DarthPedro</Authors>
+    <Company>d20Tek</Company>
+    <Description>A Blazor component for rendering Markdown text as HTML. This component uses the Markdig library to convert Markdown to HTML and render it safely in your Blazor application.</Description>
+    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor; .NET Components; WebAssembly; Markdown; Markdig</PackageTags>
+    <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+  </ItemGroup>
+
+</Project>

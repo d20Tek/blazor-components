@@ -1,0 +1,8 @@
+@inherits BaseComponent
+
+@if (this.IsVisible)
+{
+    <div @attributes="@this.RemainingAttributes" class="@this.CssClass" style="@this.CssStyles">
+        @((MarkupString)_html)
+    </div>
+}
