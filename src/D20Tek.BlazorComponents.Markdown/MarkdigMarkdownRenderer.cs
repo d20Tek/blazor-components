@@ -13,5 +13,5 @@ public class MarkdigMarkdownRenderer : IMarkdownRenderer
             .Build();
     }
 
-    public string ToHtml(string markdown) => Markdown.ToHtml(markdown ?? string.Empty, _pipeline);
+    public string ToHtml(string markdown) => Markdown.ToHtml(markdown, _pipeline);
 }
