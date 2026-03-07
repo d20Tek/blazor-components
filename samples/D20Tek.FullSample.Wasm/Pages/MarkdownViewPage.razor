@@ -1,0 +1,48 @@
+@page "/markdown-view"
+<h3>MarkdownView Component</h3>
+<p>The MarkdownView component renders a Markdown string as HTML, using the Markdig library with advanced extensions enabled.
+   It integrates via an injected <code>IMarkdownRenderer</code> service and supports all standard Markdown syntax plus
+   tables, task lists, auto-links, and more.</p>
+
+<div class="d-flex align-items-start component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Markdown Input</h5>
+        <textarea class="form-control" rows="14" style="width: 280px; font-family: monospace; font-size: 0.85rem;"
+                  @bind=_liveMarkdown @bind:event="oninput"></textarea>
+    </div>
+    <div class="p-2 flex-grow-1 justify-content-center">
+        <h5>Rendered Output</h5>
+        <div class="px-0 px-md-3">
+            <MarkdownView Markdown=@_liveMarkdown />
+        </div>
+    </div>
+</div>
+<hr />
+
+<h4>Default MarkdownView</h4>
+<p>Render a Markdown string by passing it to the <code>Markdown</code> parameter.</p>
+<pre><code>&lt;MarkdownView Markdown=@("@")_markdownText /&gt;</code></pre>
+
+<MarkdownView Markdown=@_sampleMarkdown />
+<hr />
+
+<h4>MarkdownView - Tables</h4>
+<p>Tables are supported via the Markdig advanced extensions.</p>
+<pre><code>&lt;MarkdownView Markdown=@("@")_tableMarkdown /&gt;</code></pre>
+
+<MarkdownView Markdown=@_tableMarkdown />
+<hr />
+
+<h4>MarkdownView - Task Lists</h4>
+<p>GitHub-style task lists are supported.</p>
+<pre><code>&lt;MarkdownView Markdown=@("@")_taskMarkdown /&gt;</code></pre>
+
+<MarkdownView Markdown=@_taskMarkdown />
+<hr />
+
+<h4>MarkdownView - Code Blocks</h4>
+<p>Fenced code blocks with language hints are rendered with the <code>&lt;code&gt;</code> element.</p>
+<pre><code>&lt;MarkdownView Markdown=@("@")_codeMarkdown /&gt;</code></pre>
+
+<MarkdownView Markdown=@_codeMarkdown />
+<hr />
