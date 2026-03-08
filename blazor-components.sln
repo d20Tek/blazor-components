@@ -35,6 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D20Tek.BlazorComponents.Tog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".plans", ".plans", "{DB70631B-C32E-478D-A578-43C2872D936D}"
 	ProjectSection(SolutionItems) = preProject
+		plans\markdown-component-tasks.md = plans\markdown-component-tasks.md
 		plans\message-box-tasks.md = plans\message-box-tasks.md
 		plans\modal-form-tasks.md = plans\modal-form-tasks.md
 		plans\modal-tasks.md = plans\modal-tasks.md

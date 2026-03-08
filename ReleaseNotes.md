@@ -1,6 +1,13 @@
 # Release Notes
 
-## Release v1.10.3
+## Release v1.10.7
+* Implemented MarkdigRenderer (for IMarkdownRenderer) to take markdown text and render it as html.
+* Implemented MarkdownView that has Markdown parameter and used IMarkdownRenderer to convert it to html.
+* Implemented AddMarkdownRenderer helper to register default renderer with DI.
+* Added unit tests for this component and helper classes.
+* Added MarkdownViewPage to the FullSample.Wasm project to show how this component can be used.
+
+## Release v1.10.6
 * Implemented ModalFormDialog component with built-in EditForm support:
   * EditForm Integration - Wraps body and footer in EditForm for native form submission
   * Validation Support - Compatible with DataAnnotationsValidator and any Blazor validator
@@ -9,7 +16,7 @@
   * Required Model parameter - Passed directly to EditForm
   * Consistent styling - Reuses all ModalDialog CSS classes
 
-## Release v1.10.2
+## Release v1.10.5
 * Implemented Modal component with basic modal dialog functionality:
   * Native HTML5 Dialog - Built on <dialog> element for built-in accessibility, focus trapping, and backdrop support
   * Customizable Header - Title and optional summary text
