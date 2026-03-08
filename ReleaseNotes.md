@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release v1.10.7
+## Release v1.10.8
 * Implemented MarkdigRenderer (for IMarkdownRenderer) to take markdown text and render it as html.
 * Implemented MarkdownView that has Markdown parameter and used IMarkdownRenderer to convert it to html.
 * Implemented AddMarkdownRenderer helper to register default renderer with DI.
