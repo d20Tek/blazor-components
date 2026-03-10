@@ -343,7 +343,7 @@ The visual dialog component.
 - Test the ServiceCollectionExtensions registers service correctly
 
 ### Step 13: Create new sample page for MessageBox examples
-- Add MessageBox examples to a new page - MessageBoxPage.razor
+- Add MessageBox examples to a new page - MessageBoxPage.razor in D20Tek.FullSample.Wasm project
 - Show each message type
 - Show confirmation with result handling
 

@@ -3,7 +3,8 @@
 
 @if (_isVisible)
 {
-    <MessageBox Title="@_options.Title"
+    <MessageBox @key="_dialogKey"
+                Title="@_options.Title"
                 Message="@_options.Message"
                 Type="@_options.Type"
                 Buttons="@_options.Buttons"
@@ -13,6 +14,7 @@
 @code {
     private bool _isVisible;
     private MessageBoxOptions _options = new();
+    private Guid _dialogKey = Guid.NewGuid();
 
     protected override void OnInitialized() => MessageBoxService.OnShow += ShowMessageBox;
 
@@ -20,13 +22,14 @@
     {
         _options = options;
         _isVisible = true;
+        _dialogKey = Guid.NewGuid();
         InvokeAsync(StateHasChanged);
     }
 
     private void HandleResult(MessageBoxResult result)
     {
         _isVisible = false;
-        MessageBoxService.SetResult(result);
+        _options.TaskCompletionSource?.TrySetResult(result);
         StateHasChanged();
     }
 

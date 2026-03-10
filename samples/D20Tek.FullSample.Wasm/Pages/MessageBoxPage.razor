@@ -1,0 +1,52 @@
+@page "/message-box"
+@inject IMessageBoxService MessageBox
+
+<h3>MessageBox Component</h3>
+<p>A service-based message box component for displaying alerts and confirmation dialogs from anywhere in your application.</p>
+
+<div class="component-container">
+    <section class="mb-4">
+        <h5>Simple Messages</h5>
+        <p>Display informational messages with a single OK button.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-info" @onclick="ShowInformation">Information</button>
+            <button class="btn btn-success" @onclick="ShowSuccess">Success</button>
+            <button class="btn btn-warning" @onclick="ShowWarning">Warning</button>
+            <button class="btn btn-danger" @onclick="ShowError">Error</button>
+            <button class="btn btn-primary" @onclick="ShowQuestion">Question</button>
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h5>Confirmation Dialogs</h5>
+        <p>Show confirmation dialogs with Yes/No buttons and handle the user's choice.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-warning" @onclick="ConfirmDelete">Confirm Delete (Yes/No)</button>
+            <button class="btn btn-primary" @onclick="ConfirmSave">Save Changes (Yes/No/Cancel)</button>
+            <button class="btn btn-secondary" @onclick="ConfirmAction">Confirm Action (OK/Cancel)</button>
+        </div>
+        <div class="mt-3">
+            <p><strong>Last Result:</strong> @_lastResult</p>
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h5>Advanced Examples</h5>
+        <p>More complex scenarios demonstrating the MessageBox capabilities.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-info" @onclick="ShowCustomTitle">Custom Title</button>
+            <button class="btn btn-success" @onclick="ShowLongMessage">Long Message</button>
+            <button class="btn btn-primary" @onclick="ShowSequentialDialogs">Sequential Dialogs</button>
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h5>Real-World Scenarios</h5>
+        <p>Common patterns you might use in production applications.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-danger" @onclick="SimulateError">Simulate API Error</button>
+            <button class="btn btn-warning" @onclick="UnsavedChanges">Unsaved Changes</button>
+            <button class="btn btn-success" @onclick="CompleteOperation">Complete Operation</button>
+        </div>
+    </section>
+</div>

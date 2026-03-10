@@ -41,7 +41,8 @@ public sealed class MessageBoxService : IMessageBoxService
         MessageType type,
         MessageBoxButtons buttons)
     {
-        _currentTaskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
+        var tcs = new TaskCompletionSource<MessageBoxResult>();
+        _currentTaskCompletionSource = tcs;
 
         var options = new MessageBoxOptions
         {
@@ -49,11 +50,11 @@ public sealed class MessageBoxService : IMessageBoxService
             Message = message,
             Type = type,
             Buttons = buttons,
-            TaskCompletionSource = _currentTaskCompletionSource
+            TaskCompletionSource = tcs
         };
 
         OnShow?.Invoke(options);
 
-        return _currentTaskCompletionSource.Task;
+        return tcs.Task;
     }
 }
