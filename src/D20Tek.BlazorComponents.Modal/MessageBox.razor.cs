@@ -2,6 +2,8 @@ namespace D20Tek.BlazorComponents;
 
 public partial class MessageBox : MessageBoxBase
 {
+    private string _previousMessage = string.Empty;
+
     [Parameter, EditorRequired]
     public string Message { get; set; } = string.Empty;
 
@@ -16,8 +18,9 @@ public partial class MessageBox : MessageBoxBase
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender || Message != _previousMessage)
         {
+            _previousMessage = Message;
             await ShowAsync();
         }
     }
