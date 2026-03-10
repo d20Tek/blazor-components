@@ -5,6 +5,11 @@ internal static class Constants
     public const string CssModalDialog = "modal-dialog";
     public const string SubmitButtonTextDefault = "Submit";
     public const string CancelButtonTextDefault = "Cancel";
+    public const string MessageTextDefault = "Message";
+    public const string ConfirmTextDefault = "Confirm";
+    public const string ErrorTextDefault = "Error";
+    public const string WarningTextDefault = "Warning";
+    public const string SuccessTextDefault = "Success";
 
     public static class JSFunctions
     {

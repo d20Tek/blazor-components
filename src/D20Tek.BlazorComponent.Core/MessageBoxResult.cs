@@ -1,0 +1,10 @@
+namespace D20Tek.BlazorComponents;
+
+public enum MessageBoxResult
+{
+    None = 0,
+    Ok = 1,
+    Cancel = 2,
+    Yes = 3,
+    No = 4,
+}
