@@ -1,0 +1,34 @@
+@implements IDisposable
+@inject IMessageBoxService MessageBoxService
+
+@if (_isVisible)
+{
+    <MessageBox Title="@_options.Title"
+                Message="@_options.Message"
+                Type="@_options.Type"
+                Buttons="@_options.Buttons"
+                OnResult="HandleResult" />
+}
+
+@code {
+    private bool _isVisible;
+    private MessageBoxOptions _options = new();
+
+    protected override void OnInitialized() => MessageBoxService.OnShow += ShowMessageBox;
+
+    private void ShowMessageBox(MessageBoxOptions options)
+    {
+        _options = options;
+        _isVisible = true;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleResult(MessageBoxResult result)
+    {
+        _isVisible = false;
+        MessageBoxService.SetResult(result);
+        StateHasChanged();
+    }
+
+    public void Dispose() => MessageBoxService.OnShow -= ShowMessageBox;
+}

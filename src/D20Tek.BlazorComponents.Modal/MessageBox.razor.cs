@@ -32,7 +32,6 @@ public partial class MessageBox : MessageBoxBase
 
     private RenderFragment GetIcon() => Type switch
     {
-        MessageType.Information => builder => builder.AddMarkupContent(0, InformationIcon),
         MessageType.Success => builder => builder.AddMarkupContent(0, SuccessIcon),
         MessageType.Warning => builder => builder.AddMarkupContent(0, WarningIcon),
         MessageType.Error => builder => builder.AddMarkupContent(0, ErrorIcon),
@@ -42,15 +41,6 @@ public partial class MessageBox : MessageBoxBase
 
     private RenderFragment GetButtons() => Buttons switch
     {
-        MessageBoxButtons.Ok => builder =>
-        {
-            builder.OpenElement(0, "button");
-            builder.AddAttribute(1, "type", "button");
-            builder.AddAttribute(2, "class", "modal-dialog__btn modal-dialog__btn-submit");
-            builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, () => HandleButtonClick(MessageBoxResult.Ok)));
-            builder.AddContent(4, "OK");
-            builder.CloseElement();
-        },
         MessageBoxButtons.OkCancel => builder =>
         {
             builder.OpenElement(0, "button");
@@ -106,7 +96,15 @@ public partial class MessageBox : MessageBoxBase
             builder.AddContent(24, "Yes");
             builder.CloseElement();
         },
-        _ => builder => { }
+        _ => builder =>
+        {
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(1, "type", "button");
+            builder.AddAttribute(2, "class", "modal-dialog__btn modal-dialog__btn-submit");
+            builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, () => HandleButtonClick(MessageBoxResult.Ok)));
+            builder.AddContent(4, "OK");
+            builder.CloseElement();
+        }
     };
 
     private const string InformationIcon = """

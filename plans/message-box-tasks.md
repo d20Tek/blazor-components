@@ -339,9 +339,11 @@ The visual dialog component.
 - Test MessageBox component rendering
 - Test each MessageType renders correct icon
 - Test each button configuration
+- Test the MessageBoxProvider shows dialog and returns result
+- Test the ServiceCollectionExtensions registers service correctly
 
-### Step 13: Update sample page with MessageBox examples
-- Add MessageBox examples to ModalDialogPage or new page
+### Step 13: Create new sample page for MessageBox examples
+- Add MessageBox examples to a new page - MessageBoxPage.razor
 - Show each message type
 - Show confirmation with result handling
 
