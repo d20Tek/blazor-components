@@ -1,5 +1,17 @@
 # Release Notes
 
+## Release v1.10.9
+* Implemented MessageBox component with service-based architecture for displaying alerts and confirmation dialogs:
+  * Service-Based API - Inject IMessageBoxService to show dialogs from anywhere in the application
+  * 5 Message Types - Information, Success, Warning, Error, Question with built-in SVG icons
+  * 4 Button Configurations - Ok, OkCancel, YesNo, YesNoCancel with MessageBoxResult return values
+  * Position Variants - Top (default), Center, Bottom of viewport
+  * Async/Await Pattern - All methods return Task or Task<MessageBoxResult> for proper async flow
+  * Helper Methods - ShowAsync, ConfirmAsync, ShowErrorAsync, ShowWarningAsync, ShowSuccessAsync
+  * Parameter Change Detection - Efficient sequential dialog rendering without backdrop flash
+  * Consistent Styling - Reuses ModalDialog CSS classes with message-box specific additions
+  * Sample Page - MessageBoxPage demonstrates all message types, button configurations, and positioning
+
 ## Release v1.10.8
 * Implemented MarkdigRenderer (for IMarkdownRenderer) to take markdown text and render it as html.
 * Implemented MarkdownView that has Markdown parameter and used IMarkdownRenderer to convert it to html.
