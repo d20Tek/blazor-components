@@ -8,7 +8,6 @@
   * Position Variants - Top (default), Center, Bottom of viewport
   * Async/Await Pattern - All methods return Task or Task<MessageBoxResult> for proper async flow
   * Helper Methods - ShowAsync, ConfirmAsync, ShowErrorAsync, ShowWarningAsync, ShowSuccessAsync
-  * Parameter Change Detection - Efficient sequential dialog rendering without backdrop flash
   * Consistent Styling - Reuses ModalDialog CSS classes with message-box specific additions
   * Sample Page - MessageBoxPage demonstrates all message types, button configurations, and positioning
 
