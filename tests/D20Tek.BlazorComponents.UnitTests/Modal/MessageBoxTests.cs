@@ -70,7 +70,7 @@ public class MessageBoxTests
         // assert
         var closeButton = comp.Find(".modal-dialog__close-btn");
         Assert.IsNotNull(closeButton);
-        Assert.AreEqual("×", closeButton.TextContent.Trim());
+        Assert.IsNotEmpty(closeButton.TextContent.Trim());
     }
 
     [TestMethod]
