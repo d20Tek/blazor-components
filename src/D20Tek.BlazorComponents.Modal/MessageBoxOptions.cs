@@ -10,5 +10,7 @@ public class MessageBoxOptions
 
     public MessageBoxButtons Buttons { get; set; } = MessageBoxButtons.Ok;
 
+    public VerticalPosition Position { get; set; } = VerticalPosition.Top;
+
     public TaskCompletionSource<MessageBoxResult> TaskCompletionSource { get; set; } = default!;
 }

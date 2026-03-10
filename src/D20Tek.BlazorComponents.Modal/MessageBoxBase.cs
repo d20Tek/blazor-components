@@ -12,7 +12,14 @@ public abstract class MessageBoxBase : ComponentBase, IAsyncDisposable
     [Parameter]
     public string Title { get; set; } = Constants.MessageTextDefault;
 
-    protected string? CssClass => new CssBuilder(Constants.CssModalDialog).AddClass("modal-dialog-sm").Build();
+    [Parameter]
+    public VerticalPosition Position { get; set; } = VerticalPosition.Top;
+
+    protected string? CssClass => 
+        new CssBuilder(Constants.CssModalDialog)
+            .AddClass("modal-dialog-sm")
+            .AddClass(ModalDialogPositionMetadata.GetPositionCss(Position))
+            .Build();
 
     protected string? CssStyles => new StyleBuilder().Build();
 

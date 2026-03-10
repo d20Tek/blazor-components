@@ -9,25 +9,35 @@ public sealed class MessageBoxService : IMessageBoxService
     public Task ShowAsync(
         string message,
         string title = Constants.MessageTextDefault,
-        MessageType type = MessageType.Information) => ShowMessageBoxAsync(message, title, type, MessageBoxButtons.Ok);
+        MessageType type = MessageType.Information,
+        VerticalPosition position = VerticalPosition.Top) =>
+        ShowMessageBoxAsync(message, title, type, MessageBoxButtons.Ok, position);
 
     public Task<MessageBoxResult> ConfirmAsync(
         string message,
         string title = Constants.ConfirmTextDefault,
         MessageType type = MessageType.Question,
-        MessageBoxButtons buttons = MessageBoxButtons.YesNo) =>
-        ShowMessageBoxAsync(message, title, type, buttons);
+        MessageBoxButtons buttons = MessageBoxButtons.YesNo,
+        VerticalPosition position = VerticalPosition.Top) =>
+        ShowMessageBoxAsync(message, title, type, buttons, position);
 
     public Task ShowErrorAsync(
         string message,
-        string title = Constants.ErrorTextDefault) =>
-        ShowMessageBoxAsync(message, title, MessageType.Error, MessageBoxButtons.Ok);
+        string title = Constants.ErrorTextDefault,
+        VerticalPosition position = VerticalPosition.Top) =>
+        ShowMessageBoxAsync(message, title, MessageType.Error, MessageBoxButtons.Ok, position);
 
-    public Task ShowWarningAsync(string message, string title = Constants.WarningTextDefault) =>
-        ShowMessageBoxAsync(message, title, MessageType.Warning, MessageBoxButtons.Ok);
+    public Task ShowWarningAsync(
+        string message,
+        string title = Constants.WarningTextDefault,
+        VerticalPosition position = VerticalPosition.Top) =>
+        ShowMessageBoxAsync(message, title, MessageType.Warning, MessageBoxButtons.Ok, position);
 
-    public Task ShowSuccessAsync(string message, string title = Constants.SuccessTextDefault) =>
-        ShowMessageBoxAsync(message, title, MessageType.Success, MessageBoxButtons.Ok);
+    public Task ShowSuccessAsync(
+        string message,
+        string title = Constants.SuccessTextDefault,
+        VerticalPosition position = VerticalPosition.Top) =>
+        ShowMessageBoxAsync(message, title, MessageType.Success, MessageBoxButtons.Ok, position);
 
     public void SetResult(MessageBoxResult result)
     {
@@ -39,7 +49,8 @@ public sealed class MessageBoxService : IMessageBoxService
         string message,
         string title,
         MessageType type,
-        MessageBoxButtons buttons)
+        MessageBoxButtons buttons,
+        VerticalPosition position)
     {
         var tcs = new TaskCompletionSource<MessageBoxResult>();
         _currentTaskCompletionSource = tcs;
@@ -50,6 +61,7 @@ public sealed class MessageBoxService : IMessageBoxService
             Message = message,
             Type = type,
             Buttons = buttons,
+            Position = position,
             TaskCompletionSource = tcs
         };
 

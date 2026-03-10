@@ -143,4 +143,25 @@ public partial class MessageBoxPage
         await Task.Delay(500);
         await MessageBox.ShowSuccessAsync("Operation completed successfully!", "Success");
     }
+
+    private async Task ShowAtTop() =>
+        await MessageBox.ShowAsync(
+            "This message box is positioned at the top of the screen.",
+            "Top Position",
+            MessageType.Information,
+            VerticalPosition.Top);
+
+    private async Task ShowAtCenter() =>
+        await MessageBox.ShowAsync(
+            "This message box is centered vertically on the screen.",
+            "Center Position",
+            MessageType.Information,
+            VerticalPosition.Center);
+
+    private async Task ShowAtBottom() =>
+        await MessageBox.ShowAsync(
+            "This message box is positioned at the bottom of the screen.",
+            "Bottom Position",
+            MessageType.Information,
+            VerticalPosition.Bottom);
 }

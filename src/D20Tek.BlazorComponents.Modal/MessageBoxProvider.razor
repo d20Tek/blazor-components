@@ -7,6 +7,7 @@
                 Message="@_options.Message"
                 Type="@_options.Type"
                 Buttons="@_options.Buttons"
+                Position="@_options.Position"
                 OnResult="HandleResult" />
 }
 
@@ -26,7 +27,12 @@
     private void HandleResult(MessageBoxResult result)
     {
         _isVisible = false;
-        _options.TaskCompletionSource?.TrySetResult(result);
+        
+        if (_options.TaskCompletionSource is not null)
+        {
+            _options.TaskCompletionSource.TrySetResult(result);
+        }
+        
         StateHasChanged();
     }
 
