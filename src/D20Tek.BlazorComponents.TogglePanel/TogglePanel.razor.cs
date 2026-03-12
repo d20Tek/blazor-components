@@ -5,6 +5,8 @@ public partial class TogglePanel : BaseComponent
     private bool _isOpen = false;
     private bool _prevParentIsOpen = false;
 
+    private string? OpenAttribute => _isOpen ? "open" : null;
+
     public TogglePanel() => Size = Size.Medium;
 
     [Parameter]

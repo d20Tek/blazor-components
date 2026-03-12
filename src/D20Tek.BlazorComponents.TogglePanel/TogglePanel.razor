@@ -2,10 +2,7 @@
 
 @if (IsVisible)
 {
-    <details @attributes="RemainingAttributes"
-             class="@CssClass"
-             style="@CssStyles"
-             open="@(_isOpen ? "open" : null)">
+    <details @attributes="RemainingAttributes" class="@CssClass" style="@CssStyles" open="@OpenAttribute">
         <summary class="toggle-panel__summary" @onclick="HandleToggle" @onclick:preventDefault>
             <span class="toggle-panel__summary-text">
                 @if (SummaryContent is not null)
