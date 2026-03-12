@@ -1,0 +1,34 @@
+@inherits BaseComponent
+
+@if (IsVisible)
+{
+    <details @attributes="RemainingAttributes"
+             class="@CssClass"
+             style="@CssStyles"
+             open="@(_isOpen ? "open" : null)">
+        <summary class="toggle-panel__summary" @onclick="HandleToggle" @onclick:preventDefault>
+            <span class="toggle-panel__summary-text">
+                @if (SummaryContent is not null)
+                {
+                    @SummaryContent
+                }
+                else
+                {
+                    @Summary
+                }
+            </span>
+            @if (ShowChevron)
+            {
+                <span class="toggle-panel__chevron" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            }
+        </summary>
+        <div class="toggle-panel__body">
+            @ChildContent
+        </div>
+    </details>
+}

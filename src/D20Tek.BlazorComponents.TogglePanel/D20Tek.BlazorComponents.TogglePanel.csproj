@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
+    <Authors>DarthPedro</Authors>
+    <Company>d20Tek</Company>
+    <Version>1.11.0</Version>
+    <Description>Blazor component for displaying a toggle panel using the native HTML5 details/summary elements - click-to-toggle, keyboard accessible, and fully customizable.</Description>
+    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor .NET Components WebAssembly TogglePanel Accordion Details Summary</PackageTags>
+    <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>

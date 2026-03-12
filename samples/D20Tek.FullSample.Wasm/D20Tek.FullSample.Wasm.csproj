@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Modal\D20Tek.BlazorComponents.Modal.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Spinner\D20Tek.BlazorComponents.Spinner.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Timer\D20Tek.BlazorComponents.Timer.csproj" />
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.TogglePanel\D20Tek.BlazorComponents.TogglePanel.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.ToggleSwitch\D20Tek.BlazorComponents.ToggleSwitch.csproj" />
   </ItemGroup>
 

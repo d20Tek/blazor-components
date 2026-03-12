@@ -1,0 +1,68 @@
+.toggle-panel {
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.toggle-panel__summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9fafb;
+    font-weight: 500;
+}
+
+.toggle-panel__summary::-webkit-details-marker {
+    display: none;
+}
+
+.toggle-panel__summary-text {
+    flex: 1;
+}
+
+.toggle-panel__chevron {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+    color: currentColor;
+    transition: transform 0.2s ease;
+}
+
+details[open] .toggle-panel__chevron {
+    transform: rotate(180deg);
+}
+
+.toggle-panel__body {
+    padding: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.toggle-panel-xs .toggle-panel__summary {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.toggle-panel-sm .toggle-panel__summary {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.toggle-panel-md .toggle-panel__summary {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.toggle-panel-lg .toggle-panel__summary {
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+}
+
+.toggle-panel-xl .toggle-panel__summary {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.25rem;
+}

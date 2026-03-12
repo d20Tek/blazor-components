@@ -1,0 +1,141 @@
+@page "/toggle-panel"
+
+<h3>TogglePanel Component</h3>
+<p>A collapsible panel component built entirely on the native HTML5 <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> elements.
+   No JavaScript required — click-to-toggle and keyboard accessibility are built into the browser.</p>
+
+<div class="d-flex align-items-start component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="option_summary" style="margin-right: 5px;">Summary</label></td>
+                    <td><input type="text" id="option_summary" style="width: 150px;" @bind-value=_summary></td>
+                </tr>
+                <tr>
+                    <td><label for="option_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="option_size" @bind-value=_size @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small>Small</option>
+                            <option value=@Size.Medium selected>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="option_is_open" style="margin-right: 5px;">IsOpen</label></td>
+                    <td><ToggleSwitch id="option_is_open" @bind-Checked=_isOpen /></td>
+                </tr>
+                <tr>
+                    <td><label for="option_show_chevron" style="margin-right: 5px;">ShowChevron</label></td>
+                    <td><ToggleSwitch id="option_show_chevron" @bind-Checked=_showChevron /></td>
+                </tr>
+                <tr>
+                    <td><label for="option_visible" style="margin-right: 5px;">IsVisible</label></td>
+                    <td><ToggleSwitch id="option_visible" @bind-Checked=_isVisible /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-3">
+            <p><strong>Last Toggle:</strong> @_lastToggle</p>
+        </div>
+    </div>
+    <div class="p-2 flex-grow-1">
+        <TogglePanel Summary="@_summary"
+                     Size="@_size"
+                     IsOpen="@_isOpen"
+                     ShowChevron="@_showChevron"
+                     IsVisible="@_isVisible"
+                     OnToggle="HandleToggle">
+            <p>This is the collapsible body content. Try adjusting the parameters on the left to see how the panel behaves.</p>
+            <p>You can also press <kbd>Enter</kbd> or <kbd>Space</kbd> on the focused header to toggle it without a mouse click.</p>
+        </TogglePanel>
+    </div>
+</div>
+
+<hr />
+
+<h4>Basic Usage</h4>
+<p>A simple panel with a text summary and body content.</p>
+<pre><code>&lt;TogglePanel Summary="Advanced Filters"&gt;
+    &lt;label&gt;&lt;input type="checkbox" /&gt; Show archived&lt;/label&gt;
+&lt;/TogglePanel&gt;</code></pre>
+
+<TogglePanel Summary="Advanced Filters">
+    <label><input type="checkbox" /> Show archived</label>
+</TogglePanel>
+
+<hr />
+
+<h4>Open by Default</h4>
+<p>Set <code>IsOpen="true"</code> to start the panel expanded.</p>
+
+<TogglePanel Summary="Open by Default" IsOpen="true">
+    <p>This panel is expanded on first render because <code>IsOpen="true"</code> was set.</p>
+</TogglePanel>
+
+<hr />
+
+<h4>Without Chevron</h4>
+<p>Set <code>ShowChevron="false"</code> to hide the right-justified arrow indicator.</p>
+
+<TogglePanel Summary="No Chevron Indicator" ShowChevron="false">
+    <p>The summary header has no chevron icon, using the browser's default disclosure marker instead.</p>
+</TogglePanel>
+
+<hr />
+
+<h4>Rich Summary Content</h4>
+<p>Use the <code>SummaryContent</code> render fragment for custom markup in the header.</p>
+
+<TogglePanel>
+    <SummaryContent>
+        <span>?? Advanced Options</span>
+        <span class="badge bg-primary ms-2">3 active</span>
+    </SummaryContent>
+    <ChildContent>
+        <p>The summary header uses a custom render fragment with an emoji and a badge count.</p>
+    </ChildContent>
+</TogglePanel>
+
+<hr />
+
+<h4>Size Variants</h4>
+<p>The <code>Size</code> parameter controls the padding and font size of the summary header.</p>
+
+<TogglePanel Summary="Extra Small Panel" Size="Size.ExtraSmall"><p>Extra Small content.</p></TogglePanel>
+<TogglePanel Summary="Small Panel" Size="Size.Small"><p>Small content.</p></TogglePanel>
+<TogglePanel Summary="Medium Panel (Default)" Size="Size.Medium"><p>Medium content.</p></TogglePanel>
+<TogglePanel Summary="Large Panel" Size="Size.Large"><p>Large content.</p></TogglePanel>
+<TogglePanel Summary="Extra Large Panel" Size="Size.ExtraLarge"><p>Extra Large content.</p></TogglePanel>
+
+<hr />
+
+<h4>Two-Way Binding with @@bind-IsOpen</h4>
+<p>Use <code>@@bind-IsOpen</code> to keep external state in sync with the panel open/close state.</p>
+
+<div class="mb-2">
+    <TogglePanel Summary="Bound Panel" @bind-IsOpen="_boundIsOpen">
+        <p>Toggle me and watch the state indicator below update.</p>
+    </TogglePanel>
+</div>
+<p><strong>Panel is currently:</strong> @(_boundIsOpen ? "Open ?" : "Closed ?")</p>
+<button class="btn btn-sm btn-outline-secondary" @onclick="() => _boundIsOpen = !_boundIsOpen">Toggle from code</button>
+
+<hr />
+
+<h4>Multiple Panels (Accordion-style)</h4>
+<p>Stack multiple panels for an accordion-like experience. Each panel manages its own state independently.</p>
+
+<TogglePanel Summary="Section 1 — Introduction">
+    <p>This is the content for Section 1. The native <code>&lt;details&gt;</code> element means each panel operates completely independently.</p>
+</TogglePanel>
+<TogglePanel Summary="Section 2 — Details">
+    <p>This is the content for Section 2. Opening this panel does not close the others.</p>
+</TogglePanel>
+<TogglePanel Summary="Section 3 — Summary">
+    <p>This is the content for Section 3.</p>
+</TogglePanel>
