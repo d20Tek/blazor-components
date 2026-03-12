@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Items", ".Items", "{F0C4F3
 		.github\workflows\azure-static-web-apps-white-rock-0f5bec81e.yml = .github\workflows\azure-static-web-apps-white-rock-0f5bec81e.yml
 		.github\workflows\blazor-components-ci.yml = .github\workflows\blazor-components-ci.yml
 		.github\workflows\blazor-components-official.yml = .github\workflows\blazor-components-official.yml
+		.github\copilot-instructions.md = .github\copilot-instructions.md
 		README.md = README.md
 		.github\workflows\release.yml = .github\workflows\release.yml
 		ReleaseNotes.md = ReleaseNotes.md
@@ -39,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".plans", ".plans", "{DB7063
 		plans\message-box-tasks.md = plans\message-box-tasks.md
 		plans\modal-form-tasks.md = plans\modal-form-tasks.md
 		plans\modal-tasks.md = plans\modal-tasks.md
+		plans\toggle-panel-tasks.md = plans\toggle-panel-tasks.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D20Tek.BlazorComponents.Modal", "src\D20Tek.BlazorComponents.Modal\D20Tek.BlazorComponents.Modal.csproj", "{07831D5D-5AFE-916D-97F1-D2A5FF75A005}"
