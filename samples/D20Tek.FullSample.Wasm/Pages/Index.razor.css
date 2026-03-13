@@ -1,0 +1,20 @@
+.component-grid {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    row-gap: 0.35rem;
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .component-grid {
+        grid-template-columns: 1.5rem auto auto auto;
+        column-gap: 0.75rem;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .component-grid > :nth-child(4n+3) {
+        margin-left: 4rem;
+    }
+}
