@@ -1,5 +1,11 @@
 # Release Notes
 
+## Release v1.10.10
+* Implemented TogglePanel component that toggles hiding and showing its inner content.
+* Inner content is supplied as ChildContent parameter.
+* Added unit tests for TogglePanel.
+* Added sample page for TogglePanel component to the FullSample.Wasm project.
+
 ## Release v1.10.9
 * Implemented MessageBox component with service-based architecture for displaying alerts and confirmation dialogs:
   * Service-Based API - Inject IMessageBoxService to show dialogs from anywhere in the application
