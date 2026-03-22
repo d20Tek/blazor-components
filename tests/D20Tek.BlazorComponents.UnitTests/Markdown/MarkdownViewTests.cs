@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace D20Tek.BlazorComponents.UnitTests.Markdown;
 
@@ -8,6 +10,7 @@ public partial class MarkdownViewTests
     private static BunitContext CreateContext(string renderedHtml = "")
     {
         var ctx = new BunitContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
         ctx.Services.AddSingleton<IMarkdownRenderer>(new FakeMarkdownRenderer(renderedHtml));
         return ctx;
     }
@@ -118,6 +121,7 @@ public partial class MarkdownViewTests
     {
         // arrange
         var ctx = new BunitContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
         var trackingRenderer = new TrackingMarkdownRenderer("<p>result</p>");
         ctx.Services.AddSingleton<IMarkdownRenderer>(trackingRenderer);
 
@@ -135,6 +139,7 @@ public partial class MarkdownViewTests
     {
         // arrange
         var ctx = new BunitContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
         ctx.Services.AddSingleton<IMarkdownRenderer>(new MarkdigRenderer());
 
         // act
@@ -148,6 +153,75 @@ public partial class MarkdownViewTests
 
         Assert.AreEqual("bold", comp.Find("strong").TextContent);
         Assert.AreEqual("italic", comp.Find("em").TextContent);
+    }
+
+    [TestMethod]
+    public void Render_ShowCopyButtonTrue_AddsCopyButtonToCodeBlock()
+    {
+        // arrange
+        var ctx = CreateContext("<pre><code>var x = 1;</code></pre>");
+
+        // act
+        var comp = ctx.Render<BlazorComponents.MarkdownView>(parameters =>
+            parameters.Add(p => p.Markdown, "```\nvar x = 1;\n```")
+                      .Add(p => p.ShowCopyButton, true));
+
+        // assert
+        Assert.AreEqual(1, comp.FindAll(".markdown-copy-btn").Count);
+        Assert.AreEqual(1, comp.FindAll(".markdown-code-block").Count);
+    }
+
+    [TestMethod]
+    public void Render_ShowCopyButtonFalse_NoCopyButton()
+    {
+        // arrange
+        var ctx = CreateContext("<pre><code>var x = 1;</code></pre>");
+
+        // act
+        var comp = ctx.Render<BlazorComponents.MarkdownView>(parameters =>
+            parameters.Add(p => p.Markdown, "```\nvar x = 1;\n```")
+                      .Add(p => p.ShowCopyButton, false));
+
+        // assert
+        Assert.AreEqual(0, comp.FindAll(".markdown-copy-btn").Count);
+        Assert.AreEqual(0, comp.FindAll(".markdown-code-block").Count);
+    }
+
+    [TestMethod]
+    public async Task DisposeAsync_WithJsModule_CallsDisposeOnModule()
+    {
+        // arrange
+        var ctx = new BunitContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Loose;
+        var moduleInterop = ctx.JSInterop.SetupModule(
+            "./_content/D20Tek.BlazorComponents.Markdown/markdown-copy.js");
+        ctx.Services.AddSingleton<IMarkdownRenderer>(new FakeMarkdownRenderer(""));
+
+        var comp = ctx.Render<BlazorComponents.MarkdownView>(parameters =>
+            parameters.Add(p => p.Markdown, "test")
+                      .Add(p => p.ShowCopyButton, true));
+
+        // act
+        await comp.Instance.DisposeAsync();
+
+        // assert
+        var disposeInvocations = moduleInterop.Invocations
+            .Where(i => i.Identifier == "dispose")
+            .ToList();
+        Assert.AreEqual(1, disposeInvocations.Count);
+    }
+
+    [TestMethod]
+    public async Task DisposeAsync_WithoutJsModule_CompletesWithoutError()
+    {
+        // arrange
+        var ctx = CreateContext();
+        var comp = ctx.Render<BlazorComponents.MarkdownView>(parameters =>
+            parameters.Add(p => p.Markdown, "test")
+                      .Add(p => p.ShowCopyButton, false));
+
+        // act + assert (no exception thrown)
+        await comp.Instance.DisposeAsync();
     }
 }
 

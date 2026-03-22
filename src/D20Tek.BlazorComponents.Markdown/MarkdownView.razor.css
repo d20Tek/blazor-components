@@ -1,7 +1,0 @@
-.markdown-view :deep(pre) {
-    overflow-x: auto;
-}
-
-.markdown-view :deep(img) {
-    max-width: 100%;
-}

@@ -2,7 +2,10 @@
 
 @if (this.IsVisible)
 {
-    <div @attributes="@this.RemainingAttributes" class="@this.CssClass" style="@this.CssStyles">
+    <div @ref="_elementRef"
+         @attributes="@this.RemainingAttributes"
+         class="@this.CssClass"
+         style="@this.CssStyles">
         @((MarkupString)_html)
     </div>
 }

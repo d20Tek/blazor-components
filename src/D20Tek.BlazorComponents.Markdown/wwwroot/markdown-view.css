@@ -1,0 +1,43 @@
+.markdown-view pre {
+    overflow-x: auto;
+}
+
+.markdown-view img {
+    max-width: 100%;
+}
+
+.markdown-view .markdown-code-block {
+    position: relative;
+}
+
+.markdown-view .markdown-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.4rem;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.markdown-view .markdown-code-block:hover .markdown-copy-btn {
+    opacity: 0.6;
+}
+
+.markdown-view .markdown-copy-btn:hover {
+    opacity: 1;
+}
+
+.markdown-view .markdown-copy-btn.copied {
+    opacity: 1;
+    color: #16a34a;
+    border-color: #16a34a;
+}

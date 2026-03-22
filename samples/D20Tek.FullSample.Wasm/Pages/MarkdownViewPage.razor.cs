@@ -2,7 +2,7 @@ namespace D20Tek.FullSample.Wasm.Pages;
 
 public partial class MarkdownViewPage
 {
-    private string _liveMarkdown = "## Live Preview\n\nType **Markdown** here and see it _rendered_ in real time.\n\n- Item one\n- Item two\n- Item three";
+    private string _liveMarkdown = "## Live Preview\n\nType **Markdown** here and see it _rendered_ in real time.\n\n- Item one\n- Item two\n- Item three\n\n```csharp\nvar greeting = \"Hello, World!\";\nConsole.WriteLine(greeting);\n```";
 
     private readonly string _sampleMarkdown = """
         # Welcome to MarkdownView
