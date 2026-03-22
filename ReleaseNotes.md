@@ -1,5 +1,12 @@
 # Release Notes
 
+## Release v1.10.11
+- Implemented codeblock copy button on HTML converted markdown.
+- Component has a ShowCopyButton parameter to customize whether the button is shown.
+- Added codeblocks to the MarkdownView sample page to show behavior.
+- Added unit tests for new behavior.
+- The copy code button copies everything in the inner codeblock to the clipboard.
+
 ## Release v1.10.10
 * Implemented TogglePanel component that toggles hiding and showing its inner content.
 * Inner content is supplied as ChildContent parameter.
