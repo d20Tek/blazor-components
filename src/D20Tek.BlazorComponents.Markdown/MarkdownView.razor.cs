@@ -7,7 +7,6 @@ public partial class MarkdownView : BaseComponent, IAsyncDisposable
     private const string JsModulePath = "./_content/D20Tek.BlazorComponents.Markdown/markdown-copy.js";
 
     private string _html = string.Empty;
-    private ElementReference _elementRef;
     private IJSObjectReference? _jsModule;
 
     public MarkdownView() => Size = Size.None;
@@ -37,10 +36,10 @@ public partial class MarkdownView : BaseComponent, IAsyncDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender && ShowCopyButton && _elementRef.Id is not null)
+        if (firstRender && ShowCopyButton)
         {
             _jsModule = await JsRuntime.InvokeAsync<IJSObjectReference>("import", JsModulePath);
-            await _jsModule.InvokeVoidAsync("init", _elementRef);
+            await _jsModule.InvokeVoidAsync("init");
         }
     }
 
@@ -49,7 +48,7 @@ public partial class MarkdownView : BaseComponent, IAsyncDisposable
         GC.SuppressFinalize(this);
         if (_jsModule is not null)
         {
-            await _jsModule.InvokeVoidAsync("dispose", _elementRef);
+            await _jsModule.InvokeVoidAsync("dispose");
             await _jsModule.DisposeAsync();
         }
     }
