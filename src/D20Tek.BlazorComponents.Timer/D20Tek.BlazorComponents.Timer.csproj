@@ -1,34 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>DarthPedro</Authors>
-    <Company>d20Tek</Company>
     <Version>1.9.1</Version>
     <Description>Blazor components for displaying countdown timers in visually appealing ways. These component allows you to easily place timers throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
-    <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <PackageTags>Blazor .NET Components WebAssembly Timer Countdown Stopwatch</PackageTags>
-    <PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
   </PropertyGroup>
-
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.9" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.11" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>
 
   <ItemGroup>
