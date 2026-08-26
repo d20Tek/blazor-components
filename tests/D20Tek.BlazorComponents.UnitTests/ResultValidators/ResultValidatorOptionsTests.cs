@@ -13,11 +13,9 @@ public sealed class ResultValidatorOptionsTests
 
         // act
         var selector = sut.FieldSelector;
-        var behavior = sut.UnknownFieldBehavior;
 
         // assert
         Assert.AreSame(CodeAsFieldSelector.Instance, selector);
-        Assert.AreEqual(UnknownFieldBehavior.PassThrough, behavior);
     }
 
     [TestMethod]
@@ -123,19 +121,5 @@ public sealed class ResultValidatorOptionsTests
 
         // assert
         Assert.IsInstanceOfType<PrefixStrippingFieldSelector>(sut.FieldSelector);
-    }
-
-    [TestMethod]
-    public void UnknownFieldBehavior_IsSettable()
-    {
-        // arrange
-        var sut = new ResultValidatorOptions
-        {
-            // act
-            UnknownFieldBehavior = UnknownFieldBehavior.Throw
-        };
-
-        // assert
-        Assert.AreEqual(UnknownFieldBehavior.Throw, sut.UnknownFieldBehavior);
     }
 }

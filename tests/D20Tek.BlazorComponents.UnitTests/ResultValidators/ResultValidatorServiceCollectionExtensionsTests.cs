@@ -22,7 +22,6 @@ public sealed class ResultValidatorServiceCollectionExtensionsTests
 
         Assert.AreSame(CodeAsFieldSelector.Instance, options.FieldSelector);
         Assert.AreSame(CodeAsFieldSelector.Instance, selector);
-        Assert.AreEqual(UnknownFieldBehavior.PassThrough, options.UnknownFieldBehavior);
     }
 
     [TestMethod]

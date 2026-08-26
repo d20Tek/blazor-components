@@ -18,27 +18,6 @@ public sealed class ResultValidatorSelectorResolutionTests : BunitContext
     }
 
     [TestMethod]
-    public void UnknownFieldBehaviorParameter_OverridesInjectedDefault()
-    {
-        // arrange - inject Throw via DI so the parameter must win to keep mapping working
-        Services.AddResultValidator(o => o.UnknownFieldBehavior = UnknownFieldBehavior.Throw);
-        var model = new TestModel();
-        var editContext = new EditContext(model);
-        var cut = Render<ResultValidator>(parameters => parameters
-            .AddCascadingValue(editContext)
-            .Add(p => p.UnknownFieldBehavior, UnknownFieldBehavior.PassThrough));
-
-        // act
-        var result = Result<string>.Failure([Error.Validation("Name", "Required.")]);
-        var handled = cut.Instance.HandleResult(result);
-
-        // assert
-        Assert.IsFalse(handled);
-        var messages = editContext.GetValidationMessages(editContext.Field("Name")).ToList();
-        Assert.Contains("Required.", messages);
-    }
-
-    [TestMethod]
     public void FieldSelectorParameter_OverridesDefaultSelector()
     {
         // arrange

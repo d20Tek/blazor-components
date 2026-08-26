@@ -6,8 +6,6 @@ public sealed class ResultValidatorOptions
 {
     public IErrorFieldSelector FieldSelector { get; set; } = CodeAsFieldSelector.Instance;
 
-    public UnknownFieldBehavior UnknownFieldBehavior { get; set; } = UnknownFieldBehavior.PassThrough;
-
     public ResultValidatorOptions UseSelector(IErrorFieldSelector selector)
     {
         ArgumentNullException.ThrowIfNull(selector);

@@ -2,5 +2,4 @@ namespace D20Tek.BlazorComponents;
 
 public sealed record FieldSelectorContext(
     EditContext EditContext,
-    Type? ModelType = null,
-    IReadOnlySet<string>? KnownFields = null);
+    Type? ModelType = null);

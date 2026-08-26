@@ -11,9 +11,6 @@ public class ResultValidator : ComponentBase, IDisposable
     [Parameter]
     public IErrorFieldSelector? FieldSelector { get; set; }
 
-    [Parameter]
-    public UnknownFieldBehavior? UnknownFieldBehavior { get; set; }
-
     [Inject]
     private IServiceProvider ServiceProvider { get; set; } = null!;
 
@@ -80,7 +77,7 @@ public class ResultValidator : ComponentBase, IDisposable
     }
 
     private void MapErrors(IEnumerable<Error> errors, IErrorFieldSelector? perCallSelector) =>
-        _errorMapper.Map(errors, perCallSelector ?? ResolveSelector(), ResolveUnknownBehavior());
+        _errorMapper.Map(errors, perCallSelector ?? ResolveSelector());
 
     private static DelegateFieldSelector? AsSelector(Func<Error, string>? func) =>
         func is null ? null : new DelegateFieldSelector(func);
@@ -91,14 +88,6 @@ public class ResultValidator : ComponentBase, IDisposable
 
         var injected = ServiceProvider!.GetService<IErrorFieldSelector>();
         return injected ?? CodeAsFieldSelector.Instance;
-    }
-
-    private UnknownFieldBehavior ResolveUnknownBehavior()
-    {
-        if (UnknownFieldBehavior is not null) return UnknownFieldBehavior.Value;
-
-        var injectedOptions = ServiceProvider!.GetService<ResultValidatorOptions>();
-        return injectedOptions?.UnknownFieldBehavior ?? BlazorComponents.UnknownFieldBehavior.PassThrough;
     }
 
     private void HandleFieldChanged(object? sender, FieldChangedEventArgs e)
