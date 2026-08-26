@@ -1,5 +1,6 @@
 using D20Tek.BlazorComponents;
 using D20Tek.FullSample.Wasm;
+using D20Tek.FullSample.Wasm.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -10,5 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
                 .AddMarkdownRenderer()
                 .AddMessageBox();
+
+builder.Services.AddScoped<RegistrationService>();
 
 await builder.Build().RunAsync();
