@@ -37,3 +37,40 @@
     }
 </div>
 <br />
+
+<h3>ResultAlert Component</h3>
+<p>The <code>ResultAlert</code> renders a success or error alert based on the state of a
+   <code>Result&lt;T&gt;</code> value. It is fully customizable through render-fragment slots and
+   styling options. The examples below share the same <code>_lastResult</code> produced by the form
+   above &mdash; submit the form to see them update.</p>
+
+<h4>Default alert</h4>
+<ResultAlert T="RegistrationModel" Result="_lastResult" />
+
+<h4>Custom success content</h4>
+<ResultAlert T="RegistrationModel" Result="_lastResult">
+    <SuccessContent Context="value">
+        <span class="result-alert__title">Welcome, @value.Name!</span>
+        <div>We sent a confirmation to <strong>@value.Email</strong>.</div>
+    </SuccessContent>
+</ResultAlert>
+
+<h4>Custom error content</h4>
+<ResultAlert T="RegistrationModel" Result="_lastResult">
+    <ErrorContent Context="errors">
+        <span class="result-alert__title">Please fix @errors.Count issue(s):</span>
+        <ul>
+            @foreach (var error in errors)
+            {
+                <li><code>@error.Code</code> &mdash; @error.Message</li>
+            }
+        </ul>
+    </ErrorContent>
+</ResultAlert>
+
+<h4>Dismissible alert</h4>
+<ResultAlert T="RegistrationModel"
+             Result="_dismissibleResult"
+             ShowCloseButton="true"
+             OnDismiss="HandleAlertDismiss" />
+<br />

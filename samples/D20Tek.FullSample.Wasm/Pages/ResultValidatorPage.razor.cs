@@ -1,4 +1,5 @@
 using D20Tek.BlazorComponents;
+using D20Tek.Functional;
 using D20Tek.FullSample.Wasm.Services;
 
 namespace D20Tek.FullSample.Wasm.Pages;
@@ -9,6 +10,8 @@ public partial class ResultValidatorPage
     private ResultValidator? _validator;
     private string _successMessage = string.Empty;
     private bool _submitting;
+    private Result<RegistrationModel>? _lastResult;
+    private Result<RegistrationModel>? _dismissibleResult;
 
     private async Task HandleSubmitAsync()
     {
@@ -18,6 +21,8 @@ public partial class ResultValidatorPage
         try
         {
             var result = await RegistrationService.RegisterAsync(_model);
+            _lastResult = result;
+            _dismissibleResult = result;
 
             _validator?.HandleResult(
                 result,
@@ -29,4 +34,6 @@ public partial class ResultValidatorPage
             _submitting = false;
         }
     }
+
+    private void HandleAlertDismiss() => _dismissibleResult = null;
 }
