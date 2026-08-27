@@ -33,7 +33,7 @@ public partial class ResultViewPage
         _result = null;
         StateHasChanged();
 
-        await Task.Delay(1500);
+        await Task.Delay(1000);
 
         _isLoading = false;
         ShowSuccess();

@@ -18,7 +18,7 @@ Key characteristics:
 - Auto-dismiss timeout, manual dismiss, stacking, and enter/exit animations.
 - Reuses the variant metadata, icons, and error-formatting design from `ResultAlert`.
 
-## ResultView&lt;T&gt;
+## ResultView&lt;T&gt; [Done]
 
 A render-branching container that selects its UI based on the state of a `Result<T>`,
 letting the caller supply the markup for each state. Well suited to whole-page or
