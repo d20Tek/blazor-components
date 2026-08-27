@@ -1,0 +1,76 @@
+@page "/result-validator"
+@using D20Tek.FullSample.Wasm.Services
+@inject RegistrationService RegistrationService
+
+<h3>ResultValidator Component</h3>
+<p>The <code>ResultValidator</code> integrates <code>Result&lt;T&gt;</code> validation errors returned from an
+   API into a Blazor <code>EditForm</code>. When the submit action calls an API that returns validation errors,
+   the validator maps them into the form's <code>ValidationMessageStore</code> and displays them via a
+   <code>ValidationSummary</code> (or per-field <code>ValidationMessage</code>).</p>
+
+<div>
+    <EditForm Model="_model" OnValidSubmit="HandleSubmitAsync">
+        <ResultValidator @ref="_validator" />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="_model.Name" />
+            <ValidationMessage For="() => _model.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="_model.Email" />
+            <ValidationMessage For="() => _model.Email" />
+        </div>
+
+        <ValidationSummary />
+
+        <button type="submit" class="btn btn-primary mt-2" disabled="@_submitting">
+            @(_submitting ? "Submitting..." : "Submit")
+        </button>
+    </EditForm>
+
+    @if (!string.IsNullOrEmpty(_successMessage))
+    {
+        <div class="alert alert-success mt-3" role="alert">@_successMessage</div>
+    }
+</div>
+<br />
+
+<h3>ResultAlert Component</h3>
+<p>The <code>ResultAlert</code> renders a success or error alert based on the state of a
+   <code>Result&lt;T&gt;</code> value. It is fully customizable through render-fragment slots and
+   styling options. The examples below share the same <code>_lastResult</code> produced by the form
+   above &mdash; submit the form to see them update.</p>
+
+<h5>Default alert</h5>
+<ResultAlert T="RegistrationModel" Result="_lastResult" />
+
+<h5>Custom success content</h5>
+<ResultAlert T="RegistrationModel" Result="_lastResult">
+    <SuccessContent Context="value">
+        <span class="result-alert__title">Welcome, @value.Name!</span>
+        <div>We sent a confirmation to <strong>@value.Email</strong>.</div>
+    </SuccessContent>
+</ResultAlert>
+
+<h5>Custom error content</h5>
+<ResultAlert T="RegistrationModel" Result="_lastResult">
+    <ErrorContent Context="errors">
+        <span class="result-alert__title">Please fix @errors.Count issue(s):</span>
+        <ul>
+            @foreach (var error in errors)
+            {
+                <li><code>@error.Code</code> &mdash; @error.Message</li>
+            }
+        </ul>
+    </ErrorContent>
+</ResultAlert>
+
+<h5>Dismissible alert</h5>
+<ResultAlert T="RegistrationModel"
+             Result="_dismissibleResult"
+             ShowCloseButton="true"
+             OnDismiss="HandleAlertDismiss" />
+<br />

@@ -1,18 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="bunit" Version="2.7.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="4.2.3" />
-    <PackageReference Include="MSTest.TestFramework" Version="4.2.3" />
-    <PackageReference Include="coverlet.collector" Version="10.0.1">
+    <PackageReference Include="bunit" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="MSTest.TestAdapter" />
+    <PackageReference Include="MSTest.TestFramework" />
+    <PackageReference Include="coverlet.collector">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -20,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Modal\D20Tek.BlazorComponents.Modal.csproj" />
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.ResultValidator\D20Tek.BlazorComponents.ResultValidator.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Spinner\D20Tek.BlazorComponents.Spinner.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Timer\D20Tek.BlazorComponents.Timer.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.TogglePanel\D20Tek.BlazorComponents.TogglePanel.csproj" />

@@ -1,5 +1,17 @@
 # Release Notes
 
+## Release Release v1.10.17
+* Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:
+  * `ResultValidator` component - Integrates with `EditContext` to map operation `Error`s into Blazor form validation messages via a `ValidationMessageStore`.
+  * `HandleResult` / `HandleResultAsync` - Process a `Result<T>`, invoke success callbacks on success, and push per-field validation errors on failure.
+  * Per-field errors auto-clear when the user edits the associated field, and `ClearErrors` resets validation state on demand.
+  * Pluggable field selection via `IErrorFieldSelector` with built-in selectors: code-as-field, display names, JSON property names, prefix stripping, delegate-based, and composite selectors.
+  * `AddResultValidator` DI extension with a fluent `ResultValidatorOptions` API (`UseCodeAsField`, `UseDisplayNames`, `UseJsonPropertyNames`, `StripPrefixes`, `Compose`, `UseSelector`).
+  * `ResultAlert<T>` component - Renders success/error/empty states for a `Result<T>` with customizable content, icons, header/footer, error grouping and limits, size and alert variants, borders, elevation, animation, and a dismissible close button.
+  * Added unit tests covering the validator, selectors, and alert component.
+* Added the **D20Tek.BlazorComponents.All** meta-package that bundles the full component suite (Markdown, Modal, ResultValidator, Spinner, Timer, TogglePanel, ToggleSwitch) behind a single package reference for easy installation.
+* Updated all component projects to the latest versions of their dependencies.
+
 ## Release v1.10.11
 - Implemented codeblock copy button on HTML converted markdown.
 - Component has a ShowCopyButton parameter to customize whether the button is shown.

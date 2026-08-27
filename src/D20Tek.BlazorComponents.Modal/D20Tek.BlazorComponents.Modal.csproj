@@ -1,32 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-<PropertyGroup>
-  <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
-  <Nullable>enable</Nullable>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <RootNamespace>D20Tek.BlazorComponents</RootNamespace>
-  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  <Authors>DarthPedro</Authors>
-  <Company>d20Tek</Company>
-  <Description>A Blazor component for providing a ModalDialog that shows custom content in a popup modal window with a semi-transparent background.</Description>
-  <Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
-  <PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
-  <RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
-  <PackageReadmeFile>README.md</PackageReadmeFile>
-  <RepositoryType>git</RepositoryType>
-  <PackageTags>Blazor .NET Components; WebAssembly; modal; modal dialog</PackageTags>
-</PropertyGroup>
+  <PropertyGroup>
+    <Description>A Blazor component for providing a ModalDialog that shows custom content in a popup modal window with a semi-transparent background.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Blazor .NET Components; WebAssembly; modal; modal dialog</PackageTags>
+  </PropertyGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.9" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.11" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>
 
   <ItemGroup>

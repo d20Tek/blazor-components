@@ -1,0 +1,39 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.Items/">
+    <File Path=".github/copilot-instructions.md" />
+    <File Path=".github/workflows/azure-static-web-apps-white-rock-0f5bec81e.yml" />
+    <File Path=".github/workflows/blazor-components-ci.yml" />
+    <File Path=".github/workflows/blazor-components-official.yml" />
+    <File Path=".github/workflows/release.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+    <File Path="ReleaseNotes.md" />
+  </Folder>
+  <Folder Name="/.plans/">
+    <File Path="plans/future-features.md" />
+  </Folder>
+  <Folder Name="/Components/">
+    <Project Path="src/D20Tek.BlazorComponent.Core/D20Tek.BlazorComponent.Core.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.All/D20Tek.BlazorComponents.All.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Markdown/D20Tek.BlazorComponents.Markdown.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Modal/D20Tek.BlazorComponents.Modal.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.ResultValidator/D20Tek.BlazorComponents.ResultValidator.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Spinner/D20Tek.BlazorComponents.Spinner.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Timer/D20Tek.BlazorComponents.Timer.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.TogglePanel/D20Tek.BlazorComponents.TogglePanel.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.ToggleSwitch/D20Tek.BlazorComponents.ToggleSwitch.csproj" />
+  </Folder>
+  <Folder Name="/Samples/">
+    <Project Path="samples/D20Tek.FullSample.Wasm/D20Tek.FullSample.Wasm.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/D20Tek.BlazorComponents.Shared.UnitTests/D20Tek.BlazorComponents.Core.UnitTests.csproj" />
+    <Project Path="tests/D20Tek.BlazorComponents.UnitTests/D20Tek.BlazorComponents.UnitTests.csproj" />
+  </Folder>
+</Solution>

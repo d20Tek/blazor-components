@@ -1,0 +1,79 @@
+@typeparam T where T : notnull
+@inherits BaseComponent
+
+@if (Result is null)
+{
+    @EmptyContent
+}
+else if (ShouldShowAlert())
+{
+    <div @attributes="@RemainingAttributes" role="alert" aria-live="@AriaLive" class="@CssClass" style="@CssStyles">
+        @if (ShowIcon)
+        {
+            <div class="result-alert__icon">
+                @if (IsSuccess)
+                {
+                    @(SuccessIcon ?? DefaultIcon())
+                }
+                else
+                {
+                    @(ErrorIcon ?? DefaultIcon())
+                }
+            </div>
+        }
+
+        <div class="result-alert__content">
+            @if (HeaderContent is not null)
+            {
+                <div class="result-alert__header">@HeaderContent</div>
+            }
+
+            <div class="result-alert__body">
+                @if (IsSuccess)
+                {
+                    @if (SuccessContent is not null)
+                    {
+                        @SuccessContent(Result.GetValue())
+                    }
+                    else
+                    {
+                        <span class="result-alert__title">Success</span>
+                    }
+                }
+                else
+                {
+                    @if (ErrorContent is not null)
+                    {
+                        @ErrorContent(GetErrors())
+                    }
+                    else
+                    {
+                        <span class="result-alert__title">There were errors</span>
+                        <ul class="result-alert__error-list">
+                            @foreach (var error in GetVisibleErrors())
+                            {
+                                <li class="result-alert__error-item">@ErrorFormatter(error)</li>
+                            }
+                        </ul>
+                        @if (OverflowCount() is int overflow && overflow > 0)
+                        {
+                            <div class="result-alert__error-overflow">+@overflow more</div>
+                        }
+                    }
+                }
+            </div>
+
+            @if (FooterContent is not null)
+            {
+                <div class="result-alert__footer">@FooterContent</div>
+            }
+        </div>
+
+        @if (ShowCloseButton)
+        {
+            <button type="button" class="result-alert__close-btn" aria-label="@CloseButtonAriaLabel" @onclick="HandleDismiss">
+                &times;
+            </button>
+        }
+    </div>
+}

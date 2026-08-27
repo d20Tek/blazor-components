@@ -59,6 +59,10 @@ jobs:
       run: dotnet nuget push D20Tek.BlazorComponents.ToggleSwitch.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish All
+      run: dotnet nuget push D20Tek.BlazorComponents.All.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish Core (public)
       run: dotnet nuget push D20Tek.BlazorComponent.Core.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
@@ -86,5 +90,9 @@ jobs:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     - name: Publish ToggleSwitch (public)
       run: dotnet nuget push D20Tek.BlazorComponents.ToggleSwitch.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    - name: Publish All (public)
+      run: dotnet nuget push D20Tek.BlazorComponents.All.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
