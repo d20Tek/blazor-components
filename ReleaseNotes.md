@@ -1,6 +1,15 @@
 # Release Notes
 
-## Release Release v1.10.18
+## Unreleased (features/more-result-components)
+* Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.ResultValidator** package:
+  * A lightweight, non-visual render-branching container that selects UI based on the state of a `Result<T>`.
+  * Slot-based rendering with `Loading`, `Success` (with the value), `Failure` (with the errors), and `Empty` render fragments.
+  * Adds a pending/loading state (via `IsLoading`) that neither `ResultAlert` nor `ResultValidator` covered, ideal for whole-page or data-loading scenarios.
+  * `OnStateChanged` callback and `ResultViewState` enum expose the current rendered state.
+  * Added unit tests covering all render states and state-transition callbacks.
+  * Added a `ResultView` sample page (with buttons to toggle success/failure/loading states) to the FullSample.Wasm project.
+
+## Release v1.10.18
 * Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:
   * `ResultValidator` component - Integrates with `EditContext` to map operation `Error`s into Blazor form validation messages via a `ValidationMessageStore`.
   * `HandleResult` / `HandleResultAsync` - Process a `Result<T>`, invoke success callbacks on success, and push per-field validation errors on failure.
