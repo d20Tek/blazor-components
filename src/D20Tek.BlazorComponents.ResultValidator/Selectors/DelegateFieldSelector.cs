@@ -13,7 +13,7 @@ public sealed class DelegateFieldSelector : IErrorFieldSelector
     public DelegateFieldSelector(Func<Error, FieldSelectorContext, string> selector)
     {
         ArgumentNullException.ThrowIfNull(selector);
-        _selector = (e, c) => new[] { selector(e, c) };
+        _selector = (e, c) => [selector(e, c)];
     }
 
     public DelegateFieldSelector(Func<Error, FieldSelectorContext, IEnumerable<string>> selector)

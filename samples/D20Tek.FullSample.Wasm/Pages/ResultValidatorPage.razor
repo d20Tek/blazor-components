@@ -44,10 +44,10 @@
    styling options. The examples below share the same <code>_lastResult</code> produced by the form
    above &mdash; submit the form to see them update.</p>
 
-<h4>Default alert</h4>
+<h5>Default alert</h5>
 <ResultAlert T="RegistrationModel" Result="_lastResult" />
 
-<h4>Custom success content</h4>
+<h5>Custom success content</h5>
 <ResultAlert T="RegistrationModel" Result="_lastResult">
     <SuccessContent Context="value">
         <span class="result-alert__title">Welcome, @value.Name!</span>
@@ -55,7 +55,7 @@
     </SuccessContent>
 </ResultAlert>
 
-<h4>Custom error content</h4>
+<h5>Custom error content</h5>
 <ResultAlert T="RegistrationModel" Result="_lastResult">
     <ErrorContent Context="errors">
         <span class="result-alert__title">Please fix @errors.Count issue(s):</span>
@@ -68,7 +68,7 @@
     </ErrorContent>
 </ResultAlert>
 
-<h4>Dismissible alert</h4>
+<h5>Dismissible alert</h5>
 <ResultAlert T="RegistrationModel"
              Result="_dismissibleResult"
              ShowCloseButton="true"

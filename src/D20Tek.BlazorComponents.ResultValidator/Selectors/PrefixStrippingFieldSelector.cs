@@ -14,7 +14,7 @@ public sealed class PrefixStrippingFieldSelector : IErrorFieldSelector
         ArgumentNullException.ThrowIfNull(inner);
         ArgumentNullException.ThrowIfNull(prefixes);
         _inner = inner;
-        _prefixes = prefixes.ToArray();
+        _prefixes = [.. prefixes];
         _comparison = comparison;
     }
 
@@ -33,7 +33,7 @@ public sealed class PrefixStrippingFieldSelector : IErrorFieldSelector
         {
             if (name.StartsWith(prefix, _comparison))
             {
-                return name.Substring(prefix.Length);
+                return name[prefix.Length..];
             }
         }
         return name;
