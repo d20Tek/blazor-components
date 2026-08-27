@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release Release v1.10.17
+## Release Release v1.10.18
 * Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:
   * `ResultValidator` component - Integrates with `EditContext` to map operation `Error`s into Blazor form validation messages via a `ValidationMessageStore`.
   * `HandleResult` / `HandleResultAsync` - Process a `Result<T>`, invoke success callbacks on success, and push per-field validation errors on failure.
