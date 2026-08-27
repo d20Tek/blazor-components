@@ -12,6 +12,7 @@
 	<Authors>DarthPedro</Authors>
 	<Company>d20Tek</Company>
 	<Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageProjectUrl>https://github.com/d20Tek/blazor-components</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
