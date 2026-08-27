@@ -16,11 +16,7 @@
     <File Path="ReleaseNotes.md" />
   </Folder>
   <Folder Name="/.plans/">
-    <File Path="plans/markdown-component-tasks.md" />
-    <File Path="plans/message-box-tasks.md" />
-    <File Path="plans/modal-form-tasks.md" />
-    <File Path="plans/modal-tasks.md" />
-    <File Path="plans/toggle-panel-tasks.md" />
+    <File Path="plans/future-features.md" />
   </Folder>
   <Folder Name="/Components/">
     <Project Path="src/D20Tek.BlazorComponent.Core/D20Tek.BlazorComponent.Core.csproj" />
