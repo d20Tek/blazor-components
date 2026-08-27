@@ -20,6 +20,7 @@
   </Folder>
   <Folder Name="/Components/">
     <Project Path="src/D20Tek.BlazorComponent.Core/D20Tek.BlazorComponent.Core.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.All/D20Tek.BlazorComponents.All.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Markdown/D20Tek.BlazorComponents.Markdown.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Modal/D20Tek.BlazorComponents.Modal.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.ResultValidator/D20Tek.BlazorComponents.ResultValidator.csproj" />

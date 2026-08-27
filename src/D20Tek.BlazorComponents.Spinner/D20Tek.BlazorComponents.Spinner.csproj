@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <Version>1.9.1</Version>
     <Description>A Blazor component for displaying a spinner/loader component. This component allows you to easily place spinners throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
     <PackageTags>Blazor .NET Components WebAssembly Spinner Loader</PackageTags>
   </PropertyGroup>

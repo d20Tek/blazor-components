@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
     <Description>A Blazor component for rendering Markdown text as HTML. This component uses the Markdig library to convert Markdown to HTML and render it safely in your Blazor application.</Description>
     <PackageTags>Blazor; .NET Components; WebAssembly; Markdown; Markdig</PackageTags>
   </PropertyGroup>

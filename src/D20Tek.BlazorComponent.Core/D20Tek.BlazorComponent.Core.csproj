@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.9.1</Version>
     <Description>The core shared library for all d20Tek Blazor components. Contains shared component defintions, enumerations, and base types.</Description>
     <PackageTags>Blazor .NET Components WebAssembly</PackageTags>
   </PropertyGroup>

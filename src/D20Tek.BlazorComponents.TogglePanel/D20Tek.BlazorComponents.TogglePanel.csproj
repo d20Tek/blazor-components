@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
     <Description>Blazor component for displaying a toggle panel using the native HTML5 details/summary elements - click-to-toggle, keyboard accessible, and fully customizable.</Description>
     <PackageTags>Blazor .NET Components; WebAssembly; TogglePanel; Accordion; Details Summary</PackageTags>
   </PropertyGroup>
