@@ -23,10 +23,10 @@ Components ship grouped by package, so a single package can contain more than on
 | `D20Tek.BlazorComponents.Modal` | ModalDialog, ModalFormDialog, MessageBox |
 | `D20Tek.BlazorComponents.Markdown` | MarkdownView |
 | `D20Tek.BlazorComponents.TogglePanel` | TogglePanel |
-| `D20Tek.BlazorComponents.ResultValidator` | ResultValidator, ResultAlert, ResultView, ResultToast |
+| `D20Tek.BlazorComponents.Functionally` | ResultValidator, ResultAlert, ResultView, ResultToast |
 
 ### The "All" meta-package
-If you would rather not reference each component package individually, install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Markdown, Modal, ResultValidator, Spinner, Timer, Toast, TogglePanel, and ToggleSwitch) through a single `PackageReference`. It ships no assemblies of its own, so you get exactly the same components as installing them one-by-one. If you only need a few components, install the individual packages instead to keep your dependency graph minimal.
+If you would rather not reference each component package individually, install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Functionally, Markdown, Modal, Spinner, Timer, Toast, TogglePanel, and ToggleSwitch) through a single `PackageReference`. It ships no assemblies of its own, so you get exactly the same components as installing them one-by-one. If you only need a few components, install the individual p
 
 > Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
@@ -41,7 +41,7 @@ PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.1
 PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.1
 PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.1
 PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.1
-PM > Install-Package D20Tek.BlazorComponents.ResultValidator -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.1
 ``` 
 
 Or install everything at once with the meta-package:
@@ -92,6 +92,7 @@ Some components require a one-time setup step in addition to the standard usage 
 ```html
 <link href="_content/D20Tek.BlazorComponents.Toast/Toast.css" rel="stylesheet" />
 ```
+> Note: `ResultToast` (in the `D20Tek.BlazorComponents.Functionally` package) is built on top of Toast. When you install `Functionally`, the `D20Tek.BlazorComponents.Toast` package comes with it transitively, so no extra package reference is needed - but you still need the setup above: link `Toast.css`, add `<ToastProvider />` to your layout, and call `builder.Services.AddToast();`.
 
 ### Samples:
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:

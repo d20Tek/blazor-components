@@ -23,6 +23,10 @@
   * Success toasts auto-dismiss; failure toasts are sticky. Reuses `ResultAlert` ideas: `ErrorFormatter`, `GroupErrorsByCode`, and `MaxErrorsShown` through `ResultToastOptions<T>`.
   * Added unit tests covering success/failure mapping, formatters, grouping, error limits, and display options.
 * Added a `Toast` sample page (generic variant/position/sticky controls plus `ResultToast` success/failure demos) to the FullSample.Wasm project, and included Toast in the `D20Tek.BlazorComponents.All` meta-package.
+* **Breaking change:** Renamed the **D20Tek.BlazorComponents.ResultValidator** package to **D20Tek.BlazorComponents.Functionally**:
+  * The new name reflects the package's broader scope - it hosts a growing set of Blazor UI components that map `D20Tek.Functional` concepts (`Result`/`Error`) into the UI, including `ResultValidator`, `ResultAlert`, `ResultView`, and `ResultToast`.
+  * **Action required:** replace the `D20Tek.BlazorComponents.ResultValidator` `PackageReference` with `D20Tek.BlazorComponents.Functionally`. No code changes are needed - the root namespace remains `D20Tek.BlazorComponents`, and all component types (including the `ResultValidator` component), DI extensions (`AddResultValidator`), and options classes keep their names.
+  * Change was done now, shortly after the package's initial release, to minimize disruption before wider adoption.
 
 ## Release v1.10.18
 * Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <Description>A Blazor component for displaying validation results. This component allows you to easily display validation feedback throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
-    <PackageTags>Blazor .NET Components WebAssembly Validation Result Validator</PackageTags>
+    <Description>Blazor UI components that map D20Tek.Functional concepts (Result/Error) into your user interface. Includes ResultValidator (form validation mapping), ResultAlert (inline success/error banner), ResultView (state-based render branching), and ResultToast (service-based notifications). Each has a default layout and color scheme that can be customized for your application.</Description>
+    <PackageTags>Blazor .NET Components WebAssembly Functional Result Error Validation Validator</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
