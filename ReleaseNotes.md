@@ -1,7 +1,7 @@
 # Release Notes
 
 ## Release v1.11.1
-* Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.ResultValidator** package:
+* Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.Functionally** package:
   * A lightweight, non-visual render-branching container that selects UI based on the state of a `Result<T>`.
   * Slot-based rendering with `Loading`, `Success` (with the value), `Failure` (with the errors), and `Empty` render fragments.
   * Adds a pending/loading state (via `IsLoading`) that neither `ResultAlert` nor `ResultValidator` covered, ideal for whole-page or data-loading scenarios.
@@ -17,8 +17,9 @@
   * `IToastService` (registered via `AddToast()`) - an enqueue API callable from anywhere, with `Show` overloads for a `RenderFragment`, plain message, or message + `NotificationVariant`, plus `Dismiss`.
   * `ToastInstance`, `ToastOptions`, and `ToastPosition` model per-toast content, variant, position, timeout (0 = sticky), icon, dismissible, and animation settings.
   * Per-toast auto-dismiss timer, manual dismiss, max-visible cap per position, stacking, and enter animations. Ships a static CSS file (`Toast.css`) like Modal.
+  * All toast CSS classes are namespaced with a `d20tek-toast` prefix (e.g. `d20tek-toast`, `d20tek-toast-success`, `d20tek-toast-animated`) so they never collide with CSS frameworks such as Bootstrap, which defines its own `.toast` component (its `.toast:not(.show){display:none}` rule would otherwise hide the notifications). If you added custom overrides against the earlier unprefixed class names, update them to the `d20tek-toast*` names.
   * Added comprehensive unit tests for the service, options, models, position metadata, and host component.
-* Added the `ResultToast<T>` specialization to the **D20Tek.BlazorComponents.ResultValidator** package:
+* Added the `ResultToast<T>` specialization to the **D20Tek.BlazorComponents.Functionally** package:
   * `IToastService.ShowResult<T>` extension methods that map a `Result<T>` onto a toast via composition (no component inheritance).
   * Success toasts auto-dismiss; failure toasts are sticky. Reuses `ResultAlert` ideas: `ErrorFormatter`, `GroupErrorsByCode`, and `MaxErrorsShown` through `ResultToastOptions<T>`.
   * Added unit tests covering success/failure mapping, formatters, grouping, error limits, and display options.

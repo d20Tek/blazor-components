@@ -8,7 +8,7 @@ namespace D20Tek.FullSample.Wasm.Pages;
 public partial class ToastPage
 {
     private NotificationVariant _variant = NotificationVariant.Info;
-    private ToastPosition _position = ToastPosition.BottomRight;
+    private ToastPosition _position = ToastPosition.BottomCenter;
     private bool _sticky;
 
     [Inject]

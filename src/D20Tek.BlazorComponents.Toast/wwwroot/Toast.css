@@ -122,38 +122,38 @@
 }
 
 /* Variants */
-.toast-info {
+.d20tek-toast-info {
     background-color: #eff6ff;
     border-color: #93c5fd;
     color: #1e40af;
 }
 
-.toast-success {
+.d20tek-toast-success {
     background-color: #f0fdf4;
     border-color: #86efac;
     color: #166534;
 }
 
-.toast-warning {
+.d20tek-toast-warning {
     background-color: #fffbeb;
     border-color: #fcd34d;
     color: #92400e;
 }
 
-.toast-error {
+.d20tek-toast-error {
     background-color: #fef2f2;
     border-color: #fca5a5;
     color: #991b1b;
 }
 
-.toast-neutral {
+.d20tek-toast-neutral {
     background-color: #f9fafb;
     border-color: #d1d5db;
     color: #374151;
 }
 
 /* Animation */
-.toast-animated {
+.d20tek-toast-animated {
     animation: toast-fade-in 0.3s ease-out both;
 }
 
@@ -170,7 +170,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .toast-animated {
+    .d20tek-toast-animated {
         animation: none;
     }
 }

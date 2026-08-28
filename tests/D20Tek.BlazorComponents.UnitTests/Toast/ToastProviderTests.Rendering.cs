@@ -37,7 +37,7 @@ public sealed partial class ToastProviderTests
         // assert
         Assert.HasCount(1, comp.FindAll(".d20tek-toast"));
         Assert.Contains("hello", comp.Markup);
-        Assert.Contains("toast-success", comp.Markup);
+        Assert.Contains("d20tek-toast-success", comp.Markup);
         Assert.Contains("toast-host-bottom-right", comp.Markup);
     }
 
