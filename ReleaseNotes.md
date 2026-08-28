@@ -8,6 +8,10 @@
   * `OnStateChanged` callback and `ResultViewState` enum expose the current rendered state.
   * Added unit tests covering all render states and state-transition callbacks.
   * Added a `ResultView` sample page (with buttons to toggle success/failure/loading states) to the FullSample.Wasm project.
+* Promoted the shared alert variant/icon metadata to the **D20Tek.BlazorComponent.Core** package so it can be reused across components (e.g. the upcoming Toast components):
+  * Added `NotificationVariant` (renamed from `AlertVariant`) and `NotificationVariantMetadata`, which maps a variant to a neutral CSS token (`info`, `success`, `warning`, `error`, `neutral`) plus a shared default icon.
+  * `ResultAlert<T>` now composes its own `result-alert-{token}` CSS class from the shared token, keeping Core component-agnostic.
+  * **Breaking change:** `AlertVariant` has been removed. Replace usages with `NotificationVariant` (identical members and values); the `ResultAlert<T>` `Variant`, `SuccessVariant`, and `FailureVariant` parameters now take `NotificationVariant?`.
 
 ## Release v1.10.18
 * Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:

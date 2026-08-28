@@ -1,6 +1,6 @@
 namespace D20Tek.BlazorComponents;
 
-public enum AlertVariant
+public enum NotificationVariant
 {
     Info = 0,
     Success = 1,
