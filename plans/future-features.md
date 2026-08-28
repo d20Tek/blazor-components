@@ -3,7 +3,7 @@
 Candidate components to extend the `Result<T>` display story beyond the current
 `ResultValidator` (form validation mapping) and `ResultAlert<T>` (inline success/error banner).
 
-## Toast + ResultToast&lt;T&gt;
+## Toast + ResultToast&lt;T&gt; [Done]
 
 A transient, positioned notification for showing the outcome of an operation. Unlike the
 inline `ResultAlert`, a toast renders in a fixed-position container at a corner of the

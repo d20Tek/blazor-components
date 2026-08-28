@@ -1,7 +1,7 @@
 namespace D20Tek.BlazorComponents.UnitTests.Toast;
 
 [TestClass]
-public sealed class ToastServiceTests
+public sealed partial class ToastServiceTests
 {
     private static readonly RenderFragment _content = [ExcludeFromCodeCoverage](builder) => builder.AddContent(0, "hi");
 
@@ -117,44 +117,5 @@ public sealed class ToastServiceTests
         Assert.IsNotNull(captured);
         Assert.AreEqual(NotificationVariant.Success, captured.Variant);
         Assert.AreEqual(ToastPosition.TopCenter, captured.Position);
-    }
-
-    [TestMethod]
-    public void Dismiss_RaisesOnDismissWithId()
-    {
-        // arrange
-        var service = new ToastService();
-        Guid? captured = null;
-        service.OnDismiss += id => captured = id;
-        var id = Guid.NewGuid();
-
-        // act
-        service.Dismiss(id);
-
-        // assert
-        Assert.AreEqual(id, captured);
-    }
-
-    [TestMethod]
-    public void Show_WithNoSubscribers_DoesNotThrow()
-    {
-        // arrange
-        var service = new ToastService();
-
-        // act
-        var result = service.Show("safe");
-
-        // assert
-        Assert.IsNotNull(result);
-    }
-
-    [TestMethod]
-    public void Dismiss_WithNoSubscribers_DoesNotThrow()
-    {
-        // arrange
-        var service = new ToastService();
-
-        // act - assert (no OnDismiss subscribers)
-        service.Dismiss(Guid.NewGuid());
     }
 }

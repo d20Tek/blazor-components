@@ -1,7 +1,6 @@
 namespace D20Tek.BlazorComponents;
 
-public sealed class ResultToastOptions<T>
-    where T : notnull
+public sealed class ResultToastOptions<T> where T : notnull
 {
     public string? SuccessMessage { get; set; }
 
