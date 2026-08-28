@@ -51,13 +51,13 @@ public partial class ResultAlert<T> : BaseComponent where T : notnull
     public EventCallback OnDismiss { get; set; }
 
     [Parameter]
-    public AlertVariant? Variant { get; set; }
+    public NotificationVariant? Variant { get; set; }
 
     [Parameter]
-    public AlertVariant? SuccessVariant { get; set; }
+    public NotificationVariant? SuccessVariant { get; set; }
 
     [Parameter]
-    public AlertVariant? FailureVariant { get; set; }
+    public NotificationVariant? FailureVariant { get; set; }
 
     [Parameter]
     public bool ShowIcon { get; set; } = true;
@@ -87,11 +87,11 @@ public partial class ResultAlert<T> : BaseComponent where T : notnull
 
     private string AriaLive => IsSuccess ? "polite" : "assertive";
 
-    private AlertVariant CurrentVariant =>
+    private NotificationVariant CurrentVariant =>
         Variant ??
         (IsSuccess
-            ? SuccessVariant ?? AlertVariant.Success
-            : FailureVariant ?? AlertVariant.Error);
+            ? SuccessVariant ?? NotificationVariant.Success
+            : FailureVariant ?? NotificationVariant.Error);
 
     protected override async Task OnParametersSetAsync()
     {
@@ -162,11 +162,11 @@ public partial class ResultAlert<T> : BaseComponent where T : notnull
     }
 
     private RenderFragment DefaultIcon() => builder =>
-        builder.AddMarkupContent(0, ResultAlertVariantMetadata.GetDefaultIcon(CurrentVariant));
+        builder.AddMarkupContent(0, NotificationVariantMetadata.GetDefaultIcon(CurrentVariant));
 
     protected override string? CalculateCssClasses() =>
         new CssBuilder("result-alert")
-            .AddClass(ResultAlertVariantMetadata.GetVariantCss(CurrentVariant))
+            .AddClass($"result-alert-{NotificationVariantMetadata.GetVariantToken(CurrentVariant)}")
             .AddClass(ResultAlertSizeMetadata.GetSizeCss(Size), Size != Size.None)
             .AddClass("result-alert-bordered", Bordered)
             .AddClass("result-alert-elevated", Elevated)

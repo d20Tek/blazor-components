@@ -1,0 +1,29 @@
+@typeparam T where T : notnull
+@inherits ComponentBase
+
+@if (IsLoading)
+{
+    @Loading
+}
+else if (Result is null)
+{
+    @Empty
+}
+else if (Result.IsSuccess)
+{
+    @if (Success is not null)
+    {
+        @Success(Result.GetValue())
+    }
+}
+else
+{
+    @if (Failure is not null)
+    {
+        @Failure(GetErrors())
+    }
+    else
+    {
+        <div class="result-view__failure" role="alert" aria-live="assertive">An error has occurred.</div>
+    }
+}

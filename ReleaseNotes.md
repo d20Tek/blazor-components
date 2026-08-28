@@ -1,6 +1,35 @@
 # Release Notes
 
-## Release Release v1.10.18
+## Release v1.11.1
+* Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.Functionally** package:
+  * A lightweight, non-visual render-branching container that selects UI based on the state of a `Result<T>`.
+  * Slot-based rendering with `Loading`, `Success` (with the value), `Failure` (with the errors), and `Empty` render fragments.
+  * Adds a pending/loading state (via `IsLoading`) that neither `ResultAlert` nor `ResultValidator` covered, ideal for whole-page or data-loading scenarios.
+  * `OnStateChanged` callback and `ResultViewState` enum expose the current rendered state.
+  * Added unit tests covering all render states and state-transition callbacks.
+  * Added a `ResultView` sample page (with buttons to toggle success/failure/loading states) to the FullSample.Wasm project.
+* Promoted the shared alert variant/icon metadata to the **D20Tek.BlazorComponent.Core** package so it can be reused across components (e.g. the upcoming Toast components):
+  * Added `NotificationVariant` (renamed from `AlertVariant`) and `NotificationVariantMetadata`, which maps a variant to a neutral CSS token (`info`, `success`, `warning`, `error`, `neutral`) plus a shared default icon.
+  * `ResultAlert<T>` now composes its own `result-alert-{token}` CSS class from the shared token, keeping Core component-agnostic.
+  * **Breaking change:** `AlertVariant` has been removed. Replace usages with `NotificationVariant` (identical members and values); the `ResultAlert<T>` `Variant`, `SuccessVariant`, and `FailureVariant` parameters now take `NotificationVariant?`.
+* Added the new **D20Tek.BlazorComponents.Toast** package - a general-purpose, content-agnostic toast notification system:
+  * `ToastProvider` component - a fixed-position container placed once in the layout that renders and stacks active toasts, anchored to any of nine positions (`TopLeft` ... `BottomRight`).
+  * `IToastService` (registered via `AddToast()`) - an enqueue API callable from anywhere, with `Show` overloads for a `RenderFragment`, plain message, or message + `NotificationVariant`, plus `Dismiss`.
+  * `ToastInstance`, `ToastOptions`, and `ToastPosition` model per-toast content, variant, position, timeout (0 = sticky), icon, dismissible, and animation settings.
+  * Per-toast auto-dismiss timer, manual dismiss, max-visible cap per position, stacking, and enter animations. Ships a static CSS file (`Toast.css`) like Modal.
+  * All toast CSS classes are namespaced with a `d20tek-toast` prefix (e.g. `d20tek-toast`, `d20tek-toast-success`, `d20tek-toast-animated`) so they never collide with CSS frameworks such as Bootstrap, which defines its own `.toast` component (its `.toast:not(.show){display:none}` rule would otherwise hide the notifications). If you added custom overrides against the earlier unprefixed class names, update them to the `d20tek-toast*` names.
+  * Added comprehensive unit tests for the service, options, models, position metadata, and host component.
+* Added the `ResultToast<T>` specialization to the **D20Tek.BlazorComponents.Functionally** package:
+  * `IToastService.ShowResult<T>` extension methods that map a `Result<T>` onto a toast via composition (no component inheritance).
+  * Success toasts auto-dismiss; failure toasts are sticky. Reuses `ResultAlert` ideas: `ErrorFormatter`, `GroupErrorsByCode`, and `MaxErrorsShown` through `ResultToastOptions<T>`.
+  * Added unit tests covering success/failure mapping, formatters, grouping, error limits, and display options.
+* Added a `Toast` sample page (generic variant/position/sticky controls plus `ResultToast` success/failure demos) to the FullSample.Wasm project, and included Toast in the `D20Tek.BlazorComponents.All` meta-package.
+* **Breaking change:** Renamed the **D20Tek.BlazorComponents.ResultValidator** package to **D20Tek.BlazorComponents.Functionally**:
+  * The new name reflects the package's broader scope - it hosts a growing set of Blazor UI components that map `D20Tek.Functional` concepts (`Result`/`Error`) into the UI, including `ResultValidator`, `ResultAlert`, `ResultView`, and `ResultToast`.
+  * **Action required:** replace the `D20Tek.BlazorComponents.ResultValidator` `PackageReference` with `D20Tek.BlazorComponents.Functionally`. No code changes are needed - the root namespace remains `D20Tek.BlazorComponents`, and all component types (including the `ResultValidator` component), DI extensions (`AddResultValidator`), and options classes keep their names.
+  * Change was done now, shortly after the package's initial release, to minimize disruption before wider adoption.
+
+## Release v1.10.18
 * Introduced the **D20Tek.BlazorComponents.ResultValidator** package for surfacing Result/Error outcomes in Blazor forms and UI:
   * `ResultValidator` component - Integrates with `EditContext` to map operation `Error`s into Blazor form validation messages via a `ValidationMessageStore`.
   * `HandleResult` / `HandleResultAsync` - Process a `Result<T>`, invoke success callbacks on success, and push per-field validation errors on failure.

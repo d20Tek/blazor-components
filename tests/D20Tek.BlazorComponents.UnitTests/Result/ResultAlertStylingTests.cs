@@ -1,4 +1,4 @@
-namespace D20Tek.BlazorComponents.UnitTests.ResultAlerts;
+namespace D20Tek.BlazorComponents.UnitTests.Result;
 
 public sealed partial class ResultAlertTests
 {
@@ -8,7 +8,7 @@ public sealed partial class ResultAlertTests
         // arrange - act
         var cut = Render<ResultAlert<TestModel>>(parameters => parameters
             .Add(p => p.Result, SuccessResult())
-            .Add(p => p.Variant, AlertVariant.Warning));
+            .Add(p => p.Variant, NotificationVariant.Warning));
 
         // assert
         Assert.Contains("result-alert-warning", cut.Markup);
@@ -21,7 +21,7 @@ public sealed partial class ResultAlertTests
         // arrange - act
         var cut = Render<ResultAlert<TestModel>>(parameters => parameters
             .Add(p => p.Result, SuccessResult())
-            .Add(p => p.SuccessVariant, AlertVariant.Info));
+            .Add(p => p.SuccessVariant, NotificationVariant.Info));
 
         // assert
         Assert.Contains("result-alert-info", cut.Markup);
@@ -33,7 +33,7 @@ public sealed partial class ResultAlertTests
         // arrange - act
         var cut = Render<ResultAlert<TestModel>>(parameters => parameters
             .Add(p => p.Result, FailureResult())
-            .Add(p => p.FailureVariant, AlertVariant.Neutral));
+            .Add(p => p.FailureVariant, NotificationVariant.Neutral));
 
         // assert
         Assert.Contains("result-alert-neutral", cut.Markup);

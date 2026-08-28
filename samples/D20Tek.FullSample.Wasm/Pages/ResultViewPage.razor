@@ -1,0 +1,54 @@
+@page "/result-view"
+@using D20Tek.FullSample.Wasm.Services
+
+<h3>ResultView Component</h3>
+<p>The <code>ResultView</code> is a render-branching container that selects its UI based on the state of a
+   <code>Result&lt;T&gt;</code>. The caller supplies the markup for each state through the
+   <code>Loading</code>, <code>Success</code>, <code>Failure</code>, and <code>Empty</code> slots. Unlike
+   <code>ResultAlert</code>, it also models a pending/loading state, making it well suited to whole-page or
+   data-loading scenarios.</p>
+
+<div class="btn-toolbar mb-3" role="toolbar" aria-label="Result state controls">
+    <div class="btn-group me-2" role="group">
+        <button type="button" class="btn btn-success" @onclick="ShowSuccess">Show Success</button>
+        <button type="button" class="btn btn-danger" @onclick="ShowFailure">Show Failure</button>
+        <button type="button" class="btn btn-primary" @onclick="ShowLoadingAsync">Simulate Loading</button>
+        <button type="button" class="btn btn-secondary" @onclick="Reset">Reset</button>
+    </div>
+</div>
+
+<p>Current state: <strong>@_currentState</strong></p>
+
+<div class="border rounded p-3">
+    <ResultView T="RegistrationModel"
+                Result="_result"
+                IsLoading="_isLoading"
+                OnStateChanged="HandleStateChanged">
+        <Loading>
+            <div class="d-flex align-items-center">
+                <div class="spinner-border text-primary me-2" role="status" aria-hidden="true"></div>
+                <span>Loading registration...</span>
+            </div>
+        </Loading>
+        <Success Context="value">
+            <div class="alert alert-success mb-0" role="alert">
+                <h5 class="alert-heading">Welcome, @value.Name!</h5>
+                <p class="mb-0">We sent a confirmation to <strong>@value.Email</strong>.</p>
+            </div>
+        </Success>
+        <Failure Context="errors">
+            <div class="alert alert-danger mb-0" role="alert">
+                <h5 class="alert-heading">Registration failed</h5>
+                <ul class="mb-0">
+                    @foreach (var error in errors)
+                    {
+                        <li><code>@error.Code</code> &mdash; @error.Message</li>
+                    }
+                </ul>
+            </div>
+        </Failure>
+        <Empty>
+            <p class="text-muted mb-0">No result yet. Use the buttons above to set a state.</p>
+        </Empty>
+    </ResultView>
+</div>

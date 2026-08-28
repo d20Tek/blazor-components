@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <Description>A Blazor component for displaying validation results. This component allows you to easily display validation feedback throughout your user interface. It has a default layout and color scheme that can be customized for your application.</Description>
-    <PackageTags>Blazor .NET Components WebAssembly Validation Result Validator</PackageTags>
+    <Description>A Blazor component for displaying transient toast notifications. This content-agnostic toast system provides a host, service, and positioning options that can be customized for your application.</Description>
+    <PackageTags>Blazor .NET Components WebAssembly Toast Notification</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="D20Tek.Functional" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>
 

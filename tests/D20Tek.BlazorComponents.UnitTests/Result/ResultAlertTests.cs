@@ -1,4 +1,4 @@
-namespace D20Tek.BlazorComponents.UnitTests.ResultAlerts;
+namespace D20Tek.BlazorComponents.UnitTests.Result;
 
 [TestClass]
 public sealed partial class ResultAlertTests : BunitContext

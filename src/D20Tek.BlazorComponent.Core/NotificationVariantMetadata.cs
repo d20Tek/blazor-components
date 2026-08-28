@@ -1,28 +1,28 @@
 namespace D20Tek.BlazorComponents;
 
-internal class ResultAlertVariantMetadata
+public class NotificationVariantMetadata
 {
-    internal class Item(string cssClass, string defaultIcon)
+    public class Item(string token, string defaultIcon)
     {
-        public string CssClass { get; } = cssClass;
+        public string Token { get; } = token;
 
         public string DefaultIcon { get; } = defaultIcon;
     }
 
-    private static readonly Dictionary<AlertVariant, Item> _elements = new()
+    private static readonly Dictionary<NotificationVariant, Item> _elements = new()
     {
-        { AlertVariant.Info, new Item("result-alert-info", InfoIcon) },
-        { AlertVariant.Success, new Item("result-alert-success", SuccessIcon) },
-        { AlertVariant.Warning, new Item("result-alert-warning", WarningIcon) },
-        { AlertVariant.Error, new Item("result-alert-error", ErrorIcon) },
-        { AlertVariant.Neutral, new Item("result-alert-neutral", InfoIcon) },
+        { NotificationVariant.Info, new Item("info", InfoIcon) },
+        { NotificationVariant.Success, new Item("success", SuccessIcon) },
+        { NotificationVariant.Warning, new Item("warning", WarningIcon) },
+        { NotificationVariant.Error, new Item("error", ErrorIcon) },
+        { NotificationVariant.Neutral, new Item("neutral", InfoIcon) },
     };
 
-    public static Item GetMetadataItem(AlertVariant variant) => _elements[variant];
+    public static Item GetMetadataItem(NotificationVariant variant) => _elements[variant];
 
-    public static string GetVariantCss(AlertVariant variant) => _elements[variant].CssClass;
+    public static string GetVariantToken(NotificationVariant variant) => _elements[variant].Token;
 
-    public static string GetDefaultIcon(AlertVariant variant) => _elements[variant].DefaultIcon;
+    public static string GetDefaultIcon(NotificationVariant variant) => _elements[variant].DefaultIcon;
 
     private const string InfoIcon = """
         <svg viewBox="0 0 24 24" class="result-alert__icon--info" aria-hidden="true">

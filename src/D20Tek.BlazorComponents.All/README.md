@@ -9,11 +9,12 @@ separate `PackageReference` for each one.
 
 ## Included packages
 
+- `D20Tek.BlazorComponents.Functionally`
 - `D20Tek.BlazorComponents.Markdown`
 - `D20Tek.BlazorComponents.Modal`
-- `D20Tek.BlazorComponents.ResultValidator`
 - `D20Tek.BlazorComponents.Spinner`
 - `D20Tek.BlazorComponents.Timer`
+- `D20Tek.BlazorComponents.Toast`
 - `D20Tek.BlazorComponents.TogglePanel`
 - `D20Tek.BlazorComponents.ToggleSwitch`
 
