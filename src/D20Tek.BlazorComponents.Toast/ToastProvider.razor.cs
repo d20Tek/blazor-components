@@ -66,7 +66,7 @@ public partial class ToastProvider : ComponentBase, IDisposable
     }
 
     private static string? GetToastCssClass(ToastInstance toast) =>
-        new CssBuilder("toast")
+        new CssBuilder("d20tek-toast")
             .AddClass($"toast-{NotificationVariantMetadata.GetVariantToken(toast.Variant)}")
             .AddClass("toast-animated", toast.Animate)
             .AddClass("toast-dismissible", toast.Dismissible)

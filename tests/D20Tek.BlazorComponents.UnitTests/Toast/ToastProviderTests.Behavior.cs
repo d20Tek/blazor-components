@@ -14,7 +14,7 @@ public sealed partial class ToastProviderTests
         comp.Find(".toast__close-btn").Click();
 
         // assert
-        Assert.IsEmpty(comp.FindAll(".toast"));
+        Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
     }
 
     [TestMethod]
@@ -30,7 +30,7 @@ public sealed partial class ToastProviderTests
         comp.InvokeAsync(() => service.Dismiss(shown!.Id));
 
         // assert
-        Assert.IsEmpty(comp.FindAll(".toast"));
+        Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
     }
 
     [TestMethod]
@@ -50,7 +50,7 @@ public sealed partial class ToastProviderTests
         // assert
         Assert.HasCount(1, comp.FindAll(".toast-host-top-left"));
         Assert.HasCount(1, comp.FindAll(".toast-host-bottom-right"));
-        Assert.HasCount(2, comp.FindAll(".toast"));
+        Assert.HasCount(2, comp.FindAll(".d20tek-toast"));
     }
 
     [TestMethod]
@@ -70,7 +70,7 @@ public sealed partial class ToastProviderTests
         });
 
         // assert
-        Assert.HasCount(2, comp.FindAll(".toast"));
+        Assert.HasCount(2, comp.FindAll(".d20tek-toast"));
     }
 
     [TestMethod]
@@ -80,13 +80,13 @@ public sealed partial class ToastProviderTests
         using var ctx = CreateContext(out var service);
         var comp = ctx.Render<ToastProvider>();
         await comp.InvokeAsync(() => service.Show("auto", o => o.Timeout = TimeSpan.FromMilliseconds(50)));
-        Assert.HasCount(1, comp.FindAll(".toast"));
+        Assert.HasCount(1, comp.FindAll(".d20tek-toast"));
 
         // act
         await Task.Delay(200, CancellationToken.None);
 
         // assert
-        comp.WaitForAssertion(() => Assert.IsEmpty(comp.FindAll(".toast")), TimeSpan.FromSeconds(2));
+        comp.WaitForAssertion(() => Assert.IsEmpty(comp.FindAll(".d20tek-toast")), TimeSpan.FromSeconds(2));
     }
 
     [TestMethod]
@@ -115,6 +115,6 @@ public sealed partial class ToastProviderTests
         comp.InvokeAsync(() => service.Show("after dispose", o => o.Timeout = TimeSpan.Zero));
 
         // assert - toast not added since host is disposed/unsubscribed
-        Assert.IsEmpty(comp.FindAll(".toast"));
+        Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
     }
 }

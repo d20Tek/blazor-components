@@ -10,7 +10,7 @@
     max-width: min(90vw, 24rem);
 }
 
-.toast-host > .toast {
+.toast-host > .d20tek-toast {
     pointer-events: auto;
 }
 
@@ -75,7 +75,7 @@
 }
 
 /* Toast card */
-.toast {
+.d20tek-toast {
     display: flex;
     align-items: flex-start;
     gap: 0.625rem;

@@ -21,7 +21,7 @@ public sealed partial class ToastProviderTests
         var comp = ctx.Render<ToastProvider>();
 
         // assert
-        Assert.IsEmpty(comp.FindAll(".toast"));
+        Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
     }
 
     [TestMethod]
@@ -35,7 +35,7 @@ public sealed partial class ToastProviderTests
         comp.InvokeAsync(() => service.Show("hello", NotificationVariant.Success));
 
         // assert
-        Assert.HasCount(1, comp.FindAll(".toast"));
+        Assert.HasCount(1, comp.FindAll(".d20tek-toast"));
         Assert.Contains("hello", comp.Markup);
         Assert.Contains("toast-success", comp.Markup);
         Assert.Contains("toast-host-bottom-right", comp.Markup);
