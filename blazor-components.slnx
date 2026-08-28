@@ -26,6 +26,7 @@
     <Project Path="src/D20Tek.BlazorComponents.ResultValidator/D20Tek.BlazorComponents.ResultValidator.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Spinner/D20Tek.BlazorComponents.Spinner.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Timer/D20Tek.BlazorComponents.Timer.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Toast/D20Tek.BlazorComponents.Toast.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.TogglePanel/D20Tek.BlazorComponents.TogglePanel.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.ToggleSwitch/D20Tek.BlazorComponents.ToggleSwitch.csproj" />
   </Folder>
