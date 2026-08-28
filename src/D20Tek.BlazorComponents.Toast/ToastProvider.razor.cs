@@ -1,6 +1,6 @@
 namespace D20Tek.BlazorComponents;
 
-public partial class ToastHost : ComponentBase, IDisposable
+public partial class ToastProvider : ComponentBase, IDisposable
 {
     private readonly List<ToastInstance> _toasts = [];
     private readonly ConcurrentDictionary<Guid, Timer> _timers = new();

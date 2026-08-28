@@ -1,0 +1,42 @@
+@page "/toast"
+
+<h3>Toast Notifications</h3>
+<p>The <code>ToastProvider</code> renders transient, positioned notifications enqueued through the
+   <code>IToastService</code>. Toasts auto-dismiss after a configurable timeout (or stay until dismissed when
+   sticky) and stack by position. The <code>ShowResult&lt;T&gt;</code> extension maps a
+   <code>Result&lt;T&gt;</code> onto a toast &mdash; success auto-dismisses while failure stays sticky.</p>
+
+<h5 class="mt-4">Generic toasts</h5>
+<div class="mb-3">
+    <label class="form-label">Variant</label>
+    <select class="form-select w-auto d-inline-block ms-2" @bind="_variant">
+        @foreach (var variant in Enum.GetValues<NotificationVariant>())
+        {
+            <option value="@variant">@variant</option>
+        }
+    </select>
+
+    <label class="form-label ms-3">Position</label>
+    <select class="form-select w-auto d-inline-block ms-2" @bind="_position">
+        @foreach (var position in Enum.GetValues<ToastPosition>())
+        {
+            <option value="@position">@position</option>
+        }
+    </select>
+
+    <div class="form-check form-check-inline ms-3">
+        <input class="form-check-input" type="checkbox" id="sticky" @bind="_sticky" />
+        <label class="form-check-label" for="sticky">Sticky (no auto-dismiss)</label>
+    </div>
+</div>
+
+<div class="btn-group mb-4" role="group">
+    <button type="button" class="btn btn-primary" @onclick="ShowToast">Show Toast</button>
+    <button type="button" class="btn btn-secondary" @onclick="ShowMultiple">Show 3 Toasts</button>
+</div>
+
+<h5 class="mt-2">Result toasts</h5>
+<div class="btn-group mb-3" role="group">
+    <button type="button" class="btn btn-success" @onclick="ShowResultSuccess">Show Success Result</button>
+    <button type="button" class="btn btn-danger" @onclick="ShowResultFailure">Show Failure Result</button>
+</div>

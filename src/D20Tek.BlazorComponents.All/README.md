@@ -14,6 +14,7 @@ separate `PackageReference` for each one.
 - `D20Tek.BlazorComponents.ResultValidator`
 - `D20Tek.BlazorComponents.Spinner`
 - `D20Tek.BlazorComponents.Timer`
+- `D20Tek.BlazorComponents.Toast`
 - `D20Tek.BlazorComponents.TogglePanel`
 - `D20Tek.BlazorComponents.ToggleSwitch`
 

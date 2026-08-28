@@ -10,7 +10,7 @@ This package suite provides custom, reusable Blazor components. These components
 
 **Live demo:** [components.d20tek.com](https://components.d20tek.com)
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, and ResultAlert.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, and ResultToast.
 
 Components ship grouped by package, so a single package can contain more than one component:
 
@@ -18,33 +18,35 @@ Components ship grouped by package, so a single package can contain more than on
 | --- | --- |
 | `D20Tek.BlazorComponents.Spinner` | Spinner, ContentSpinner |
 | `D20Tek.BlazorComponents.Timer` | Timer, SpanTimer, CountdownTimer |
+| `D20Tek.BlazorComponents.Toast` | Toast (ToastProvider) |
 | `D20Tek.BlazorComponents.ToggleSwitch` | ToggleSwitch |
 | `D20Tek.BlazorComponents.Modal` | ModalDialog, ModalFormDialog, MessageBox |
 | `D20Tek.BlazorComponents.Markdown` | MarkdownView |
 | `D20Tek.BlazorComponents.TogglePanel` | TogglePanel |
-| `D20Tek.BlazorComponents.ResultValidator` | ResultValidator, ResultAlert |
+| `D20Tek.BlazorComponents.ResultValidator` | ResultValidator, ResultAlert, ResultView, ResultToast |
 
 ### The "All" meta-package
-If you would rather not reference each component package individually, install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Markdown, Modal, ResultValidator, Spinner, Timer, TogglePanel, and ToggleSwitch) through a single `PackageReference`. It ships no assemblies of its own, so you get exactly the same components as installing them one-by-one. If you only need a few components, install the individual packages instead to keep your dependency graph minimal.
+If you would rather not reference each component package individually, install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Markdown, Modal, ResultValidator, Spinner, Timer, Toast, TogglePanel, and ToggleSwitch) through a single `PackageReference`. It ships no assemblies of its own, so you get exactly the same components as installing them one-by-one. If you only need a few components, install the individual packages instead to keep your dependency graph minimal.
 
-> Note: because the meta-package includes the Modal components, apps that use `All` still need to link the Modal static CSS file - see [Component-Specific Setup](#component-specific-setup) below.
+> Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 > Tip: omit the `-Version` argument to install the latest published version of any package.
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.10.18
-PM > Install-Package D20Tek.BlazorComponents.ResultValidator -Version 1.10.18
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.1
+PM > Install-Package D20Tek.BlazorComponents.ResultValidator -Version 1.11.1
 ``` 
 
 Or install everything at once with the meta-package:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.All -Version 1.10.18
+PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.1
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.
@@ -84,6 +86,11 @@ Some components require a one-time setup step in addition to the standard usage 
 **ModalDialog / ModalFormDialog / MessageBox** - These components use a static CSS file that must be linked in your app's `wwwroot/index.html` (Blazor WASM) or `App.razor` / `_Host.cshtml` (Blazor Server) inside the `<head>` tag:
 ```html
 <link href="_content/D20Tek.BlazorComponents.Modal/Modal.css" rel="stylesheet" />
+```
+
+**Toast / ResultToast** - The Toast package uses a static CSS file that must be linked inside the `<head>` tag, and the `<ToastProvider />` component must be placed once in your layout (e.g. `MainLayout.razor`). Register the service with `builder.Services.AddToast();`:
+```html
+<link href="_content/D20Tek.BlazorComponents.Toast/Toast.css" rel="stylesheet" />
 ```
 
 ### Samples:

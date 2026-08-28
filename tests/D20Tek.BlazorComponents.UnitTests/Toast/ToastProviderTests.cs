@@ -1,7 +1,7 @@
 namespace D20Tek.BlazorComponents.UnitTests.Toast;
 
 [TestClass]
-public sealed class ToastHostTests
+public sealed class ToastProviderTests
 {
     private static BunitContext CreateContext(out IToastService service)
     {
@@ -18,7 +18,7 @@ public sealed class ToastHostTests
         using var ctx = CreateContext(out _);
 
         // act
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // assert
         Assert.IsEmpty(comp.FindAll(".toast"));
@@ -29,7 +29,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.InvokeAsync(() => service.Show("hello", NotificationVariant.Success));
@@ -46,7 +46,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.InvokeAsync(() => service.Show("no icon", o => o.ShowIcon = false));
@@ -60,7 +60,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.InvokeAsync(() => service.Show("icon"));
@@ -74,7 +74,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.InvokeAsync(() => service.Show("sticky", o =>
@@ -92,7 +92,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
         comp.InvokeAsync(() => service.Show("dismiss me", o => o.Timeout = TimeSpan.Zero));
 
         // act
@@ -107,7 +107,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
         ToastInstance? shown = null;
         comp.InvokeAsync(() => shown = service.Show("bye", o => o.Timeout = TimeSpan.Zero));
 
@@ -123,7 +123,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.InvokeAsync(() =>
@@ -143,7 +143,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>(p => p.Add(x => x.MaxVisible, 2));
+        var comp = ctx.Render<ToastProvider>(p => p.Add(x => x.MaxVisible, 2));
 
         // act
         comp.InvokeAsync(() =>
@@ -163,7 +163,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
         await comp.InvokeAsync(() => service.Show("auto", o => o.Timeout = TimeSpan.FromMilliseconds(50)));
         Assert.HasCount(1, comp.FindAll(".toast"));
 
@@ -179,7 +179,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>(p => p.Add(x => x.CloseButtonAriaLabel, "Close toast"));
+        var comp = ctx.Render<ToastProvider>(p => p.Add(x => x.CloseButtonAriaLabel, "Close toast"));
 
         // act
         comp.InvokeAsync(() => service.Show("labeled", o => o.Timeout = TimeSpan.Zero));
@@ -193,7 +193,7 @@ public sealed class ToastHostTests
     {
         // arrange
         using var ctx = CreateContext(out var service);
-        var comp = ctx.Render<ToastHost>();
+        var comp = ctx.Render<ToastProvider>();
 
         // act
         comp.Instance.Dispose();
