@@ -1,0 +1,30 @@
+@implements IDisposable
+@inject IToastService ToastService
+
+@foreach (var group in GetVisibleGroups())
+{
+    <div class="toast-host @ToastPositionMetadata.GetPositionCss(group.Key)"
+         role="region" aria-live="polite" aria-label="Notifications">
+        @foreach (var toast in group.Items)
+        {
+            <div class="@GetToastCssClass(toast)" role="alert" @key="toast.Id">
+                @if (toast.ShowIcon)
+                {
+                    <span class="toast__icon" aria-hidden="true">
+                        @DefaultIcon(toast)
+                    </span>
+                }
+                <div class="toast__content">
+                    @toast.Content
+                </div>
+                @if (toast.Dismissible)
+                {
+                    <button type="button" class="toast__close-btn" aria-label="@CloseButtonAriaLabel"
+                            @onclick="() => Dismiss(toast.Id)">
+                        &times;
+                    </button>
+                }
+            </div>
+        }
+    </div>
+}
