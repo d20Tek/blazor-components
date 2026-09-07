@@ -7,18 +7,17 @@ namespace D20Tek.FullSample.Wasm.Pages;
 public partial class ResultValidatorPage
 {
     private readonly RegistrationModel _model = new();
+    private readonly BusyState _busy = new();
     private ResultValidator? _validator;
     private string _successMessage = string.Empty;
-    private bool _submitting;
     private Result<RegistrationModel>? _lastResult;
     private Result<RegistrationModel>? _dismissibleResult;
 
     private async Task HandleSubmitAsync()
     {
         _successMessage = string.Empty;
-        _submitting = true;
 
-        try
+        await _busy.RunAsync(async _ =>
         {
             var result = await RegistrationService.RegisterAsync(_model);
             _lastResult = result;
@@ -28,11 +27,7 @@ public partial class ResultValidatorPage
                 result,
                 onSuccess: value =>
                     _successMessage = $"Registered '{value.Name}' with email '{value.Email}'.");
-        }
-        finally
-        {
-            _submitting = false;
-        }
+        });
     }
 
     private void HandleAlertDismiss() => _dismissibleResult = null;

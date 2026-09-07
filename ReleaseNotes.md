@@ -10,6 +10,13 @@
   * Added unit tests covering the DI overload, service seeding/override behavior, and ResultToast success/failure seeding.
 * Changed the built-in default toast position from `BottomRight` to `BottomCenter` (applies to `ToastDefaults`, `ToastOptions`, `ToastInstance`, and `ResultToastOptions`); override it per app via `AddToast` or per call via `configure`.
 * Added a `ShowResult<T>` overload that accepts a `successMessage` parameter directly, so you can set the success message without a `configure` delegate; the trailing `configure` parameter remains optional and can still override any option (including the success message).
+* Added the `BusyState` class to the **D20Tek.BlazorComponent.Core** package:
+  * Tracks a transient busy/submitting flag whose scope is reset via a disposable returned from `Begin()`, even when an exception is thrown.
+  * Nested `Begin()` calls are reference counted, so `IsActive` only becomes `false` once every scope has been disposed.
+  * Added a `Changed` event (`EventHandler`) that consumers can subscribe to in order to re-render when the busy state transitions.
+  * Added `TryBegin(out IDisposable? scope)`, which starts a busy scope only when not already active, to guard against concurrent or double-submit operations.
+  * Added `RunAsync(Func<CancellationToken, Task>, CancellationToken)` and `RunAsync<T>(Func<CancellationToken, Task<T>>, CancellationToken)` wrappers that run an async operation within a busy scope, removing the manual `using` boilerplate and flowing the cancellation token to the operation.
+  * Added unit tests covering activation, reentrancy, change notification, the `TryBegin` guard, and the `RunAsync` wrappers.
 
 ## Release v1.11.1
 * Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.Functionally** package:

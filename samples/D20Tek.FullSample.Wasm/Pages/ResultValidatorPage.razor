@@ -26,8 +26,8 @@
 
         <ValidationSummary />
 
-        <button type="submit" class="btn btn-primary mt-2" disabled="@_submitting">
-            @(_submitting ? "Submitting..." : "Submit")
+        <button type="submit" class="btn btn-primary mt-2" disabled="@_busy.IsActive">
+            @(_busy.IsActive ? "Submitting..." : "Submit")
         </button>
     </EditForm>
 
