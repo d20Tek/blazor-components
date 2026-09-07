@@ -14,7 +14,7 @@ public sealed partial class ResultToastExtensionsTests
         // assert
         Assert.IsNotNull(service.LastToast);
         Assert.AreEqual(NotificationVariant.Success, service.LastToast.Variant);
-        Assert.AreEqual(TimeSpan.FromSeconds(5), service.LastToast.Timeout);
+        Assert.AreEqual(TimeSpan.FromSeconds(3), service.LastToast.Timeout);
         Assert.IsFalse(service.LastToast.IsSticky);
     }
 

@@ -12,11 +12,22 @@ public static class ResultToastExtensions
         ArgumentNullException.ThrowIfNull(result);
 
         var options = new ResultToastOptions<T>();
+        ApplyDefaults(options, toastService.Defaults);
         configure?.Invoke(options);
 
         return result.IsSuccess
             ? ShowSuccess(toastService, result.GetValue(), options)
             : ShowFailure(toastService, [.. result.GetErrors()], options);
+    }
+
+    private static void ApplyDefaults<T>(ResultToastOptions<T> options, ToastDefaults defaults)
+        where T : notnull
+    {
+        options.Position = defaults.Position;
+        options.SuccessTimeout = defaults.DefaultTimeout;
+        options.ShowIcon = defaults.ShowIcon;
+        options.Dismissible = defaults.Dismissible;
+        options.Animate = defaults.Animate;
     }
 
     private static ToastInstance ShowSuccess<T>(

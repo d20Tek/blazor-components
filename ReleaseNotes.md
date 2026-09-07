@@ -1,5 +1,14 @@
 # Release Notes
 
+## Release v1.11.2
+* Added app-wide default toast settings to the **D20Tek.BlazorComponents.Toast** package:
+  * New `ToastDefaults` class holds presentation-only defaults - `Position`, `DefaultTimeout`, `ShowIcon`, `Dismissible`, and `Animate`.
+  * `AddToast` now has an optional overload, `AddToast(Action<ToastDefaults>? configure = null)`, that lets you configure these defaults once at startup; the parameterless call still works and registers built-in defaults (non-breaking).
+  * `IToastService` exposes a read-only `Defaults` property, and `ToastService.Show` seeds each toast from the configured defaults before applying any per-call `configure`.
+  * `ResultToast.ShowResult<T>` (in the **D20Tek.BlazorComponents.Functionally** package) seeds its presentation options (`Position`, `SuccessTimeout` from `DefaultTimeout`, `ShowIcon`, `Dismissible`, `Animate`) from the same defaults. Result-failure toasts remain sticky by default and are not driven by `DefaultTimeout`.
+  * Settings resolve in the order: component built-in defaults -> app defaults (`AddToast`) -> per-call `configure` on `Show`/`ShowResult`.
+  * Added unit tests covering the DI overload, service seeding/override behavior, and ResultToast success/failure seeding.
+
 ## Release v1.11.1
 * Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.Functionally** package:
   * A lightweight, non-visual render-branching container that selects UI based on the state of a `Result<T>`.

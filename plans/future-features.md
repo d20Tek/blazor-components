@@ -1,7 +1,67 @@
 # Future Features
 
-Candidate components to extend the `Result<T>` display story beyond the current
-`ResultValidator` (form validation mapping) and `ResultAlert<T>` (inline success/error banner).
+## Tile
+
+A container-agnostic `Tile` component for list/grid layouts: image on top (falls back to an
+abbreviation avatar), a single-line title, a two-line clamped description, an optional footer
+render fragment, customizable size that shrinks on mobile, and a `Clicked` event.
+
+### Package & Project
+- New project **`D20Tek.BlazorComponents.Tile`** (`Microsoft.NET.Sdk.Razor`, multi-target `net9.0;net10.0`), root namespace `D20Tek.BlazorComponents`.
+- Files: `Tile.razor`, `Tile.razor.cs`, **`Tile.razor.css` (isolated/scoped CSS)** + `GlobalUsings.cs`.
+- Because CSS is isolated (Blazor auto-scopes it via generated attributes), **no class-name namespacing and no consumer `<link>` is required** (unlike Toast/Modal static CSS).
+- Inherits `BaseComponent`; use `CalculateCssClasses` / `CalculateCssStyles` overrides.
+
+### Anatomy (single root, three regions)
+- `media` (top) - `<img>` when `ImageUrl` set, else abbreviation avatar (initials on colored bg).
+- `body` - `title` (single line, ellipsis) + `description` (2-line `-webkit-line-clamp`).
+- `footer` (optional) - renders `Footer` RenderFragment only when supplied.
+
+### Public API
+- `Title` (string), `Description` (string?), `ImageUrl` (string?), `Abbreviation` (string? override).
+- `Size` (Core enum) - base dimensions.
+- `Footer` (RenderFragment?), `Href` (string?, optional anchor mode).
+- `Clicked` (EventCallback<MouseEventArgs>).
+- Inherited: `IsVisible`, `RemainingAttributes`.
+
+### Sizing & Responsiveness
+- `TileSizeMetadata` static class maps `Size` -> modifier that sets a CSS custom property (`--tile-width`) rather than hard pixels.
+- Container-agnostic: tile is a flex/inline-block item with a width; callers own the grid/flex wrapper.
+- Mobile shrink via `@media` breakpoint overriding `--tile-width` (e.g. `100%`/`clamp()`); media uses `aspect-ratio`.
+
+### Click & Accessibility
+- `Href` set -> render `<a>` (native focus/keyboard/navigation); still raise `Clicked`.
+- Only `Clicked` -> render `<button type="button">` (free keyboard support) or `role="button"` + `tabindex=0` + Enter/Space.
+- Footer actions must `stopPropagation` so they don't trigger the tile `Clicked`.
+- `aria-label` defaults to `Title`; focus-visible outline; honor `prefers-reduced-motion`.
+
+### Abbreviation Fallback
+- Compute initials: use `Abbreviation` if given, else first letters of first two words of `Title` (max 2, uppercase).
+- Optional deterministic background color (hash title -> small neutral palette).
+- Render `<img alt={Title}>` only when `ImageUrl` non-empty; optional `onerror` -> abbreviation later.
+
+### CSS Notes (Tile.razor.css)
+- Root: flex column, `--tile-width` custom prop, border, radius, shadow, hover elevation, `overflow: hidden`.
+- Media: fixed `aspect-ratio`, `object-fit: cover`; centered flex for avatar.
+- Title: `nowrap` + ellipsis. Description: 2-line `-webkit-line-clamp` box.
+- Size modifiers only change custom properties (DRY).
+
+### Testing (bUnit + MSTest, split partials)
+- Rendering: image vs abbreviation fallback, title/description, footer only when supplied, size modifier class.
+- Behavior: `Clicked` fires; footer click does NOT bubble; anchor mode renders `<a href>`; keyboard activation; abbreviation edge cases.
+- `TileSizeMetadata` DataRow-driven mapping test.
+
+### Rollout Checklist
+- New project + `GlobalUsings.cs`; add to solution and `.All` meta-package.
+- Add publish steps to `release.yml` (GitHub Packages + nuget.org), mirroring Toast.
+- README: component list + package table row (note: no CSS link needed - isolated CSS).
+- Sample page in `FullSample.Wasm`: responsive grid of tiles (with/without images, footer flyouts).
+- `ReleaseNotes.md` entry.
+
+### Open Questions
+- Default click semantics: button-mode default, anchor-mode when `Href` set? (recommended)
+- Whole-tile clickable vs explicit action area (propagation-stop handles footer).
+- Abbreviation color: deterministic palette vs single neutral default.
 
 ## Toast + ResultToast&lt;T&gt; [Done]
 
