@@ -14,7 +14,7 @@ public sealed class ResultToastOptions<T> where T : notnull
 
     public int? MaxErrorsShown { get; set; }
 
-    public ToastPosition Position { get; set; } = ToastPosition.BottomRight;
+    public ToastPosition Position { get; set; } = ToastPosition.BottomCenter;
 
     public TimeSpan SuccessTimeout { get; set; } = TimeSpan.FromSeconds(5);
 

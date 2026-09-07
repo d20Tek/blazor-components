@@ -6,6 +6,8 @@ public interface IToastService
 
     event Action<Guid>? OnDismiss;
 
+    ToastDefaults Defaults { get; }
+
     ToastInstance Show(RenderFragment content, Action<ToastOptions>? configure = null);
 
     ToastInstance Show(string message, Action<ToastOptions>? configure = null);

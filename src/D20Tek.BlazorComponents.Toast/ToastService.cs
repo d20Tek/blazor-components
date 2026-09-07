@@ -6,11 +6,15 @@ internal sealed class ToastService : IToastService
 
     public event Action<Guid>? OnDismiss;
 
+    public ToastDefaults Defaults { get; }
+
+    public ToastService(ToastDefaults? defaults = null) => Defaults = defaults ?? new ToastDefaults();
+
     public ToastInstance Show(RenderFragment content, Action<ToastOptions>? configure = null)
     {
         ArgumentNullException.ThrowIfNull(content);
 
-        var options = new ToastOptions();
+        var options = CreateOptions();
         configure?.Invoke(options);
 
         var toast = new ToastInstance
@@ -42,6 +46,15 @@ internal sealed class ToastService : IToastService
         });
 
     public void Dismiss(Guid id) => OnDismiss?.Invoke(id);
+
+    private ToastOptions CreateOptions() => new()
+    {
+        Position = Defaults.Position,
+        Timeout = Defaults.DefaultTimeout,
+        ShowIcon = Defaults.ShowIcon,
+        Dismissible = Defaults.Dismissible,
+        Animate = Defaults.Animate,
+    };
 
     private static RenderFragment BuildMessageFragment(string message) => builder => builder.AddContent(0, message);
 }

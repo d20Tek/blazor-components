@@ -92,6 +92,18 @@ Some components require a one-time setup step in addition to the standard usage 
 ```html
 <link href="_content/D20Tek.BlazorComponents.Toast/Toast.css" rel="stylesheet" />
 ```
+You can optionally configure app-wide default presentation settings that apply to every toast (both generic `Show` and `ResultToast.ShowResult`):
+```csharp
+builder.Services.AddToast(options =>
+{
+    options.Position = ToastPosition.TopRight;
+    options.DefaultTimeout = TimeSpan.FromSeconds(4);
+    options.ShowIcon = true;
+    options.Dismissible = true;
+    options.Animate = true;
+});
+```
+These defaults cover presentation chrome only (`Position`, `DefaultTimeout`, `ShowIcon`, `Dismissible`, `Animate`). Values resolve in the order: **component built-in defaults -> app defaults (`AddToast`) -> per-call `configure`** on `Show`/`ShowResult`, so any individual call can still override the app defaults. Note that `DefaultTimeout` seeds the timeout for generic toasts and for `ResultToast` success toasts; `ResultToast` failure toasts remain sticky by default.
 > Note: `ResultToast` (in the `D20Tek.BlazorComponents.Functionally` package) is built on top of Toast. When you install `Functionally`, the `D20Tek.BlazorComponents.Toast` package comes with it transitively, so no extra package reference is needed - but you still need the setup above: link `Toast.css`, add `<ToastProvider />` to your layout, and call `builder.Services.AddToast();`.
 
 ### Samples:

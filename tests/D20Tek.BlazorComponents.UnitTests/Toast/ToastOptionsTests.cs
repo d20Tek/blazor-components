@@ -11,7 +11,7 @@ public sealed class ToastOptionsTests
 
         // assert
         Assert.AreEqual(NotificationVariant.Info, options.Variant);
-        Assert.AreEqual(ToastPosition.BottomRight, options.Position);
+        Assert.AreEqual(ToastPosition.BottomCenter, options.Position);
         Assert.AreEqual(TimeSpan.FromSeconds(5), options.Timeout);
         Assert.IsTrue(options.ShowIcon);
         Assert.IsTrue(options.Dismissible);

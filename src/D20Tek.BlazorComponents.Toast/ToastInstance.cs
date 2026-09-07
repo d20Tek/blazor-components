@@ -8,7 +8,7 @@ public sealed class ToastInstance
 
     public NotificationVariant Variant { get; init; } = NotificationVariant.Info;
 
-    public ToastPosition Position { get; init; } = ToastPosition.BottomRight;
+    public ToastPosition Position { get; init; } = ToastPosition.BottomCenter;
 
     public TimeSpan Timeout { get; init; } = TimeSpan.FromSeconds(5);
 

@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="D20Tek.BlazorComponents.UnitTests" />
+  </ItemGroup>
+
 </Project>

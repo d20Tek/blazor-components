@@ -20,8 +20,8 @@ public sealed partial class ToastServiceTests
         Assert.IsNotNull(captured);
         Assert.AreEqual(result.Id, captured.Id);
         Assert.AreEqual(NotificationVariant.Info, captured.Variant);
-        Assert.AreEqual(ToastPosition.BottomRight, captured.Position);
-        Assert.AreEqual(TimeSpan.FromSeconds(5), captured.Timeout);
+        Assert.AreEqual(ToastPosition.BottomCenter, captured.Position);
+        Assert.AreEqual(TimeSpan.FromSeconds(3), captured.Timeout);
         Assert.IsTrue(captured.ShowIcon);
         Assert.IsTrue(captured.Dismissible);
         Assert.IsTrue(captured.Animate);

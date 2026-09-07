@@ -14,7 +14,7 @@ public sealed partial class ResultToastExtensionsTests
         // assert
         Assert.IsNotNull(service.LastToast);
         Assert.AreEqual(NotificationVariant.Success, service.LastToast.Variant);
-        Assert.AreEqual(TimeSpan.FromSeconds(5), service.LastToast.Timeout);
+        Assert.AreEqual(TimeSpan.FromSeconds(3), service.LastToast.Timeout);
         Assert.IsFalse(service.LastToast.IsSticky);
     }
 
@@ -74,5 +74,48 @@ public sealed partial class ResultToastExtensionsTests
         var markup = RenderContent(service.LastToast!);
         Assert.Contains("Explicit", markup);
         Assert.DoesNotContain("Hello Ada", markup);
+    }
+
+    [TestMethod]
+    public void ShowResult_SuccessMessageParameter_SetsSuccessMessage()
+    {
+        // arrange
+        var service = new FakeToastService();
+
+        // act
+        service.ShowResult(SuccessResult(), "Saved!");
+
+        // assert
+        Assert.Contains("Saved!", RenderContent(service.LastToast!));
+    }
+
+    [TestMethod]
+    public void ShowResult_SuccessMessageParameter_AppliesConfigure()
+    {
+        // arrange
+        var service = new FakeToastService();
+
+        // act
+        service.ShowResult(SuccessResult(), "Saved!", o => o.Position = ToastPosition.TopCenter);
+
+        // assert
+        var toast = service.LastToast!;
+        Assert.Contains("Saved!", RenderContent(toast));
+        Assert.AreEqual(ToastPosition.TopCenter, toast.Position);
+    }
+
+    [TestMethod]
+    public void ShowResult_SuccessMessageParameter_ConfigureCanOverrideMessage()
+    {
+        // arrange
+        var service = new FakeToastService();
+
+        // act
+        service.ShowResult(SuccessResult(), "FromParameter", o => o.SuccessMessage = "FromConfigure");
+
+        // assert
+        var markup = RenderContent(service.LastToast!);
+        Assert.Contains("FromConfigure", markup);
+        Assert.DoesNotContain("FromParameter", markup);
     }
 }

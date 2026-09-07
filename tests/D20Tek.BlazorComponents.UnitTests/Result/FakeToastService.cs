@@ -6,6 +6,8 @@ public sealed class FakeToastService : IToastService
     public event Action<ToastInstance>? OnShow;
     public event Action<Guid>? OnDismiss;
 
+    public ToastDefaults Defaults { get; set; } = new();
+
     public ToastInstance? LastToast { get; private set; }
 
     public ToastInstance Show(RenderFragment content, Action<ToastOptions>? configure = null)
