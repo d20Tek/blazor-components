@@ -58,7 +58,7 @@ public sealed class ToastDependencyInjectionTests
 
         // assert
         Assert.IsNotNull(defaults);
-        Assert.AreEqual(ToastPosition.BottomRight, defaults.Position);
+        Assert.AreEqual(ToastPosition.BottomCenter, defaults.Position);
         Assert.AreEqual(TimeSpan.FromSeconds(3), defaults.DefaultTimeout);
     }
 

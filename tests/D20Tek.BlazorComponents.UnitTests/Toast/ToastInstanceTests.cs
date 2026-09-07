@@ -14,7 +14,7 @@ public sealed class ToastInstanceTests
         // assert
         Assert.AreNotEqual(Guid.Empty, toast.Id);
         Assert.AreEqual(NotificationVariant.Info, toast.Variant);
-        Assert.AreEqual(ToastPosition.BottomRight, toast.Position);
+        Assert.AreEqual(ToastPosition.BottomCenter, toast.Position);
         Assert.AreEqual(TimeSpan.FromSeconds(5), toast.Timeout);
         Assert.IsTrue(toast.ShowIcon);
         Assert.IsTrue(toast.Dismissible);

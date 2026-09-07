@@ -73,7 +73,7 @@ public sealed partial class ToastServiceTests
 
         // assert
         Assert.IsNotNull(defaults);
-        Assert.AreEqual(ToastPosition.BottomRight, defaults.Position);
+        Assert.AreEqual(ToastPosition.BottomCenter, defaults.Position);
         Assert.AreEqual(TimeSpan.FromSeconds(3), defaults.DefaultTimeout);
         Assert.IsTrue(defaults.ShowIcon);
         Assert.IsTrue(defaults.Dismissible);
