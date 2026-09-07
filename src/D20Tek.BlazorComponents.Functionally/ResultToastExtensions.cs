@@ -20,6 +20,18 @@ public static class ResultToastExtensions
             : ShowFailure(toastService, [.. result.GetErrors()], options);
     }
 
+    public static ToastInstance ShowResult<T>(
+        this IToastService toastService,
+        Result<T> result,
+        string successMessage,
+        Action<ResultToastOptions<T>>? configure = null)
+        where T : notnull =>
+        toastService.ShowResult(result, options =>
+        {
+            options.SuccessMessage = successMessage;
+            configure?.Invoke(options);
+        });
+
     private static void ApplyDefaults<T>(ResultToastOptions<T> options, ToastDefaults defaults)
         where T : notnull
     {

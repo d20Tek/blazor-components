@@ -8,6 +8,8 @@
   * `ResultToast.ShowResult<T>` (in the **D20Tek.BlazorComponents.Functionally** package) seeds its presentation options (`Position`, `SuccessTimeout` from `DefaultTimeout`, `ShowIcon`, `Dismissible`, `Animate`) from the same defaults. Result-failure toasts remain sticky by default and are not driven by `DefaultTimeout`.
   * Settings resolve in the order: component built-in defaults -> app defaults (`AddToast`) -> per-call `configure` on `Show`/`ShowResult`.
   * Added unit tests covering the DI overload, service seeding/override behavior, and ResultToast success/failure seeding.
+* Changed the built-in default toast position from `BottomRight` to `BottomCenter` (applies to `ToastDefaults`, `ToastOptions`, `ToastInstance`, and `ResultToastOptions`); override it per app via `AddToast` or per call via `configure`.
+* Added a `ShowResult<T>` overload that accepts a `successMessage` parameter directly, so you can set the success message without a `configure` delegate; the trailing `configure` parameter remains optional and can still override any option (including the success message).
 
 ## Release v1.11.1
 * Added the `ResultView<T>` component to the **D20Tek.BlazorComponents.Functionally** package:
