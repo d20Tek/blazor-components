@@ -5,6 +5,9 @@
     <Description>A convenience meta-package that bundles all of the D20Tek Blazor component packages (Functionally, Markdown, Modal, Spinner, Timer, Toast, TogglePanel, ToggleSwitch). Install this to get the full component suite in one reference. If you only need a few components, install the individual packages instead.</Description>
     <PackageTags>Blazor .NET Components WebAssembly Bundle All Meta</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <!-- Meta-package has no build output, so no symbols (.pdb) exist; skip the empty .snupkg
+         that nuget.org rejects with "The package does not contain any symbol (.pdb) files." -->
+    <IncludeSymbols>false</IncludeSymbols>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 

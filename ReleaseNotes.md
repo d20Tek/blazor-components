@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release v1.11.3
+## Release v1.11.4
 * Updated package references to latest versions.
 * Updated release.yml script to use Nuget Trusted Publishing.
 * Added symbol package generation to release.yml script.
