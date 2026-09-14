@@ -4,6 +4,12 @@ on:
   push:
     tags:
     - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: read
+  packages: write     # required to push to GitHub Packages with GITHUB_TOKEN
+  id-token: write     # REQUIRED for OIDC -> NuGet temporary API key
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,84 +37,16 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
 
-    - name: Publish Core
-      run: dotnet nuget push D20Tek.BlazorComponent.Core.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Markdown
-      run: dotnet nuget push D20Tek.BlazorComponents.Markdown.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Modal
-      run: dotnet nuget push D20Tek.BlazorComponents.Modal.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Functionally
-      run: dotnet nuget push D20Tek.BlazorComponents.Functionally.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Spinner
-      run: dotnet nuget push D20Tek.BlazorComponents.Spinner.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Timer
-      run: dotnet nuget push D20Tek.BlazorComponents.Timer.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish Toast
-      run: dotnet nuget push D20Tek.BlazorComponents.Toast.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish TogglePanel
-      run: dotnet nuget push D20Tek.BlazorComponents.TogglePanel.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish ToggleSwitch
-      run: dotnet nuget push D20Tek.BlazorComponents.ToggleSwitch.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish All
-      run: dotnet nuget push D20Tek.BlazorComponents.All.${VERSION}.nupkg --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN}
+    - name: Publish packages (local)
+      run: dotnet nuget push "D20Tek.*.nupkg" --source https://nuget.pkg.github.com/d20Tek/index.json --api-key ${GITHUB_TOKEN} --skip-duplicate
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish Core (public)
-      run: dotnet nuget push D20Tek.BlazorComponent.Core.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Markdown (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Markdown.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Modal (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Modal.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Functionally (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Functionally.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Spinner (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Spinner.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Timer (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Timer.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish Toast (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.Toast.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish TogglePanel (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.TogglePanel.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish ToggleSwitch (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.ToggleSwitch.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-    - name: Publish All (public)
-      run: dotnet nuget push D20Tek.BlazorComponents.All.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    - name: NuGet login (OIDC -> temporary API key)
+      id: login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: Publish packages (nuget.org)
+      run: dotnet nuget push "D20Tek.*.nupkg" --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

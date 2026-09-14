@@ -1,5 +1,12 @@
 # Release Notes
 
+## Release v1.11.3
+* Updated package references to latest versions.
+* Updated release.yml script to use Nuget Trusted Publishing.
+* Added symbol package generation to release.yml script.
+* Added package icon to all nuget package projects.
+* Fixed up package metadata for all nuget package projects to include solution-level readme in all packages.
+
 ## Release v1.11.2
 * Added app-wide default toast settings to the **D20Tek.BlazorComponents.Toast** package:
   * New `ToastDefaults` class holds presentation-only defaults - `Position`, `DefaultTimeout`, `ShowIcon`, `Dismissible`, and `Animate`.

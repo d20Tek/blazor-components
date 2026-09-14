@@ -7,8 +7,8 @@
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <!-- Common package/repository metadata used by all packable projects -->
-  <PropertyGroup>
+	<!-- Common package/repository metadata used by all packable projects -->
+	<PropertyGroup>
 	<Authors>DarthPedro</Authors>
 	<Company>d20Tek</Company>
 	<Copyright>Copyright (c) d20Tek. All rights reserved.</Copyright>
@@ -17,6 +17,24 @@
 	<RepositoryUrl>https://github.com/d20Tek/blazor-components</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageReleaseNotes>Please read the latest release notes at: https://github.com/d20Tek/blazor-components/blob/main/ReleaseNotes.md</PackageReleaseNotes>
-  </PropertyGroup>
+	<PackageIcon>package-icon.png</PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<!-- Pack the shared package icon into every packable project -->
+	<ItemGroup Condition="'$(IsPackable)' != 'false'">
+	<None Include="$(MSBuildThisFileDirectory)package-icon.png" Pack="true" PackagePath="\" Visible="false" />
+	<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+	</ItemGroup>
+
+	<!-- Symbol packages and SourceLink for debuggable NuGet packages -->
+	<PropertyGroup>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<Deterministic>true</Deterministic>
+	<ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+	</PropertyGroup>
 
 </Project>

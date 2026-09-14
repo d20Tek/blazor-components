@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Description>A Blazor component for providing a ModalDialog that shows custom content in a popup modal window with a semi-transparent background.</Description>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Blazor .NET Components; WebAssembly; modal; modal dialog</PackageTags>
   </PropertyGroup>
 
@@ -19,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
     <None Include="wwwroot\Modal.js" />
   </ItemGroup>
 
