@@ -183,3 +183,51 @@ Key characteristics:
 - Adds a pending/loading state that neither `ResultAlert` nor `ResultValidator` covers today.
 - Lightweight/non-visual by default; styling and layout are supplied by the caller.
 - Complements `ResultAlert` for cases where the entire view depends on the result state.
+
+## OperationScope
+
+A lightweight, opt-in cancellation primitive for Core (`D20Tek.BlazorComponents`) that owns a
+`CancellationTokenSource` tied to a component's lifetime and provides ergonomic
+cancel-previous-then-run semantics. It composes *alongside* `BusyState` (a component can hold
+both) rather than being baked into it - cancellation and busy-tracking are orthogonal concerns,
+and merging them would violate `BusyState`'s single responsibility.
+
+### Why it is a separate primitive (not part of BusyState)
+- Baking cancellation into `BusyState.RunAsync` would change behavior based on whether `default`
+  was passed - a surprising, leaky API - and would give an inconsistent cancellation story across
+  the library (only busy-tracked operations would be cancelable).
+- Keeping it separate provides one coherent cancellation mechanism library-wide that also serves
+  long-running operations that have nothing to do with the busy flag.
+
+### Sketched public API
+- `CancellationToken Token { get; }` - the read-only view to cascade to children / pass to async
+  calls (the `AbortSignal` half of the owner/view split).
+- `bool IsRunning { get; }` / `bool CanCancel { get; }` - for UI binding (enable/disable a Cancel
+  button).
+- `event EventHandler? Changed;` - so a Blazor component can re-render on state changes (mirrors
+  `BusyState.Changed`).
+- `void Cancel();` - the owner's cancel action (the `AbortController.abort()` half).
+- `CancellationToken BeginNext(CancellationToken linkedToken = default);` - cancel the prior run
+  and start a fresh one, linked to an optional outer/cascaded token.
+- `Task RunAsync(Func<CancellationToken, Task> operation, CancellationToken linkedToken = default);`
+  plus a `Task<T>` overload - cancel-previous + run + guaranteed cleanup (BusyState-style ergonomics).
+- `void CancelAfter(TimeSpan delay);` - optional convenience (maps to `CancelAfter`/`AbortSignal.timeout`).
+- `void Dispose();` - cancel-on-teardown (tie `Cancel()` to the component's `Dispose`).
+
+### Design reminders / rationale
+- **Always use a linked token source** (`CreateLinkedTokenSource`); never branch behavior on
+  whether the caller passed `default`. Linked sources are cheap and always compose.
+- **Owner/view split** (from `AbortController`/`AbortSignal`): the parent holds the scope and can
+  `Cancel()`; children receive only the `CancellationToken` via `[CascadingParameter]`. Never
+  cascade the scope itself.
+- **Cancel-previous ergonomics** (from `Microsoft.VisualStudio.Threading.CancellationSeries`):
+  `BeginNext` is the real ergonomic win over a hand-rolled CTS - ideal for search-as-you-type.
+- **Single-flight concurrency contract**: prefer exactly one cancelable operation at a time so the
+  internal `_cts` field stays unambiguous (matches the existing double-submit guard idea).
+- Prior art to borrow from: `CancellationSeries` (cancel-previous) and `AbortController`/`AbortSignal`
+  (owner/view split, `any` = linked tokens, `timeout` = `CancelAfter`).
+
+### Promotion trigger (build it when any one becomes concrete)
+- A sample or consumer needs **search-as-you-type / cancel-previous** semantics, or
+- A sample needs a real **Submit + Cancel button pair** on client-side long-running work, or
+- An actual **user request** for cancellation support arrives.

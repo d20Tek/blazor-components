@@ -6,12 +6,7 @@
     <PackageTags>Blazor .NET Components WebAssembly Bundle All Meta</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\D20Tek.BlazorComponents.Markdown\D20Tek.BlazorComponents.Markdown.csproj" />
