@@ -1,6 +1,6 @@
 using D20Tek.Vertically.Queries.Pagination;
 
-namespace D20Tek.BlazorComponents.UnitTests.Pagination;
+namespace D20Tek.BlazorComponents.UnitTests.Vertically;
 
 [TestClass]
 public sealed class OffsetPagerTests : BunitContext

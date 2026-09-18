@@ -6,13 +6,14 @@ public sealed class PagerValidationTests : BunitContext
     [TestMethod]
     public void CurrentPage_BelowMinimum_ThrowsArgumentOutOfRange()
     {
-        // arrange - act - assert
+        // arrange - act
         [ExcludeFromCodeCoverage]
         void Act() => Render<Pager>(parameters => parameters
             .Add(p => p.CurrentPage, 0)
             .Add(p => p.PageSize, 10)
             .Add(p => p.TotalItems, 50));
 
+        // assert
         var ex = Assert.ThrowsExactly<InvalidOperationException>(Act);
         Assert.IsInstanceOfType<ArgumentOutOfRangeException>(ex.InnerException);
     }
@@ -20,13 +21,14 @@ public sealed class PagerValidationTests : BunitContext
     [TestMethod]
     public void PageSize_BelowMinimum_ThrowsArgumentOutOfRange()
     {
-        // arrange - act - assert
+        // arrange - act
         [ExcludeFromCodeCoverage]
         void Act() => Render<Pager>(parameters => parameters
             .Add(p => p.CurrentPage, 1)
             .Add(p => p.PageSize, 0)
             .Add(p => p.TotalItems, 50));
 
+        // assert
         var ex = Assert.ThrowsExactly<InvalidOperationException>(Act);
         Assert.IsInstanceOfType<ArgumentOutOfRangeException>(ex.InnerException);
     }
@@ -34,13 +36,14 @@ public sealed class PagerValidationTests : BunitContext
     [TestMethod]
     public void TotalItems_Negative_ThrowsArgumentOutOfRange()
     {
-        // arrange - act - assert
+        // arrange - act
         [ExcludeFromCodeCoverage]
         void Act() => Render<Pager>(parameters => parameters
             .Add(p => p.CurrentPage, 1)
             .Add(p => p.PageSize, 10)
             .Add(p => p.TotalItems, -1));
 
+        // assert
         var ex = Assert.ThrowsExactly<InvalidOperationException>(Act);
         Assert.IsInstanceOfType<ArgumentOutOfRangeException>(ex.InnerException);
     }
@@ -48,7 +51,7 @@ public sealed class PagerValidationTests : BunitContext
     [TestMethod]
     public void BoundaryCount_Negative_ThrowsArgumentOutOfRange()
     {
-        // arrange - act - assert
+        // arrange - act
         [ExcludeFromCodeCoverage]
         void Act() => Render<Pager>(parameters => parameters
             .Add(p => p.CurrentPage, 1)
@@ -56,6 +59,7 @@ public sealed class PagerValidationTests : BunitContext
             .Add(p => p.TotalItems, 50)
             .Add(p => p.BoundaryCount, -1));
 
+        // assert
         var ex = Assert.ThrowsExactly<InvalidOperationException>(Act);
         Assert.IsInstanceOfType<ArgumentOutOfRangeException>(ex.InnerException);
     }
@@ -63,7 +67,7 @@ public sealed class PagerValidationTests : BunitContext
     [TestMethod]
     public void MiddleCount_BelowMinimum_ThrowsArgumentOutOfRange()
     {
-        // arrange - act - assert
+        // arrange - act
         [ExcludeFromCodeCoverage]
         void Act() => Render<Pager>(parameters => parameters
             .Add(p => p.CurrentPage, 1)
@@ -71,6 +75,7 @@ public sealed class PagerValidationTests : BunitContext
             .Add(p => p.TotalItems, 50)
             .Add(p => p.MiddleCount, 0));
 
+        // assert
         var ex = Assert.ThrowsExactly<InvalidOperationException>(Act);
         Assert.IsInstanceOfType<ArgumentOutOfRangeException>(ex.InnerException);
     }

@@ -2,11 +2,8 @@
 
 @if (IsVisible)
 {
-    <nav @attributes="@RemainingAttributes"
-         role="navigation"
-         aria-label="pagination"
-         class="@CssClass"
-         style="@CssStyles">
+    <nav @attributes="@RemainingAttributes" role="navigation" aria-label="pagination"
+         class="@CssClass" style="@CssStyles">
 
         @if (ShowDescription)
         {
@@ -16,20 +13,14 @@
         <div class="pager__controls">
             @if (ShowFirstLast)
             {
-                <button type="button"
-                        class="pager__button pager__first"
-                        aria-label="@FirstLabel"
-                        disabled="@(!Window.HasFirstPage)"
-                        @onclick="() => GoToPageAsync(1)">
+                <button type="button" class="pager__button pager__first" aria-label="@FirstLabel"
+                        disabled="@(!Window.HasFirstPage)" @onclick="() => GoToPageAsync(1)">
                     &laquo;
                 </button>
             }
 
-            <button type="button"
-                    class="pager__button pager__prev"
-                    aria-label="@PreviousLabel"
-                    disabled="@(!Window.HasPreviousPage)"
-                    @onclick="() => GoToPageAsync(CurrentPage - 1)">
+            <button type="button" class="pager__button pager__prev" aria-label="@PreviousLabel"
+                    disabled="@(!Window.HasPreviousPage)" @onclick="() => GoToPageAsync(CurrentPage - 1)">
                 &lsaquo;
             </button>
 
@@ -51,11 +42,8 @@
                         var activeClass = isCurrent ? "pager__page--active" : null;
                         var ariaCurrent = isCurrent ? "page" : null;
                         <li class="pager__page-item">
-                            <button type="button"
-                                    class="pager__button pager__page @activeClass"
-                                    aria-current="@ariaCurrent"
-                                    aria-label="@($"Page {target}")"
-                                    @onclick="() => GoToPageAsync(target)">
+                            <button type="button" class="pager__button pager__page @activeClass" aria-current="@ariaCurrent"
+                                    aria-label="@($"Page {target}")" @onclick="() => GoToPageAsync(target)">
                                 @target
                             </button>
                         </li>
@@ -65,21 +53,15 @@
                 </ol>
             }
 
-            <button type="button"
-                    class="pager__button pager__next"
-                    aria-label="@NextLabel"
-                    disabled="@(!Window.HasNextPage)"
-                    @onclick="() => GoToPageAsync(CurrentPage + 1)">
+            <button type="button" class="pager__button pager__next" aria-label="@NextLabel"
+                    disabled="@(!Window.HasNextPage)" @onclick="() => GoToPageAsync(CurrentPage + 1)">
                 &rsaquo;
             </button>
 
             @if (ShowFirstLast)
             {
-                <button type="button"
-                        class="pager__button pager__last"
-                        aria-label="@LastLabel"
-                        disabled="@(!Window.HasLastPage)"
-                        @onclick="() => GoToPageAsync(TotalPages)">
+                <button type="button" class="pager__button pager__last" aria-label="@LastLabel"
+                        disabled="@(!Window.HasLastPage)" @onclick="() => GoToPageAsync(TotalPages)">
                     &raquo;
                 </button>
             }

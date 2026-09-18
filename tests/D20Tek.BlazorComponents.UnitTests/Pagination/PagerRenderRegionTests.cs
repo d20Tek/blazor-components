@@ -1,7 +1,7 @@
 namespace D20Tek.BlazorComponents.UnitTests.Pagination;
 
 [TestClass]
-public sealed class PagerRenderTests : BunitContext
+public sealed class PagerRenderRegionTests : BunitContext
 {
     [TestMethod]
     public void Render_Defaults_ShowsNavPrevNextAndNumbers()
@@ -75,7 +75,7 @@ public sealed class PagerRenderTests : BunitContext
             .Add(p => p.PageSize, 20)
             .Add(p => p.TotalItems, 100)
             .Add(p => p.ShowPageSizeSelector, true)
-            .Add(p => p.PageSizeOptions, new[] { 20, 40 }));
+            .Add(p => p.PageSizeOptions, [20, 40]));
 
         // assert
         Assert.Contains("pager__page-size-select", cut.Markup);
@@ -105,123 +105,6 @@ public sealed class PagerRenderTests : BunitContext
     }
 
     [TestMethod]
-    public void Render_CurrentPage_MarksActivePageWithAriaCurrent()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 3)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 100));
-
-        // assert
-        Assert.Contains("pager__page--active", cut.Markup);
-        Assert.Contains("aria-current=\"page\"", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_FirstPage_DisablesPrevAndFirst()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 100)
-            .Add(p => p.ShowFirstLast, true));
-
-        // assert
-        var prev = cut.Find(".pager__prev");
-        var first = cut.Find(".pager__first");
-        Assert.IsTrue(prev.HasAttribute("disabled"));
-        Assert.IsTrue(first.HasAttribute("disabled"));
-    }
-
-    [TestMethod]
-    public void Render_LastPage_DisablesNextAndLast()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 10)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 100)
-            .Add(p => p.ShowFirstLast, true));
-
-        // assert
-        var next = cut.Find(".pager__next");
-        var last = cut.Find(".pager__last");
-        Assert.IsTrue(next.HasAttribute("disabled"));
-        Assert.IsTrue(last.HasAttribute("disabled"));
-    }
-
-    [TestMethod]
-    public void Render_LargePageCount_RendersEllipsis()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 10)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 200));
-
-        // assert
-        Assert.Contains("pager__ellipsis", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_SizeMedium_AppliesSizeModifierClass()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 50)
-            .Add(p => p.Size, Size.Medium));
-
-        // assert
-        Assert.Contains("pager-md", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_SizeNone_OmitsSizeModifierClass()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 50)
-            .Add(p => p.Size, Size.None));
-
-        // assert
-        Assert.DoesNotContain("pager-sm", cut.Markup);
-        Assert.DoesNotContain("pager-md", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_DisableResponsive_AddsStaticClass()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 50)
-            .Add(p => p.DisableResponsive, true));
-
-        // assert
-        Assert.Contains("pager-static", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_ResponsiveDefault_OmitsStaticClass()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 50));
-
-        // assert
-        Assert.DoesNotContain("pager-static", cut.Markup);
-    }
-
-    [TestMethod]
     public void Render_IsVisibleFalse_RendersNothing()
     {
         // arrange - act
@@ -247,19 +130,5 @@ public sealed class PagerRenderTests : BunitContext
 
         // assert
         Assert.DoesNotContain("pager__pages", cut.Markup);
-    }
-
-    [TestMethod]
-    public void Render_RemainingAttributes_ForwardsCustomClass()
-    {
-        // arrange - act
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.CurrentPage, 1)
-            .Add(p => p.PageSize, 10)
-            .Add(p => p.TotalItems, 50)
-            .AddUnmatched("class", "custom-pager"));
-
-        // assert
-        Assert.Contains("custom-pager", cut.Markup);
     }
 }

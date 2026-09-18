@@ -5,20 +5,11 @@ public sealed class PagerTotalPagesTests : BunitContext
 {
     private int RenderAndGetTotalPages(int totalItems, int pageSize)
     {
-        // arrange - act
         var cut = Render<Pager>(parameters => parameters
             .Add(p => p.TotalItems, totalItems)
             .Add(p => p.PageSize, pageSize));
 
         return cut.Instance.TotalPages;
-    }
-
-    private static void SetPrivatePageSize(Pager pager, int value)
-    {
-        var field = typeof(Pager).GetField(
-            "_pageSize",
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        field!.SetValue(pager, value);
     }
 
     [TestMethod]
@@ -105,9 +96,8 @@ public sealed class PagerTotalPagesTests : BunitContext
     public void TotalPages_ZeroPageSize_ReturnsZero()
     {
         // arrange
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.TotalItems, 100));
-        SetPrivatePageSize(cut.Instance, 0);
+        var cut = Render<Pager>(parameters => parameters.Add(p => p.TotalItems, 100));
+        PagerAccessor.SetPageSize(cut.Instance, 0);
 
         // act
         var result = cut.Instance.TotalPages;
@@ -120,9 +110,8 @@ public sealed class PagerTotalPagesTests : BunitContext
     public void TotalPages_NegativePageSize_ReturnsZero()
     {
         // arrange
-        var cut = Render<Pager>(parameters => parameters
-            .Add(p => p.TotalItems, 100));
-        SetPrivatePageSize(cut.Instance, -5);
+        var cut = Render<Pager>(parameters => parameters.Add(p => p.TotalItems, 100));
+        PagerAccessor.SetPageSize(cut.Instance, -5);
 
         // act
         var result = cut.Instance.TotalPages;
