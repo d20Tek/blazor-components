@@ -1,0 +1,135 @@
+@page "/pager"
+@using D20Tek.Vertically.Queries.Pagination
+
+<h3>Pager Component</h3>
+<p>The <code>Pager</code> component is a theme-agnostic, fully controlled pagination control. It supports previous/next
+   navigation, numbered pages with MudBlazor-style anchored windowing, optional first/last buttons, a description
+   ("Page X of Y"), and an optional page-size selector. Its scoped styles use <code>currentColor</code> so it adapts to
+   any light, dark, or custom theme.</p>
+
+<div class="d-flex align-items-start component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="opt_total" style="margin-right: 5px;">TotalItems</label></td>
+                    <td><input type="number" id="opt_total" style="width: 120px;" @bind-value=_totalItems></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_boundary" style="margin-right: 5px;">BoundaryCount</label></td>
+                    <td><input type="number" id="opt_boundary" style="width: 120px;" @bind-value=_boundaryCount></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_middle" style="margin-right: 5px;">MiddleCount</label></td>
+                    <td><input type="number" id="opt_middle" style="width: 120px;" @bind-value=_middleCount></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_size" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="opt_size" @bind-value=_size @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small selected>Small</option>
+                            <option value=@Size.Medium>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="opt_first" style="margin-right: 5px;">ShowFirstLast</label></td>
+                    <td><input type="checkbox" id="opt_first" @bind=_showFirstLast></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_desc" style="margin-right: 5px;">ShowDescription</label></td>
+                    <td><input type="checkbox" id="opt_desc" @bind=_showDescription></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_pagesize" style="margin-right: 5px;">ShowPageSizeSelector</label></td>
+                    <td><input type="checkbox" id="opt_pagesize" @bind=_showPageSizeSelector></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_static" style="margin-right: 5px;">DisableResponsive</label></td>
+                    <td><input type="checkbox" id="opt_static" @bind=_disableResponsive></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-2 flex-grow-1">
+        <p class="mb-2">Current page: <strong>@_currentPage</strong>, page size: <strong>@_pageSize</strong></p>
+        <Pager CurrentPage=@_currentPage
+               CurrentPageChanged=@OnCurrentPageChanged
+               PageSize=@_pageSize
+               PageSizeChanged=@OnPageSizeChanged
+               TotalItems=@_totalItems
+               BoundaryCount=@_boundaryCount
+               MiddleCount=@_middleCount
+               Size=@_size
+               ShowFirstLast=@_showFirstLast
+               ShowDescription=@_showDescription
+               ShowPageSizeSelector=@_showPageSizeSelector
+               DisableResponsive=@_disableResponsive />
+    </div>
+</div>
+<hr />
+
+<h4>Default Pager</h4>
+<p>A pager with only previous/next and numbered pages.</p>
+<pre><code>&lt;Pager CurrentPage="@_defaultPage" CurrentPageChanged="OnDefaultChanged"
+       PageSize="10" TotalItems="95" /&gt;</code></pre>
+<Pager CurrentPage=@_defaultPage
+       CurrentPageChanged=@(p => _defaultPage = p)
+       PageSize="10"
+       TotalItems="95" />
+<hr />
+
+<h4>Full-featured Pager</h4>
+<p>A pager with first/last buttons, the description, and a page-size selector all enabled.</p>
+<Pager CurrentPage=@_fullPage
+       CurrentPageChanged=@(p => _fullPage = p)
+       PageSize=@_fullPageSize
+       PageSizeChanged=@(s => { _fullPageSize = s; _fullPage = 1; })
+       TotalItems="240"
+       ShowFirstLast="true"
+       ShowDescription="true"
+       ShowPageSizeSelector="true" />
+<hr />
+
+<h4>Responsive Collapse</h4>
+<p>The pager collapses subcomponents as its container gets narrower. Resize the container below to see the
+   description, first/last, page-size selector, and finally the page numbers progressively hide, leaving compact
+   previous/next controls with a page indicator.</p>
+<div style="resize: horizontal; overflow: auto; border: 1px dashed currentColor; padding: 0.5rem; min-width: 220px; max-width: 100%;">
+    <Pager CurrentPage=@_responsivePage
+           CurrentPageChanged=@(p => _responsivePage = p)
+           PageSize="10"
+           TotalItems="200"
+           ShowFirstLast="true"
+           ShowDescription="true"
+           ShowPageSizeSelector="true" />
+</div>
+<hr />
+
+<h3>OffsetPager&lt;T&gt; Component</h3>
+<p>The <code>OffsetPager&lt;T&gt;</code> component binds the core <code>Pager</code> to the D20Tek.Vertically
+   <code>PageOf&lt;T&gt;</code> result type. It reads the current page, page size, and total count from the bound page
+   and raises <code>OnPageQuery</code> with a new <code>PagedRequest</code> whenever the user navigates or changes the
+   page size.</p>
+<div class="p-2">
+    <p class="mb-2">
+        Showing @_verticalPage.Items.Count of @_verticalPage.TotalCount items (page @_verticalPage.PageNumber).
+    </p>
+    <ul>
+        @foreach (var item in _verticalPage.Items)
+        {
+            <li>@item</li>
+        }
+    </ul>
+    <OffsetPager T="string"
+                 Page=@_verticalPage
+                 OnPageQuery=@OnPageQuery
+                 ShowFirstLast="true"
+                 ShowDescription="true"
+                 ShowPageSizeSelector="true"
+                 PageSizeOptions=@(new[] { 5, 10, 25 }) />
+</div>

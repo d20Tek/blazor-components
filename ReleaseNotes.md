@@ -1,5 +1,19 @@
 # Release Notes
 
+## Release v1.11.5
+* Added the **D20Tek.BlazorComponents.Pager** package with the theme-agnostic `Pager` component:
+  * Fully controlled pagination via `CurrentPage`/`CurrentPageChanged`, `PageSize`/`PageSizeChanged`, and `TotalItems`.
+  * Opt-in previous/next, numbered pages, first/last buttons, a "Page X of Y" description, and a page-size selector.
+  * MudBlazor-style anchored page windowing driven by two knobs, `BoundaryCount` (default 1) and `MiddleCount` (default 5, centered on the current page), with leading/trailing ellipsis.
+  * Scoped CSS styled from `currentColor` (no static stylesheet to link) that adapts to any light, dark, or custom theme.
+  * Responsive collapse of subcomponents via CSS container queries as the container narrows; opt out with `DisableResponsive="true"`.
+  * Configurable control labels and `Size` support.
+* Added the **D20Tek.BlazorComponents.Vertically** package with the `OffsetPager<T>` component:
+  * Wraps `Pager` for the D20Tek.Vertically paging types, binding a `PageOf<T>` result to the pager controls.
+  * Raises `OnPageQuery` with a new one-based `PagedRequest` (`PageNumber` plus `PageSize`) on navigation or page-size changes, resetting to page 1 when the page size changes.
+* Added both new packages to the **D20Tek.BlazorComponents.All** meta-package.
+* Added a Pager sample page to the D20Tek.FullSample.Wasm sample app.
+
 ## Release v1.11.4
 * Updated package references to latest versions.
 * Updated release.yml script to use Nuget Trusted Publishing.

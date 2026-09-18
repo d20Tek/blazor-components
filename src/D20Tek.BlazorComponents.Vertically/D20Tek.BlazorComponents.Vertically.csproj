@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Description>Blazor UI components that integrate with the D20Tek.Vertically framework. Includes OffsetPager, a strongly-typed pagination component that binds to PageOf&lt;T&gt; paged results and raises a page-query callback. Additional Vertically-focused components will expand this package over time.</Description>
+    <PackageTags>Blazor .NET Components WebAssembly Vertically Pagination Pager PageOf</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="D20Tek.Vertically" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+    <ProjectReference Include="..\D20Tek.BlazorComponents.Pager\D20Tek.BlazorComponents.Pager.csproj" />
+  </ItemGroup>
+
+</Project>

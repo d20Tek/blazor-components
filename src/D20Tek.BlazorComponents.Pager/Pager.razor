@@ -1,0 +1,103 @@
+@inherits BaseComponent
+
+@if (IsVisible)
+{
+    <nav @attributes="@RemainingAttributes"
+         role="navigation"
+         aria-label="pagination"
+         class="@CssClass"
+         style="@CssStyles">
+
+        @if (ShowDescription)
+        {
+            <div class="pager__description">Page @CurrentPage of @Math.Max(1, TotalPages)</div>
+        }
+
+        <div class="pager__controls">
+            @if (ShowFirstLast)
+            {
+                <button type="button"
+                        class="pager__button pager__first"
+                        aria-label="@FirstLabel"
+                        disabled="@(!Window.HasFirstPage)"
+                        @onclick="() => GoToPageAsync(1)">
+                    &laquo;
+                </button>
+            }
+
+            <button type="button"
+                    class="pager__button pager__prev"
+                    aria-label="@PreviousLabel"
+                    disabled="@(!Window.HasPreviousPage)"
+                    @onclick="() => GoToPageAsync(CurrentPage - 1)">
+                &lsaquo;
+            </button>
+
+            @if (ShowNumbers)
+            {
+                <ol class="pager__pages">
+                    @{
+                        var previous = 0;
+                    }
+                    @foreach (var page in Window.Pages)
+                    {
+                        if (previous > 0 && page - previous > 1)
+                        {
+                            <li class="pager__ellipsis" aria-hidden="true">&hellip;</li>
+                        }
+
+                        var target = page;
+                        var isCurrent = page == CurrentPage;
+                        var activeClass = isCurrent ? "pager__page--active" : null;
+                        var ariaCurrent = isCurrent ? "page" : null;
+                        <li class="pager__page-item">
+                            <button type="button"
+                                    class="pager__button pager__page @activeClass"
+                                    aria-current="@ariaCurrent"
+                                    aria-label="@($"Page {target}")"
+                                    @onclick="() => GoToPageAsync(target)">
+                                @target
+                            </button>
+                        </li>
+
+                        previous = page;
+                    }
+                </ol>
+            }
+
+            <button type="button"
+                    class="pager__button pager__next"
+                    aria-label="@NextLabel"
+                    disabled="@(!Window.HasNextPage)"
+                    @onclick="() => GoToPageAsync(CurrentPage + 1)">
+                &rsaquo;
+            </button>
+
+            @if (ShowFirstLast)
+            {
+                <button type="button"
+                        class="pager__button pager__last"
+                        aria-label="@LastLabel"
+                        disabled="@(!Window.HasLastPage)"
+                        @onclick="() => GoToPageAsync(TotalPages)">
+                    &raquo;
+                </button>
+            }
+
+            <div class="pager__compact" aria-hidden="true">@CurrentPage / @Math.Max(1, TotalPages)</div>
+        </div>
+
+        @if (ShowPageSizeSelector)
+        {
+            <label class="pager__page-size">
+                <span class="pager__page-size-label">@PageSizeLabel</span>
+                <select class="pager__page-size-select" value="@PageSize" @onchange="OnPageSizeChangedAsync">
+                    @foreach (var option in PageSizeOptions)
+                    {
+                        <option value="@option" selected="@(option == PageSize)">@option</option>
+                    }
+                </select>
+            </label>
+        }
+    </nav>
+}

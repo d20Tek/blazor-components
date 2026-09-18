@@ -12,11 +12,13 @@ separate `PackageReference` for each one.
 - `D20Tek.BlazorComponents.Functionally`
 - `D20Tek.BlazorComponents.Markdown`
 - `D20Tek.BlazorComponents.Modal`
+- `D20Tek.BlazorComponents.Pager`
 - `D20Tek.BlazorComponents.Spinner`
 - `D20Tek.BlazorComponents.Timer`
 - `D20Tek.BlazorComponents.Toast`
 - `D20Tek.BlazorComponents.TogglePanel`
 - `D20Tek.BlazorComponents.ToggleSwitch`
+- `D20Tek.BlazorComponents.Vertically`
 
 Each of these depends transitively on `D20Tek.BlazorComponent.Core`, so it is included
 automatically.

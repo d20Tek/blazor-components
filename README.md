@@ -10,7 +10,7 @@ This package suite provides custom, reusable Blazor components. These components
 
 **Live demo:** [components.d20tek.com](https://components.d20tek.com)
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, and ResultToast.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
 
 Components ship grouped by package, so a single package can contain more than one component:
 
@@ -24,9 +24,11 @@ Components ship grouped by package, so a single package can contain more than on
 | `D20Tek.BlazorComponents.Markdown` | MarkdownView |
 | `D20Tek.BlazorComponents.TogglePanel` | TogglePanel |
 | `D20Tek.BlazorComponents.Functionally` | ResultValidator, ResultAlert, ResultView, ResultToast |
+| `D20Tek.BlazorComponents.Pager` | Pager |
+| `D20Tek.BlazorComponents.Vertically` | OffsetPager |
 
 ### The "All" meta-package
-If you would rather not reference each component package individually, install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Functionally, Markdown, Modal, Spinner, Timer, Toast, TogglePanel, and ToggleSwitch) through a single `PackageReference`. It ships no assemblies of its own, so you get exactly the same components as installing them one-by-one. If you only need a few components, install the individual p
+install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Functionally, Markdown, Modal, Pager, Spinner, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
 
 > Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
@@ -34,19 +36,21 @@ If you would rather not reference each component package individually, install t
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 > Tip: omit the `-Version` argument to install the latest published version of any package.
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.4
-PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.4
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.5
+PM > Install-Package D20Tek.BlazorComponents.Vertically -Version 1.11.5
 ``` 
 
 Or install everything at once with the meta-package:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.4
+PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.5
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.
@@ -105,6 +109,10 @@ builder.Services.AddToast(options =>
 ```
 These defaults cover presentation chrome only (`Position`, `DefaultTimeout`, `ShowIcon`, `Dismissible`, `Animate`). Values resolve in the order: **component built-in defaults -> app defaults (`AddToast`) -> per-call `configure`** on `Show`/`ShowResult`, so any individual call can still override the app defaults. Note that `DefaultTimeout` seeds the timeout for generic toasts and for `ResultToast` success toasts; `ResultToast` failure toasts remain sticky by default.
 > Note: `ResultToast` (in the `D20Tek.BlazorComponents.Functionally` package) is built on top of Toast. When you install `Functionally`, the `D20Tek.BlazorComponents.Toast` package comes with it transitively, so no extra package reference is needed - but you still need the setup above: link `Toast.css`, add `<ToastProvider />` to your layout, and call `builder.Services.AddToast();`.
+
+**Pager / OffsetPager** - The `Pager` component (in `D20Tek.BlazorComponents.Pager`) uses scoped CSS, so there is no static stylesheet to link. Its styles derive from `currentColor`, allowing it to adapt to any light, dark, or custom theme. `Pager` is fully controlled: bind `CurrentPage`/`CurrentPageChanged`, `PageSize`/`PageSizeChanged`, and `TotalItems`. Numbered pages use a MudBlazor-style anchored window controlled by two knobs, `BoundaryCount` (default 1) and `MiddleCount` (default 5, centered on the current page). The pager collapses its subcomponents (description, first/last, page-size selector, then numbers) as its container narrows using CSS container queries; set `DisableResponsive="true"` to opt out. Container queries require a modern browser (Chrome/Edge 105+, Firefox 110+, Safari 16+).
+>
+> `OffsetPager<T>` (in `D20Tek.BlazorComponents.Vertically`) wraps `Pager` for the D20Tek.Vertically paging types. Bind its `Page` parameter to a `PageOf<T>` result and handle `OnPageQuery`, which raises a new `PagedRequest` (one-based `PageNumber` plus `PageSize`) whenever the user navigates or changes the page size.
 
 ### Samples:
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:
