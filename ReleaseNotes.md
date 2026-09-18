@@ -1,10 +1,10 @@
 # Release Notes
 
-## Release v1.11.5
+## Release v1.11.15
 * Added the **D20Tek.BlazorComponents.Pager** package with the theme-agnostic `Pager` component:
   * Fully controlled pagination via `CurrentPage`/`CurrentPageChanged`, `PageSize`/`PageSizeChanged`, and `TotalItems`.
   * Opt-in previous/next, numbered pages, first/last buttons, a "Page X of Y" description, and a page-size selector.
-  * MudBlazor-style anchored page windowing driven by two knobs, `BoundaryCount` (default 1) and `MiddleCount` (default 5, centered on the current page), with leading/trailing ellipsis.
+  * Anchored page windowing driven by two knobs, `BoundaryCount` (default 1) and `MiddleCount` (default 5, centered on the current page), with leading/trailing ellipsis.
   * Scoped CSS styled from `currentColor` (no static stylesheet to link) that adapts to any light, dark, or custom theme.
   * Responsive collapse of subcomponents via CSS container queries as the container narrows; opt out with `DisableResponsive="true"`.
   * Configurable control labels and `Size` support.
