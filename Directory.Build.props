@@ -27,6 +27,11 @@
 	<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
 	</ItemGroup>
 
+	<!-- Expose internals of packable component projects to the unit test project -->
+	<ItemGroup Condition="'$(IsPackable)' != 'false'">
+	<InternalsVisibleTo Include="D20Tek.BlazorComponents.UnitTests" />
+	</ItemGroup>
+
 	<!-- Symbol packages and SourceLink for debuggable NuGet packages -->
 	<PropertyGroup>
 	<IncludeSymbols>true</IncludeSymbols>

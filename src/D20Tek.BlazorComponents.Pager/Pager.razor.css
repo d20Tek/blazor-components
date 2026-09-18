@@ -1,0 +1,171 @@
+.pager {
+    /* Theme-agnostic tokens: default to currentColor/theme so light, dark, and custom
+       themes work without overrides. Consumers can override any of these variables. */
+    --pager-gap: 0.25rem;
+    --pager-padding: 0.375rem 0.625rem;
+    --pager-font-size: 1rem;
+    --pager-radius: 0.375rem;
+    --pager-border-color: currentColor;
+    --pager-active-bg: color-mix(in srgb, currentColor 18%, transparent);
+    --pager-active-border-color: currentColor;
+    --pager-hover-bg: color-mix(in srgb, currentColor 12%, transparent);
+    --pager-disabled-opacity: 0.4;
+
+    container-type: inline-size;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: inherit;
+    font-size: var(--pager-font-size);
+}
+
+.pager__description {
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+.pager__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--pager-gap);
+    /* Auto inline margins absorb free space on both sides so the page list and
+       prev/next buttons stay centered even when the description or page-size
+       regions are hidden. */
+    margin-inline: auto;
+}
+
+.pager__pages {
+    display: flex;
+    align-items: center;
+    gap: var(--pager-gap);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pager__page-item {
+    display: inline-flex;
+}
+
+.pager__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    padding: var(--pager-padding);
+    border: 1px solid var(--pager-border-color);
+    border-radius: var(--pager-radius);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pager__button:hover:not(:disabled) {
+    background: var(--pager-hover-bg);
+}
+
+.pager__button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.pager__button:disabled {
+    opacity: var(--pager-disabled-opacity);
+    cursor: default;
+}
+
+.pager__page--active {
+    background: var(--pager-active-bg);
+    border-color: var(--pager-active-border-color);
+    color: inherit;
+    font-weight: 600;
+}
+
+.pager__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    opacity: 0.7;
+    user-select: none;
+}
+
+.pager__page-size {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    white-space: nowrap;
+}
+
+.pager__page-size-select {
+    padding: 0.25rem 0.375rem;
+    border: 1px solid var(--pager-border-color);
+    border-radius: var(--pager-radius);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+/* Compact "X / Y" indicator only appears at the smallest breakpoint. */
+.pager__compact {
+    display: none;
+    white-space: nowrap;
+    opacity: 0.85;
+    padding: 0 0.375rem;
+}
+
+/* Size modifiers only adjust sizing tokens (DRY). */
+.pager-xs {
+    --pager-font-size: 0.75rem;
+    --pager-padding: 0.2rem 0.4rem;
+}
+
+.pager-sm {
+    --pager-font-size: 0.875rem;
+    --pager-padding: 0.3rem 0.5rem;
+}
+
+.pager-md {
+    --pager-font-size: 1rem;
+    --pager-padding: 0.375rem 0.625rem;
+}
+
+.pager-lg {
+    --pager-font-size: 1.125rem;
+    --pager-padding: 0.5rem 0.75rem;
+}
+
+.pager-xl {
+    --pager-font-size: 1.25rem;
+    --pager-padding: 0.625rem 0.875rem;
+}
+
+/* Responsive progressive collapse based on the Pager's own container width.
+   Skipped entirely when the consumer opts out via DisableResponsive (.pager-static). */
+@container (max-width: 640px) {
+    .pager:not(.pager-static) .pager__description {
+        display: none;
+    }
+}
+
+@container (max-width: 480px) {
+    .pager:not(.pager-static) .pager__first,
+    .pager:not(.pager-static) .pager__last,
+    .pager:not(.pager-static) .pager__page-size {
+        display: none;
+    }
+}
+
+@container (max-width: 360px) {
+    .pager:not(.pager-static) .pager__pages {
+        display: none;
+    }
+
+    .pager:not(.pager-static) .pager__compact {
+        display: inline-flex;
+    }
+}

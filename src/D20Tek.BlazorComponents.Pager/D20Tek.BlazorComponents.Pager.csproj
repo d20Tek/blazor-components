@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Description>A content-agnostic Blazor pagination component. The Pager renders first/previous/numbered/next/last controls, an optional "page X of Y" description, and an optional page-size selector. It uses theme-agnostic scoped CSS (light/dark/custom) and a MudBlazor-style windowed page list that collapses responsively based on its container width.</Description>
+    <PackageTags>Blazor .NET Components WebAssembly Pager Pagination Paging</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+  </ItemGroup>
+
+</Project>

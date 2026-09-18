@@ -58,5 +58,30 @@
     .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
+        /* Fill the space under the brand row and scroll when the nav items
+           exceed the available height. */
+        height: calc(100vh - 3.5rem);
+        overflow-y: auto;
+        /* Thin scrollbar tinted to blend with the green sidebar gradient. */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(50, 205, 50, 0.7) transparent;
     }
+
+        /* WebKit/Blink (Chrome, Edge, Safari) thin scrollbar styling. */
+        .collapse::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .collapse::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .collapse::-webkit-scrollbar-thumb {
+            background-color: rgba(50, 205, 50, 0.7);
+            border-radius: 4px;
+        }
+
+            .collapse::-webkit-scrollbar-thumb:hover {
+                background-color: limegreen;
+            }
 }

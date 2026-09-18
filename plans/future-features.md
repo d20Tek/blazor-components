@@ -231,3 +231,60 @@ and merging them would violate `BusyState`'s single responsibility.
 - A sample or consumer needs **search-as-you-type / cancel-previous** semantics, or
 - A sample needs a real **Submit + Cancel button pair** on client-side long-running work, or
 - An actual **user request** for cancellation support arrives.
+
+## Pager Decomposition (composable pager sub-components)
+
+Decompose the current monolithic `Pager` into a headless coordinator plus a set of opt-in
+sub-components so developers can build their own pager layout from the individual pieces
+(description, page-list buttons, page-size selector, and navigation buttons), while the existing
+`Pager` continues to work unchanged.
+
+### Goals & non-goals
+- **Additive and non-breaking**: the current `Pager` public API (parameters, rendered markup, CSS
+  class names) stays identical; the sub-components are a new lower layer beneath it.
+- **Headless coordination**: shared pagination state and windowing live in a coordinator that the
+  sub-components read via a cascading value, so custom layouts stay in sync automatically.
+- **Controlled model preserved**: the coordinator stays fully controlled (the consumer owns
+  `CurrentPage`/`PageSize`), matching today's `Pager` and `OffsetPager<T>` behavior.
+- **Non-goal - responsive collapse for custom layouts**: the container-query responsive collapse is
+  supported **only** for the built-in `Pager` component. If a developer restructures `Pager` via the
+  child-content escape hatch or builds their own pager from the sub-components, responsive collapse is
+  explicitly not provided; those layouts are the developer's responsibility.
+
+### Proposed pieces
+- **`PagerContext`** (coordinator) - owns `CurrentPage`, `PageSize`, `TotalItems`, `BoundaryCount`,
+  `MiddleCount`; computes `TotalPages` and the `PageWindow`; exposes intent methods
+  (`GoToPageAsync`, `SetPageSizeAsync`) and raises `CurrentPageChanged`/`PageSizeChanged`. Provided to
+  descendants as a `[CascadingParameter]`.
+- **`PagerPages`** - renders the numbered page buttons plus leading/trailing ellipsis from the
+  coordinator's `PageWindow` (the piece that genuinely needs the window).
+- **`PagerDescription`** - renders the "Page X of Y" text from coordinator state.
+- **`PagerPageSize`** - renders the page-size `<select>` bound to `PageSizeOptions`.
+- **`PagerNav`** / **`PagerButton`** - first/previous/next/last navigation buttons (thin buttons that
+  call coordinator intent methods and reflect disabled state).
+
+### Rebuild the existing Pager on top of the coordinator
+- Re-implement today's `Pager` internally by composing the sub-components around a `PagerContext`,
+  proving the primitives are complete and keeping all existing `PagerRenderTests` /
+  `PagerBehaviorTests` green.
+- Add a `ChildContent` (RenderFragment) escape hatch on `Pager` so developers can reorder or omit
+  regions without dropping fully to raw primitives; when `ChildContent` is supplied, `Pager` renders
+  the custom layout inside its coordinator and **disables responsive collapse** for that instance.
+- Align `OffsetPager<T>` to wrap the same coordinator so both packages share one composition model.
+
+### Design reminders / rationale
+- Keep the current region markup and CSS class names (`.pager__description`, `.pager__pages`,
+  `.pager__button`, `.pager__page-size`, etc.) stable so extraction into sub-components is a
+  mechanical refactor, not a redesign.
+- `PageWindow` is already an immutable helper and can move onto the coordinator unchanged.
+- Decide a small set of shared class names / CSS custom properties for the sub-components rather than
+  fully isolated scoped files, so a custom layout still shares one visual language.
+- New public types plus tests and docs are a meaningful API-surface commitment; ship them in a minor
+  version as an additive layer.
+
+### Promotion trigger (build it when any one becomes concrete)
+- A consumer needs a **custom pager layout** (reorder/replace regions) the monolithic `Pager` cannot
+  express, or
+- A consumer needs to **reuse a single piece** (e.g., just the page-list buttons or the page-size
+  selector) inside their own toolbar, or
+- An actual **user request** for composable pager primitives arrives.

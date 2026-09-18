@@ -1,0 +1,21 @@
+@typeparam T
+@inherits ComponentBase
+
+@if (IsVisible)
+{
+    <Pager @attributes="@RemainingAttributes"
+           CurrentPage="@CurrentPage"
+           CurrentPageChanged="OnCurrentPageChangedAsync"
+           PageSize="@PageSize"
+           PageSizeChanged="OnPageSizeChangedAsync"
+           TotalItems="@TotalItems"
+           ShowNumbers="@ShowNumbers"
+           ShowFirstLast="@ShowFirstLast"
+           ShowDescription="@ShowDescription"
+           ShowPageSizeSelector="@ShowPageSizeSelector"
+           PageSizeOptions="@PageSizeOptions"
+           BoundaryCount="@BoundaryCount"
+           MiddleCount="@MiddleCount"
+           DisableResponsive="@DisableResponsive"
+           Size="@Size" />
+}

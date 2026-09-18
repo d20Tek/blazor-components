@@ -25,6 +25,8 @@
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.TogglePanel\D20Tek.BlazorComponents.TogglePanel.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.ToggleSwitch\D20Tek.BlazorComponents.ToggleSwitch.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Markdown\D20Tek.BlazorComponents.Markdown.csproj" />
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Pager\D20Tek.BlazorComponents.Pager.csproj" />
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Vertically\D20Tek.BlazorComponents.Vertically.csproj" />
   </ItemGroup>
 
 </Project>
