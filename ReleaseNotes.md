@@ -1,5 +1,18 @@
 # Release Notes
 
+## Release v1.11.16
+* Added the **D20Tek.BlazorComponents.Tiles** package with the `Tile` and `LinkTile` components:
+  * Container-agnostic tile/card layout with a media region (image, or an abbreviation-avatar fallback), a title, a clamped description, and an optional footer.
+  * `Tile` renders as a `<button>` and raises a `Clicked` event; `LinkTile` renders as an `<a href>` for native navigation with an optional `Target` (auto-adds `rel="noopener noreferrer"` for `_blank`), and still raises `Clicked`.
+  * The whole tile is clickable except the footer, whose interactions do not bubble to the tile.
+  * `Size` (default `Medium`, `None` = unstyled) maps to clamped width tiers, and `LayoutOption` (`Compact`, `Common`, `Verbose`) controls title/description line clamping.
+  * Abbreviation initials fall back from an explicit override, to the first letters of the first two title words, to the first character of the description, to `?`; the avatar background uses an optional `AbbreviationColor` override or an internal deterministic 16-color palette.
+  * Image load failures fall back to the abbreviation avatar via a pure-Blazor `@onerror` handler (no JS interop).
+  * Isolated (scoped) CSS, so no additional stylesheet link is required.
+* Added the Tiles package to the **D20Tek.BlazorComponents.All** meta-package.
+* Added a Tiles sample page to the D20Tek.FullSample.Wasm sample app.
+* Added unit tests to cover all of the new classes and functionality.
+
 ## Release v1.11.15
 * Added the **D20Tek.BlazorComponents.Pager** package with the theme-agnostic `Pager` component:
   * Fully controlled pagination via `CurrentPage`/`CurrentPageChanged`, `PageSize`/`PageSizeChanged`, and `TotalItems`.

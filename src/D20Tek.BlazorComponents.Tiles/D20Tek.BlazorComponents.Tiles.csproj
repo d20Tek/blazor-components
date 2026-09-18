@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Description>A Blazor package providing tile components (Tile and LinkTile) for building list and grid layouts. Each tile shows an optional image (with an abbreviation avatar fallback), a title, a clamped description, and an optional footer. Tiles are container-agnostic, size-aware, and use isolated CSS so no additional stylesheet link is required.</Description>
+    <PackageTags>Blazor .NET Components WebAssembly Tile LinkTile Card Grid</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\D20Tek.BlazorComponent.Core\D20Tek.BlazorComponent.Core.csproj" />
+  </ItemGroup>
+
+</Project>

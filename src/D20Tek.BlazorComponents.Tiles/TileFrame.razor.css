@@ -1,0 +1,176 @@
+.tile {
+    --tile-width: 16rem;
+    --tile-title-lines: 1;
+    --tile-desc-lines: 3;
+    --tile-radius: 0.5rem;
+    --tile-bg: #ffffff;
+    --tile-border: #e0e0e0;
+    --tile-title-color: #1f2933;
+    --tile-desc-color: #52606d;
+    --tile-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --tile-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.18);
+
+    display: inline-flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: var(--tile-width);
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    background-color: var(--tile-bg);
+    border: 1px solid var(--tile-border);
+    border-radius: var(--tile-radius);
+    box-shadow: var(--tile-shadow);
+    overflow: hidden;
+    cursor: pointer;
+    font: inherit;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tile:hover {
+    box-shadow: var(--tile-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.tile:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Size modifiers only set the width custom property. The ~48% preferred value lets two
+   tiles share a row until the max cap is reached, then they wrap responsively. */
+.tile-xs {
+    --tile-width: clamp(8rem, 48%, 10rem);
+}
+
+.tile-sm {
+    --tile-width: clamp(10rem, 48%, 12rem);
+}
+
+.tile-md {
+    --tile-width: clamp(10rem, 48%, 16rem);
+}
+
+.tile-lg {
+    --tile-width: clamp(12rem, 48%, 20rem);
+}
+
+.tile-xl {
+    --tile-width: clamp(14rem, 48%, 26rem);
+}
+
+/* Layout modifiers only set line-clamp custom properties. */
+.tile-layout-compact {
+    --tile-title-lines: 1;
+    --tile-desc-lines: 2;
+}
+
+.tile-layout-common {
+    --tile-title-lines: 1;
+    --tile-desc-lines: 3;
+}
+
+.tile-layout-verbose {
+    --tile-title-lines: 2;
+    --tile-desc-lines: 3;
+}
+
+.tile-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #f0f2f5;
+}
+
+.tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.tile-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+}
+
+.tile-title {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--tile-title-lines);
+    line-clamp: var(--tile-title-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 600;
+    color: var(--tile-title-color);
+}
+
+.tile-description {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--tile-desc-lines);
+    line-clamp: var(--tile-desc-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.875rem;
+    color: var(--tile-desc-color);
+}
+
+.tile-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--tile-border);
+    cursor: default;
+}
+
+@media (max-width: 380px) {
+    .tile-md,
+    .tile-lg,
+    .tile-xl {
+        --tile-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tile {
+        transition: none;
+    }
+
+    .tile:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .tile {
+        --tile-bg: #1f2933;
+        --tile-border: #3e4c59;
+        --tile-title-color: #f5f7fa;
+        --tile-desc-color: #cbd2d9;
+        --tile-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        --tile-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .tile-media {
+        background-color: #323f4b;
+    }
+}

@@ -1,0 +1,73 @@
+@namespace D20Tek.BlazorComponents
+@inherits ComponentBase
+
+@if (Owner.IsVisible)
+{
+    @if (IsLink)
+    {
+        <a class="@Owner.RootCssClass" style="@Owner.RootCssStyles" href="@Owner.ResolvedHref"
+           target="@Owner.ResolvedTarget" rel="@Rel" aria-label="@Owner.AriaLabel"
+           @attributes="@Owner.RemainingAttributes" @onclick="Owner.OnClickedAsync">
+            @Body
+        </a>
+    }
+    else
+    {
+        <button type="button" class="@Owner.RootCssClass" style="@Owner.RootCssStyles"
+                aria-label="@Owner.AriaLabel" @attributes="@Owner.RemainingAttributes"
+                @onclick="Owner.OnClickedAsync">
+            @Body
+        </button>
+    }
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public TileBase Owner { get; set; } = default!;
+
+    private bool IsLink => !string.IsNullOrWhiteSpace(Owner.ResolvedHref);
+
+    private string? Rel
+    {
+        get
+        {
+            if (Owner.RemainingAttributes.ContainsKey("rel"))
+            {
+                return null;
+            }
+
+            return Owner.ResolvedTarget == "_blank" ? "noopener noreferrer" : null;
+        }
+    }
+
+    private RenderFragment Body => __builder =>
+    {
+        <div class="tile-media">
+            @if (Owner.HasImage)
+            {
+                <img class="tile-image" src="@Owner.ImageUrl" alt="@Owner.Title"
+                     @onerror="Owner.OnImageError" />
+            }
+            else
+            {
+                <span class="tile-avatar" style="background-color: @Owner.AbbreviationBackground;"
+                      aria-hidden="true">
+                    @Owner.Initials
+                </span>
+            }
+        </div>
+        <div class="tile-body">
+            <div class="tile-title">@Owner.Title</div>
+            @if (!string.IsNullOrWhiteSpace(Owner.Description))
+            {
+                <div class="tile-description">@Owner.Description</div>
+            }
+        </div>
+        @if (Owner.HasFooter)
+        {
+            <div class="tile-footer" @onclick:stopPropagation="true">
+                @Owner.Footer
+            </div>
+        }
+    };
+}

@@ -10,7 +10,7 @@ This package suite provides custom, reusable Blazor components. These components
 
 **Live demo:** [components.d20tek.com](https://components.d20tek.com)
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, Tile, LinkTile, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
 
 Components ship grouped by package, so a single package can contain more than one component:
 
@@ -18,6 +18,7 @@ Components ship grouped by package, so a single package can contain more than on
 | --- | --- |
 | `D20Tek.BlazorComponents.Spinner` | Spinner, ContentSpinner |
 | `D20Tek.BlazorComponents.Timer` | Timer, SpanTimer, CountdownTimer |
+| `D20Tek.BlazorComponents.Tiles` | Tile, LinkTile (isolated CSS, no link needed) |
 | `D20Tek.BlazorComponents.Toast` | Toast (ToastProvider) |
 | `D20Tek.BlazorComponents.ToggleSwitch` | ToggleSwitch |
 | `D20Tek.BlazorComponents.Modal` | ModalDialog, ModalFormDialog, MessageBox |
@@ -28,7 +29,7 @@ Components ship grouped by package, so a single package can contain more than on
 | `D20Tek.BlazorComponents.Vertically` | OffsetPager |
 
 ### The "All" meta-package
-install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bundle that transitively references the full component suite (Functionally, Markdown, Modal, Pager, Spinner, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
+references the full component suite (Functionally, Markdown, Modal, Pager, Spinner, Tiles, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
 
 > Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
@@ -36,21 +37,21 @@ install the **D20Tek.BlazorComponents.All** meta-package. It is a convenience bu
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 > Tip: omit the `-Version` argument to install the latest published version of any package.
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.15
-PM > Install-Package D20Tek.BlazorComponents.Vertically -Version 1.11.15
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.16
+PM > Install-Package D20Tek.BlazorComponents.Vertically -Version 1.11.16
 ``` 
 
 Or install everything at once with the meta-package:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.15
+PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.16
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.

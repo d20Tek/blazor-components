@@ -1,10 +1,12 @@
 # Future Features
 
-## Tile
+## Tile [Done]
 
-A container-agnostic `Tile` component for list/grid layouts: image on top (falls back to an
-abbreviation avatar), a single-line title, a two-line clamped description, an optional footer
-render fragment, customizable size that shrinks on mobile, and a `Clicked` event.
+Container-agnostic tile components for list/grid layouts: image on top (falls back to an
+abbreviation avatar), a title, a clamped description, an optional footer render fragment,
+customizable size that shrinks on mobile, and a `Clicked` event. Shipped as two components,
+`Tile` (button semantics) and `LinkTile` (anchor navigation), sharing an abstract `TileBase`
+and an internal `TileFrame` render component that owns the shared markup and scoped CSS.
 
 ### Package & Project
 - New project **`D20Tek.BlazorComponents.Tile`** (`Microsoft.NET.Sdk.Razor`, multi-target `net9.0;net10.0`), root namespace `D20Tek.BlazorComponents`.
@@ -58,10 +60,24 @@ render fragment, customizable size that shrinks on mobile, and a `Clicked` event
 - Sample page in `FullSample.Wasm`: responsive grid of tiles (with/without images, footer flyouts).
 - `ReleaseNotes.md` entry.
 
-### Open Questions
-- Default click semantics: button-mode default, anchor-mode when `Href` set? (recommended)
-- Whole-tile clickable vs explicit action area (propagation-stop handles footer).
-- Abbreviation color: deterministic palette vs single neutral default.
+### Final Decisions (as shipped)
+- Package renamed to plural **`D20Tek.BlazorComponents.Tiles`** to denote multiple components.
+- Two components: `Tile` (renders `<button type="button">`, raises `Clicked`) and `LinkTile`
+  (renders `<a href>` with button styling, adds `Href` and `Target`; `Target="_blank"` auto-adds
+  `rel="noopener noreferrer"` unless the caller supplies `rel`; still raises `Clicked`).
+- Shared abstract `TileBase` holds all parameters/logic; internal `TileFrame` renders the markup
+  and owns the single scoped stylesheet (avoids CSS duplication across the two components).
+- Whole tile is clickable; the footer region uses `@onclick:stopPropagation` automatically.
+- `Size` defaults to `Medium`; `None` = unstyled width. Size maps to clamped `--tile-width` tiers
+  (XS/S use a `45%` preferred value so two tiles fit per row in a narrow vertical container).
+- `LayoutOption` (local to the Tiles package) controls title/description line clamps:
+  `Compact` (1+2), `Common` (default, 1+3), `Verbose` (2+3), via `--tile-title-lines`/
+  `--tile-desc-lines`.
+- Abbreviation initials: explicit `Abbreviation` override -> first letters of first two `Title`
+  words -> first char of `Description` -> `?`. Avatar background uses `AbbreviationColor`
+  override, else an internal deterministic 16-color muted palette (light/dark safe).
+- Image load failure falls back to the avatar via a pure-Blazor `@onerror` handler (no JS interop).
+- Isolated/scoped CSS, so no consumer `<link>` is required.
 
 ## Toast + ResultToast&lt;T&gt; [Done]
 

@@ -1,0 +1,81 @@
+@page "/tiles"
+
+<h3>Tiles</h3>
+<p>The <code>Tile</code> and <code>LinkTile</code> components render container-agnostic cards for list
+   and grid layouts. Each tile shows an optional image (with an abbreviation-avatar fallback), a
+   single or two-line title, a clamped description, and an optional footer. The whole tile is
+   clickable except the footer, whose interactions do not bubble to the tile. Tiles use isolated CSS,
+   so no additional stylesheet link is required.</p>
+
+<div class="mb-3">
+    <label class="form-label">Size</label>
+    <select class="form-select w-auto d-inline-block ms-2" @bind="_size">
+        @foreach (var size in Enum.GetValues<Size>())
+        {
+            <option value="@size">@size</option>
+        }
+    </select>
+
+    <label class="form-label ms-3">Layout</label>
+    <select class="form-select w-auto d-inline-block ms-2" @bind="_layout">
+        @foreach (var option in Enum.GetValues<LayoutOption>())
+        {
+            <option value="@option">@option</option>
+        }
+    </select>
+</div>
+
+@if (_lastClicked is not null)
+{
+    <div class="alert alert-info">Last clicked: <strong>@_lastClicked</strong></div>
+}
+
+<div class="d-flex flex-wrap gap-3">
+    <Tile Size="_size" Layout="_layout"
+          Title="Mountain Retreat"
+          Description="A quiet cabin nestled high in the alpine forest, perfect for a weekend escape away from the city."
+          ImageUrl="https://picsum.photos/seed/mountain/400/225"
+          Clicked="@(() => OnClicked("Mountain Retreat"))" />
+
+    <Tile Size="_size" Layout="_layout"
+          Title="Ada Lovelace"
+          Description="Pioneering mathematician often regarded as the first computer programmer."
+          Clicked="@(() => OnClicked("Ada Lovelace"))" />
+
+    <Tile Size="_size" Layout="_layout"
+          Title="Broken Image Example"
+          Description="This tile points at a missing image, so it falls back to an abbreviation avatar."
+          ImageUrl="https://example.invalid/missing.png"
+          AbbreviationColor="#2f855a"
+          Clicked="@(() => OnClicked("Broken Image Example"))" />
+
+    <Tile Size="_size" Layout="_layout"
+          Title="Tile With Footer and a Really Long Title"
+          Description="The footer area holds actions whose clicks do not trigger the tile's Clicked event."
+          ImageUrl="https://picsum.photos/seed/footer/400/225"
+          Clicked="@(() => OnClicked("Tile With Footer"))">
+        <Footer>
+            <button type="button" class="btn btn-sm btn-outline-primary"
+                    @onclick="@(() => OnFooterAction("Edit"))">Edit</button>
+            <button type="button" class="btn btn-sm btn-outline-danger"
+                    @onclick="@(() => OnFooterAction("Delete"))">Delete</button>
+        </Footer>
+    </Tile>
+
+    <LinkTile Size="_size" Layout="_layout"
+              Title="Open GitHub Repo"
+              Description="LinkTile renders an anchor and navigates natively. Target=_blank adds a safe rel automatically."
+              ImageUrl="https://picsum.photos/seed/github/400/225"
+              Href="https://github.com/d20Tek/blazor-components"
+              Target="_blank" />
+</div>
+
+@code {
+    private Size _size = Size.Medium;
+    private LayoutOption _layout = LayoutOption.Common;
+    private string? _lastClicked;
+
+    private void OnClicked(string title) => _lastClicked = title;
+
+    private void OnFooterAction(string action) => _lastClicked = $"Footer: {action}";
+}
