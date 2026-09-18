@@ -128,7 +128,7 @@ public partial class Pager : BaseComponent
         await CurrentPageChanged.InvokeAsync(target);
     }
 
-    private async Task OnPageSizeChangedAsync(ChangeEventArgs args)
+    internal async Task OnPageSizeChangedAsync(ChangeEventArgs args)
     {
         if (!int.TryParse(args.Value?.ToString(), out var newSize) || newSize < 1) return;
         if (newSize == PageSize) return;

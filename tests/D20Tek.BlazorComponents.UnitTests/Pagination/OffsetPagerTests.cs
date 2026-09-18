@@ -107,7 +107,7 @@ public sealed class OffsetPagerTests : BunitContext
         var cut = Render<OffsetPager<string>>(parameters => parameters
             .Add(p => p.Page, CreatePage(pageNumber: 3, pageSize: 10, totalCount: 100))
             .Add(p => p.ShowPageSizeSelector, true)
-            .Add(p => p.PageSizeOptions, new[] { 10, 25 })
+            .Add(p => p.PageSizeOptions, [10, 25])
             .Add(p => p.OnPageQuery, EventCallback.Factory.Create<PagedRequest>(this, r => captured = r)));
 
         // act
@@ -132,5 +132,61 @@ public sealed class OffsetPagerTests : BunitContext
 
         // assert
         Assert.Contains("Page 1 of 1", cut.Markup);
+    }
+
+    [TestMethod]
+    public void PageSize_PopulatedPage_UsesPageSizeFromPage()
+    {
+        // arrange - act
+        var cut = Render<OffsetPager<string>>(parameters => parameters
+            .Add(p => p.Page, CreatePage(pageNumber: 1, pageSize: 25, totalCount: 100))
+            .Add(p => p.ShowPageSizeSelector, true)
+            .Add(p => p.PageSizeOptions, [10, 25, 50]));
+
+        // assert
+        var select = cut.Find(".pager__page-size-select");
+        Assert.AreEqual("25", select.GetAttribute("value"));
+    }
+
+    [TestMethod]
+    public void PageSize_PopulatedPage_IgnoresPageSizeOptionsFallback()
+    {
+        // arrange - act
+        var cut = Render<OffsetPager<string>>(parameters => parameters
+            .Add(p => p.Page, CreatePage(pageNumber: 1, pageSize: 30, totalCount: 100))
+            .Add(p => p.ShowPageSizeSelector, true)
+            .Add(p => p.PageSizeOptions, [15, 45]));
+
+        // assert - page size comes from the page, not from PageSizeOptions[0]
+        var select = cut.Find(".pager__page-size-select");
+        Assert.AreEqual("30", select.GetAttribute("value"));
+    }
+
+    [TestMethod]
+    public void PageSize_NullPageWithOptions_UsesFirstOption()
+    {
+        // arrange - act
+        var cut = Render<OffsetPager<string>>(parameters => parameters
+            .Add(p => p.Page, (PageOf<string>?)null)
+            .Add(p => p.ShowPageSizeSelector, true)
+            .Add(p => p.PageSizeOptions, [15, 30, 60]));
+
+        // assert
+        var select = cut.Find(".pager__page-size-select");
+        Assert.AreEqual("15", select.GetAttribute("value"));
+    }
+
+    [TestMethod]
+    public void PageSize_NullPageWithEmptyOptions_UsesDefaultOfTen()
+    {
+        // arrange - act
+        var cut = Render<OffsetPager<string>>(parameters => parameters
+            .Add(p => p.Page, (PageOf<string>?)null)
+            .Add(p => p.ShowPageSizeSelector, true)
+            .Add(p => p.PageSizeOptions, []));
+
+        // assert
+        var select = cut.Find(".pager__page-size-select");
+        Assert.AreEqual("10", select.GetAttribute("value"));
     }
 }
