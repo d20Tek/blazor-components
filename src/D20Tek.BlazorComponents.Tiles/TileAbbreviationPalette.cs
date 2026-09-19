@@ -24,18 +24,11 @@ internal static class TileAbbreviationPalette
 
     public static int Count => _colors.Length;
 
-    public static string GetColor(string? key)
-    {
-        var index = GetIndex(key);
-        return _colors[index];
-    }
+    public static string GetColor(string? key) => _colors[GetIndex(key)];
 
     private static int GetIndex(string? key)
     {
-        if (string.IsNullOrEmpty(key))
-        {
-            return 0;
-        }
+        if (string.IsNullOrEmpty(key)) return 0;
 
         var hash = 0;
         foreach (var c in key)

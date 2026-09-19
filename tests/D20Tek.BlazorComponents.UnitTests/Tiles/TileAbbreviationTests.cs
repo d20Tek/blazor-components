@@ -76,7 +76,7 @@ public class TileAbbreviationTests
     }
 
     [TestMethod]
-    public void Compute_WithEmptyTitleAndDescription_ReturnsFirstDescriptionChar()
+    public void Compute_WithEmptyTitleAndSingleWordDescription_ReturnsFirstDescriptionChar()
     {
         // Arrange
 
@@ -85,6 +85,18 @@ public class TileAbbreviationTests
 
         // Assert
         Assert.AreEqual("E", result);
+    }
+
+    [TestMethod]
+    public void Compute_WithEmptyTitleAndMultiWordDescription_ReturnsFirstTwoDescriptionInitials()
+    {
+        // Arrange
+
+        // Act
+        var result = TileAbbreviation.Compute(null, "quiet cabin retreat", null);
+
+        // Assert
+        Assert.AreEqual("QC", result);
     }
 
     [TestMethod]

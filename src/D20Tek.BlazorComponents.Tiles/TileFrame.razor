@@ -27,31 +27,21 @@
 
     private bool IsLink => !string.IsNullOrWhiteSpace(Owner.ResolvedHref);
 
-    private string? Rel
-    {
-        get
-        {
-            if (Owner.RemainingAttributes.ContainsKey("rel"))
-            {
-                return null;
-            }
-
-            return Owner.ResolvedTarget == "_blank" ? "noopener noreferrer" : null;
-        }
-    }
+    private string? Rel => 
+        (Owner.RemainingAttributes.ContainsKey("rel"))
+             ? null
+             : (Owner.ResolvedTarget == "_blank" ? "noopener noreferrer" : null);
 
     private RenderFragment Body => __builder =>
     {
         <div class="tile-media">
             @if (Owner.HasImage)
             {
-                <img class="tile-image" src="@Owner.ImageUrl" alt="@Owner.Title"
-                     @onerror="Owner.OnImageError" />
+                <img class="tile-image" src="@Owner.ImageUrl" alt="@Owner.Title" @onerror="Owner.OnImageError" />
             }
             else
             {
-                <span class="tile-avatar" style="background-color: @Owner.AbbreviationBackground;"
-                      aria-hidden="true">
+                <span class="tile-avatar" style="background-color: @Owner.AbbreviationBackground;" aria-hidden="true">
                     @Owner.Initials
                 </span>
             }

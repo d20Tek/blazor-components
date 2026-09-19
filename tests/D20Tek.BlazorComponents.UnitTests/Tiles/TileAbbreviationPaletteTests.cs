@@ -62,7 +62,7 @@ public class TileAbbreviationPaletteTests
         var result = TileAbbreviationPalette.GetColor("arbitrary key value");
 
         // Assert
-        StringAssert.StartsWith(result, "#");
+        Assert.StartsWith("#", result);
         Assert.AreEqual(7, result.Length);
     }
 }

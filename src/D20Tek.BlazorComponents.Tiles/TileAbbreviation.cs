@@ -4,34 +4,19 @@ internal static class TileAbbreviation
 {
     private static readonly char[] _separators = [' ', '\t', '\r', '\n'];
 
-    public static string Compute(string? title, string? description, string? overrideValue)
+    public static string Compute(string? title, string? description, string? overrideValue) =>
+        (overrideValue, title, description) switch
+        {
+            _ when !string.IsNullOrWhiteSpace(overrideValue) => Normalize(overrideValue.Trim()),
+            _ when !string.IsNullOrWhiteSpace(title) => FromWords(title),
+            _ when !string.IsNullOrWhiteSpace(description) => FromWords(description),
+            _ => "?",
+        };
+
+    private static string FromWords(string value)
     {
-        if (!string.IsNullOrWhiteSpace(overrideValue))
-        {
-            return Normalize(overrideValue.Trim());
-        }
-
-        if (!string.IsNullOrWhiteSpace(title))
-        {
-            return FromTitle(title);
-        }
-
-        if (!string.IsNullOrWhiteSpace(description))
-        {
-            return description.Trim()[..1].ToUpperInvariant();
-        }
-
-        return "?";
-    }
-
-    private static string FromTitle(string title)
-    {
-        var words = title.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
-
-        var initials = words
-            .Take(2)
-            .Select(w => w[0])
-            .ToArray();
+        var words = value.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
+        char[] initials = [.. words.Take(2).Select(w => w[0])];
 
         return new string(initials).ToUpperInvariant();
     }

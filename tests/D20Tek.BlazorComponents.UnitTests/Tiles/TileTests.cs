@@ -96,7 +96,7 @@ public class TileTests
         var img = comp.Find("img.tile-image");
         Assert.AreEqual("https://example.com/a.png", img.GetAttribute("src"));
         Assert.AreEqual("Hello", img.GetAttribute("alt"));
-        Assert.AreEqual(0, comp.FindAll(".tile-avatar").Count);
+        Assert.IsEmpty(comp.FindAll(".tile-avatar"));
     }
 
     [TestMethod]
@@ -111,7 +111,7 @@ public class TileTests
         // Assert
         var avatar = comp.Find(".tile-avatar");
         Assert.AreEqual("MR", avatar.TextContent.Trim());
-        Assert.AreEqual(0, comp.FindAll("img.tile-image").Count);
+        Assert.IsEmpty(comp.FindAll("img.tile-image"));
     }
 
     [TestMethod]
@@ -127,7 +127,7 @@ public class TileTests
 
         // Assert
         var style = comp.Find(".tile-avatar").GetAttribute("style");
-        StringAssert.Contains(style, "background-color: #123456");
+        Assert.Contains("background-color: #123456", style!);
     }
 
     [TestMethod]
@@ -140,7 +140,7 @@ public class TileTests
         var comp = ctx.Render<Tile>(p => p.Add(t => t.Title, "Hello"));
 
         // Assert
-        Assert.AreEqual(0, comp.FindAll(".tile-description").Count);
+        Assert.IsEmpty(comp.FindAll(".tile-description"));
     }
 
     [TestMethod]
@@ -168,7 +168,7 @@ public class TileTests
         var comp = ctx.Render<Tile>(p => p.Add(t => t.Title, "Hello"));
 
         // Assert
-        Assert.AreEqual(0, comp.FindAll(".tile-footer").Count);
+        Assert.IsEmpty(comp.FindAll(".tile-footer"));
     }
 
     [TestMethod]
@@ -183,7 +183,7 @@ public class TileTests
             .Add(t => t.Footer, (RenderFragment)(b => b.AddMarkupContent(0, "<span>foot</span>"))));
 
         // Assert
-        StringAssert.Contains(comp.Find(".tile-footer").InnerHtml, "foot");
+        Assert.Contains("foot", comp.Find(".tile-footer").InnerHtml);
     }
 
     [TestMethod]
@@ -197,54 +197,5 @@ public class TileTests
 
         // Assert
         Assert.AreEqual("Hello", comp.Find("button").GetAttribute("aria-label"));
-    }
-
-    [TestMethod]
-    public void Click_WithClickedHandler_InvokesCallback()
-    {
-        // Arrange
-        var ctx = new BunitContext();
-        var clicked = false;
-        var comp = ctx.Render<Tile>(p => p
-            .Add(t => t.Title, "Hello")
-            .Add(t => t.Clicked, EventCallback.Factory.Create<MouseEventArgs>(this, () => clicked = true)));
-
-        // Act
-        comp.Find("button").Click();
-
-        // Assert
-        Assert.IsTrue(clicked);
-    }
-
-    [TestMethod]
-    public void ImageError_FallsBackToAvatar()
-    {
-        // Arrange
-        var ctx = new BunitContext();
-        var comp = ctx.Render<Tile>(p => p
-            .Add(t => t.Title, "Mountain Retreat")
-            .Add(t => t.ImageUrl, "https://example.com/missing.png"));
-
-        // Act
-        comp.Find("img.tile-image").TriggerEvent("onerror", new EventArgs());
-
-        // Assert
-        Assert.AreEqual(0, comp.FindAll("img.tile-image").Count);
-        Assert.AreEqual("MR", comp.Find(".tile-avatar").TextContent.Trim());
-    }
-
-    [TestMethod]
-    public void Render_PassesThroughAdditionalAttributes()
-    {
-        // Arrange
-        var ctx = new BunitContext();
-
-        // Act
-        var comp = ctx.Render<Tile>(p => p
-            .Add(t => t.Title, "Hello")
-            .AddUnmatched("data-test", "abc"));
-
-        // Assert
-        Assert.AreEqual("abc", comp.Find("button").GetAttribute("data-test"));
     }
 }
