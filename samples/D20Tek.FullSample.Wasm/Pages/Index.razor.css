@@ -1,20 +1,21 @@
 .component-grid {
-    display: grid;
-    grid-template-columns: 1.5rem 1fr;
-    row-gap: 0.35rem;
-    column-gap: 0.5rem;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
 }
 
-@media (min-width: 768px) {
-    .component-grid {
-        grid-template-columns: 1.5rem auto auto auto;
-        column-gap: 0.75rem;
-        width: max-content;
-        margin: 0 auto;
-    }
+/* The sample app's global "a { color: #0071c1 }" bleeds into LinkTile anchors,
+   tinting the title/icon blue. Recolor tiles to match the dark green NavBar. */
+.component-grid ::deep .tile {
+    --tile-bg: darkgreen;
+    --tile-border: #004d00;
+    --tile-title-color: #ffffff;
+    --tile-desc-color: #d7f0d7;
+    color: #ffffff;
+}
 
-    .component-grid > :nth-child(4n+3) {
-        margin-left: 4rem;
-    }
+.component-grid ::deep .tile-media {
+    background-color: #004d00;
 }

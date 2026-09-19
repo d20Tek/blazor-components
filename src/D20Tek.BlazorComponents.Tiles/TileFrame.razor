@@ -39,6 +39,10 @@
             {
                 <img class="tile-image" src="@Owner.ImageUrl" alt="@Owner.Title" @onerror="Owner.OnImageError" />
             }
+            else if (Owner.HasIcon)
+            {
+                <span class="tile-icon @Owner.IconCssClass" aria-hidden="true"></span>
+            }
             else
             {
                 <span class="tile-avatar" style="background-color: @Owner.AbbreviationBackground;" aria-hidden="true">

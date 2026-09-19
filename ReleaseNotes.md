@@ -2,11 +2,12 @@
 
 ## Release v1.11.16
 * Added the **D20Tek.BlazorComponents.Tiles** package with the `Tile` and `LinkTile` components:
-  * Container-agnostic tile/card layout with a media region (image, or an abbreviation-avatar fallback), a title, a clamped description, and an optional footer.
+  * Container-agnostic tile/card layout with a media region (icon, image, or an abbreviation-avatar fallback), a title, a clamped description, and an optional footer.
   * `Tile` renders as a `<button>` and raises a `Clicked` event; `LinkTile` renders as an `<a href>` for native navigation with an optional `Target` (auto-adds `rel="noopener noreferrer"` for `_blank`), and still raises `Clicked`.
   * The whole tile is clickable except the footer, whose interactions do not bubble to the tile.
   * `Size` (default `Medium`, `None` = unstyled) maps to clamped width tiers, and `LayoutOption` (`Compact`, `Common`, `Verbose`) controls title/description line clamping.
-  * Abbreviation initials fall back from an explicit override, to the first letters of the first two title words, to the first character of the description, to `?`; the avatar background uses an optional `AbbreviationColor` override or an internal deterministic 16-color palette.
+  * The media region renders an image when `ImageUrl` is set, otherwise an icon when `IconCssClass` is set (for example, an Open Iconic `oi oi-*` class), otherwise the abbreviation avatar. When both `ImageUrl` and `IconCssClass` are set, the image takes precedence (a Debug-only console warning is emitted).
+  * Abbreviation initials fall back from an explicit override, to the first letters of the first two title words, to the first letters of the first two description words, to `?`; the avatar background uses an optional `AbbreviationColor` override or an internal deterministic 16-color palette.
   * Image load failures fall back to the abbreviation avatar via a pure-Blazor `@onerror` handler (no JS interop).
   * Isolated (scoped) CSS, so no additional stylesheet link is required.
 * Added the Tiles package to the **D20Tek.BlazorComponents.All** meta-package.

@@ -20,6 +20,9 @@ public abstract class TileBase : BaseComponent
     public string? Abbreviation { get; set; }
 
     [Parameter]
+    public string? IconCssClass { get; set; }
+
+    [Parameter]
     public string? AbbreviationColor { get; set; }
 
     [Parameter]
@@ -36,6 +39,8 @@ public abstract class TileBase : BaseComponent
     internal virtual string? ResolvedTarget => null;
 
     internal bool HasImage => !string.IsNullOrWhiteSpace(ImageUrl) && !_imageError;
+
+    internal bool HasIcon => !string.IsNullOrWhiteSpace(IconCssClass);
 
     internal bool HasFooter => Footer is not null;
 
@@ -58,6 +63,23 @@ public abstract class TileBase : BaseComponent
         Initials;
 
     internal void OnImageError() => _imageError = true;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        WarnOnConflictingMedia();
+    }
+
+    [Conditional("DEBUG")]
+    private void WarnOnConflictingMedia()
+    {
+        if (!string.IsNullOrWhiteSpace(ImageUrl) && !string.IsNullOrWhiteSpace(IconCssClass))
+        {
+            Console.WriteLine(
+                $"[Tile] Both ImageUrl and IconCssClass are set for tile '{Title}'. " +
+                "ImageUrl takes precedence and IconCssClass is ignored.");
+        }
+    }
 
     internal async Task OnClickedAsync(MouseEventArgs args)
     {
