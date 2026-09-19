@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release v1.11.16
+## Release v1.11.17
 * Added the **D20Tek.BlazorComponents.Tiles** package with the `Tile` and `LinkTile` components:
   * Container-agnostic tile/card layout with a media region (icon, image, or an abbreviation-avatar fallback), a title, a clamped description, and an optional footer.
   * `Tile` renders as a `<button>` and raises a `Clicked` event; `LinkTile` renders as an `<a href>` for native navigation with an optional `Target` (auto-adds `rel="noopener noreferrer"` for `_blank`), and still raises `Clicked`.

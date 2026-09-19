@@ -18,16 +18,16 @@
   </ItemGroup>
   <!-- Third-party dependencies -->
   <ItemGroup>
-    <PackageVersion Include="D20Tek.Functional" Version="1.1.9" />
-    <PackageVersion Include="D20Tek.Vertically" Version="0.9.1" />
+    <PackageVersion Include="D20Tek.Functional" Version="1.1.11" />
+    <PackageVersion Include="D20Tek.Vertically" Version="0.9.3" />
     <PackageVersion Include="Markdig" Version="1.3.2" />
   </ItemGroup>
   <!-- Test dependencies -->
   <ItemGroup>
     <PackageVersion Include="bunit" Version="2.11.3" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="4.4.0" />
-    <PackageVersion Include="MSTest.TestFramework" Version="4.4.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.4.1" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.4.1" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
   </ItemGroup>
 </Project>
