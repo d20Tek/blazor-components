@@ -105,9 +105,17 @@
     padding: 0.25rem 0.375rem;
     border: 1px solid var(--pager-border-color);
     border-radius: var(--pager-radius);
-    background: transparent;
-    color: inherit;
+    background: var(--pager-select-bg, transparent);
+    color: var(--pager-select-color, inherit);
+    /* Inherit the host's declared color-scheme so the native option flyout
+       renders with the app theme (dark apps get a dark flyout automatically). */
+    color-scheme: inherit;
     font: inherit;
+}
+
+.pager__page-size-select option {
+    background: var(--pager-select-bg, canvas);
+    color: var(--pager-select-color, canvastext);
 }
 
 /* Compact "X / Y" indicator only appears at the smallest breakpoint. */

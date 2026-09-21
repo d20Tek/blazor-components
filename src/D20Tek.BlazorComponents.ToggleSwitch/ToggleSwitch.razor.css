@@ -17,3 +17,9 @@
 .toggle-xl {
     font-size: xx-large;
 }
+
+/* Let the native checkbox follow the host app's declared color-scheme so it
+   renders correctly in light, dark, or custom themes. */
+.form-check-input {
+    color-scheme: inherit;
+}

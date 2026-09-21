@@ -18,6 +18,8 @@ public partial class ToastProvider : ComponentBase, IDisposable
 
     private void HandleShow(ToastInstance toast)
     {
+        if (_disposed) return;
+
         lock (_toasts)
         {
             _toasts.Add(toast);
@@ -25,7 +27,7 @@ public partial class ToastProvider : ComponentBase, IDisposable
 
         if (!toast.IsSticky) StartTimer(toast);
 
-        InvokeAsync(StateHasChanged);
+        _ = InvokeAsync(StateHasChanged);
     }
 
     private void HandleDismiss(Guid id) => RemoveToast(id);
@@ -34,6 +36,8 @@ public partial class ToastProvider : ComponentBase, IDisposable
 
     private void RemoveToast(Guid id)
     {
+        if (_disposed) return;
+
         if (_timers.TryRemove(id, out var timer)) timer.Dispose();
 
         lock (_toasts)
@@ -41,7 +45,7 @@ public partial class ToastProvider : ComponentBase, IDisposable
             _toasts.RemoveAll(t => t.Id == id);
         }
 
-        InvokeAsync(StateHasChanged);
+        _ = InvokeAsync(StateHasChanged);
     }
 
     private void StartTimer(ToastInstance toast) =>

@@ -37,21 +37,22 @@ references the full component suite (Functionally, Markdown, Modal, Pager, Spinn
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
 > Tip: omit the `-Version` argument to install the latest published version of any package.
 ```  
-PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.17
-PM > Install-Package D20Tek.BlazorComponents.Vertically -Version 1.11.17
+PM > Install-Package D20Tek.BlazorComponents.Spinner -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Tiles -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Timer -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Vertically -Version 1.11.18
 ``` 
 
 Or install everything at once with the meta-package:
 ```  
-PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.17
+PM > Install-Package D20Tek.BlazorComponents.All -Version 1.11.18
 ``` 
 
 To install in the Visual Studio UI, go to the Tools menu > "Manage NuGet Packages". Then search for D20Tek.BlazorComponents.Spinner and install it from there.
@@ -92,6 +93,19 @@ Some components require a one-time setup step in addition to the standard usage 
 ```html
 <link href="_content/D20Tek.BlazorComponents.Modal/Modal.css" rel="stylesheet" />
 ```
+
+The modal inherits the host's `color-scheme` and exposes CSS custom properties (all prefixed with `--modal-`) so you can retheme it - including for dark mode - without overriding internal class names or using `!important`. Set the variables on the `.modal-dialog` selector (or a scope that contains it):
+```css
+.modal-dialog {
+    --modal-surface: #1e1e2a;
+    --modal-footer-bg: #171722;
+    --modal-border-color: #33334a;
+    --modal-title-color: #f5f5f7;
+    --modal-summary-color: #a0a0b0;
+    --modal-body-color: #e0e0e6;
+}
+```
+The defaults reproduce the original light appearance, so existing apps are unaffected.
 
 **Toast / ResultToast** - The Toast package uses a static CSS file that must be linked inside the `<head>` tag, and the `<ToastProvider />` component must be placed once in your layout (e.g. `MainLayout.razor`). Register the service with `builder.Services.AddToast();`:
 ```html

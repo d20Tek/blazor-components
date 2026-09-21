@@ -1,5 +1,14 @@
 # Release Notes
 
+## Release v1.11.18
+* Fixed Pager component to correctly support theming for the RowCount selector. The select element now inherits the host's color-scheme, so an app that declares `color-scheme: dark` at its root automatically gets a correctly themed native option flyout with no extra work. For finer control, override these CSS custom properties (defaults preserve the current theme-agnostic appearance):
+  * `--pager-select-bg` - Background of the page-size selector and its options.
+  * `--pager-select-color` - Text color of the page-size selector and its options.
+* Fixed ToggleSwitch  component with better theming support.
+* Added full theming support to the Modal component (colors default to light mode, but can be overridden via CSS custom properties):
+	* Added css properties for background, text color, and border color for the modal header, body, and footer. 
+	* Added css properties for the modal close button background and color.
+
 ## Release v1.11.17
 * Added the **D20Tek.BlazorComponents.Tiles** package with the `Tile` and `LinkTile` components:
   * Container-agnostic tile/card layout with a media region (icon, image, or an abbreviation-avatar fallback), a title, a clamped description, and an optional footer.

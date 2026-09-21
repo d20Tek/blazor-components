@@ -28,3 +28,24 @@ controls, an optional "page X of Y" description, and an optional page-size selec
 ```
 
 Because the styles are scoped (isolated) CSS, no consumer `<link>` is required.
+
+## Theming the page-size selector
+
+The page-size `<select>` inherits the host's `color-scheme`, so an app that declares
+`color-scheme: dark` at its root automatically gets a correctly themed native option flyout with no
+extra work. For finer control, override these CSS custom properties (defaults preserve the current
+theme-agnostic appearance):
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `--pager-select-bg` | `transparent` (closed control), `canvas` (option flyout) | Background of the page-size selector and its options. |
+| `--pager-select-color` | `inherit` (closed control), `canvastext` (option flyout) | Text color of the page-size selector and its options. |
+
+```css
+:root {
+    --pager-select-bg: #2a2a3c;
+    --pager-select-color: #e0e0e0;
+}
+```
+
+No dependency on internal class names or `!important` is required.

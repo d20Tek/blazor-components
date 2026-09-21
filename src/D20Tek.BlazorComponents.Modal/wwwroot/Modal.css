@@ -1,12 +1,39 @@
 /* Modal Dialog Base Styles */
 .modal-dialog {
+    /* Theming tokens: defaults preserve the original light appearance. Consumers
+       can override any of these (e.g. for dark themes) without touching internal
+       class names or using !important. */
+    --modal-surface: #ffffff;
+    --modal-footer-bg: #f9fafb;
+    --modal-border-color: #e5e7eb;
+    --modal-title-color: #111827;
+    --modal-summary-color: #6b7280;
+    --modal-body-color: #374151;
+    --modal-close-color: #9ca3af;
+    --modal-close-hover-color: #374151;
+    --modal-close-hover-bg: #f3f4f6;
+    --modal-focus-color: #3b82f6;
+    --modal-btn-cancel-bg: #ffffff;
+    --modal-btn-cancel-color: #374151;
+    --modal-btn-cancel-border: #d1d5db;
+    --modal-btn-cancel-hover-bg: #f3f4f6;
+    --modal-btn-cancel-hover-border: #9ca3af;
+    --modal-btn-submit-bg: #3b82f6;
+    --modal-btn-submit-color: #ffffff;
+    --modal-btn-submit-hover-bg: #2563eb;
+    --modal-btn-submit-active-bg: #1d4ed8;
+
     border: none;
     border-radius: 8px;
     padding: 0;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     max-height: 90vh;
     pointer-events: auto !important;
-    
+    background-color: var(--modal-surface);
+    color: var(--modal-body-color);
+    /* Follow the host's declared color-scheme for native affordances. */
+    color-scheme: inherit;
+
     /* Prevent scroll jump when dialog opens */
     position: fixed;
     inset: 0;
@@ -71,7 +98,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--modal-border-color);
     gap: 1rem;
 }
 
@@ -84,14 +111,14 @@
     margin: 0;
     font-size: 1.25rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--modal-title-color);
     line-height: 1.4;
 }
 
 .modal-dialog__summary {
     margin: 0.25rem 0 0 0;
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--modal-summary-color);
     line-height: 1.5;
 }
 
@@ -103,7 +130,7 @@
     background: transparent;
     font-size: 1.5rem;
     line-height: 1;
-    color: #9ca3af;
+    color: var(--modal-close-color);
     cursor: pointer;
     border-radius: 4px;
     display: flex;
@@ -113,12 +140,12 @@
 }
 
 .modal-dialog__close-btn:hover {
-    color: #374151;
-    background-color: #f3f4f6;
+    color: var(--modal-close-hover-color);
+    background-color: var(--modal-close-hover-bg);
 }
 
 .modal-dialog__close-btn:focus {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid var(--modal-focus-color);
     outline-offset: 2px;
 }
 
@@ -127,7 +154,7 @@
     padding: 1.5rem;
     overflow-y: auto;
     flex: 1;
-    color: #374151;
+    color: var(--modal-body-color);
     line-height: 1.6;
 }
 
@@ -137,8 +164,8 @@
     justify-content: flex-end;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
-    border-top: 1px solid #e5e7eb;
-    background-color: #f9fafb;
+    border-top: 1px solid var(--modal-border-color);
+    background-color: var(--modal-footer-bg);
     border-radius: 0 0 8px 8px;
 }
 
@@ -153,30 +180,30 @@
 }
 
 .modal-dialog__btn:focus {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid var(--modal-focus-color);
     outline-offset: 2px;
 }
 
 .modal-dialog__btn-cancel {
-    background-color: #ffffff;
-    color: #374151;
-    border-color: #d1d5db;
+    background-color: var(--modal-btn-cancel-bg);
+    color: var(--modal-btn-cancel-color);
+    border-color: var(--modal-btn-cancel-border);
 }
 
 .modal-dialog__btn-cancel:hover {
-    background-color: #f3f4f6;
-    border-color: #9ca3af;
+    background-color: var(--modal-btn-cancel-hover-bg);
+    border-color: var(--modal-btn-cancel-hover-border);
 }
 
 .modal-dialog__btn-submit {
-    background-color: #3b82f6;
-    color: #ffffff;
+    background-color: var(--modal-btn-submit-bg);
+    color: var(--modal-btn-submit-color);
 }
 
 .modal-dialog__btn-submit:hover {
-    background-color: #2563eb;
+    background-color: var(--modal-btn-submit-hover-bg);
 }
 
 .modal-dialog__btn-submit:active {
-    background-color: #1d4ed8;
+    background-color: var(--modal-btn-submit-active-bg);
 }

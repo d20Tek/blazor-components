@@ -32,7 +32,7 @@ public abstract class TimerBase : BaseComponent, IDisposable
     public void ResetTimer()
     {
         InitializeTime();
-        InvokeAsync(StateHasChanged);
+        _ = InvokeAsync(StateHasChanged);
 
         _timer?.Change(_millisecondsPerSec, _millisecondsPerSec);
     }
@@ -43,13 +43,15 @@ public abstract class TimerBase : BaseComponent, IDisposable
 
     internal void OnTimerChanged(object? state)
     {
+        if (IsDisposed) return;
+
         if (ProcessTimerChange() <= 0)
         {
             if (_timer is not null) _timer.Change(Timeout.Infinite, Timeout.Infinite);
-            TimerExpired.InvokeAsync();
+            _ = TimerExpired.InvokeAsync();
         }
 
-        InvokeAsync(StateHasChanged);
+        _ = InvokeAsync(StateHasChanged);
     }
 
     protected virtual void Dispose(bool disposing)

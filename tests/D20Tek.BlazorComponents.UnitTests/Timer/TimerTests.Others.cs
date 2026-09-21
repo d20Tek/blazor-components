@@ -78,6 +78,41 @@ public partial class TimerOtherTests
     }
 
     [TestMethod]
+    public void OnTimerChanged_AfterDispose_DoesNotProcessTick()
+    {
+        // arrange
+        var ctx = new BunitContext();
+        var comp = ctx.Render<BlazorComponents.Timer>();
+        var before = comp.Instance.TimeRemaining;
+        comp.Instance.Dispose();
+
+        // act
+        comp.Instance.OnTimerChanged(true);
+
+        // assert - guard short-circuits so the remaining time is unchanged
+        Assert.IsTrue(comp.Instance.IsDisposed);
+        Assert.AreEqual(before, comp.Instance.TimeRemaining);
+    }
+
+    [TestMethod]
+    public void OnTimerChanged_AfterDispose_DoesNotRaiseTimerExpired()
+    {
+        // arrange
+        var eventCalled = false;
+        var ctx = new BunitContext();
+        var comp = ctx.Render<BlazorComponents.Timer>(parameters =>
+            parameters.Add(p => p.TimerDuration, 1)
+                      .Add(p => p.TimerExpired, [ExcludeFromCodeCoverage]() => { eventCalled = true; }));
+        comp.Instance.Dispose();
+
+        // act
+        comp.Instance.OnTimerChanged(true);
+
+        // assert - guard prevents expiration callback after dispose
+        Assert.IsFalse(eventCalled);
+    }
+
+    [TestMethod]
     public void Dispose()
     {
         // arrange

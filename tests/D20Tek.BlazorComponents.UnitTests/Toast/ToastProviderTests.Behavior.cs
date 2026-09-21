@@ -117,4 +117,41 @@ public sealed partial class ToastProviderTests
         // assert - toast not added since host is disposed/unsubscribed
         Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
     }
+
+    [TestMethod]
+    public void HandleShow_AfterDispose_DoesNotAddToast()
+    {
+        // arrange
+        using var ctx = CreateContext(out _);
+        var comp = ctx.Render<ToastProvider>();
+        comp.Instance.Dispose();
+        var toast = new ToastInstance 
+        { 
+            Content = [ExcludeFromCodeCoverage](builder) => builder.AddContent(0, "late"),
+            Timeout = TimeSpan.Zero
+        };
+
+        // act - direct invocation simulates an in-flight callback racing disposal
+        comp.InvokeAsync(() => ToastProviderAccessor.HandleShow(comp.Instance, toast));
+
+        // assert - guard short-circuits so nothing renders
+        Assert.IsEmpty(comp.FindAll(".d20tek-toast"));
+    }
+
+    [TestMethod]
+    public void RemoveToast_AfterDispose_ShortCircuits()
+    {
+        // arrange
+        using var ctx = CreateContext(out var service);
+        var comp = ctx.Render<ToastProvider>();
+        ToastInstance? shown = null;
+        comp.InvokeAsync(() => shown = service.Show("sticky", o => o.Timeout = TimeSpan.Zero));
+        comp.Instance.Dispose();
+
+        // act - a pending timer callback could call RemoveToast after dispose
+        comp.InvokeAsync(() => ToastProviderAccessor.RemoveToast(comp.Instance, shown!.Id));
+
+        // assert - guard prevents a post-dispose render; markup is unchanged
+        Assert.HasCount(1, comp.FindAll(".d20tek-toast"));
+    }
 }
