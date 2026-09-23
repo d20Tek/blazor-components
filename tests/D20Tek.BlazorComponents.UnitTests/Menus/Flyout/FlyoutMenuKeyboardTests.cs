@@ -1,4 +1,4 @@
-namespace D20Tek.BlazorComponents.UnitTests.Menus;
+namespace D20Tek.BlazorComponents.UnitTests.Menus.Flyout;
 
 [TestClass]
 public class FlyoutMenuKeyboardTests

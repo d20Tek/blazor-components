@@ -11,7 +11,7 @@
 ## Component Design Patterns
 
 ### 1. BaseComponent Inheritance
-All components inherit from `BaseComponent`:public abstract class BaseComponent : ComponentBase {
+All components inherit from `BaseComponent`: public abstract class BaseComponent : ComponentBase {
     [Parameter] public bool IsVisible { get; set; } = true;
     [Parameter] public Size Size { get; set; } = Size.Small;
     [Parameter(CaptureUnmatchedValues = true)]
@@ -20,11 +20,13 @@ All components inherit from `BaseComponent`:public abstract class BaseComponent 
     protected string? CssStyles { get; set; }
     protected abstract string? CalculateCssClasses();
     protected abstract string? CalculateCssStyles();
-}### 2. Component File Structure
+}
+### 2. Component File Structure
 Each component has:
 - `ComponentName.razor` - Markup with `@inherits` directive
 - `ComponentName.razor.cs` - Code-behind with `partial class`
 - `ComponentName.razor.css` - Scoped CSS styles
+- When moving a `.razor` file into a subfolder, add an explicit `@namespace D20Tek.BlazorComponents` directive to ensure the generated partial rejoins the code-behind.
 
 ### 3. CSS/Style Building Pattern
 Use fluent builders for CSS classes and inline styles:protected override string? CalculateCssClasses() =>
@@ -37,7 +39,8 @@ protected override string? CalculateCssStyles() =>
     new StyleBuilder()
         .AddStyleFromAttributes(RemainingAttributes)
         .AddStyle("property", "value", condition)
-        .Build();### 4. Metadata Classes Pattern
+        .Build();
+### 4. Metadata Classes Pattern
 Use static metadata classes for Size/Type mappings:internal class ComponentSizeMetadata {
     private static Dictionary<Size, string> _elements = new() {
         { Size.None, string.Empty },
@@ -46,19 +49,22 @@ Use static metadata classes for Size/Type mappings:internal class ComponentSizeM
         // ...
     };
     public static string GetSizeCss(Size size) => _elements[size];
-}### 5. Parameter Validation
+}
+### 5. Parameter Validation
 Use `ValueRange` for validating numeric parameters:protected static readonly ValueRange _validRange = new(0, 1000);
 [Parameter]
 [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "Needed")]
 public int Value {
     get => _value;
     set { _validRange.AssertInRange(value, nameof(Value)); _value = value; }
-}### 6. Razor Markup Pattern@inherits BaseComponent
+}
+### 6. Razor Markup Pattern@inherits BaseComponent
 @if (IsVisible) {
     <div @attributes="@this.RemainingAttributes" role="..." class="@this.CssClass" style="@this.CssStyles">
         <!-- content -->
     </div>
-}### 7. GlobalUsings.cs
+}
+### 7. GlobalUsings.cs
 Each component project includes:global using D20Tek.BlazorComponents.Utilities;
 global using Microsoft.AspNetCore.Components;
 global using System.Diagnostics.CodeAnalysis;
@@ -81,18 +87,21 @@ public void TestName() {
     var expectedHtml = @"<div>...</div>";
     comp.MarkupMatches(expectedHtml);
     Assert.AreEqual(expectedValue, comp.Instance.Property);
-}### 3. Expected Markup Pattern (for complex components)
+}
+### 3. Expected Markup Pattern (for complex components)
 Use partial class with nested `Expected` class for complex HTML:public partial class ComponentTests {
     internal static class Expected {
         public const string Default = @"<div>...</div>";
         public const string WithParameters = @"<div>...</div>";
     }
-}### 4. Custom Verifiers
+}
+### 4. Custom Verifiers
 Create helper classes for reusable assertion logic:internal static class ComponentVerifier {
     internal static void VerifyMarkupDifferences(IReadOnlyList<IDiff> results) {
         // Custom verification logic
     }
-}### 5. GlobalUsings for Testsglobal using Bunit;
+}
+### 5. GlobalUsings for Testsglobal using Bunit;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using System;
 global using System.Collections.Generic;
@@ -101,3 +110,4 @@ global using System.Diagnostics.CodeAnalysis;
 - Skip XML documentation comments (///) when generating C# code files.
 - Keep code lines to 120 characters before wrapping parameter lists and function call method lists.
 - Prefer expression body (=>) over block body for methods when possible.
+- When moving a colocated static/JS asset (e.g., `FlyoutMenu.razor.js`), update its `_content/<package>/<project-relative-path>` URL (e.g., in Constants.cs) to match the new folder. Plain `.cs` files can move between folders freely without code changes.

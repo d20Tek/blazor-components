@@ -16,7 +16,7 @@ internal static class Constants
     public static class JSFunctions
     {
         public const string Import = "import";
-        public const string ModulePath = "./_content/D20Tek.BlazorComponents.Menus/FlyoutMenu.razor.js";
+        public const string ModulePath = "./_content/D20Tek.BlazorComponents.Menus/Flyout/FlyoutMenu.razor.js";
         public const string Initialize = "initialize";
         public const string Reposition = "reposition";
         public const string Teardown = "teardown";
