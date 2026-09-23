@@ -7,5 +7,7 @@ public enum MenuPlacement
     TopStart = 2,
     TopEnd = 3,
     LeftStart = 4,
-    RightStart = 5
+    RightStart = 5,
+    LeftEnd = 6,
+    RightEnd = 7
 }

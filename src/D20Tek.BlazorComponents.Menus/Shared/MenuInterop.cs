@@ -30,6 +30,17 @@ internal sealed class MenuInterop(IJSRuntime jsRuntime, FlyoutMenu owner)
     public Task TeardownAsync(ElementReference popup) =>
         InvokeSafelyAsync(Constants.JSFunctions.Teardown, popup);
 
+    public async Task FocusElementAsync(ElementReference element)
+    {
+        try
+        {
+            await element.FocusAsync();
+        }
+        catch (Exception ex) when (IsBenign(ex))
+        {
+        }
+    }
+
     public async ValueTask DisposeAsync(ElementReference popup)
     {
         if (_module is not null)

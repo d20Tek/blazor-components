@@ -40,6 +40,23 @@ public class PlacementCalculatorTests
     }
 
     [TestMethod]
+    public void Calculate_TopEnd_AlignsMenuRightEdgeToTriggerRightEdge()
+    {
+        // Arrange
+        var trigger = new BlazorComponents.MenuRect(500, 300, 40, 20);
+        var menu = new BlazorComponents.MenuRect(0, 0, 200, 150);
+
+        // Act
+        var result = BlazorComponents.PlacementCalculator.Calculate(
+            trigger, menu, Viewport, BlazorComponents.MenuPlacement.TopEnd, 6);
+
+        // Assert
+        Assert.AreEqual(BlazorComponents.MenuPlacement.TopEnd, result.ResolvedPlacement);
+        Assert.AreEqual(340, result.X);
+        Assert.AreEqual(144, result.Y);
+    }
+
+    [TestMethod]
     public void Calculate_BottomStart_WhenNoRoomBelow_FlipsToTop()
     {
         // Arrange
@@ -101,6 +118,40 @@ public class PlacementCalculatorTests
         // Assert
         Assert.AreEqual(BlazorComponents.MenuPlacement.RightStart, result.ResolvedPlacement);
         Assert.AreEqual(66, result.X);
+    }
+
+    [TestMethod]
+    public void Calculate_LeftEnd_AlignsMenuBottomEdgeToTriggerBottomEdge()
+    {
+        // Arrange
+        var trigger = new BlazorComponents.MenuRect(500, 300, 40, 20);
+        var menu = new BlazorComponents.MenuRect(0, 0, 200, 150);
+
+        // Act
+        var result = BlazorComponents.PlacementCalculator.Calculate(
+            trigger, menu, Viewport, BlazorComponents.MenuPlacement.LeftEnd, 6, shiftEnabled: false);
+
+        // Assert
+        Assert.AreEqual(BlazorComponents.MenuPlacement.LeftEnd, result.ResolvedPlacement);
+        Assert.AreEqual(294, result.X);
+        Assert.AreEqual(170, result.Y);
+    }
+
+    [TestMethod]
+    public void Calculate_RightEnd_AlignsMenuBottomEdgeToTriggerBottomEdge()
+    {
+        // Arrange
+        var trigger = new BlazorComponents.MenuRect(500, 300, 40, 20);
+        var menu = new BlazorComponents.MenuRect(0, 0, 200, 150);
+
+        // Act
+        var result = BlazorComponents.PlacementCalculator.Calculate(
+            trigger, menu, Viewport, BlazorComponents.MenuPlacement.RightEnd, 6, shiftEnabled: false);
+
+        // Assert
+        Assert.AreEqual(BlazorComponents.MenuPlacement.RightEnd, result.ResolvedPlacement);
+        Assert.AreEqual(546, result.X);
+        Assert.AreEqual(170, result.Y);
     }
 
     [TestMethod]

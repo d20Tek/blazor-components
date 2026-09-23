@@ -200,6 +200,25 @@ public class FlyoutMenuRenderingTests
     }
 
     [TestMethod]
+    public async Task Open_WithUnknownEntryType_RendersNothingForThatEntry()
+    {
+        // Arrange
+        var ctx = CreateContext();
+        IReadOnlyList<IMenuEntry> items =
+        [
+            new MenuActionItem { Label = "One" },
+            new Fakes.FakeMenuEntry(),
+        ];
+        var comp = ctx.Render<FlyoutMenu>(p => p.Add(x => x.Items, items));
+
+        // Act
+        await comp.Find(".d20tek-flyout-menu__trigger__button").ClickAsync(new());
+
+        // Assert
+        Assert.HasCount(1, comp.FindAll(".d20tek-flyout-menu__item"));
+    }
+
+    [TestMethod]
     public void Render_WithDisabledTrue_TriggerButtonIsDisabled()
     {
         // Arrange

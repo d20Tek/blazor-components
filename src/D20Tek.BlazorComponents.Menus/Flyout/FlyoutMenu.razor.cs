@@ -58,16 +58,7 @@ public partial class FlyoutMenu : BaseComponent, IManagedMenu, IAsyncDisposable
             closeOnOutsideClick = CloseOnOutsideClick
         };
 
-    private async Task FocusTriggerAsync()
-    {
-        try
-        {
-            await _triggerRef.FocusAsync();
-        }
-        catch (Exception ex) when (MenuInterop.IsBenign(ex))
-        {
-        }
-    }
+    private Task FocusTriggerAsync() => _interop.FocusElementAsync(_triggerRef);
 
     private bool HasRenderableEntries()
     {

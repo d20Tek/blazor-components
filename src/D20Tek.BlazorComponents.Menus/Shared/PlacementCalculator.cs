@@ -43,8 +43,7 @@ public static class PlacementCalculator
             MenuSide.Bottom => trigger.Bottom + offset + menu.Height <= boundary.Bottom,
             MenuSide.Top => trigger.Top - offset - menu.Height >= boundary.Top,
             MenuSide.Left => trigger.Left - offset - menu.Width >= boundary.Left,
-            MenuSide.Right => trigger.Right + offset + menu.Width <= boundary.Right,
-            _ => true
+            _ => trigger.Right + offset + menu.Width <= boundary.Right,
         };
 
     private static (double X, double Y) ComputeCoordinates(
@@ -87,21 +86,14 @@ public static class PlacementCalculator
         // For top/bottom sides shift along X; for left/right sides shift along Y.
         if (side is MenuSide.Bottom or MenuSide.Top)
         {
-            x = Clamp(x, boundary.Left, boundary.Right - menu.Width);
+            x = Math.Clamp(x, boundary.Left, boundary.Right - menu.Width);
         }
         else
         {
-            y = Clamp(y, boundary.Top, boundary.Bottom - menu.Height);
+            y = Math.Clamp(y, boundary.Top, boundary.Bottom - menu.Height);
         }
 
         return (x, y);
-    }
-
-    private static double Clamp(double value, double min, double max)
-    {
-        if (max < min) return min;
-
-        return value < min ? min : (value > max ? max : value);
     }
 
     private static MenuSide Opposite(MenuSide side) =>
@@ -116,17 +108,17 @@ public static class PlacementCalculator
     private static MenuSide GetSide(MenuPlacement placement) =>
         placement switch
         {
-            MenuPlacement.BottomStart or MenuPlacement.BottomEnd => MenuSide.Bottom,
             MenuPlacement.TopStart or MenuPlacement.TopEnd => MenuSide.Top,
-            MenuPlacement.LeftStart => MenuSide.Left,
-            MenuPlacement.RightStart => MenuSide.Right,
+            MenuPlacement.LeftStart or MenuPlacement.LeftEnd => MenuSide.Left,
+            MenuPlacement.RightStart or MenuPlacement.RightEnd => MenuSide.Right,
             _ => MenuSide.Bottom
         };
 
     private static MenuAlignment GetAlignment(MenuPlacement placement) =>
         placement switch
         {
-            MenuPlacement.BottomEnd or MenuPlacement.TopEnd => MenuAlignment.End,
+            MenuPlacement.BottomEnd or MenuPlacement.TopEnd
+                or MenuPlacement.LeftEnd or MenuPlacement.RightEnd => MenuAlignment.End,
             _ => MenuAlignment.Start
         };
 
@@ -137,7 +129,9 @@ public static class PlacementCalculator
             (MenuSide.Bottom, MenuAlignment.End) => MenuPlacement.BottomEnd,
             (MenuSide.Top, MenuAlignment.Start) => MenuPlacement.TopStart,
             (MenuSide.Top, MenuAlignment.End) => MenuPlacement.TopEnd,
+            (MenuSide.Left, MenuAlignment.End) => MenuPlacement.LeftEnd,
             (MenuSide.Left, _) => MenuPlacement.LeftStart,
+            (MenuSide.Right, MenuAlignment.End) => MenuPlacement.RightEnd,
             _ => MenuPlacement.RightStart
         };
 

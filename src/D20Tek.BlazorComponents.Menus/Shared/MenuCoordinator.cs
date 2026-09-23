@@ -24,8 +24,7 @@ internal static class MenuCoordinator
     {
         lock (_sync)
         {
-            if (_openByGroup.TryGetValue(group, out var current) &&
-                ReferenceEquals(current, menu))
+            if (_openByGroup.TryGetValue(group, out var current) && ReferenceEquals(current, menu))
             {
                 _openByGroup.Remove(group);
             }

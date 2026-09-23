@@ -102,4 +102,24 @@ public class MenuCoordinatorTests
         // Cleanup
         MenuCoordinator.NotifyClosed(group, next);
     }
+
+    [TestMethod]
+    public async Task NotifyClosed_ForUntrackedGroup_DoesNothing()
+    {
+        // Arrange
+        var group = Guid.NewGuid().ToString();
+        var menu = new FakeManagedMenu();
+
+        // Act
+        MenuCoordinator.NotifyClosed(group, menu);
+        var next = new FakeManagedMenu();
+        await MenuCoordinator.NotifyOpenedAsync(group, next);
+
+        // Assert
+        Assert.AreEqual(0, menu.CloseRequestCount);
+        Assert.AreEqual(0, next.CloseRequestCount);
+
+        // Cleanup
+        MenuCoordinator.NotifyClosed(group, next);
+    }
 }
