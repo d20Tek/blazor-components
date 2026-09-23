@@ -16,12 +16,14 @@
     <File Path="ReleaseNotes.md" />
   </Folder>
   <Folder Name="/.plans/">
+    <File Path="plans/flyout-menu.md" />
     <File Path="plans/future-features.md" />
   </Folder>
   <Folder Name="/Components/">
     <Project Path="src/D20Tek.BlazorComponent.Core/D20Tek.BlazorComponent.Core.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.All/D20Tek.BlazorComponents.All.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Markdown/D20Tek.BlazorComponents.Markdown.csproj" />
+    <Project Path="src/D20Tek.BlazorComponents.Menus/D20Tek.BlazorComponents.Menus.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Modal/D20Tek.BlazorComponents.Modal.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Functionally/D20Tek.BlazorComponents.Functionally.csproj" />
     <Project Path="src/D20Tek.BlazorComponents.Pager/D20Tek.BlazorComponents.Pager.csproj" />

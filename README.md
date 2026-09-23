@@ -10,7 +10,7 @@ This package suite provides custom, reusable Blazor components. These components
 
 **Live demo:** [components.d20tek.com](https://components.d20tek.com)
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, Tile, LinkTile, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, Tile, LinkTile, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, FlyoutMenu, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
 
 Components ship grouped by package, so a single package can contain more than one component:
 
@@ -23,15 +23,16 @@ Components ship grouped by package, so a single package can contain more than on
 | `D20Tek.BlazorComponents.ToggleSwitch` | ToggleSwitch |
 | `D20Tek.BlazorComponents.Modal` | ModalDialog, ModalFormDialog, MessageBox |
 | `D20Tek.BlazorComponents.Markdown` | MarkdownView |
+| `D20Tek.BlazorComponents.Menus` | FlyoutMenu (link `Menu.css`) |
 | `D20Tek.BlazorComponents.TogglePanel` | TogglePanel |
 | `D20Tek.BlazorComponents.Functionally` | ResultValidator, ResultAlert, ResultView, ResultToast |
 | `D20Tek.BlazorComponents.Pager` | Pager |
 | `D20Tek.BlazorComponents.Vertically` | OffsetPager |
 
 ### The "All" meta-package
-references the full component suite (Functionally, Markdown, Modal, Pager, Spinner, Tiles, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
+references the full component suite (Functionally, Markdown, Menus, Modal, Pager, Spinner, Tiles, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
 
-> Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
+> Note: because the meta-package includes the Menus, Modal, and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
@@ -44,6 +45,7 @@ PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Menus -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.18

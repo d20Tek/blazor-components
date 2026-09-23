@@ -1,0 +1,51 @@
+@inherits BaseComponent
+@implements IManagedMenu
+@implements IAsyncDisposable
+
+@if (IsVisible)
+{
+    <div class="@CssClass" style="@CssStyles" @attributes="RemainingAttributes">
+        <div class="@Constants.CssTrigger" @ref="_triggerRef">
+            @if (Trigger is not null)
+            {
+                @Trigger(_context)
+            }
+            else
+            {
+                <button type="button" class="@TriggerButtonCss" aria-haspopup="menu"
+                        aria-expanded="@_isOpen.ToString().ToLowerInvariant()" aria-controls="@PopupId"
+                        aria-label="@TriggerAriaLabel" disabled="@Disabled" @onclick="ToggleAsync">
+                    @if (!string.IsNullOrEmpty(TriggerIcon))
+                    {
+                        <i class="@TriggerIcon" aria-hidden="true"></i>
+                    }
+                    else
+                    {
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="5" r="1.6" fill="currentColor" />
+                            <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+                            <circle cx="12" cy="19" r="1.6" fill="currentColor" />
+                        </svg>
+                    }
+                </button>
+            }
+        </div>
+
+        @if (_isOpen)
+        {
+            <CascadingValue Value="this" IsFixed="true">
+                <div id="@PopupId" class="@PopupCss" style="@PopupStyle" role="menu" tabindex="-1"
+                     aria-label="@TriggerAriaLabel" @ref="_popupRef" @onkeydown="HandleKeyDownAsync">
+                    @if (Items is not null)
+                    {
+                        @foreach (var entry in Items)
+                        {
+                            @RenderEntry(entry)
+                        }
+                    }
+                    @ChildContent
+                </div>
+            </CascadingValue>
+        }
+    </div>
+}
