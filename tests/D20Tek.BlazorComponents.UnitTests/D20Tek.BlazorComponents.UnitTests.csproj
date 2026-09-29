@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Menus\D20Tek.BlazorComponents.Menus.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Modal\D20Tek.BlazorComponents.Modal.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Functionally\D20Tek.BlazorComponents.Functionally.csproj" />
     <ProjectReference Include="..\..\src\D20Tek.BlazorComponents.Spinner\D20Tek.BlazorComponents.Spinner.csproj" />

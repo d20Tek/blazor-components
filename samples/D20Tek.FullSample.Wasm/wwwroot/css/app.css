@@ -87,3 +87,122 @@ pre {
 .component-container {
     border: 1px solid lightgray;
 }
+
+.demo-surface {
+    padding: 1.5rem;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+/* Theme toggle button (in the layout top-row) */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 1.5rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    color: inherit;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+    .theme-toggle:hover {
+        background: rgba(128, 128, 128, 0.15);
+    }
+
+    .theme-toggle .oi {
+        top: 0;
+    }
+
+/*
+ * Dark theme for the sample app's own chrome. The D20Tek components opt into
+ * dark on their own via the [data-theme="dark"] marker and color-scheme (both
+ * set on <html> by js/theme.js); these rules retheme the surrounding sample
+ * page so the whole app is legible in dark mode.
+ */
+[data-theme="dark"] {
+    background-color: #16181c;
+    color: #e6e6e6;
+}
+
+[data-theme="dark"] body {
+    background-color: #16181c;
+    color: #e6e6e6;
+}
+
+html[data-theme="dark"] .top-row {
+    background-color: #1f2228;
+    border-bottom-color: #333842;
+}
+
+[data-theme="dark"] a,
+[data-theme="dark"] .btn-link {
+    color: #4ea3ff;
+}
+
+[data-theme="dark"] pre {
+    background-color: #22262d;
+    border-color: #333842;
+    color: #e6e6e6;
+}
+
+[data-theme="dark"] .component-container,
+[data-theme="dark"] .interactivity-card {
+    border-color: #333842;
+}
+
+/*
+ * Bootstrap's .table forces its own text color via --bs-table-color, which
+ * stays dark and makes the parameter labels unreadable on the dark card.
+ * Re-map the table color variables and label text so they are legible.
+ */
+[data-theme="dark"] .interactivity-card .table {
+    --bs-table-color: #e6e6e6;
+    --bs-table-bg: transparent;
+    --bs-table-border-color: #333842;
+    color: #e6e6e6;
+}
+
+[data-theme="dark"] .interactivity-card label,
+[data-theme="dark"] .interactivity-card td {
+    color: #e6e6e6;
+}
+
+[data-theme="dark"] .demo-surface {
+    border-color: #333842;
+    background-color: #1f2228;
+}
+
+/*
+ * Modal + MessageBox dark theming. These components expose --modal-* tokens
+ * with light defaults and expect consumers to override them for dark mode.
+ * The <dialog> is rendered under <html>, so the [data-theme="dark"] marker
+ * matches it. Remap the tokens so dialogs and message boxes read correctly
+ * in dark mode.
+ */
+[data-theme="dark"] .modal-dialog {
+    --modal-surface: #1f2228;
+    --modal-footer-bg: #191b1f;
+    --modal-border-color: #333842;
+    --modal-title-color: #f1f1f1;
+    --modal-summary-color: #a0a4ab;
+    --modal-body-color: #e6e6e6;
+    --modal-close-color: #a0a4ab;
+    --modal-close-hover-color: #f1f1f1;
+    --modal-close-hover-bg: #2a2e35;
+    --modal-focus-color: #4ea3ff;
+    --modal-btn-cancel-bg: #2a2e35;
+    --modal-btn-cancel-color: #e6e6e6;
+    --modal-btn-cancel-border: #444a54;
+    --modal-btn-cancel-hover-bg: #333842;
+    --modal-btn-cancel-hover-border: #5a616d;
+    --modal-btn-submit-bg: #3b82f6;
+    --modal-btn-submit-color: #ffffff;
+    --modal-btn-submit-hover-bg: #2563eb;
+    --modal-btn-submit-active-bg: #1d4ed8;
+}

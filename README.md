@@ -10,7 +10,7 @@ This package suite provides custom, reusable Blazor components. These components
 
 **Live demo:** [components.d20tek.com](https://components.d20tek.com)
 
-Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, Tile, LinkTile, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
+Supported components: Spinner, ContentSpinner, Timer, SpanTimer, CountdownTimer, Tile, LinkTile, ToggleSwitch, ModalDialog, ModalFormDialog, MessageBox, MarkdownView, TogglePanel, FlyoutMenu, ResultValidator, ResultAlert, ResultView, Toast, ResultToast, Pager, and OffsetPager.
 
 Components ship grouped by package, so a single package can contain more than one component:
 
@@ -23,15 +23,16 @@ Components ship grouped by package, so a single package can contain more than on
 | `D20Tek.BlazorComponents.ToggleSwitch` | ToggleSwitch |
 | `D20Tek.BlazorComponents.Modal` | ModalDialog, ModalFormDialog, MessageBox |
 | `D20Tek.BlazorComponents.Markdown` | MarkdownView |
+| `D20Tek.BlazorComponents.Menus` | FlyoutMenu (link `Menu.css`) |
 | `D20Tek.BlazorComponents.TogglePanel` | TogglePanel |
 | `D20Tek.BlazorComponents.Functionally` | ResultValidator, ResultAlert, ResultView, ResultToast |
 | `D20Tek.BlazorComponents.Pager` | Pager |
 | `D20Tek.BlazorComponents.Vertically` | OffsetPager |
 
 ### The "All" meta-package
-references the full component suite (Functionally, Markdown, Modal, Pager, Spinner, Tiles, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
+references the full component suite (Functionally, Markdown, Menus, Modal, Pager, Spinner, Tiles, Timer, Toast, TogglePanel, ToggleSwitch, and Vertically) through a single `PackageReference`.
 
-> Note: because the meta-package includes the Modal and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
+> Note: because the meta-package includes the Menus, Modal, and Toast components, apps that use `All` still need to link their static CSS files - see [Component-Specific Setup](#component-specific-setup) below.
 
 ## Installation
 These libraries are in NuGet packages so they are easy to add to your project. To install these packages into your solution, you can use the Package Manager. In PM, please use the following commands:
@@ -44,6 +45,7 @@ PM > Install-Package D20Tek.BlazorComponents.Toast -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.ToggleSwitch -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Modal -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Markdown -Version 1.11.18
+PM > Install-Package D20Tek.BlazorComponents.Menus -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.TogglePanel -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Functionally -Version 1.11.18
 PM > Install-Package D20Tek.BlazorComponents.Pager -Version 1.11.18
@@ -128,6 +130,21 @@ These defaults cover presentation chrome only (`Position`, `DefaultTimeout`, `Sh
 **Pager / OffsetPager** - The `Pager` component (in `D20Tek.BlazorComponents.Pager`) uses scoped CSS, so there is no static stylesheet to link. Its styles derive from `currentColor`, allowing it to adapt to any light, dark, or custom theme. `Pager` is fully controlled: bind `CurrentPage`/`CurrentPageChanged`, `PageSize`/`PageSizeChanged`, and `TotalItems`. Numbered pages use a MudBlazor-style anchored window controlled by two knobs, `BoundaryCount` (default 1) and `MiddleCount` (default 5, centered on the current page). The pager collapses its subcomponents (description, first/last, page-size selector, then numbers) as its container narrows using CSS container queries; set `DisableResponsive="true"` to opt out. Container queries require a modern browser (Chrome/Edge 105+, Firefox 110+, Safari 16+).
 >
 > `OffsetPager<T>` (in `D20Tek.BlazorComponents.Vertically`) wraps `Pager` for the D20Tek.Vertically paging types. Bind its `Page` parameter to a `PageOf<T>` result and handle `OnPageQuery`, which raises a new `PagedRequest` (one-based `PageNumber` plus `PageSize`) whenever the user navigates or changes the page size.
+
+**FlyoutMenu** - The `FlyoutMenu` component (in `D20Tek.BlazorComponents.Menus`) portals its popup to `<body>` and builds its items in code, so it uses a static CSS file that must be linked inside the `<head>` tag:
+```html
+<link href="_content/D20Tek.BlazorComponents.Menus/Menu.css" rel="stylesheet" />
+```
+Trigger it from the built-in kebab button or supply a custom `Trigger` fragment that receives the open state and a toggle callback. Populate it with data-driven entries (`MenuActionItem`, `MenuLinkItem`, `MenuSeparatorItem`, `MenuHeaderItem` bound via `Items`) or the equivalent templated child components (`MenuItem`, `MenuLink`, `MenuSeparator`, `MenuHeader`). Menus that share a `GroupName` enforce a single-open policy, and the `Size` parameter (`ExtraSmall` through `ExtraLarge`) controls item density. The menu ships light defaults and exposes `--d20tek-menu-*` CSS custom properties for theming:
+```css
+.d20tek-flyout-menu,
+.d20tek-flyout-menu__popup {
+    --d20tek-menu-bg: #1e1e1e;
+    --d20tek-menu-color: #e6e6e6;
+    --d20tek-menu-border: 1px solid #333333;
+}
+```
+Dark mode is opt-in: add a `data-theme="dark"`, `data-bs-theme="dark"`, or `.dark` marker to an ancestor, or use `data-theme="auto"` to follow the OS `prefers-color-scheme`. Because the popup is portaled to `<body>` when open, place the dark marker on `<html>` or `<body>`; if it must live on an inner wrapper, add the `d20tek-menu--dark` class to the popup via the `MenuCssClass` parameter. The derived hover/active/focus states use `color-mix`, which requires a modern browser (Chrome/Edge 105+, Firefox 110+, Safari 16.2+).
 
 ### Samples:
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:

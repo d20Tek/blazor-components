@@ -1,5 +1,19 @@
 # Release Notes
 
+## Release v1.11.19
+* Added the **D20Tek.BlazorComponents.Menus** package with the generic, reusable `FlyoutMenu` component:
+  * Self-positioning flyout/popover triggered from a built-in kebab button or a fully custom `Trigger` fragment that receives the open state and a toggle callback.
+  * Supports both data-driven entries (`MenuActionItem`, `MenuLinkItem`, `MenuSeparatorItem`, `MenuHeaderItem`) and templated child components (`MenuItem`, `MenuLink`, `MenuSeparator`, `MenuHeader`) that produce identical markup.
+  * Collision-aware placement (flip and shift) via a minimal isolated JavaScript module that portals the popup to `<body>`, with the geometry logic mirrored in a pure, unit-testable `PlacementCalculator`.
+  * Group-aware single-open policy: menus sharing a `GroupName` close one another when opened, while menus in different groups stay independent.
+  * Full keyboard accessibility with `aria-haspopup`, `aria-expanded`, `aria-controls`, `role="menu"`, and `role="menuitem"` wiring, plus Escape-to-close with focus return to the trigger.
+  or use `data-theme="auto"` to follow the OS `prefers-color-scheme`). The component no longer flips to dark based solely on the OS setting, so it stays light in light-mode apps regardless of the developer's OS theme. Because the popup is portaled to `<body>` when open, place the dark marker on `<html>` or `<body>` (the standard placement for Bootstrap's `data-bs-theme`, Tailwind's `.dark`, etc.); if the marker must live on an inner wrapper, add the `d20tek-menu--dark` class to the popup via `MenuCssClass` so the detached popup still picks up the dark tokens.
+  * Ships a global `Menu.css` static asset (required because the popup is portaled and items are generated in code); link it from `_content/D20Tek.BlazorComponents.Menus/Menu.css`.
+* Added the Menus package to the **D20Tek.BlazorComponents.All** meta-package.
+* Added unit tests to cover the placement geometry, single-open coordination, sizing metadata, and component behavior.
+* Added sample page for FlyoutMenu to the D20Tek.FullSample.Wasm sample app.
+* Updated the sample app to support light and dark themes via a `data-theme` attribute on `<html>` (or `<body>`), with a toggle button to switch between them.
+
 ## Release v1.11.18
 * Fixed Pager component to correctly support theming for the RowCount selector. The select element now inherits the host's color-scheme, so an app that declares `color-scheme: dark` at its root automatically gets a correctly themed native option flyout with no extra work. For finer control, override these CSS custom properties (defaults preserve the current theme-agnostic appearance):
   * `--pager-select-bg` - Background of the page-size selector and its options.

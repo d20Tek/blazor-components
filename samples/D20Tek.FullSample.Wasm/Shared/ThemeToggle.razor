@@ -1,0 +1,8 @@
+@inject IJSRuntime JS
+
+<button type="button" class="theme-toggle" @onclick="ToggleAsync"
+        title="@(_isDark ? "Switch to light mode" : "Switch to dark mode")"
+        aria-label="@(_isDark ? "Switch to light mode" : "Switch to dark mode")">
+    <span class="oi @(_isDark ? "oi-sun" : "oi-moon")" aria-hidden="true"></span>
+    <span class="theme-toggle__label">@(_isDark ? "Light" : "Dark")</span>
+</button>
