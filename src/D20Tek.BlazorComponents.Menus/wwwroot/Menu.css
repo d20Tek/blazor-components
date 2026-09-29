@@ -36,6 +36,14 @@
  * prefers-color-scheme block below, which only applies under an explicit
  * [data-theme="auto"] marker. The portaled popup lands on <body>, so the markers
  * are matched on <body>/<html> ancestors for both the root and the popup.
+ *
+ * IMPORTANT: because the popup is portaled to <body> when open, the dark marker
+ * must live on <html> or <body> (the standard placement used by Bootstrap's
+ * data-bs-theme, Tailwind's .dark, etc.). If the marker is placed on an inner
+ * wrapper instead, the portaled popup is no longer a descendant of that wrapper
+ * and will fall back to the light tokens even though the trigger looks dark. In
+ * that scenario, add the d20tek-menu--dark class directly to the popup via the
+ * MenuCssClass parameter to force the dark tokens onto the detached popup.
  */
 .d20tek-flyout-menu.d20tek-menu--dark,
 .d20tek-flyout-menu__popup.d20tek-menu--dark,

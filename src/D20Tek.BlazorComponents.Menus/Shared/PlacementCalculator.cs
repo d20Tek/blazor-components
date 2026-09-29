@@ -1,6 +1,6 @@
 namespace D20Tek.BlazorComponents;
 
-public static class PlacementCalculator
+internal static class PlacementCalculator
 {
     public static MenuPosition Calculate(
         MenuRect trigger,

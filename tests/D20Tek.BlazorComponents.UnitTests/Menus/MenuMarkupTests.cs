@@ -114,7 +114,7 @@ public class MenuMarkupTests
 
         // Assert
         Assert.IsNotNull(comp.Find("span.d20tek-flyout-menu__item-icon .custom-svg"));
-        Assert.AreEqual(0, comp.FindAll("i.d20tek-flyout-menu__item-icon").Count);
+        Assert.IsEmpty(comp.FindAll("i.d20tek-flyout-menu__item-icon"));
     }
 
     [TestMethod]

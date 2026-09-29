@@ -1,6 +1,6 @@
 namespace D20Tek.BlazorComponents;
 
-public readonly record struct MenuRect(double X, double Y, double Width, double Height)
+internal readonly record struct MenuRect(double X, double Y, double Width, double Height)
 {
     public double Left => X;
 

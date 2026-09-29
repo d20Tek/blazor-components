@@ -113,19 +113,12 @@ internal static class MenuMarkup
         builder.CloseElement();
     }
 
-    private static string ItemCss(bool isDestructive, bool isDisabled)
-    {
-        var css = Constants.CssItem;
-        if (isDestructive)
+    private static string ItemCss(bool isDestructive, bool isDisabled) =>
+        (isDestructive, isDisabled) switch
         {
-            css += $" {Constants.CssItem}--destructive";
-        }
-
-        if (isDisabled)
-        {
-            css += $" {Constants.CssItem}--disabled";
-        }
-
-        return css;
-    }
+            (true, true) => $"{Constants.CssItem} {Constants.CssItem}--destructive {Constants.CssItem}--disabled",
+            (true, false) => $"{Constants.CssItem} {Constants.CssItem}--destructive",
+            (false, true) => $"{Constants.CssItem} {Constants.CssItem}--disabled",
+            (false, false) => Constants.CssItem,
+        };
 }

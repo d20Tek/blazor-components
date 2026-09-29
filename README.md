@@ -131,6 +131,21 @@ These defaults cover presentation chrome only (`Position`, `DefaultTimeout`, `Sh
 >
 > `OffsetPager<T>` (in `D20Tek.BlazorComponents.Vertically`) wraps `Pager` for the D20Tek.Vertically paging types. Bind its `Page` parameter to a `PageOf<T>` result and handle `OnPageQuery`, which raises a new `PagedRequest` (one-based `PageNumber` plus `PageSize`) whenever the user navigates or changes the page size.
 
+**FlyoutMenu** - The `FlyoutMenu` component (in `D20Tek.BlazorComponents.Menus`) portals its popup to `<body>` and builds its items in code, so it uses a static CSS file that must be linked inside the `<head>` tag:
+```html
+<link href="_content/D20Tek.BlazorComponents.Menus/Menu.css" rel="stylesheet" />
+```
+Trigger it from the built-in kebab button or supply a custom `Trigger` fragment that receives the open state and a toggle callback. Populate it with data-driven entries (`MenuActionItem`, `MenuLinkItem`, `MenuSeparatorItem`, `MenuHeaderItem` bound via `Items`) or the equivalent templated child components (`MenuItem`, `MenuLink`, `MenuSeparator`, `MenuHeader`). Menus that share a `GroupName` enforce a single-open policy, and the `Size` parameter (`ExtraSmall` through `ExtraLarge`) controls item density. The menu ships light defaults and exposes `--d20tek-menu-*` CSS custom properties for theming:
+```css
+.d20tek-flyout-menu,
+.d20tek-flyout-menu__popup {
+    --d20tek-menu-bg: #1e1e1e;
+    --d20tek-menu-color: #e6e6e6;
+    --d20tek-menu-border: 1px solid #333333;
+}
+```
+Dark mode is opt-in: add a `data-theme="dark"`, `data-bs-theme="dark"`, or `.dark` marker to an ancestor, or use `data-theme="auto"` to follow the OS `prefers-color-scheme`. Because the popup is portaled to `<body>` when open, place the dark marker on `<html>` or `<body>`; if it must live on an inner wrapper, add the `d20tek-menu--dark` class to the popup via the `MenuCssClass` parameter. The derived hover/active/focus states use `color-mix`, which requires a modern browser (Chrome/Edge 105+, Firefox 110+, Safari 16.2+).
+
 ### Samples:
 For more detailed examples on how to use the D20Tek.BlazorComponents libraries, please review the following samples:
 

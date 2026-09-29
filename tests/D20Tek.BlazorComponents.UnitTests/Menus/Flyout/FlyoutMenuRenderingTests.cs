@@ -39,7 +39,7 @@ public class FlyoutMenuRenderingTests
 
         // Assert
         Assert.IsNotNull(comp.Find("i.oi.oi-menu"));
-        Assert.AreEqual(0, comp.FindAll("svg").Count);
+        Assert.IsEmpty(comp.FindAll("svg"));
     }
 
     [TestMethod]
@@ -152,8 +152,9 @@ public class FlyoutMenuRenderingTests
 
         // Assert
         var style = comp.Find("[role=menu]").GetAttribute("style");
-        StringAssert.Contains(style, "--d20tek-menu-z-index");
-        StringAssert.Contains(style, "5000");
+        Assert.IsNotNull(style);
+        Assert.Contains("--d20tek-menu-z-index", style);
+        Assert.Contains("5000", style);
     }
 
     [TestMethod]

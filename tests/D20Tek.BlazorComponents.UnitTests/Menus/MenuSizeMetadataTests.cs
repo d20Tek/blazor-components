@@ -13,7 +13,7 @@ public class MenuSizeMetadataTests
     public void GetSizeCss_ForEachSize_ReturnsExpectedClass(Size size, string expected)
     {
         // Arrange & Act
-        var result = BlazorComponents.MenuSizeMetadata.GetSizeCss(size);
+        var result = MenuSizeMetadata.GetSizeCss(size);
 
         // Assert
         Assert.AreEqual(expected, result);
@@ -24,7 +24,6 @@ public class MenuSizeMetadataTests
     public void GetSizeCss_WithUndefinedSize_Throws()
     {
         // Act & Assert
-        Assert.ThrowsExactly<KeyNotFoundException>(
-            () => BlazorComponents.MenuSizeMetadata.GetSizeCss((Size)999));
+        Assert.ThrowsExactly<KeyNotFoundException>(() => MenuSizeMetadata.GetSizeCss((Size)999));
     }
 }
