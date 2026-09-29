@@ -12,6 +12,7 @@
 * Added the Menus package to the **D20Tek.BlazorComponents.All** meta-package.
 * Added unit tests to cover the placement geometry, single-open coordination, sizing metadata, and component behavior.
 * Added sample page for FlyoutMenu to the D20Tek.FullSample.Wasm sample app.
+* Updated the sample app to support light and dark themes via a `data-theme` attribute on `<html>` (or `<body>`), with a toggle button to switch between them.
 
 ## Release v1.11.18
 * Fixed Pager component to correctly support theming for the RowCount selector. The select element now inherits the host's color-scheme, so an app that declares `color-scheme: dark` at its root automatically gets a correctly themed native option flyout with no extra work. For finer control, override these CSS custom properties (defaults preserve the current theme-agnostic appearance):

@@ -1,7 +1,20 @@
 .toggle-panel {
-    border: 1px solid #e5e7eb;
+    /* Theming tokens: defaults use light-dark() so the panel automatically
+       adapts to the host's color-scheme (light or dark) with no consumer CSS.
+       Consumers can still override any token directly for a custom palette. */
+    --toggle-panel-surface: light-dark(#ffffff, #1f2228);
+    --toggle-panel-summary-bg: light-dark(#f9fafb, #191b1f);
+    --toggle-panel-border-color: light-dark(#e5e7eb, #333842);
+    --toggle-panel-text-color: light-dark(#111827, #e6e6e6);
+
+    /* Follow the host's declared color-scheme so light-dark() resolves correctly. */
+    color-scheme: inherit;
+
+    border: 1px solid var(--toggle-panel-border-color);
     border-radius: 6px;
     overflow: hidden;
+    background-color: var(--toggle-panel-surface);
+    color: var(--toggle-panel-text-color);
 }
 
 .toggle-panel__summary {
@@ -12,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f9fafb;
+    background-color: var(--toggle-panel-summary-bg);
     font-weight: 500;
 }
 
@@ -39,7 +52,7 @@ details[open] .toggle-panel__chevron {
 
 .toggle-panel__body {
     padding: 1rem;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--toggle-panel-border-color);
 }
 
 .toggle-panel-xs .toggle-panel__summary {
