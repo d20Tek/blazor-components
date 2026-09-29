@@ -19,8 +19,9 @@ internal static class MenuCss
             .AddClass(triggerCssClass!, !string.IsNullOrEmpty(triggerCssClass))
             .Build();
 
-    public static string? PopupClasses(bool animate, string? menuCssClass) =>
+    public static string? PopupClasses(Size size, bool animate, string? menuCssClass) =>
         new CssBuilder(Constants.CssPopup)
+            .AddClass(MenuSizeMetadata.GetSizeCss(size), size != Size.None)
             .AddClass(Constants.CssPopup + "--animate", animate)
             .AddClass(menuCssClass!, !string.IsNullOrEmpty(menuCssClass))
             .Build();

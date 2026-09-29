@@ -87,3 +87,10 @@ pre {
 .component-container {
     border: 1px solid lightgray;
 }
+
+.demo-surface {
+    padding: 1.5rem;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    background-color: #fafafa;
+}

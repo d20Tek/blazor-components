@@ -79,7 +79,7 @@ public partial class FlyoutMenu
 
     private string? TriggerButtonCss => MenuCss.TriggerButtonClasses(_isOpen, TriggerCssClass);
 
-    private string? PopupCss => MenuCss.PopupClasses(Animate, MenuCssClass);
+    private string? PopupCss => MenuCss.PopupClasses(Size, Animate, MenuCssClass);
 
     private string? PopupStyle => MenuCss.PopupStyle(ZIndex);
 }

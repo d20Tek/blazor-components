@@ -7,10 +7,11 @@
   * Collision-aware placement (flip and shift) via a minimal isolated JavaScript module that portals the popup to `<body>`, with the geometry logic mirrored in a pure, unit-testable `PlacementCalculator`.
   * Group-aware single-open policy: menus sharing a `GroupName` close one another when opened, while menus in different groups stay independent.
   * Full keyboard accessibility with `aria-haspopup`, `aria-expanded`, `aria-controls`, `role="menu"`, and `role="menuitem"` wiring, plus Escape-to-close with focus return to the trigger.
-  * Density-based sizing via the shared `Size` parameter, and efficient theming through `--d20tek-menu-*` CSS custom properties with light defaults and an automatic dark-mode override.
+  * Density-based sizing via the shared `Size` parameter (`ExtraSmall` through `ExtraLarge`) that retunes item padding, minimum tap size, popup width, and label typography; the size modifier is now applied to the portaled popup so it takes visible effect, and efficient theming through `--d20tek-menu-*` CSS custom properties with light defaults and an opt-in dark-mode override (apply a `data-theme="dark"`, `data-bs-theme="dark"`, or `.dark` marker on an ancestor, or use `data-theme="auto"` to follow the OS `prefers-color-scheme`). The component no longer flips to dark based solely on the OS setting, so it stays light in light-mode apps regardless of the developer's OS theme.
   * Ships a global `Menu.css` static asset (required because the popup is portaled and items are generated in code); link it from `_content/D20Tek.BlazorComponents.Menus/Menu.css`.
 * Added the Menus package to the **D20Tek.BlazorComponents.All** meta-package.
 * Added unit tests to cover the placement geometry, single-open coordination, sizing metadata, and component behavior.
+* Added sample page for FlyoutMenu to the D20Tek.FullSample.Wasm sample app.
 
 ## Release v1.11.18
 * Fixed Pager component to correctly support theming for the RowCount selector. The select element now inherits the host's color-scheme, so an app that declares `color-scheme: dark` at its root automatically gets a correctly themed native option flyout with no extra work. For finer control, override these CSS custom properties (defaults preserve the current theme-agnostic appearance):

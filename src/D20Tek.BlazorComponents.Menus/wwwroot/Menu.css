@@ -1,4 +1,12 @@
-.d20tek-flyout-menu {
+/*
+ * Tokens are declared on both the root element and the popup. The popup is
+ * portaled to <body> (outside the root), so it cannot inherit custom properties
+ * defined only on the root; declaring them here as well keeps the detached popup
+ * fully themed (otherwise var(--d20tek-menu-bg) resolves to nothing and the menu
+ * renders with a transparent background).
+ */
+.d20tek-flyout-menu,
+.d20tek-flyout-menu__popup {
     --d20tek-menu-bg: #ffffff;
     --d20tek-menu-color: #1e1e1e;
     --d20tek-menu-border: 1px solid #d0d0d0;
@@ -10,6 +18,7 @@
     --d20tek-menu-item-padding: 0.5rem 0.75rem;
     --d20tek-menu-min-tap-size: 40px;
     --d20tek-menu-min-width: 12rem;
+    --d20tek-menu-item-font-size: 1rem;
     --d20tek-menu-z-index: 1080;
     --d20tek-menu-anim-duration: 120ms;
     --d20tek-menu-offset: 6px;
@@ -19,8 +28,35 @@
     --d20tek-menu-destructive-hover-bg: color-mix(in srgb, var(--d20tek-menu-bg) 88%, var(--d20tek-menu-destructive-color));
 }
 
+/*
+ * Dark theme tokens are opt-in so the component does not silently flip to dark
+ * based solely on the OS setting while the host app renders in light mode.
+ * Apps opt in by adding a dark marker (data-theme="dark", data-bs-theme="dark",
+ * or a .dark ancestor). Apps that want to follow the OS can also opt in via the
+ * prefers-color-scheme block below, which only applies under an explicit
+ * [data-theme="auto"] marker. The portaled popup lands on <body>, so the markers
+ * are matched on <body>/<html> ancestors for both the root and the popup.
+ */
+.d20tek-flyout-menu.d20tek-menu--dark,
+.d20tek-flyout-menu__popup.d20tek-menu--dark,
+[data-theme="dark"] .d20tek-flyout-menu,
+[data-theme="dark"] .d20tek-flyout-menu__popup,
+[data-bs-theme="dark"] .d20tek-flyout-menu,
+[data-bs-theme="dark"] .d20tek-flyout-menu__popup,
+.dark .d20tek-flyout-menu,
+.dark .d20tek-flyout-menu__popup {
+    --d20tek-menu-bg: #1e1e1e;
+    --d20tek-menu-color: #e6e6e6;
+    --d20tek-menu-border: 1px solid #333333;
+    --d20tek-menu-shadow: 0 8px 24px rgb(0 0 0 / 45%);
+    --d20tek-menu-separator-color: #333333;
+    --d20tek-menu-destructive-color: #ff6b6b;
+    --d20tek-menu-header-color: #9aa0a6;
+}
+
 @media (prefers-color-scheme: dark) {
-    .d20tek-flyout-menu {
+    [data-theme="auto"] .d20tek-flyout-menu,
+    [data-theme="auto"] .d20tek-flyout-menu__popup {
         --d20tek-menu-bg: #1e1e1e;
         --d20tek-menu-color: #e6e6e6;
         --d20tek-menu-border: 1px solid #333333;
@@ -98,6 +134,46 @@
     outline: none;
 }
 
+/*
+ * Density tiers. The Size parameter emits a modifier class on the popup (which is
+ * portaled to <body>), so these rules retune the item padding, tap size, popup
+ * width, and label typography by overriding the relevant tokens.
+ */
+.d20tek-flyout-menu--xs {
+    --d20tek-menu-item-padding: 0.25rem 0.5rem;
+    --d20tek-menu-min-tap-size: 28px;
+    --d20tek-menu-min-width: 9rem;
+    --d20tek-menu-item-font-size: 0.8125rem;
+}
+
+.d20tek-flyout-menu--sm {
+    --d20tek-menu-item-padding: 0.375rem 0.625rem;
+    --d20tek-menu-min-tap-size: 34px;
+    --d20tek-menu-min-width: 10.5rem;
+    --d20tek-menu-item-font-size: 0.875rem;
+}
+
+.d20tek-flyout-menu--md {
+    --d20tek-menu-item-padding: 0.5rem 0.75rem;
+    --d20tek-menu-min-tap-size: 40px;
+    --d20tek-menu-min-width: 12rem;
+    --d20tek-menu-item-font-size: 1rem;
+}
+
+.d20tek-flyout-menu--lg {
+    --d20tek-menu-item-padding: 0.625rem 0.875rem;
+    --d20tek-menu-min-tap-size: 46px;
+    --d20tek-menu-min-width: 14rem;
+    --d20tek-menu-item-font-size: 1.0625rem;
+}
+
+.d20tek-flyout-menu--xl {
+    --d20tek-menu-item-padding: 0.75rem 1rem;
+    --d20tek-menu-min-tap-size: 52px;
+    --d20tek-menu-min-width: 16rem;
+    --d20tek-menu-item-font-size: 1.125rem;
+}
+
 .d20tek-flyout-menu__popup--animate {
     animation: d20tek-menu-in var(--d20tek-menu-anim-duration, 120ms) ease-out;
     transform-origin: top;
@@ -123,6 +199,7 @@
     min-block-size: var(--d20tek-menu-min-tap-size, 40px);
     padding: var(--d20tek-menu-item-padding, 0.5rem 0.75rem);
     color: inherit;
+    font-size: var(--d20tek-menu-item-font-size, 1rem);
     text-align: start;
     text-decoration: none;
     background: transparent;

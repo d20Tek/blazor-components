@@ -1,0 +1,121 @@
+@page "/flyout-menu"
+
+<h3>FlyoutMenu Component</h3>
+<p>The <code>FlyoutMenu</code> is a generic, self-positioning popover menu. It supports a built-in kebab trigger or a
+   fully custom trigger, both data-driven entries and templated child components, collision-aware placement, full
+   keyboard accessibility, and <code>--d20tek-menu-*</code> token theming with automatic light/dark support.</p>
+
+<div class="d-flex align-items-start component-container">
+    <div class="p-2 interactivity-card">
+        <h5>Parameters</h5>
+        <table class="table table-sm mb-0">
+            <tbody>
+                <tr>
+                    <td><label for="opt_placement" style="margin-right: 5px;">Placement</label></td>
+                    <td>
+                        <select id="opt_placement" @bind-value=_placement @bind-value:event="onchange">
+                            <option value=@MenuPlacement.BottomStart>Bottom Start</option>
+                            <option value=@MenuPlacement.BottomEnd selected>Bottom End</option>
+                            <option value=@MenuPlacement.TopStart>Top Start</option>
+                            <option value=@MenuPlacement.TopEnd>Top End</option>
+                            <option value=@MenuPlacement.LeftStart>Left Start</option>
+                            <option value=@MenuPlacement.RightStart>Right Start</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="opt_msize" style="margin-right: 5px;">Size</label></td>
+                    <td>
+                        <select id="opt_msize" @bind-value=_size @bind-value:event="onchange">
+                            <option value=@Size.ExtraSmall>Extra Small</option>
+                            <option value=@Size.Small selected>Small</option>
+                            <option value=@Size.Medium>Medium</option>
+                            <option value=@Size.Large>Large</option>
+                            <option value=@Size.ExtraLarge>Extra Large</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="opt_offset" style="margin-right: 5px;">Offset</label></td>
+                    <td><input type="number" id="opt_offset" style="width: 120px;" @bind-value=_offset></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_flip" style="margin-right: 5px;">FlipEnabled</label></td>
+                    <td><input type="checkbox" id="opt_flip" @bind=_flipEnabled></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_shift" style="margin-right: 5px;">ShiftEnabled</label></td>
+                    <td><input type="checkbox" id="opt_shift" @bind=_shiftEnabled></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_scroll" style="margin-right: 5px;">CloseOnScroll</label></td>
+                    <td><input type="checkbox" id="opt_scroll" @bind=_closeOnScroll></td>
+                </tr>
+                <tr>
+                    <td><label for="opt_disabled" style="margin-right: 5px;">Disabled</label></td>
+                    <td><input type="checkbox" id="opt_disabled" @bind=_disabled></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="p-2 flex-grow-1">
+        <h5>Interactive (data-driven kebab)</h5>
+        <p class="text-muted">Configure the parameters on the left, then open the kebab menu below.</p>
+        <div class="demo-surface">
+            <FlyoutMenu Items="_items"
+                        Placement="_placement"
+                        Size="_size"
+                        Offset="_offset"
+                        FlipEnabled="_flipEnabled"
+                        ShiftEnabled="_shiftEnabled"
+                        CloseOnScroll="_closeOnScroll"
+                        Disabled="_disabled"
+                        OnOpen='() => Log("opened")'
+                        OnClose='() => Log("closed")' />
+        </div>
+        <p class="mt-2"><strong>Last action:</strong> @_lastAction</p>
+    </div>
+</div>
+
+<hr />
+
+<h5>Custom trigger with open-state context</h5>
+<p>The <code>Trigger</code> render fragment receives a <code>FlyoutMenuContext</code> exposing <code>IsOpen</code> and a
+   toggle callback, so custom triggers can reflect their active state.</p>
+<div class="demo-surface">
+    <FlyoutMenu Items="_items" GroupName="custom-trigger" OnOpen='() => Log("custom opened")'>
+        <Trigger Context="ctx">
+            <button class="btn btn-primary" @onclick="ctx.Toggle">
+                Options <span class="oi @(ctx.IsOpen ? "oi-caret-top" : "oi-caret-bottom")" aria-hidden="true"></span>
+            </button>
+        </Trigger>
+    </FlyoutMenu>
+</div>
+
+<hr />
+
+<h5>Templated child components</h5>
+<p>The same markup can be authored declaratively with <code>MenuHeader</code>, <code>MenuItem</code>,
+   <code>MenuLink</code>, and <code>MenuSeparator</code> children.</p>
+<div class="demo-surface">
+    <FlyoutMenu GroupName="templated" TriggerAriaLabel="Document actions">
+        <MenuHeader Label="Document" />
+        <MenuItem Label="Rename" Icon="oi oi-pencil" OnClick='() => Log("rename")' />
+        <MenuItem Label="Duplicate" Icon="oi oi-layers" OnClick='() => Log("duplicate")' />
+        <MenuLink Label="Open in new tab" Icon="oi oi-external-link" Href="https://components.d20tek.com" Target="_blank" />
+        <MenuSeparator />
+        <MenuItem Label="Delete" Icon="oi oi-trash" IsDestructive="true" OnClick='() => Log("delete")' />
+    </FlyoutMenu>
+</div>
+
+<hr />
+
+<h5>Independent menus (group isolation)</h5>
+<p>Menus in different <code>GroupName</code> values open independently, while those sharing a group enforce a
+   single-open policy.</p>
+<div class="demo-surface d-flex" style="gap: 1rem;">
+    <FlyoutMenu Items="_items" GroupName="row-a" TriggerAriaLabel="Row A actions" />
+    <FlyoutMenu Items="_items" GroupName="row-a" TriggerAriaLabel="Row A actions 2" />
+    <FlyoutMenu Items="_items" GroupName="row-b" TriggerAriaLabel="Row B actions" />
+</div>

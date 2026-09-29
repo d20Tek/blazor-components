@@ -83,6 +83,36 @@ public class FlyoutMenuRenderingTests
     }
 
     [TestMethod]
+    public async Task Open_WithSizeLarge_AddsSizeClassToPopup()
+    {
+        // Arrange
+        var ctx = CreateContext();
+        var comp = ctx.Render<FlyoutMenu>(p => p.Add(x => x.Items, Items()).Add(x => x.Size, Size.Large));
+
+        // Act
+        await comp.Find(".d20tek-flyout-menu__trigger__button").ClickAsync(new());
+
+        // Assert
+        Assert.IsTrue(comp.Find("[role=menu]").ClassList.Contains("d20tek-flyout-menu--lg"));
+    }
+
+    [TestMethod]
+    public async Task Open_WithSizeNone_OmitsSizeClassFromPopup()
+    {
+        // Arrange
+        var ctx = CreateContext();
+        var comp = ctx.Render<FlyoutMenu>(p => p.Add(x => x.Items, Items()).Add(x => x.Size, Size.None));
+
+        // Act
+        await comp.Find(".d20tek-flyout-menu__trigger__button").ClickAsync(new());
+
+        // Assert
+        var classList = comp.Find("[role=menu]").ClassList;
+        Assert.IsFalse(classList.Contains("d20tek-flyout-menu--md"));
+        Assert.IsFalse(classList.Contains("d20tek-flyout-menu--sm"));
+    }
+
+    [TestMethod]
     public async Task Open_WithAnimateTrue_AddsAnimateClass()
     {
         // Arrange
