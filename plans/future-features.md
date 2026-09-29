@@ -305,10 +305,13 @@ sub-components so developers can build their own pager layout from the individua
   selector) inside their own toolbar, or
 - An actual **user request** for composable pager primitives arrives.
 
-## Flyout Menu component
+## Flyout Menu component [DONE]
 - See the full feature requirements in the [plans/flyout-menu.md](./flyout-menu.md) file.
 
 ## MenuBar component
 - Extend the Flyout Menu component to support a horizontal menu bar with top-level items and optional submenus. This will provide a more traditional navigation experience for applications that require a persistent menu at the top of the page.
 - Requires support for keyboard navigation, focus management, and ARIA roles to ensure accessibility.
 - Requires support for submenus, including proper positioning and visibility management.
+
+## Theme Manager [DONE]
+- See the full feature requirements in the [plans/theme-manager.md](./theme-manager.md) file.

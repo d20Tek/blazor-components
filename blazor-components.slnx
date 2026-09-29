@@ -16,8 +16,11 @@
     <File Path="ReleaseNotes.md" />
   </Folder>
   <Folder Name="/.plans/">
+    <File Path="plans/bundle-package-design.md" />
     <File Path="plans/flyout-menu.md" />
     <File Path="plans/future-features.md" />
+    <File Path="plans/offset-pager-plan.md" />
+    <File Path="plans/theme-manager.md" />
   </Folder>
   <Folder Name="/Components/">
     <Project Path="src/D20Tek.BlazorComponent.Core/D20Tek.BlazorComponent.Core.csproj" />
