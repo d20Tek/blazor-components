@@ -102,6 +102,7 @@ Grow from a light/dark switch into a true theme *manager*: arbitrary named theme
 8. Expand tests for named-theme registration, resolution, marker emission, provider cascade, and selector rendering of custom themes.
 9. Update api-reference docs, README, CHANGELOG, and ReleaseNotes for the v2 surface; document extension points and migration notes.
 10. Run full solution build and test suite; verify green.
+11. **Backlog (deferred from the dot-release dark-mode fixes):** centralize repeated dark-mode neutral color literals (e.g. Tile's `#1f2933`/`#3e4c59`/`#f5f7fa`, TogglePanel's `#1f2228`/`#333842`/`#191b1f`, Menu's `#e6e6e6`) into a shared base-token vocabulary once named/custom themes require a common palette contract. As of the dot release fixing ResultAlert/Toast/Tile/MessageBox dark-mode gaps, each component's dark palette uses distinct values (not verbatim duplication), so this was deliberately deferred rather than actioned prematurely - revisit here, where named themes need a shared vocabulary anyway, rather than doing it twice.
 
 ## Key Files (planned)
 - `src/D20Tek.BlazorComponents.ThemeManager/ThemeManager.cs` - core service and interop coordination.
@@ -125,3 +126,4 @@ Grow from a light/dark switch into a true theme *manager*: arbitrary named theme
 - **`light-dark()` interplay:** components using `light-dark()` resolve against `color-scheme`; ensure the manager always sets `color-scheme` (unless disabled) so those components stay consistent with the marker-based ones.
 - **Browser support:** `light-dark()` and `color-mix()` used by components require modern browsers; document the baseline and that the manager itself degrades gracefully (markers still apply).
 - **Scope of v1 components:** confirm whether `<ThemeSelector>` dropdown mode is in v1 or deferred to v2 to keep the MVP lean.
+- **Shared dark-mode token vocabulary (deferred):** Tile, TogglePanel, Modal, ResultAlert, and Toast each ship their own independent `light-dark()` dark-mode values rather than a shared base palette. This was a deliberate v1-dot-release decision (the values differ per component today, so there is no real duplication to remove yet) - track it here so it is not skipped once Phase 2 introduces named themes and a shared palette vocabulary becomes necessary.

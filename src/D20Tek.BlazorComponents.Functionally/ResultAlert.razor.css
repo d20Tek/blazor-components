@@ -1,4 +1,7 @@
 .result-alert {
+    /* Follow the host's declared color-scheme so light-dark() resolves correctly. */
+    color-scheme: inherit;
+
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -70,34 +73,54 @@
 }
 
 /* Variants */
+/* Theming tokens: values are intentionally identical for light and dark via
+   light-dark() today (the pastel chip palette already reads well on both
+   backgrounds). Consumers can override any --result-alert-* token directly,
+   and a future release can tune the dark-mode value independently by
+   changing the second light-dark() argument without touching markup. */
 .result-alert-success {
-    background-color: #f0fdf4;
-    border-color: #86efac;
-    color: #166534;
+    --result-alert-bg: light-dark(#f0fdf4, #f0fdf4);
+    --result-alert-border: light-dark(#86efac, #86efac);
+    --result-alert-color: light-dark(#166534, #166534);
+    background-color: var(--result-alert-bg);
+    border-color: var(--result-alert-border);
+    color: var(--result-alert-color);
 }
 
 .result-alert-error {
-    background-color: #fef2f2;
-    border-color: #fca5a5;
-    color: #991b1b;
+    --result-alert-bg: light-dark(#fef2f2, #fef2f2);
+    --result-alert-border: light-dark(#fca5a5, #fca5a5);
+    --result-alert-color: light-dark(#991b1b, #991b1b);
+    background-color: var(--result-alert-bg);
+    border-color: var(--result-alert-border);
+    color: var(--result-alert-color);
 }
 
 .result-alert-warning {
-    background-color: #fffbeb;
-    border-color: #fcd34d;
-    color: #92400e;
+    --result-alert-bg: light-dark(#fffbeb, #fffbeb);
+    --result-alert-border: light-dark(#fcd34d, #fcd34d);
+    --result-alert-color: light-dark(#92400e, #92400e);
+    background-color: var(--result-alert-bg);
+    border-color: var(--result-alert-border);
+    color: var(--result-alert-color);
 }
 
 .result-alert-info {
-    background-color: #eff6ff;
-    border-color: #93c5fd;
-    color: #1e40af;
+    --result-alert-bg: light-dark(#eff6ff, #eff6ff);
+    --result-alert-border: light-dark(#93c5fd, #93c5fd);
+    --result-alert-color: light-dark(#1e40af, #1e40af);
+    background-color: var(--result-alert-bg);
+    border-color: var(--result-alert-border);
+    color: var(--result-alert-color);
 }
 
 .result-alert-neutral {
-    background-color: #f9fafb;
-    border-color: #d1d5db;
-    color: #374151;
+    --result-alert-bg: light-dark(#f9fafb, #f9fafb);
+    --result-alert-border: light-dark(#d1d5db, #d1d5db);
+    --result-alert-color: light-dark(#374151, #374151);
+    background-color: var(--result-alert-bg);
+    border-color: var(--result-alert-border);
+    color: var(--result-alert-color);
 }
 
 /* Sizes */

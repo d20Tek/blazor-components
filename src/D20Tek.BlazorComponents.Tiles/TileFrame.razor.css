@@ -3,12 +3,16 @@
     --tile-title-lines: 1;
     --tile-desc-lines: 3;
     --tile-radius: 0.5rem;
-    --tile-bg: #ffffff;
-    --tile-border: #e0e0e0;
-    --tile-title-color: #1f2933;
-    --tile-desc-color: #52606d;
-    --tile-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-    --tile-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.18);
+    --tile-bg: light-dark(#ffffff, #1f2933);
+    --tile-border: light-dark(#e0e0e0, #3e4c59);
+    --tile-title-color: light-dark(#1f2933, #f5f7fa);
+    --tile-desc-color: light-dark(#52606d, #cbd2d9);
+    --tile-media-bg: light-dark(#f0f2f5, #323f4b);
+    --tile-shadow: light-dark(0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.5));
+    --tile-shadow-hover: light-dark(0 6px 16px rgba(0, 0, 0, 0.18), 0 6px 16px rgba(0, 0, 0, 0.6));
+
+    /* Follow the host's declared color-scheme so light-dark() resolves correctly. */
+    color-scheme: inherit;
 
     display: inline-flex;
     flex-direction: column;
@@ -85,7 +89,7 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background-color: #f0f2f5;
+    background-color: var(--tile-media-bg);
 }
 
 .tile-image {
@@ -167,20 +171,5 @@
 
     .tile:hover {
         transform: none;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    .tile {
-        --tile-bg: #1f2933;
-        --tile-border: #3e4c59;
-        --tile-title-color: #f5f7fa;
-        --tile-desc-color: #cbd2d9;
-        --tile-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        --tile-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.6);
-    }
-
-    .tile-media {
-        background-color: #323f4b;
     }
 }

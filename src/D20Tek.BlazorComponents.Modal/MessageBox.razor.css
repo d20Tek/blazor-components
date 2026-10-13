@@ -17,19 +17,34 @@
     line-height: 1.5;
 }
 
+/* Theming tokens: values are intentionally identical for light and dark via
+   light-dark() today (the neutral gray already reads well on both surfaces).
+   Consumers can override any --modal-btn-secondary-* token directly, and a
+   future release can tune the dark-mode value independently by changing the
+   second light-dark() argument without touching markup. */
 .modal-dialog__btn-secondary {
-    background-color: #6b7280;
-    color: white;
-    border: 1px solid #6b7280;
+    --modal-btn-secondary-bg: light-dark(#6b7280, #6b7280);
+    --modal-btn-secondary-color: light-dark(#ffffff, #ffffff);
+    --modal-btn-secondary-border: light-dark(#6b7280, #6b7280);
+    --modal-btn-secondary-hover-bg: light-dark(#4b5563, #4b5563);
+    --modal-btn-secondary-hover-border: light-dark(#4b5563, #4b5563);
+    --modal-btn-secondary-focus-outline: light-dark(#6b7280, #6b7280);
+
+    /* Follow the host's declared color-scheme so light-dark() resolves correctly. */
+    color-scheme: inherit;
+
+    background-color: var(--modal-btn-secondary-bg);
+    color: var(--modal-btn-secondary-color);
+    border: 1px solid var(--modal-btn-secondary-border);
     transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .modal-dialog__btn-secondary:hover {
-    background-color: #4b5563;
-    border-color: #4b5563;
+    background-color: var(--modal-btn-secondary-hover-bg);
+    border-color: var(--modal-btn-secondary-hover-border);
 }
 
 .modal-dialog__btn-secondary:focus {
-    outline: 2px solid #6b7280;
+    outline: 2px solid var(--modal-btn-secondary-focus-outline);
     outline-offset: 2px;
 }

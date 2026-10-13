@@ -313,5 +313,5 @@ sub-components so developers can build their own pager layout from the individua
 - Requires support for keyboard navigation, focus management, and ARIA roles to ensure accessibility.
 - Requires support for submenus, including proper positioning and visibility management.
 
-## Theme Manager [DONE]
+## Theme Manager
 - See the full feature requirements in the [plans/theme-manager.md](./theme-manager.md) file.

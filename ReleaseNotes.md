@@ -1,5 +1,9 @@
 # Release Notes
 
+## Release v1.11.20
+* Updated package reference to newest versions.
+* Fixed theming issues with alerts and tiles.
+
 ## Release v1.11.19
 * Added the **D20Tek.BlazorComponents.Menus** package with the generic, reusable `FlyoutMenu` component:
   * Self-positioning flyout/popover triggered from a built-in kebab button or a fully custom `Trigger` fragment that receives the open state and a toggle callback.
