@@ -1,5 +1,9 @@
 # Release Notes
 
+## Release v1.11.21
+* Updated package reference to newest .net10 versions.
+* Last release before upgrading to .net11.
+
 ## Release v1.11.20
 * Updated package reference to newest versions.
 * Fixed theming issues with alerts and tiles.
